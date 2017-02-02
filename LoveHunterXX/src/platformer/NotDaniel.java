@@ -1,10 +1,10 @@
 /**
  * 
  */
-package frogger;
+package platformer;
 
 /**
- * @author Daniel
+ * @author Student 6
  *
  */
 public class NotDaniel {
