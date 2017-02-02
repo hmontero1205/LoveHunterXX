@@ -10,7 +10,7 @@ package frogger;
 public class HansTest {
 
 	/**
-	 * 
+	 **
 	 */
 	public HansTest() {
 		// TODO Auto-generated constructor stub
