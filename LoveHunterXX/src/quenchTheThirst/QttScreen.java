@@ -1,12 +1,14 @@
 package quenchTheThirst;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import gui.Screen;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class QttScreen extends Screen {
+public class QttScreen extends Screen implements KeyListener{
 	
 	private Graphic map;
 	private Player user;
@@ -26,6 +28,21 @@ public class QttScreen extends Screen {
 		user = new Player();
 		viewObjects.add(map);
 		viewObjects.add(user);
+	}
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
