@@ -4,8 +4,9 @@ import gui.GUIApplication;
 
 public class SnakeGame extends GUIApplication {
 	
-	public static SnakeGame sGame;
-	public static SnakeScreen sScreen;
+	public static SnakeGame sGame; // the main class to run game.
+	public static SnakeScreen sScreen; // screen for game.
+	public static GuideScreen gScreen; // screen for instructions.
 
 	public SnakeGame(int width, int height) {
 		super(width, height);
@@ -13,7 +14,8 @@ public class SnakeGame extends GUIApplication {
 
 	public void initScreen() {
 		sScreen = new SnakeScreen(getWidth(),getHeight());
-		setScreen(sScreen);
+		gScreen = new GuideScreen(getWidth(),getHeight());
+		setScreen(gScreen);
 	}
 	
 	public static void main(String[] stuff){
