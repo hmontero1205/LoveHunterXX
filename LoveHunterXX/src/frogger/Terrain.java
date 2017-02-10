@@ -10,16 +10,10 @@ public class Terrain extends Component {
 	private ArrayList<Obstacle> obs;
 	private ArrayList<Platform> pf;
 	private ArrayList<AnimatedPlatform> apf;
-	
+	private int tType;
 	public Terrain(int x, int y, int w, int h, int terrainType) {
 		super(x, y, w, h);
-		if(terrainType == FroggerScreen.ROAD) {
-			obs = new ArrayList<Obstacle>();
-		} else if(terrainType == FroggerScreen.WATER) {
-			double rand = Math.random() * 1;
-		} else if(terrainType == FroggerScreen.SAFEZONE) {
-			
-		}
+		tType = terrainType;
 	}
 
 	@Override
