@@ -22,13 +22,5 @@ public class Player extends MovingComponent{
 		this.h = h;
 	}
 	public void update(Graphics2D g){
-		try{
-			ImageIcon icon = new ImageIcon("resources/player.PNG");
-			image = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
-			g.drawImage(icon.getImage(),0,0,w,h,0,0,icon.getIconWidth(),icon.getIconHeight(),null);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 }
