@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import gui.ClickableScreen;
 import gui.Screen;
 import gui.components.Graphic;
 import gui.components.Visible;
@@ -11,23 +12,22 @@ import gui.components.Visible;
 public class QttScreen extends Screen implements KeyListener{
 	
 	private Graphic map;
-	private Player user;
 
 	public QttScreen(int width, int height) {
+		// TODO Auto-generated constructor stub
 		super(width, height);
 	}
+	
 	/**
-	 * Screen needs to include the map, the ai(enemy) and the bottle
-	 * the enemy and bottle belong to a arraylist that keeps on changing
-	 * updates when bottle appear and disappear from screen
-	 * and updates when enemy spawn/get killed
+	 * Make Map
+	 * Player Movement update  player getx gety 
+	 * Zombie Movement update  zombie getx gety (zombie are in an array list)
+	 * Bottle Movement update  bottle getx gety
 	 */
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		map = new Graphic(0,0,"resources/tempmap");
-		user = new Player();
-		viewObjects.add(map);
-		viewObjects.add(user);
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -44,5 +44,6 @@ public class QttScreen extends Screen implements KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
