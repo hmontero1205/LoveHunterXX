@@ -1,15 +1,17 @@
 package quenchTheThirst;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import gui.ClickableScreen;
+import gui.Screen;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class QttScreen extends ClickableScreen implements KeyListener{
+public class QttScreen extends Screen implements KeyListener{
 	
 	private Graphic map;
-	private Player user;
 
 	public QttScreen(int width, int height) {
 		// TODO Auto-generated constructor stub
@@ -23,12 +25,25 @@ public class QttScreen extends ClickableScreen implements KeyListener{
 	 * Bottle Movement update  bottle getx gety
 	 */
 	@Override
-	public void initAllObjects(ArrayList<Visible> viewObjects) {
-		map = new Graphic(0,0,"resources/temp_map.png");
-		viewObjects.add(map);
+	public void initObjects(ArrayList<Visible> viewObjects) {
+		// TODO Auto-generated method stub
 		
-		user = new Player();
-		viewObjects.add(user);
 	}
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
