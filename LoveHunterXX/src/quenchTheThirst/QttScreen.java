@@ -2,29 +2,32 @@ package quenchTheThirst;
 
 import java.util.ArrayList;
 
-import gui.Screen;
+import gui.ClickableScreen;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class QttScreen extends Screen {
+public class QttScreen extends ClickableScreen implements KeyListener{
 	
 	private Graphic map;
 	private Player user;
 
 	public QttScreen(int width, int height) {
+		// TODO Auto-generated constructor stub
 		super(width, height);
 	}
+	
 	/**
-	 * Screen needs to include the map, the ai(enemy) and the bottle
-	 * the enemy and bottle belong to a arraylist that keeps on changing
-	 * updates when bottle appear and disappear from screen
-	 * and updates when enemy spawn/get killed
+	 * Make Map
+	 * Player Movement update  player getx gety 
+	 * Zombie Movement update  zombie getx gety (zombie are in an array list)
+	 * Bottle Movement update  bottle getx gety
 	 */
 	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) {
-		map = new Graphic(0,0,"resources/tempmap");
-		user = new Player();
+	public void initAllObjects(ArrayList<Visible> viewObjects) {
+		map = new Graphic(0,0,"resources/temp_map.png");
 		viewObjects.add(map);
+		
+		user = new Player();
 		viewObjects.add(user);
 	}
 
