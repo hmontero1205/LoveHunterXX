@@ -26,8 +26,8 @@ public class QttScreen extends Screen implements KeyListener{
 	 */
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		// TODO Auto-generated method stub
-		
+		map = new Graphic(0,0,800,600,"rescources/tempmap.png");
+		viewObjects.add(map);
 	}
 	@Override
 	public void keyPressed(KeyEvent arg0) {
