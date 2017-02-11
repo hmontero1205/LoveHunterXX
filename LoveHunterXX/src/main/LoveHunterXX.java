@@ -3,6 +3,7 @@
  */
 package main;
 
+import frogger.FroggerScreen;
 import gui.GUIApplication;
 
 /**
@@ -12,17 +13,17 @@ import gui.GUIApplication;
 public class LoveHunterXX extends GUIApplication {
 
 	public static LoveHunterXX game;
+	public static FroggerScreen fs;
 	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
-		// TODO Auto-generated constructor stub
 	}
 
 
 	@Override
 	public void initScreen() {
-		// TODO Auto-generated method stub
-
+		fs = new FroggerScreen(800,600);
+		setScreen(fs);
 	}
 
 
