@@ -21,16 +21,29 @@ public class FroggerScreen extends Screen {
 		super(width, height);
 		sWidth = width;
 		sHeight = height;
+		initObjects(getViewObjects());
 	}
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		pf = new Platform(0, WINDOWBARHEIGHT, 50, 25, 1, null);
-		viewObjects.add(pf);
-		pf.play();
-		ob = new Obstacle(0, WINDOWBARHEIGHT + 30, 50, 25, 5, "resources/frogger/truck.png");
-		viewObjects.add(ob);
-		ob.play();
+//		testing
+		if(sWidth != 0) {
+			pf = new Platform(0, WINDOWBARHEIGHT, 50, 25, 1, null);
+			viewObjects.add(pf);
+			pf.play();
+			
+			ob = new Obstacle(0, WINDOWBARHEIGHT + ROWHEIGHT + 5, 50, 25, 3, "resources/frogger/truck.png");
+			viewObjects.add(ob);
+			ob.play();
+			
+			pf = new Platform(getWidth(), WINDOWBARHEIGHT + ROWHEIGHT*2 + 5, 50, 25, -1, null);
+			viewObjects.add(pf);
+			pf.play();
+			
+			ob = new Obstacle(getWidth(), WINDOWBARHEIGHT + ROWHEIGHT*3 + 5, 50, 25, -3, "resources/frogger/truck.png");
+			viewObjects.add(ob);
+			ob.play();
+		}
 	}
 
 }

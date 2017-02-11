@@ -2,6 +2,7 @@ package frogger;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -13,6 +14,15 @@ public class Platform extends MovingComponent {
 	private boolean touchable;
 	private String imgLoc;
 
+	/**
+	 * @param  x  initial x location of this component
+	 * @param  y  initial y location of this component
+	 * @param  w  width of this component
+	 * @param  h  height of this component
+	 * @param  vx  x velocity of this component
+	 * @param  imgLoc  location of the image for this component
+	 */
+	
 	public Platform(int x, int y, int w, int h, int vx, String imgLoc) {
 		super(x, y, w, h);
 		touchable = true;
@@ -53,8 +63,21 @@ public class Platform extends MovingComponent {
 		ImageIcon icon = new ImageIcon(getImgLoc());
 		setImage(new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB));
 		Graphics2D g = getImage().createGraphics();
-		g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
+		AffineTransform  at = new AffineTransform ();
+		double xScale = getWidth() / icon.getIconWidth();
+		double yScale = getHeight() / icon.getIconHeight();
+		at.scale(xScale, yScale);
+		
+		if(getVx() > 0) {
+//			rotate cars if they are starting from the right side of the screen
+			at.translate(icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+			at.rotate(Math.PI);
+			at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
+		}
+		
+		g.drawImage(icon.getImage(), at, null);
 	}
+	
 	
 	public void run() {
 		setPosx(getX());
@@ -85,8 +108,14 @@ public class Platform extends MovingComponent {
 	}
 	
 	public void checkBehaviors() {
-		if(getX() > FroggerScreen.sWidth) {
-			setX(0 - getWidth());
+		if(getVx() > 0) {
+			if(getX() > FroggerScreen.sWidth) {
+				setX(0 - getWidth());
+			}
+		} else if(getVx() < 0) {
+			if(getX() + getWidth() < 0) {
+				setX(FroggerScreen.sWidth);
+			}
 		}
 	}
 	
