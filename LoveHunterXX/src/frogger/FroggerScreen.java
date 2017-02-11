@@ -28,7 +28,7 @@ public class FroggerScreen extends Screen {
 		pf = new Platform(0, WINDOWBARHEIGHT, 50, 25, 1, null);
 		viewObjects.add(pf);
 		pf.play();
-		ob = new Obstacle(0, WINDOWBARHEIGHT + 30, 50, 25, 1, "resources/frogger/truck.png");
+		ob = new Obstacle(0, WINDOWBARHEIGHT + 30, 50, 25, 5, "resources/frogger/truck.png");
 		viewObjects.add(ob);
 		ob.play();
 	}
