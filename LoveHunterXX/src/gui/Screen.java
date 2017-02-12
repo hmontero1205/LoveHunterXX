@@ -15,12 +15,7 @@ import gui.components.Visible;
 public abstract class Screen {
 	private BufferedImage image;
 	private ArrayList<Visible> viewObjects;
-	public ArrayList<Visible> getViewObjects() {
-		return viewObjects;
-	}
-	public void setViewObjects(ArrayList<Visible> viewObjects) {
-		this.viewObjects = viewObjects;
-	}
+
 	public Screen(int width,int height){
 		viewObjects = new ArrayList<Visible>();
 		initObjects(viewObjects);

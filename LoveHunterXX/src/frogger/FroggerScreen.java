@@ -1,49 +1,104 @@
+/**
+ * @author Hans
+ *
+ */
 package frogger;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import gui.Screen;
+import gui.components.Graphic;
+import gui.components.MovingComponent;
 import gui.components.Visible;
 
-public class FroggerScreen extends Screen {
+public class FroggerScreen extends Screen implements KeyListener,Runnable{
 
-	public static int sWidth;
-	public static int sHeight;
-	public static final int WINDOWBARHEIGHT = 32;
-	public static final int ROWHEIGHT = 25;
-	public static final int ROAD = 1;
-	public static final int WATER = 2;
-	public static final int SAFEZONE = 3;
-	public static Platform pf;
-	public static Obstacle ob;
+	public int sWidth;
+	public int sHeight;
+	public final int WINDOWBARHEIGHT = 32;
+	public final int ROW_HEIGHT = 40;
+	public final int SAFEZONE = 0;
+	public final int ROAD = 1;
+	public final int WATER = 2;	
+	public ArrayList<Terrain> tList;
+	public PlayerInterface player;
+
 	
-	public FroggerScreen(int width, int height) {
-		super(width, height);
-		sWidth = width;
-		sHeight = height;
-		initObjects(getViewObjects());
+	public FroggerScreen(int w, int h) {
+		super(w, h);
+		Thread fGame = new Thread(this);
+		fGame.start();
 	}
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-//		testing
-		if(sWidth != 0) {
-			pf = new Platform(0, WINDOWBARHEIGHT, 50, 25, 1, null);
-			viewObjects.add(pf);
-			pf.play();
-			
-			ob = new Obstacle(0, WINDOWBARHEIGHT + ROWHEIGHT + 5, 50, 25, 3, "resources/frogger/truck.png");
-			viewObjects.add(ob);
-			ob.play();
-			
-			pf = new Platform(getWidth(), WINDOWBARHEIGHT + ROWHEIGHT*2 + 5, 50, 25, -1, null);
-			viewObjects.add(pf);
-			pf.play();
-			
-			ob = new Obstacle(getWidth(), WINDOWBARHEIGHT + ROWHEIGHT*3 + 5, 50, 25, -3, "resources/frogger/truck.png");
-			viewObjects.add(ob);
-			ob.play();
+		tList = new ArrayList<Terrain>();
+		//player = getPlayer();
+		Terrain t1 = new Terrain(8, 31, 784, ROW_HEIGHT, ROAD);
+		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,784,ROW_HEIGHT,WATER);
+		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
+		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
+		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
+		Terrain t6 = new Terrain(8,31+(5*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
+		tList.add(t1);
+		tList.add(t2);
+		tList.add(t3);
+		tList.add(t4);
+		tList.add(t5);
+		tList.add(t6);
+		viewObjects.add(t1);
+		viewObjects.add(t2);
+		viewObjects.add(t3);
+		viewObjects.add(t4);
+		viewObjects.add(t5);
+		viewObjects.add(t6);
+		//viewObjects.add(player);
+		
+	}
+	
+//	public PlayerInterface getPlayer(){
+//		return new PlayerInterface();
+//	}
+	@Override
+	public void run() {
+		for(int i=0;i<tList.size();i++){
+			if(tList.get(i).getTerrain() == ROAD){
+				tList.get(i).startThread();
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
+		
+	}
+	public KeyListener getKeyListener(){
+		return this;
+	}
+	@Override
+	public void keyPressed(KeyEvent k) {
+//		if(k.getKeyCode()==KeyEvent.VK_UP){
+//			player.move(k);
+//		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

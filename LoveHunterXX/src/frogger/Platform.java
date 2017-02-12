@@ -109,12 +109,12 @@ public class Platform extends MovingComponent {
 	
 	public void checkBehaviors() {
 		if(getVx() > 0) {
-			if(getX() > FroggerScreen.sWidth) {
+			if(getX() > 800) {
 				setX(0 - getWidth());
 			}
 		} else if(getVx() < 0) {
 			if(getX() + getWidth() < 0) {
-				setX(FroggerScreen.sWidth);
+				setX(800);
 			}
 		}
 	}

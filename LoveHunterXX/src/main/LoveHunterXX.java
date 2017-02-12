@@ -12,26 +12,17 @@ import gui.GUIApplication;
  */
 public class LoveHunterXX extends GUIApplication {
 
-	public static LoveHunterXX game;
-	public static FroggerScreen fs;
-	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
+		// TODO Auto-generated constructor stub
 	}
-
 
 	@Override
 	public void initScreen() {
-		fs = new FroggerScreen(800,600);
-		setScreen(fs);
+		// TODO Auto-generated method stub
+		
 	}
 
-
-	public static void main(String[] args) {
-		game = new LoveHunterXX(800,600);
-		Thread go = new Thread(game);
-		go.start();
-
-	}
+	
 
 }
