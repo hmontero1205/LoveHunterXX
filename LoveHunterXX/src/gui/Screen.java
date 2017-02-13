@@ -15,6 +15,7 @@ import gui.components.Visible;
 public abstract class Screen {
 	private BufferedImage image;
 	private ArrayList<Visible> viewObjects;
+
 	public Screen(int width,int height){
 		viewObjects = new ArrayList<Visible>();
 		initObjects(viewObjects);
@@ -33,10 +34,18 @@ public abstract class Screen {
 		g.setColor(new Color(204,204,255));
 		g.fillRect(0,0,image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		for(int i=0;i<viewObjects.size();i++){
-			g.drawImage(viewObjects.get(i).getImage(), viewObjects.get(i).getX(), viewObjects.get(i).getY(), null);
+
+		try{
+			for(int i=0;i<viewObjects.size();i++){
+				Visible v = viewObjects.get(i);
+				g.drawImage(v.getImage(), v.getX(), v.getY(), null);
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(viewObjects);
 		}
 		g2.drawImage(buffer, 0, 0, null);
+		
 		
 	}
 	public abstract void initObjects(ArrayList<Visible> viewObjects);
@@ -63,6 +72,7 @@ public abstract class Screen {
 	}
 	
 	public void addObject(Visible v){
+		if(v!=null)
 		viewObjects.add(v);
 	}
 	public void remove(Visible v){
