@@ -20,7 +20,7 @@ public class GuideScreen extends ClickableScreen {
 	public void initAllObjects(ArrayList<Visible> viewObjects) {
 		// TODO Auto-generated method stub
 		
-		// Background image.
+		// Background image.jtyutyu
 		Graphic background = new Graphic(0, 0, "resources/ShoppingSpree.png");
 		
 		// button to be clicked to transition into the next screen.
