@@ -39,13 +39,10 @@ public class GuideScreen extends ClickableScreen {
 		return lines;
 	}
 	
-	public void generateTextLine(String str){
-		String[] lines = str.split(".");
-		System.out.println(lines.length);
-		//String tmp ="";
-		for(int i = 0, n = lines.length; i < n; ++i){
-			System.out.println("sdsdsd");
-			System.out.println(lines[i]);
+	public void addLines(String str, ArrayList<Visible> v, int xStart){
+		ArrayList<String> lines = getLines(str);
+		for(int i = 0, n = lines.size(); i < n; ++i){
+			v.add(new TextArea(0,i * 50, 800, 600, lines.get(i)));
 		}
 	}
 
@@ -65,8 +62,6 @@ public class GuideScreen extends ClickableScreen {
 			}
 		});
 		
-		//generateTextLine("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
-			//	+ " presents as you can. Use the.");
 		
 		ArrayList<String> s = getLines("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
 				+ " presents as you can. Use the.");
