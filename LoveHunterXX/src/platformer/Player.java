@@ -88,7 +88,6 @@ public class Player extends MovingComponent{
 					super.setVy(-5);
 				}
 			}
-			
 			else{
 				if(difference >= 2000){
 					setJump(false);
@@ -100,9 +99,9 @@ public class Player extends MovingComponent{
 					else{
 						super.setVy(10);
 					}
-					
 				}
 			}
+			
 			
 		}
 	}
