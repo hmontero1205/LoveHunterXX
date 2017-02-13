@@ -19,7 +19,7 @@ public class SnakeGame extends GUIApplication {
 	}
 	
 	public static void main(String[] stuff){
-		sGame = new SnakeGame(800,600);
+		sGame = new SnakeGame(800,500);
 		Thread game = new Thread(sGame);
 		game.start();
 	}

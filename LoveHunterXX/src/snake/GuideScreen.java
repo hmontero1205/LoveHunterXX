@@ -21,10 +21,10 @@ public class GuideScreen extends ClickableScreen {
 		// TODO Auto-generated method stub
 		
 		// Background image.
-		Graphic background = new Graphic(100, 100, "resources/robbierotten.png");
+		Graphic background = new Graphic(0, 0, "resources/ShoppingSpree.png");
 		
 		// button to be clicked to transition into the next screen.
-		Button button = new Button(0, 0, 0, 0, "Continue.", Color.BLACK, new Action() {
+		Button button = new Button(400, 400, 100, 100, "Continue.", Color.BLACK, new Action() {
 			
 			@Override
 			public void act() {
