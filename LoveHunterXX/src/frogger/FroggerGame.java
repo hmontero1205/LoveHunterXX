@@ -10,6 +10,7 @@ public class FroggerGame extends GUIApplication {
 	
 	public FroggerGame(int width, int height) {
 		super(width, height);
+		setResizable(false);
 	}
 
 

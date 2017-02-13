@@ -39,7 +39,7 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	public void initObjects(List<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
 		//player = getPlayer();
-		tList.add(new Terrain(8, 31, 792, ROW_HEIGHT, WATER,5));
+		tList.add(new Terrain(8, 31, 792, ROW_HEIGHT, SAFEZONE,5));
 		tList.add(new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,0));
 		tList.add(new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5));
 		tList.add(new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
@@ -47,7 +47,7 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 		tList.add(new Terrain(8,31+(5*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
 		tList.add(new Terrain(8,31+(6*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5));
 		tList.add(new Terrain(8,31+(7*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
-		tList.add(new Terrain(8,31+(8*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5));
+		tList.add(new Terrain(8,31+(8*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
 		viewObjects.addAll(tList);
 		//viewObjects.add(player);
 		
