@@ -100,6 +100,7 @@ public class Player extends MovingComponent{
 			else{
 				if(difference >= 2000){
 					setJump(false);
+					setY(370);
 				}
 				else{
 //					if(difference >= 1000 && difference <= 1500){
