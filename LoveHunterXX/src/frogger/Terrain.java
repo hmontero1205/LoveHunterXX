@@ -46,7 +46,6 @@ public class Terrain extends Component implements Runnable {
 			if(c1!=null){
 				obs.add(c1);
 				FroggerGame.fs.addObject(c1);
-				FroggerGame.fs.moveToBack(c1);
 			}
 			c1.play();	
 			try {
@@ -78,25 +77,25 @@ public class Terrain extends Component implements Runnable {
 		
 	}
 	
-//	public void checkCars() {
-//		if(carVelocity<0 && obs.size()>0){
-//			Obstacle leadingCar = obs.get(0);
-//			if(leadingCar.getX()<100){
-//				obs.remove(leadingCar);
-//				FroggerGame.fs.remove(leadingCar);
-//			}
-//		}
-//		else{
-//			if(carVelocity>0&& obs.size()>0){
-//				Obstacle leadingCar = obs.get(0);
-//				if(leadingCar.getX()>700){
-//					obs.remove(leadingCar);
-//					FroggerGame.fs.remove(leadingCar);
-//				}
-//			}
-//		}
-//		
-//	}
+	public void checkCars() {
+		if(carVelocity<0 && obs.size()>0){
+			Obstacle leadingCar = obs.get(0);
+			if(leadingCar.getX()<100){
+				obs.remove(leadingCar);
+				FroggerGame.fs.remove(leadingCar);
+			}
+		}
+		else{
+			if(carVelocity>0&& obs.size()>0){
+				Obstacle leadingCar = obs.get(0);
+				if(leadingCar.getX()>700){
+					obs.remove(leadingCar);
+					FroggerGame.fs.remove(leadingCar);
+				}
+			}
+		}
+		
+	}
 
 //	public void addCars(){
 //		if(true){

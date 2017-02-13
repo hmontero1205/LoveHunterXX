@@ -38,24 +38,33 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
 		//player = getPlayer();
-		Terrain t1 = new Terrain(8, 31, 792, ROW_HEIGHT, ROAD,3);
-		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,-5);
-		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-2);
-		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,4);
-		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,4);
+		Terrain t1 = new Terrain(8, 31, 792, ROW_HEIGHT, ROAD,5);
+		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,0);
+		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5);
+		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
+		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
 		Terrain t6 = new Terrain(8,31+(5*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
+		Terrain t7 = new Terrain(8,31+(6*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5);
+		Terrain t8 = new Terrain(8,31+(7*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5);
+		Terrain t9 = new Terrain(8,31+(8*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5);
 		tList.add(t1);
 		tList.add(t2);
 		tList.add(t3);
 		tList.add(t4);
 		tList.add(t5);
 		tList.add(t6);
+		tList.add(t7);
+		tList.add(t8);
+		tList.add(t9);
 		viewObjects.add(t1);
 		viewObjects.add(t2);
 		viewObjects.add(t3);
 		viewObjects.add(t4);
 		viewObjects.add(t5);
 		viewObjects.add(t6);
+		viewObjects.add(t7);
+		viewObjects.add(t8);
+		viewObjects.add(t9);
 		//viewObjects.add(player);
 		
 	}
