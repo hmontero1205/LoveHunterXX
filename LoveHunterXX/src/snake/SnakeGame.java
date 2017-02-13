@@ -16,8 +16,8 @@ public class SnakeGame extends GUIApplication {
 	public void initScreen() {
 		sScreen = new SnakeScreen(getWidth(),getHeight());
 		iScreen = new IntroScreen(getWidth(),getHeight());
-		//gScreen = new GuideScreen(getWidth(),getHeight()); fix this pls :).
-		setScreen(iScreen);
+		gScreen = new GuideScreen(getWidth(),getHeight());
+		setScreen(gScreen);
 	}
 	
 	public static void main(String[] stuff){
