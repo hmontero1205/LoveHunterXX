@@ -106,7 +106,7 @@ public class Platform extends MovingComponent {
 			super.setY((int)getPosy());
 		}
 	}
-	
+
 	public void checkBehaviors() {
 		if(getVx() > 0) {
 			if(getX() > 800) {
@@ -118,7 +118,7 @@ public class Platform extends MovingComponent {
 			}
 		}
 	}
-	
+
 	public void isTouching(Player p) {
 //		TODO later, not important atm, will probably need player x, y, width, height
 	}

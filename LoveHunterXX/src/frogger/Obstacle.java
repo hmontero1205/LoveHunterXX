@@ -11,7 +11,7 @@ public class Obstacle extends Platform {
 	 * @param  vx  x velocity of this component
 	 * @param  imgLoc  location of the image for this component
 	 */
-	
+
 	public Obstacle(int x, int y, int w, int h, int vx, String imgLoc) {
 		super(x, y, w, h, vx, imgLoc);
 		setTouchable(false);

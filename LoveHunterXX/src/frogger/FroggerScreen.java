@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.Screen;
 import gui.components.Graphic;
@@ -35,36 +36,19 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	}
 
 	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) {
+	public void initObjects(List<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
 		//player = getPlayer();
-		Terrain t1 = new Terrain(8, 31, 792, ROW_HEIGHT, ROAD,5);
-		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,0);
-		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5);
-		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
-		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
-		Terrain t6 = new Terrain(8,31+(5*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
-		Terrain t7 = new Terrain(8,31+(6*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5);
-		Terrain t8 = new Terrain(8,31+(7*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5);
-		Terrain t9 = new Terrain(8,31+(8*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5);
-		tList.add(t1);
-		tList.add(t2);
-		tList.add(t3);
-		tList.add(t4);
-		tList.add(t5);
-		tList.add(t6);
-		tList.add(t7);
-		tList.add(t8);
-		tList.add(t9);
-		viewObjects.add(t1);
-		viewObjects.add(t2);
-		viewObjects.add(t3);
-		viewObjects.add(t4);
-		viewObjects.add(t5);
-		viewObjects.add(t6);
-		viewObjects.add(t7);
-		viewObjects.add(t8);
-		viewObjects.add(t9);
+		tList.add(new Terrain(8, 31, 792, ROW_HEIGHT, WATER,5));
+		tList.add(new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,0));
+		tList.add(new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5));
+		tList.add(new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
+		tList.add(new Terrain(8,31+(4*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5));
+		tList.add(new Terrain(8,31+(5*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
+		tList.add(new Terrain(8,31+(6*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5));
+		tList.add(new Terrain(8,31+(7*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
+		tList.add(new Terrain(8,31+(8*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5));
+		viewObjects.addAll(tList);
 		//viewObjects.add(player);
 		
 	}
@@ -74,15 +58,16 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 //	}
 	@Override
 	public void run() {
+		
 		for(int i=0;i<tList.size();i++){
 			if(tList.get(i).getTerrain() == ROAD){
 				tList.get(i).startThread();
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(100);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		}
 		
