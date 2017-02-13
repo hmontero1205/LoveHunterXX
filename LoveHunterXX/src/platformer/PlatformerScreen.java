@@ -19,13 +19,11 @@ public class PlatformerScreen extends Screen implements KeyListener{
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		player = new Player(10, 300, 173, 300, "resources/player.png");
-		player.play();
-		viewObjects.add(player);
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
-//		Graphic h = new Graphic(100, 100, .5, "resources/player.png");
-//		viewObjects.add(h);
+		player = new Player(10, 370, 100, 150, "resources/player.png");
+		player.play();
+		viewObjects.add(player);
 	}
 	public KeyListener getKeyListener(){
 		return this;
@@ -33,7 +31,9 @@ public class PlatformerScreen extends Screen implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
+		if(e.getKeyCode() == 32){
+			player.setJump(true);
+		}
 	}
 
 	@Override

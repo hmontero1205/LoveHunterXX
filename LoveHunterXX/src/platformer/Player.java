@@ -17,7 +17,7 @@ public class Player extends MovingComponent{
 	private int w;
 	private int h;
 	private Image image;
-	
+	private boolean jumping;
 	private String imgLoc;
 	private ImageIcon icon;
 	private boolean load;
@@ -29,6 +29,7 @@ public class Player extends MovingComponent{
 		this.h = h;
 		this.imgLoc = imageLocation;
 		load = false;
+		jumping = false;
 		setX(x);
 		setY(y);
 		loadImage();
@@ -47,7 +48,6 @@ public class Player extends MovingComponent{
 	public void update(Graphics2D g){
 		if(load){
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
-			
 		}
 	}
 	private void setImage(BufferedImage bufferedImage) {
@@ -77,5 +77,9 @@ public class Player extends MovingComponent{
 			Thread start = new Thread(this);
 			start.start();
 		}
+	}
+	public void setJump(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 }
