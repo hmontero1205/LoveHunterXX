@@ -37,7 +37,6 @@ public class Player extends MovingComponent{
 				g.drawImage(icon.getImage(),0,0,null);
 			}
 			else{
-				
 				image = new BufferedImage(newWidth,newHeight,BufferedImage.TYPE_INT_ARGB);
 				g = image.createGraphics();
 				//xCoord of destination,yCoord destination,width of dest,height,xCoord of target, yCoord of target, w + h of target, null
