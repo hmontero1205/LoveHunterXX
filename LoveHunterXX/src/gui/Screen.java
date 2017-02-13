@@ -33,11 +33,10 @@ public abstract class Screen {
 		g.setColor(new Color(204,204,255));
 		g.fillRect(0,0,image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		for(int i=viewObjects.size()-1;i>-1;i--){
+		for(int i=0;i<viewObjects.size();i++){
 			g.drawImage(viewObjects.get(i).getImage(), viewObjects.get(i).getX(), viewObjects.get(i).getY(), null);
 		}
 		g2.drawImage(buffer, 0, 0, null);
-		
 	}
 	public abstract void initObjects(ArrayList<Visible> viewObjects);
 	public int getWidth(){
