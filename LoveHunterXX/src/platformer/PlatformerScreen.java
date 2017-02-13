@@ -24,13 +24,14 @@ public class PlatformerScreen extends Screen implements KeyListener{
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
-		addObjects(viewObjects);
+		//addObjects(viewObjects);
 	}
 	private void addObjects(ArrayList<Visible> viewObjects) {
 		while(true){
 			try {
 				Thread.sleep(2000);
-				
+				Obstacle obstacle = new Obstacle(500, 370, 100, 100, 10, "resources/cactus.png");
+				viewObjects.add(obstacle);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
