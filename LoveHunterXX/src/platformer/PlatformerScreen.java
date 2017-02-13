@@ -26,7 +26,7 @@ public class PlatformerScreen extends Screen implements KeyListener {
 		viewObjects.add(player);
 		// addObjects(viewObjects);
 	}
-
+//
 	private void addObjects(ArrayList<Visible> viewObjects) {
 		while (true) {
 			try {
