@@ -21,7 +21,7 @@ public class IntroScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		button = new Button(500,400,100,100, "Start!", null, null);
-
+		
 	}
 
 	@Override
