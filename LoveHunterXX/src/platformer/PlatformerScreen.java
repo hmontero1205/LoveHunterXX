@@ -2,13 +2,13 @@ package platformer;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList; 
+import java.util.ArrayList;
 
 import gui.Screen;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class PlatformerScreen extends Screen implements KeyListener{
+public class PlatformerScreen extends Screen implements KeyListener {
 
 	private Graphic bg;
 	private Player player;
@@ -24,10 +24,11 @@ public class PlatformerScreen extends Screen implements KeyListener{
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
-		//addObjects(viewObjects);
+		// addObjects(viewObjects);
 	}
+
 	private void addObjects(ArrayList<Visible> viewObjects) {
-		while(true){
+		while (true) {
 			try {
 				Thread.sleep(2000);
 				Obstacle obstacle = new Obstacle(500, 370, 100, 100, 10, "resources/cactus.png");
@@ -39,13 +40,13 @@ public class PlatformerScreen extends Screen implements KeyListener{
 		}
 	}
 
-	public KeyListener getKeyListener(){
+	public KeyListener getKeyListener() {
 		return this;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == 32){
+		if (e.getKeyCode() == 32) {
 			player.setJump(true);
 		}
 	}
@@ -53,13 +54,13 @@ public class PlatformerScreen extends Screen implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
