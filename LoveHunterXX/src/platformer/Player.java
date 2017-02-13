@@ -31,16 +31,17 @@ public class Player extends MovingComponent{
 		image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),BufferedImage.TYPE_INT_ARGB);
 		setX(x);
 		setY(y);
-		play();
 	}
 	public void update(Graphics2D g){
-		g.drawImage(image, 0, 0, null);
+		icon = new ImageIcon(getImgLoc());
+		setImage(new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
+		g.drawImage(icon.getImage(), 100, 100, null);
 	}
 	public void createImage(Graphics2D g){
 		icon = new ImageIcon(getImgLoc());
-		setImage(new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB));
-		g = image.createGraphics();
-		g.drawImage(icon.getImage(), 10, 10, null);
+		setImage(new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
+		g.drawImage(icon.getImage(), 100, 100, null);
+//		g = image.createGraphics();
 	}
 	private void setImage(BufferedImage bufferedImage) {
 		image = bufferedImage;

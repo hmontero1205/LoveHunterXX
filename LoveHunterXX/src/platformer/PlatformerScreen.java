@@ -22,7 +22,7 @@ public class PlatformerScreen extends Screen implements KeyListener{
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.PNG");
 		viewObjects.add(bg);
 		player = new Player(10, 300, 100, 100, "resources/player.PNG");
-		
+		player.play();
 		viewObjects.add(player);
 	}
 	public KeyListener getKeyListener(){
