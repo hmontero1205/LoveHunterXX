@@ -7,27 +7,48 @@ import java.util.ArrayList;
 import gui.ClickableScreen;
 import gui.Screen;
 import gui.components.Graphic;
+import gui.components.TextLabel;
 import gui.components.Visible;
 
 public class QTTScreen extends Screen implements KeyListener {
 
 	private Graphic map;
-	private ArrayList<Entity> entities;
+	private TextLabel explosive;
+	private TextLabel alluring;
+	private TextLabel health;
+	// private ArrayList<Entity> entities; //all the
+	// entities(bottle,player,enemies)
+	private Player user;
 
 	public QTTScreen(int width, int height) {
 		super(width, height);
+
+		user = new Player(50, 50);
 	}
 
 	/**
 	 * Make Map Player Movement update player getx gety Zombie Movement update
 	 * zombie getx gety (zombie are in an array list) Bottle Movement update
-	 * bottle getx gety
+	 * bottle getx gety Display ammo & health
 	 */
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		map = new Graphic(0, 0, 800, 600, "rescources/tempmap.png");
-		viewObjects.add(map);
-		viewObjects.addAll(entities);
+		if (user != null) {
+			// returns the int amount for explosive
+			int explosiveAmmo = user.getArsenal().get("explosive");
+			int alluringAmmo = user.getArsenal().get("alluring");
+
+			// health = new TextLabel(650,20,100,50,"HEALTH:"+user.getHealth());
+			explosive = new TextLabel(500, 530, 100, 50, "explosive: " + explosiveAmmo);
+			alluring = new TextLabel(690, 530, 100, 50, "alluring: " + alluringAmmo);
+
+			map = new Graphic(0, 0, 800, 600, "resources/map.png");
+			viewObjects.add(map);
+			// viewObjects.add(health);
+			viewObjects.add(explosive);
+			viewObjects.add(alluring);
+			// viewObjects.addAll(entities);
+		}
 	}
 
 	@Override
@@ -37,6 +58,7 @@ public class QTTScreen extends Screen implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent event) {
+		user.handle(event);
 	}
 
 	@Override
