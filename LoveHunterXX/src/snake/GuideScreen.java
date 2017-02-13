@@ -19,6 +19,26 @@ public class GuideScreen extends ClickableScreen {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public static ArrayList<String> getLines(String str){ // will transform a single string to an array of lines of the string.
+		ArrayList<String> lines = new ArrayList<String>();
+		String tmp = "";
+		
+		for(int i = 0, n = str.length(); i < n; ++i){
+			tmp += str.charAt(i);
+			
+			if(tmp.equals(" ")){ // delete the extra space after a period.
+				tmp = "";
+			}
+			
+			if(str.charAt(i) == '.'){
+				lines.add(tmp);
+				tmp = "";
+			}
+		}
+		
+		return lines;
+	}
+	
 	public void generateTextLine(String str){
 		String[] lines = str.split(".");
 		System.out.println(lines.length);
@@ -45,8 +65,15 @@ public class GuideScreen extends ClickableScreen {
 			}
 		});
 		
-		generateTextLine("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
+		//generateTextLine("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
+			//	+ " presents as you can. Use the.");
+		
+		ArrayList<String> s = getLines("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
 				+ " presents as you can. Use the.");
+		for(String ss: s){
+			System.out.println(ss);
+		}
+		
 		// text with all the instructions.
 		TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
 //		/TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
