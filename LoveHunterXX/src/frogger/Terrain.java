@@ -43,7 +43,8 @@ public class Terrain extends Component implements Runnable {
 			int randomLength = (int)(Math.random() *3)+4;
 			for(int i=0;i<randomLength;i++){
 				int startingPos = (obsDir>0) ? 0:800;
-				Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,obsDir,"resources/frogger/truck.png");
+				String carSrc = (Math.random()>.5) ? "greencar.png":"truck.png";
+				Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,obsDir,"resources/frogger/"+carSrc);
 				obs.add(c1);
 				FroggerGame.fs.addObject(c1);
 				FroggerGame.fs.moveToBack(c1);
