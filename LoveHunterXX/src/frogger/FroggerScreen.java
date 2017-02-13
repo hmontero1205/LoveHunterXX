@@ -38,12 +38,12 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	public void initObjects(ArrayList<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
 		//player = getPlayer();
-		Terrain t1 = new Terrain(8, 31, 784, ROW_HEIGHT, ROAD);
-		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,784,ROW_HEIGHT,WATER);
-		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
-		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
-		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
-		Terrain t6 = new Terrain(8,31+(5*ROW_HEIGHT),784,ROW_HEIGHT,ROAD);
+		Terrain t1 = new Terrain(8, 31, 792, ROW_HEIGHT, ROAD,3);
+		Terrain t2 = new Terrain(8,31+ROW_HEIGHT,792,ROW_HEIGHT,WATER,-5);
+		Terrain t3 = new Terrain(8,31+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-2);
+		Terrain t4 = new Terrain(8,31+(3*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,4);
+		Terrain t5 = new Terrain(8,31+(4*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,4);
+		Terrain t6 = new Terrain(8,31+(5*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5);
 		tList.add(t1);
 		tList.add(t2);
 		tList.add(t3);
@@ -69,7 +69,7 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 			if(tList.get(i).getTerrain() == ROAD){
 				tList.get(i).startThread();
 				try {
-					Thread.sleep(30);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

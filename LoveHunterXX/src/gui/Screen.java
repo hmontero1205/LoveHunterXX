@@ -34,10 +34,18 @@ public abstract class Screen {
 		g.setColor(new Color(204,204,255));
 		g.fillRect(0,0,image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		for(int i=viewObjects.size()-1;i>-1;i--){
-			g.drawImage(viewObjects.get(i).getImage(), viewObjects.get(i).getX(), viewObjects.get(i).getY(), null);
+		try{
+			for(int i=viewObjects.size()-1;i>-1;i--){
+				Visible var = viewObjects.get(i);
+				g.drawImage(var.getImage(), var.getX(), var.getY(), null);
+				
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(viewObjects);
 		}
 		g2.drawImage(buffer, 0, 0, null);
+		
 		
 	}
 	public abstract void initObjects(ArrayList<Visible> viewObjects);
