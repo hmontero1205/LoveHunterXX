@@ -16,10 +16,11 @@ public class Player extends MovingComponent{
 	private int y;
 	private int w;
 	private int h;
-	private BufferedImage image;
+	private Image image;
+	
 	private String imgLoc;
 	private ImageIcon icon;
-	private boolean jump;
+	private boolean load;
 	public Player(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		this.x = x;
@@ -27,23 +28,30 @@ public class Player extends MovingComponent{
 		this.w = w;
 		this.h = h;
 		this.imgLoc = imageLocation;
-		icon = new ImageIcon(imgLoc);
-		image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),BufferedImage.TYPE_INT_ARGB);
+		load = false;
 		setX(x);
 		setY(y);
+		loadImage();
+	}
+	private void loadImage() {
+		try{
+			image = new ImageIcon("resources/player.png").getImage();
+			load = true;
+			update();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	public void update(Graphics2D g){
-		icon = new ImageIcon(getImgLoc());
-		setImage(new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
-		g.drawImage(icon.getImage(), 100, 100, null);
-	}
-	public void createImage(Graphics2D g){
-		icon = new ImageIcon(getImgLoc());
-		setImage(new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB));
-		g.drawImage(icon.getImage(), 100, 100, null);
-//		g = image.createGraphics();
+		if(load){
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+			
+		}
 	}
 	private void setImage(BufferedImage bufferedImage) {
+		
 		image = bufferedImage;
 	}
 	public String getImgLoc(){
@@ -65,7 +73,6 @@ public class Player extends MovingComponent{
 		
 	}
 	public void play(){
-		createImage(image.createGraphics());
 		if(!isRunning()){
 			Thread start = new Thread(this);
 			start.start();

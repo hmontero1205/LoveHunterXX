@@ -19,11 +19,13 @@ public class PlatformerScreen extends Screen implements KeyListener{
 
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.PNG");
-		viewObjects.add(bg);
-		player = new Player(10, 300, 100, 100, "resources/player.PNG");
+		player = new Player(10, 300, 173, 300, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
+		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
+		viewObjects.add(bg);
+//		Graphic h = new Graphic(100, 100, .5, "resources/player.png");
+//		viewObjects.add(h);
 	}
 	public KeyListener getKeyListener(){
 		return this;
