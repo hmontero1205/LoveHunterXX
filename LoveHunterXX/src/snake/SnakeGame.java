@@ -17,7 +17,7 @@ public class SnakeGame extends GUIApplication {
 		sScreen = new SnakeScreen(getWidth(),getHeight());
 		iScreen = new IntroScreen(getWidth(),getHeight());
 		gScreen = new GuideScreen(getWidth(),getHeight());
-		setScreen(gScreen);
+		setScreen(iScreen);
 	}
 	
 	public static void main(String[] stuff){
