@@ -18,6 +18,16 @@ public class GuideScreen extends ClickableScreen {
 		super(width, height);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void generateTextLine(String str){
+		String[] lines = str.split(".");
+		System.out.println(lines.length);
+		//String tmp ="";
+		for(int i = 0, n = lines.length; i < n; ++i){
+			System.out.println("sdsdsd");
+			System.out.println(lines[i]);
+		}
+	}
 
 	@Override
 	public void initAllObjects(ArrayList<Visible> viewObjects) {
@@ -35,8 +45,11 @@ public class GuideScreen extends ClickableScreen {
 			}
 		});
 		
+		generateTextLine("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
+				+ " presents as you can. Use the.");
 		// text with all the instructions.
-		TextArea guideBox = new TextArea(100, 100, 200, 200, "Instructions:");
+		TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
+//		/TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
 		
 		// add items to the view list.
 		viewObjects.add(background);
