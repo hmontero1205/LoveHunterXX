@@ -76,6 +76,30 @@ public class MovingComponent extends Component implements Runnable {
 
 	}
 
+	public long getMoveTime() {
+		return moveTime;
+	}
+
+	public void setMoveTime(long moveTime) {
+		this.moveTime = moveTime;
+	}
+
+	public double getPosx() {
+		return posx;
+	}
+
+	public void setPosx(double posx) {
+		this.posx = posx;
+	}
+
+	public double getPosy() {
+		return posy;
+	}
+
+	public void setPosy(double posy) {
+		this.posy = posy;
+	}
+
 	public void checkBehaviors() {
 		if(getY()>300){
 			setY(300);
