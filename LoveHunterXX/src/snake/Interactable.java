@@ -10,4 +10,13 @@ public abstract class Interactable {
 	
 	public Interactable() {
 	}
+
+	public int getX() {
+		// TODO Auto-generated method stub
+		return xPos;
+	}
+	
+	public int getY(){
+		return yPos;
+	}
 }

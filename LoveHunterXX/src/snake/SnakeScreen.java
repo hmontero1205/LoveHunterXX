@@ -26,6 +26,10 @@ public class SnakeScreen extends Screen implements KeyListener {
 	
 
 	}
+	
+	public KeyListener getKeyListener(){
+		return this;
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {

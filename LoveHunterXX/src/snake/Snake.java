@@ -22,6 +22,8 @@ public class Snake {
 	}
 
 	private void addPresent(Present p){
+		p.setX(presentList.get(presentList.size()-1).getX());
+		p.setY(prese) // finish from here
 		presentList.add(p);
 	}
 	
