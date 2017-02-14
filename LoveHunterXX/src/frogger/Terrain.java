@@ -96,7 +96,7 @@ public class Terrain extends Component implements Runnable {
 		 Obstacle frontCar = obs.get(0);
 		 if(carVelocity>0){
 			 if(frontCar.getX()<700 && backCar.getX()>100 && Math.random()<.2 ){
-				 int startingPos = (carVelocity>0) ? 0:800;
+				 int startingPos = 0;
 				 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
 				 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
 				 obs.add(c1);
@@ -106,7 +106,7 @@ public class Terrain extends Component implements Runnable {
 		 }
 		 else{
 			 if(frontCar.getX()>100 && backCar.getX()<700 && Math.random()<.2 ){
-				 int startingPos = (carVelocity>0) ? 0:800;
+				 int startingPos = 800;
 				 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
 				 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
 				 obs.add(c1);

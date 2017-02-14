@@ -18,8 +18,6 @@ import gui.components.Visible;
 
 public class FroggerScreen extends Screen implements KeyListener,Runnable{
 
-	public int sWidth;
-	public int sHeight;
 	public final int WINDOWBARHEIGHT = 26;
 	public final int ROW_HEIGHT = 40;
 	public final int SAFEZONE = 0;
