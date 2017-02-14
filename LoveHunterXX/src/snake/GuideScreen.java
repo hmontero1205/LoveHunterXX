@@ -14,6 +14,12 @@ public class GuideScreen extends ClickableScreen {
 
 	private final int WIDTH = 800;
 	private final int HEIGHT = 600;
+	private String instructions = "You need to find the best present for your girl."
+			+ " You can do this by collecting all the presents you see."
+			+ " Use the arrows to move left,up,right, or down."
+			+ " But also, be sure to avoid the obstacles that will destroy"
+			+ " some of the ";
+	
 	public GuideScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
@@ -69,7 +75,8 @@ public class GuideScreen extends ClickableScreen {
 		viewObjects.add(button);
 		
 		// add the lines of instructions to the screen.
-		addLines("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
+		addLines("You need to find the best present for your girl. Collect all the presents"
+				+ " yUsing the arrows, move the cart and get as many"
 				+ " presents as you can. Use the arrows.", viewObjects, 10);
 		
 
