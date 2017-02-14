@@ -36,7 +36,6 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
-		//player = getPlayer()
 		tList.add(new Terrain(3,WINDOWBARHEIGHT, 794, ROW_HEIGHT, ROAD,9));
 		tList.add(new Terrain(3,WINDOWBARHEIGHT+ROW_HEIGHT,794,ROW_HEIGHT,WATER,0));
 		tList.add(new Terrain(3,WINDOWBARHEIGHT+(2*ROW_HEIGHT),794,ROW_HEIGHT,ROAD,-5));
