@@ -40,15 +40,17 @@ public class GuideScreen extends ClickableScreen {
 	}
 	
 	public void addLines(String str, ArrayList<Visible> v, int xStart){
+		// Will create individual TextArea lines for each sentence.
+		// specifically with the period at the end of each sentence.
+		System.out.println("Creating lines.");
 		ArrayList<String> lines = getLines(str);
 		for(int i = 0, n = lines.size(); i < n; ++i){
-			v.add(new TextArea(0,i * 50, 800, 600, lines.get(i)));
+			v.add(new TextArea(xStart, (i + 2) * 50, 800, 600, lines.get(i)));
 		}
 	}
 
 	@Override
 	public void initAllObjects(ArrayList<Visible> viewObjects) {
-		// TODO Auto-generated method stub
 		// Background image.
 		Graphic background = new Graphic(0, 0, 800, 600, "resources/guidebackground.jpg");
 		
@@ -62,21 +64,13 @@ public class GuideScreen extends ClickableScreen {
 			}
 		});
 		
-		
-		ArrayList<String> s = getLines("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
-				+ " presents as you can. Use the.");
-		for(String ss: s){
-			System.out.println(ss);
-		}
-		
-		// text with all the instructions.
-		TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
-//		/TextArea guideBox = new TextArea(100, 100, 200, 200, "You need to find the best present for your girl.");
-		
 		// add items to the view list.
 		viewObjects.add(background);
 		viewObjects.add(button);
-		viewObjects.add(guideBox);
+		
+		// add the lines of instructions to the screen.
+		addLines("You need to find the best present for your girl. Using the arrows, move the cart and get as many"
+				+ " presents as you can. Use the arrows.", viewObjects, 10);
 		
 
 	}
