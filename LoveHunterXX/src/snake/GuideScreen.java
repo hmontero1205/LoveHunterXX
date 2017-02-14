@@ -40,7 +40,7 @@ public class GuideScreen extends ClickableScreen {
 		return lines;
 	}
 	
-	public void addLines(String str, ArrayList<Visible> v, int xStart){
+	public void addLines(String str, List<Visible> v, int xStart){
 		// Will create individual TextArea lines for each sentence.
 		// specifically with the period at the end of each sentence.
 		System.out.println("Creating lines.");
