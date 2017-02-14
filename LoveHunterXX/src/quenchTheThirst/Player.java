@@ -8,7 +8,7 @@ public class Player extends LivingEntity {
 	private HashMap<String, Integer> arsenal;
 
 	public Player(int x, int y) {
-		super(x, y, 1, "resources/player.PNG");
+		super(x, y, .2, "resources/player.PNG");
 		
 		arsenal = new HashMap<String, Integer>();
 		arsenal.put("explosive", 5);

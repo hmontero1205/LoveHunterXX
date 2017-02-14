@@ -16,14 +16,11 @@ public class QTTScreen extends Screen implements KeyListener {
 	private TextLabel explosive;
 	private TextLabel alluring;
 	private TextLabel health;
-	// private ArrayList<Entity> entities; //all the
-	// entities(bottle,player,enemies)
+	// private ArrayList<Entity> entities; //all the entities(bottle,player,enemies)
 	private Player user;
 
 	public QTTScreen(int width, int height) {
 		super(width, height);
-
-		user = new Player(50, 50);
 	}
 
 	/**
@@ -33,22 +30,22 @@ public class QTTScreen extends Screen implements KeyListener {
 	 */
 	@Override
 	public void initObjects(ArrayList<Visible> viewObjects) {
-		if (user != null) {
-			// returns the int amount for explosive
-			int explosiveAmmo = user.getArsenal().get("explosive");
-			int alluringAmmo = user.getArsenal().get("alluring");
+		user = new Player(400, 300);
+		// returns the int amount for explosive
+		int explosiveAmmo = user.getArsenal().get("explosive");
+		int alluringAmmo = user.getArsenal().get("alluring");
 
-			// health = new TextLabel(650,20,100,50,"HEALTH:"+user.getHealth());
-			explosive = new TextLabel(500, 530, 100, 50, "explosive: " + explosiveAmmo);
-			alluring = new TextLabel(690, 530, 100, 50, "alluring: " + alluringAmmo);
+		health = new TextLabel(600,20,100,50,"HEALTH:"+user.getHealth());
+		explosive = new TextLabel(500, 530, 100, 50, "explosive: " + explosiveAmmo);
+		alluring = new TextLabel(690, 530, 100, 50, "alluring: " + alluringAmmo);
 
-			map = new Graphic(0, 0, 800, 600, "resources/map.png");
-			viewObjects.add(map);
-			// viewObjects.add(health);
-			viewObjects.add(explosive);
-			viewObjects.add(alluring);
-			// viewObjects.addAll(entities);
-		}
+		map = new Graphic(0, 0, 800, 600, "resources/map.png");
+		viewObjects.add(map);
+		viewObjects.add(health);
+		viewObjects.add(explosive);
+		viewObjects.add(alluring);
+		viewObjects.add(user);
+		// viewObjects.addAll(entities);
 	}
 
 	@Override
