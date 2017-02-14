@@ -22,8 +22,8 @@ public class Player extends MovingComponent{
 	private boolean load;
 	private long startJump;
 	private final long jumpLength;
-	private int initialV;
-	private int grav;
+	private final int initialV;
+	private double grav;
 	public Player(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		jumpLength = 2000;
@@ -34,8 +34,8 @@ public class Player extends MovingComponent{
 		this.imgLoc = imageLocation;
 		this.load = false;
 		this.jump = false;
-		this.initialV = 10;
-		this.grav = 1;
+		this.initialV = 21;
+		this.grav = 2.2;
 		setX(x);
 		setY(y);
 		loadImage();
@@ -85,35 +85,18 @@ public class Player extends MovingComponent{
 			long current = System.currentTimeMillis();
 			int difference = (int)(current - startJump);
 			double newV = initialV - grav*(double)(difference/100);
-			
-			if(difference <= 1000){
+			if(difference <= jumpLength/2){
 				super.setVy(-newV);
-//				if(difference <= 500){
-//					//vy = vyo - gt;
-//					
-//					super.setVy(-10);
-//				}
-//				else{
-//					super.setVy(-5);
-//				}
 			}
 			else{
-				if(difference >= 2000){
+				if(difference >= jumpLength){
 					setJump(false);
 					setY(370);
 				}
 				else{
-//					if(difference >= 1000 && difference <= 1500){
-//						super.setVy(5);
-//					}
-//					else{
-//						super.setVy(10);
-//					}
 					super.setVy(-newV);
 				}
 			}
-			
-			
 		}
 	}
 	public void play(){
@@ -125,5 +108,8 @@ public class Player extends MovingComponent{
 	public void setJump(boolean b) {
 		jump = b;
 		startJump = System.currentTimeMillis();
+	}
+	public boolean getJump() {
+		return jump;
 	}
 }

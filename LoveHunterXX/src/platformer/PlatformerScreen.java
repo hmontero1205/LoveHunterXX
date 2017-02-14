@@ -47,7 +47,9 @@ public class PlatformerScreen extends Screen implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
-			player.setJump(true);
+			if(!player.getJump()){
+				player.setJump(true);
+			}
 		}
 	}
 
