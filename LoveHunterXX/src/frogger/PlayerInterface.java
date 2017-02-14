@@ -2,7 +2,9 @@ package frogger;
 
 import java.awt.event.KeyEvent;
 
-public interface PlayerInterface {
+import gui.components.Visible;
+
+public interface PlayerInterface extends Visible{
 
 	void move(KeyEvent k);
 
