@@ -7,7 +7,7 @@ public abstract class Projectile extends Entity {
 	}
 
 	public void setVelocity(double d) {
-		
+//		getuser
 	}
 	
 	public void setAcceleration(double d) {
