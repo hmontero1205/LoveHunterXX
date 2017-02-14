@@ -19,7 +19,7 @@ public class GuideScreen extends ClickableScreen {
 			+ " You can do this by collecting all the presents you see."
 			+ " Use the arrows to move left,up,right, or down."
 			+ " But also, be sure to avoid the obstacles that will destroy"
-			+ " some of the ";
+			+ " some of the presents!";
 	
 	public GuideScreen(int width, int height) {
 		super(width, height);
@@ -37,7 +37,7 @@ public class GuideScreen extends ClickableScreen {
 				tmp = "";
 			}
 			
-			if(str.charAt(i) == '.'){
+			if(str.charAt(i) == '.' || str.charAt(i) == '!'){
 				lines.add(tmp);
 				tmp = "";
 			}
@@ -52,7 +52,7 @@ public class GuideScreen extends ClickableScreen {
 		System.out.println("Creating lines.");
 		ArrayList<String> lines = getLines(str);
 		for(int i = 0, n = lines.size(); i < n; ++i){
-			v.add(new TextArea(xStart, (i + 2) * 50, 800, 600, lines.get(i)));
+			v.add(new TextArea(xStart, (i + 2) * 40, 800, 600, lines.get(i)));
 		}
 	}
 
@@ -62,8 +62,12 @@ public class GuideScreen extends ClickableScreen {
 		// Background image.
 		Graphic background = new Graphic(0, 0, 800, 600, "resources/guidebackground.jpg");
 		
+		// Cart icon.
+		Graphic cartImg = new Graphic(550, 50, 100, 100, "resources/cart.png");
+		
+		
 		// button to be clicked to transition into the next screen.
-		Button button = new Button((WIDTH/2) - (100/2), (HEIGHT/2) - (100/2), 100, 60, "Continue", Color.BLACK, new Action() {
+		Button button = new Button((WIDTH/2) - (100/2), 400, 100, 60, "Continue", Color.BLACK, new Action() {
 			
 			@Override
 			public void act() { // transition will occur here.
@@ -75,11 +79,14 @@ public class GuideScreen extends ClickableScreen {
 		// add items to the view list.
 		viewObjects.add(background);
 		viewObjects.add(button);
+		viewObjects.add(cartImg);
 		
 		// add the lines of instructions to the screen.
-		addLines("You need to find the best present for your girl. Collect all the presents"
-				+ " yUsing the arrows, move the cart and get as many"
-				+ " presents as you can. Use the arrows.", viewObjects, 10);
+		addLines("You need to find the best present for your girl."
+				+ " You can do this by collecting all the presents you see."
+				+ " Use the arrows to move left,up,right, or down."
+				+ " But also, be sure to avoid the obstacles that will destroy"
+				+ " some of the presents!", viewObjects, 10);
 		
 
 	}
