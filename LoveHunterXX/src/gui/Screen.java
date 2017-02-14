@@ -9,14 +9,16 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import gui.components.Visible;
 
 public abstract class Screen {
 	private BufferedImage image;
-	private ArrayList<Visible> viewObjects;
+	private List<Visible> viewObjects;
 	public Screen(int width,int height){
-		viewObjects = new ArrayList<Visible>();
+		viewObjects = Collections.synchronizedList(new ArrayList<Visible>());
 		initObjects(viewObjects);
 		initImage(width,height);
 	}
@@ -39,7 +41,7 @@ public abstract class Screen {
 		g2.drawImage(buffer, 0, 0, null);
 		
 	}
-	public abstract void initObjects(ArrayList<Visible> viewObjects);
+	public abstract void initObjects(List<Visible> viewObjects);
 	public int getWidth(){
 		return image.getWidth();
 	}
