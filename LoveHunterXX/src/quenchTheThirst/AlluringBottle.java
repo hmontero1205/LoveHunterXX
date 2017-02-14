@@ -1,9 +1,21 @@
 package quenchTheThirst;
 
-public class AlluringBottle extends Projectile {
+public class AlluringBottle extends Entity implements ProjectileInterface {
 
-	public AlluringBottle(int x, int y, double scale, String imageLocation) {
-		super(x, y, scale, imageLocation);
+	public AlluringBottle(int x, int y, int dir) {
+		super(x, y, 1, "resources/alluring");
+		
+	}
+
+	@Override
+	public void setVelocity(double v) {
+		
+	}
+
+	@Override
+	public void setAcceleration(double a) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
