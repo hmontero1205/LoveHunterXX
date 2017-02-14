@@ -9,6 +9,30 @@ public class MovingComponent extends Component implements Runnable {
 	private double vy; //the vertical velocity
 	private double posx; //the actual x-coordinate of the object
 	private double posy; //the actual y-coordinate of the object
+	public long getMoveTime() {
+		return moveTime;
+	}
+
+	public void setMoveTime(long moveTime) {
+		this.moveTime = moveTime;
+	}
+
+	public double getPosx() {
+		return posx;
+	}
+
+	public void setPosx(double posx) {
+		this.posx = posx;
+	}
+
+	public double getPosy() {
+		return posy;
+	}
+
+	public void setPosy(double posy) {
+		this.posy = posy;
+	}
+
 	private boolean running;
 
 	public static final int REFRESH_RATE = 20;

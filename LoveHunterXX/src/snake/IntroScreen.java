@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.ClickableScreen;
 import gui.Screen;
@@ -25,7 +26,7 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 	}
 
 	@Override
-	public void initAllObjects(ArrayList<Visible> viewObjects) {
+	public void initAllObjects(List<Visible> viewObjects) {
 		button = new Button(350,100,100,50, "Start!", Color.LIGHT_GRAY, new Action() {
 			@Override
 			public void act() {
