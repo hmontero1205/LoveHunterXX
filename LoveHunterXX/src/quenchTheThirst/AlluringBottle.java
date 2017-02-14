@@ -9,6 +9,7 @@ public class AlluringBottle extends Entity implements ProjectileInterface {
 
 	@Override
 	public void setVelocity(double v) {
+		// TODO Auto-generated method stub
 		
 	}
 
