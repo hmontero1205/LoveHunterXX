@@ -87,7 +87,7 @@ public class Platform extends MovingComponent {
 		while(isRunning()){
 			try {
 				Thread.sleep(REFRESH_RATE);
-				checkBehaviors();
+				//checkBehaviors();
 				update();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

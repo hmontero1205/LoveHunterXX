@@ -20,7 +20,7 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 
 	public int sWidth;
 	public int sHeight;
-	public final int WINDOWBARHEIGHT = 31;
+	public final int WINDOWBARHEIGHT = 26;
 	public final int ROW_HEIGHT = 40;
 	public final int SAFEZONE = 0;
 	public final int ROAD = 1;
@@ -38,16 +38,16 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
-		//player = getPlayer();
-		tList.add(new Terrain(8, 31, 792, ROW_HEIGHT, WATER,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+ROW_HEIGHT,792,ROW_HEIGHT,WATER,0));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(2*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,-5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(3*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(4*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(5*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(6*ROW_HEIGHT),792,ROW_HEIGHT,WATER,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(7*ROW_HEIGHT),792,ROW_HEIGHT,SAFEZONE,5));
-		tList.add(new Terrain(8,WINDOWBARHEIGHT+(8*ROW_HEIGHT),792,ROW_HEIGHT,ROAD,5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT, 794, ROW_HEIGHT, ROAD,9));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+ROW_HEIGHT,794,ROW_HEIGHT,WATER,0));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(2*ROW_HEIGHT),794,ROW_HEIGHT,ROAD,-5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(3*ROW_HEIGHT),794,ROW_HEIGHT,SAFEZONE,5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(4*ROW_HEIGHT),794,ROW_HEIGHT,ROAD,2));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(5*ROW_HEIGHT),794,ROW_HEIGHT,ROAD,5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(6*ROW_HEIGHT),794,ROW_HEIGHT,WATER,5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(7*ROW_HEIGHT),794,ROW_HEIGHT,SAFEZONE,5));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(8*ROW_HEIGHT),794,ROW_HEIGHT,ROAD,-4));
+
 		viewObjects.addAll(tList);
 		//viewObjects.add(player);
 		
@@ -62,12 +62,6 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 		for(int i=0;i<tList.size();i++){
 			if(tList.get(i).getTerrain() == ROAD){
 				tList.get(i).startThread();
-//				try {
-//					Thread.sleep(100);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 			}
 		}
 		
@@ -77,9 +71,6 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	}
 	@Override
 	public void keyPressed(KeyEvent k) {
-//		if(k.getKeyCode()==KeyEvent.VK_UP){
-//			player.move(k);
-//		}
 		
 	}
 
