@@ -37,15 +37,10 @@ public abstract class Screen {
 		g.setColor(new Color(204, 204, 255));
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		try {
-			for (int i = 0; i < viewObjects.size(); i++) {
-				Visible v = viewObjects.get(i);
+		for (int i = 0; i < viewObjects.size(); i++) {
+			Visible v = viewObjects.get(i);
 
-				g.drawImage(v.getImage(), v.getX(), v.getY(), null);
-			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			System.out.println(viewObjects);
+			g.drawImage(v.getImage(), v.getX(), v.getY(), null);
 		}
 		g2.drawImage(buffer, 0, 0, null);
 

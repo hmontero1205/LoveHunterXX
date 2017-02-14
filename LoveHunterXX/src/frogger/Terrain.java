@@ -41,26 +41,6 @@ public class Terrain extends Component implements Runnable {
 		}
 	}
 
-//	public void generateObstacles() {
-//		for (int i = 0; i < 3; i++) {
-//			int startingPos = (carVelocity > 0) ? -50 : 800;
-//			String carSrc = (Math.random() < .5) ? "greencar.png" : "whiteconvert.png";
-//			Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
-//					"resources/frogger/" + carSrc);
-//			if (c1 != null) {
-//				obs.add(c1);
-//				FroggerGame.fs.addObject(c1);
-//			}
-//			c1.play();
-//			try {
-//				Thread.sleep(2000 / Math.abs(carVelocity));
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//
-//	}
 
 	public void startThread() {
 		Thread tThread = new Thread(this);
@@ -142,33 +122,7 @@ public class Terrain extends Component implements Runnable {
 
 	}
 
-	// public void checkOutOfBounds() {
-	// if(obs.size()>0){
-	// Obstacle inFront = obs.get(0);
-	// System.out.println(inFront.getX());
-	// if(inFront.getX()>650){
-	// obs.remove(inFront);
-	// FroggerGame.fs.remove(inFront);
-	// try {
-	// Thread.sleep(500);
-	// addNewObs();
-	// } catch (InterruptedException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	//
-	// }
-
-	// public void addNewObs(){
-	// Obstacle c1 = new
-	// Obstacle(0,getY()+10,50,25,3,"resources/frogger/truck.png");
-	// obs.add(c1);
-	// FroggerGame.fs.addObject(c1);
-	// FroggerGame.fs.moveToBack(c1);
-	// c1.play();
-	// }
+	
 
 	public int getTerrain() {
 		// TODO Auto-generated method stub

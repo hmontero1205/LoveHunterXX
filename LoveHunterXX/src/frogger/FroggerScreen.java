@@ -63,12 +63,6 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 		for(int i=0;i<tList.size();i++){
 			if(tList.get(i).getTerrain() == ROAD){
 				tList.get(i).startThread();
-//				try {
-//					Thread.sleep(100);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 			}
 		}
 		
@@ -78,9 +72,6 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	}
 	@Override
 	public void keyPressed(KeyEvent k) {
-//		if(k.getKeyCode()==KeyEvent.VK_UP){
-//			player.move(k);
-//		}
 		
 	}
 
