@@ -18,7 +18,6 @@ public class Obstacle extends Platform {
 	}
 	
 	public void play() {
-		createImage();
 		if(!isRunning()){
 			Thread go = new Thread(this);
 			go.start();

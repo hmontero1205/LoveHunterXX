@@ -18,11 +18,15 @@ import gui.components.Visible;
 
 public class FroggerScreen extends Screen implements KeyListener,Runnable{
 
-	public final int WINDOWBARHEIGHT = 26;
-	public final int ROW_HEIGHT = 40;
-	public final int SAFEZONE = 0;
-	public final int ROAD = 1;
-	public final int WATER = 2;	
+	public final static int LEFTARROWKEY = 37;
+	public final static int UPARROWKEY = 38;
+	public final static int RIGHTARROWKEY = 39;
+	public final static int DOWNARROWKEY = 40;
+	public final static int WINDOWBARHEIGHT = 26;
+	public final static int ROW_HEIGHT = 40;
+	public final static int SAFEZONE = 0;
+	public final static int ROAD = 1;
+	public final static int WATER = 2;	
 	public ArrayList<Terrain> tList;
 	public PlayerInterface player;
 
@@ -67,9 +71,13 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	public KeyListener getKeyListener(){
 		return this;
 	}
+	
 	@Override
 	public void keyPressed(KeyEvent k) {
-		
+		int keyCode = k.getKeyCode();
+		if(keyCode >= 37 && keyCode <= 40) {
+			player.move(keyCode);
+		}
 	}
 
 	@Override

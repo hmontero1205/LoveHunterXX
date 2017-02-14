@@ -47,38 +47,7 @@ public class Platform extends MovingComponent {
 	public void setTouchable(boolean b) {
 		touchable = b;
 	}
-	
-//	drawing with no image
-	public void createImage(Graphics2D g) {
-		Color c = new Color(153, 102, 51);
-		g.setColor(c);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
-
-	}
-	
-//	drawing using an image
-	public void createImage() {
-		ImageIcon icon = new ImageIcon(getImgLoc());
-		setImage(new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB));
-		Graphics2D g = getImage().createGraphics();
-		AffineTransform  at = new AffineTransform ();
-		double xScale = getWidth() / icon.getIconWidth();
-		double yScale = getHeight() / icon.getIconHeight();
-		at.scale(xScale, yScale);
 		
-		if(getVx() > 0) {
-//			rotate cars if they are starting from the right side of the screen
-			at.translate(icon.getIconWidth() / 2, icon.getIconHeight() / 2);
-			at.rotate(Math.PI);
-			at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
-		}
-		
-		g.drawImage(icon.getImage(), at, null);
-	}
-	
-	
 	public void run() {
 		setPosx(getX());
 		setPosy(getY());
@@ -105,6 +74,20 @@ public class Platform extends MovingComponent {
 			super.setX((int)getPosx());
 			super.setY((int)getPosy());
 		}
+		
+		ImageIcon icon = new ImageIcon(getImgLoc());
+		AffineTransform  at = new AffineTransform ();
+		double xScale = getWidth() / icon.getIconWidth();
+		double yScale = getHeight() / icon.getIconHeight();
+		at.scale(xScale, yScale);
+		if(getVx() > 0) {
+//			rotate cars if they are starting from the right side of the screen
+			at.translate(icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+			at.rotate(Math.PI);
+			at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
+		}
+		
+		g.drawImage(icon.getImage(), at, null);
 	}
 
 	public void checkBehaviors() {
@@ -124,7 +107,6 @@ public class Platform extends MovingComponent {
 	}
 	
 	public void play() {
-		createImage(getImage().createGraphics());
 		if(!isRunning()){
 			Thread go = new Thread(this);
 			go.start();

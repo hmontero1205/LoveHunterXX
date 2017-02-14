@@ -6,6 +6,6 @@ import gui.components.Visible;
 
 public interface PlayerInterface extends Visible{
 
-	void move(KeyEvent k);
+	void move(int k);
 
 }
