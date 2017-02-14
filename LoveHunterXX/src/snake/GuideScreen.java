@@ -2,6 +2,7 @@ package snake;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.ClickableScreen;
 import gui.components.Action;
@@ -45,7 +46,7 @@ public class GuideScreen extends ClickableScreen {
 		return lines;
 	}
 	
-	public void addLines(String str, ArrayList<Visible> v, int xStart){
+	public void addLines(String str, List<Visible> v, int xStart){
 		// Will create individual TextArea lines for each sentence.
 		// specifically with the period at the end of each sentence.
 		System.out.println("Creating lines.");
@@ -56,7 +57,8 @@ public class GuideScreen extends ClickableScreen {
 	}
 
 	@Override
-	public void initAllObjects(ArrayList<Visible> viewObjects) {
+	public void initAllObjects(List<Visible> viewObjects) {
+		// TODO Auto-generated method stub
 		// Background image.
 		Graphic background = new Graphic(0, 0, 800, 600, "resources/guidebackground.jpg");
 		
