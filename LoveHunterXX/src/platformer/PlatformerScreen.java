@@ -3,6 +3,7 @@ package platformer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.Screen;
 import gui.components.Graphic;
@@ -18,7 +19,7 @@ public class PlatformerScreen extends Screen implements KeyListener {
 	}
 
 	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) {
+	public void initObjects(List<Visible> viewObjects) {
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
 		player = new Player(10, 370, 100, 150, "resources/player.png");
@@ -27,7 +28,7 @@ public class PlatformerScreen extends Screen implements KeyListener {
 		// addObjects(viewObjects);	
 		}
 
-	private void addObjects(ArrayList<Visible> viewObjects) {
+	private void addObjects(List<Visible> viewObjects) {
 		while (true) {
 			try {
 				Thread.sleep(2000);

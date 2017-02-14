@@ -10,7 +10,7 @@ import gui.components.Visible;
 
 public abstract class ClickableScreen extends Screen implements MouseListener {
 
-	private ArrayList<Clickable> clickables;
+	private List<Clickable> clickables;
 	public ClickableScreen(int width, int height) {
 		super(width, height);
 		//this is a comment
@@ -52,7 +52,7 @@ public abstract class ClickableScreen extends Screen implements MouseListener {
 	}
 
 	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) {
+	public void initObjects(List<Visible> viewObjects) {
 		initAllObjects(viewObjects);
 		clickables = new ArrayList<Clickable>();
 		for(Visible v: viewObjects){
@@ -62,7 +62,7 @@ public abstract class ClickableScreen extends Screen implements MouseListener {
 		}
 	}
 	
-	public abstract void initAllObjects(ArrayList<Visible> viewObjects);
+	public abstract void initAllObjects(List<Visible> viewObjects);
 	
 	public MouseListener getMouseListener(){
 		return this;

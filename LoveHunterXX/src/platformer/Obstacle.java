@@ -61,7 +61,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 
 	public void run() {
 		setRunning(true);
-		while (isRunning()) {
+		while(isRunning()){
 			try {
 				Thread.sleep(REFRESH_RATE);
 				update();
