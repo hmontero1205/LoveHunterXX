@@ -16,14 +16,15 @@ public class Player extends MovingComponent{
 	private int y;
 	private int w;
 	private int h;
+	
 	private Image image;
 	private boolean jump;
-	private String imgLoc;
 	private boolean load;
 	private long startJump;
-	private final long jumpLength;
+	
 	private final double initialV;
 	private double grav;
+	private int hp;
 	public Player(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		
@@ -31,16 +32,16 @@ public class Player extends MovingComponent{
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		this.imgLoc = imageLocation;
 		this.load = false;
 		this.jump = false;
+		this.hp = 3;
 		
 //		this.initialV = 5.5;
 //		this.grav = .5;
 		
 		this.initialV = 4;
 		this.grav = .39;
-		this.jumpLength = 2400;
+		
 		
 		setX(x);
 		setY(y);
@@ -72,9 +73,6 @@ public class Player extends MovingComponent{
 			}
 		}
 	}
-	public String getImgLoc(){
-		return imgLoc;
-	}
 	public void run() {
 		setRunning(true);
 		while(isRunning()){
@@ -92,15 +90,23 @@ public class Player extends MovingComponent{
 			long current = System.currentTimeMillis();
 			int difference = (int)(current - startJump);
 			double newV = initialV - grav*(double)(difference/100);
-			if(difference >= jumpLength){
+			if(getY() > 372){
+				System.out.println(getY());
 				setJump(false);
 				setY(370);
 			}
 			else{
-				System.out.println(getPosy());
-				super.setVy(-newV);
+				
+					super.setVy(-newV);
+				
 			}
 		}
+	}
+	public int getHp() {
+		return hp;
+	}
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 	public void play(){
 		if(!isRunning()){
@@ -115,4 +121,21 @@ public class Player extends MovingComponent{
 	public boolean getJump() {
 		return jump;
 	}
+	public void act() {
+		// TODO Auto-generated method stub
+		
+	}
+	public int getW() {
+		return w;
+	}
+	public void setW(int w) {
+		this.w = w;
+	}
+	public int getH() {
+		return h;
+	}
+	public void setH(int h) {
+		this.h = h;
+	}
+	
 }
