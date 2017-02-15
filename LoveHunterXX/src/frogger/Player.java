@@ -17,7 +17,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public static final int RIGHT = 1;
 	public static final int UP = 2;
 	public static final int DOWN = 3;
-	public static final int moveDistance = 15;
+	public static final int moveDistance = 30;
 	private int dir;
 	private ArrayList<PowerUp> inventory;
 	private String[] pModels = {"resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png", "resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png"};
