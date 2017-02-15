@@ -3,16 +3,19 @@ package platformer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import gui.Screen;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class PlatformerScreen extends Screen implements KeyListener {
+public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private Graphic bg;
 	private Player player;
+	private ArrayList<Obstacle> obstacles;
+	private Obstacle obs;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
@@ -24,16 +27,17 @@ public class PlatformerScreen extends Screen implements KeyListener {
 		viewObjects.add(bg);
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
-		viewObjects.add(player);
-		// addObjects(viewObjects);	
-		}
+		viewObjects.add(player);	
+	}
 
-	private void addObjects(List<Visible> viewObjects) {
+	private void appearNewObstacle() {
+		obstacles = new ArrayList<Obstacle>();
 		while (true) {
 			try {
 				Thread.sleep(2000);
-				Obstacle obstacle = new Obstacle(500, 370, 100, 100, 10, "resources/cactus.png");
-				viewObjects.add(obstacle);
+				obs = new Obstacle(500, 370, 100, 100, -5, "resources/cactus.png");
+				obstacles.add(obs);
+				viewObjects.add(obs);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -64,6 +68,12 @@ public class PlatformerScreen extends Screen implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -32,6 +32,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 		setY(y);
 		setVx(vx);
 		loadImage();
+		this.play();
 	}
 
 	private void loadImage() {
