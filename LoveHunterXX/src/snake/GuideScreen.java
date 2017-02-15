@@ -87,7 +87,7 @@ public class GuideScreen extends ClickableScreen {
 		// add items to the view list.
 		viewObjects.add(button);
 		viewObjects.add(cartImg);
-		
+		//
 		// add the lines of instructions to the screen.
 		addLines("You need to find the best present for your girl."
 				+ " You can do this by collecting all the presents you see."
