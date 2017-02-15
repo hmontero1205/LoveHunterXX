@@ -19,11 +19,12 @@ public class Snake {
 		this.posY = 0;
 		this.direction = DOWN;
 		presentList = new ArrayList<Interactable>();
+		presentList.add(new SnakeHead(10,10,10,10));
 	}
 
 	private void addPresent(Present p){
 		p.setX(presentList.get(presentList.size()-1).getX());
-		p.setY(prese) // finish from here
+		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
 		presentList.add(p);
 	}
 	
@@ -33,8 +34,8 @@ public class Snake {
 	
 	private void moveCoors(){
 		for(int i = presentList.size()-1; i>0; i--){
-			
+			presentList.get(i).setX(presentList.get(i-1).getX());
+			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
-		
 	}
 }

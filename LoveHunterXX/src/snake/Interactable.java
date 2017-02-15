@@ -8,7 +8,11 @@ public abstract class Interactable {
 	private int width;
 	private int height;
 	
-	public Interactable() {
+	public Interactable(int x, int y, int width, int height) {
+		this.xPos = x;
+		this.yPos = y;
+		this.width = width;
+		this.height = height;
 	}
 
 	public int getX() {
@@ -18,5 +22,13 @@ public abstract class Interactable {
 	
 	public int getY(){
 		return yPos;
+	}
+	
+	public void setX(int x){
+		this.xPos = x;
+	}
+	
+	public void setY(int y){
+		this.yPos = y;
 	}
 }
