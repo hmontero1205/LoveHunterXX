@@ -1,5 +1,7 @@
 package frogger;
 
+import javax.swing.ImageIcon;
+
 import gui.GUIApplication;
 import main.LoveHunterXX;
 
@@ -23,6 +25,8 @@ public class FroggerGame extends GUIApplication {
 
 	public static void main(String[] args) {
 		game = new FroggerGame(800,600);
+		game.setTitle("LoveHunterXX");
+		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread go = new Thread(game);
 		go.start();
 
