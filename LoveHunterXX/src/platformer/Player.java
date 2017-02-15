@@ -67,7 +67,6 @@ public class Player extends MovingComponent{
 				if(diff >= REFRESH_RATE){
 					setMoveTime(currentTime);
 					setPosy(getPosy() + getVy());
-					
 					super.setY((int)getPosy());
 				}
 			}
