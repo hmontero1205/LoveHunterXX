@@ -16,7 +16,7 @@ public class Player extends LivingEntity {
 		arsenal.put("explosive", 5);
 		arsenal.put("alluring", 5);
 		
-		direction = "north";
+		direction = "east";
 	}
 
 	public HashMap<String, Integer> getArsenal() {

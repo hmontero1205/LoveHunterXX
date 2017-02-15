@@ -19,7 +19,7 @@ public abstract class Projectile extends Entity implements Runnable {
 	public void run() {
 		while (velocity > 0) {
 			if (dir.equals("east")) {
-				this.setX((int) (this.getX() - velocity));
+				this.setX((int) (this.getX() + velocity));
 				velocity += acceleration;
 			}
 			if (dir.equals("south")) {
@@ -31,7 +31,7 @@ public abstract class Projectile extends Entity implements Runnable {
 				velocity += acceleration;
 			}
 			if (dir.equals("north")) {
-				this.setY((int) (this.getY() + velocity));
+				this.setY((int) (this.getY() - velocity));
 				velocity += acceleration;
 			}
 
