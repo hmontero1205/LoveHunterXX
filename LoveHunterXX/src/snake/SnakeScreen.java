@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gui.Screen;
+import gui.components.Graphic;
 import gui.components.Visible;
 
 public class SnakeScreen extends Screen implements KeyListener {
@@ -46,6 +47,10 @@ public class SnakeScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
+		Graphic background = new Graphic(0, 0, 800, 600, null);
+		
+		
+		view.add(background);
 		
 	}
 
