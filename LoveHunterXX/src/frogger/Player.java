@@ -38,8 +38,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 			ImageIcon icon = new ImageIcon(pModels[dir]);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g.drawImage(icon.getImage(), 0, 0, getWidth()-3, getHeight()-3, 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
-			g.setColor(Color.RED);
-			g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+//			g.setColor(Color.RED);
+//			g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 		}
 	}
 	
