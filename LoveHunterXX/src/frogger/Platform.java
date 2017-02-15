@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
 
-public class Platform extends MovingComponent {
+public class Platform extends MovingComponent implements PlatformInterface {
 	
 	private boolean touchable;
 	private String imgLoc;
@@ -92,26 +92,35 @@ public class Platform extends MovingComponent {
 		}
 	}
 
-	public void checkBehaviors() {
-		if(getVx() > 0) {
-			if(getX() > 800) {
-				setX(0 - getWidth());
-			}
-		} else if(getVx() < 0) {
-			if(getX() + getWidth() < 0) {
-				setX(800);
-			}
-		}
-	}
+//	public void checkBehaviors() {
+//		if(getVx() > 0) {
+//			if(getX() > 800) {
+//				setX(0 - getWidth());
+//			}
+//		} else if(getVx() < 0) {
+//			if(getX() + getWidth() < 0) {
+//				setX(800);
+//			}
+//		}
+//	}
 
-	public void isTouching(Player p) {
-//		TODO later, not important atm, will probably need player x, y, width, height
-	}
 	
 	public void play() {
 		if(!isRunning()){
 			Thread go = new Thread(this);
 			go.start();
 		}
+	}
+
+	@Override
+	public boolean isTouchingPlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isApproachingPlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

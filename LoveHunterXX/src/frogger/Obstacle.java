@@ -1,7 +1,7 @@
 package frogger;
 
 
-public class Obstacle extends Platform {
+public class Obstacle extends Platform{
 	
 	/**
 	 * @param  x  initial x location of this component
@@ -22,5 +22,17 @@ public class Obstacle extends Platform {
 			Thread go = new Thread(this);
 			go.start();
 		}
+	}
+
+	@Override
+	public boolean isTouchingPlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isApproachingPlayer(Player p) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

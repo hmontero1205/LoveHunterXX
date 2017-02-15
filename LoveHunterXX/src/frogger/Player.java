@@ -69,7 +69,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 		update();
 	}
 
-	private boolean outOfBounds(int k) {
+	public boolean outOfBounds(int k) {
 		if(k == FroggerScreen.LEFTARROWKEY) {
 			if(getX() - moveDistance + getWidth() < 25) {
 				return true;
@@ -94,6 +94,18 @@ public class Player extends MovingComponent implements PlayerInterface {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void ridePlatform(Platform p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void die() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
