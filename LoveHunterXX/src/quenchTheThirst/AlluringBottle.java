@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public class AlluringBottle extends Entity implements ProjectileInterface {
+public class AlluringBottle extends Projectile {
 
 	public AlluringBottle(int x, int y, int dir) {
 		super(x, y, 1, "resources/alluring");
