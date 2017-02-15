@@ -75,19 +75,21 @@ public class Platform extends MovingComponent {
 			super.setY((int)getPosy());
 		}
 		
-		ImageIcon icon = new ImageIcon(getImgLoc());
-		AffineTransform  at = new AffineTransform ();
-		double xScale = getWidth() / icon.getIconWidth();
-		double yScale = getHeight() / icon.getIconHeight();
-		at.scale(xScale, yScale);
-		if(getVx() > 0) {
-//			rotate cars if they are starting from the right side of the screen
-			at.translate(icon.getIconWidth() / 2, icon.getIconHeight() / 2);
-			at.rotate(Math.PI);
-			at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
+		if(getImgLoc()!=null){	
+			ImageIcon icon = new ImageIcon(getImgLoc());
+			AffineTransform  at = new AffineTransform ();
+			double xScale = getWidth() / icon.getIconWidth();
+			double yScale = getHeight() / icon.getIconHeight();
+			at.scale(xScale, yScale);
+			if(getVx() > 0) {
+				//rotate cars if they are starting from the right side of the screen
+				at.translate(icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+				at.rotate(Math.PI);
+				at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
+			}
+			
+			g.drawImage(icon.getImage(), at, null);
 		}
-		
-		g.drawImage(icon.getImage(), at, null);
 	}
 
 	public void checkBehaviors() {

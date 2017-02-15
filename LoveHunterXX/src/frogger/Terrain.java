@@ -96,8 +96,7 @@ public class Terrain extends Component implements Runnable {
 		 if(obs.size()==0){
 			 int startingPos = (carVelocity>0) ? 0:800;
 			 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
-			 Obstacle c1 = new
-			 Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
+			 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
 			 obs.add(c1);
 			 FroggerGame.fs.addObject(c1);
 			 c1.play();
