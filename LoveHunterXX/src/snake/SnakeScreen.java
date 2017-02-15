@@ -25,6 +25,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 	
+		//
 
 	}
 	
@@ -51,8 +52,11 @@ public class SnakeScreen extends Screen implements KeyListener {
 		Snake snake = new Snake();
 		
 		
+		
 		view.add(background);
 		
 	}
+	
+
 
 }

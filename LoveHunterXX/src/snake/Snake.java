@@ -1,5 +1,6 @@
 package snake;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 public class Snake {
@@ -38,6 +39,12 @@ public class Snake {
 	}
 	
 	private void moveCoors(Direction d){
+		// this moves the body parts.
+		for(int i = presentList.size()-1; i>0; i--){
+			presentList.get(i).setX(presentList.get(i-1).getX());
+			presentList.get(i).setY(presentList.get(i-1).getY());
+		}
+		
 		// this moves the head.
 		switch(d){
 		case Left:
@@ -52,12 +59,6 @@ public class Snake {
 		case Down:
 			presentList.get(0).setY(presentList.get(0).getY() + 10);
 			break;
-		}
-		
-		// this moves the body parts.
-		for(int i = presentList.size()-1; i>0; i--){
-			presentList.get(i).setX(presentList.get(i-1).getX());
-			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
 		
 		
