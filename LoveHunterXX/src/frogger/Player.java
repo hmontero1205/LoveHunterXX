@@ -33,11 +33,12 @@ public class Player extends MovingComponent implements PlayerInterface {
 	@Override
 	public void update(Graphics2D g) {
 		if(pModels != null) {
+			g = clear();
 			ImageIcon icon = new ImageIcon(pModels[dir]);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
+			g.drawImage(icon.getImage(), 0, 0, getWidth()-3, getHeight()-3, 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
 			g.setColor(Color.RED);
-			g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+			//g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 		}
 	}
 	
@@ -69,13 +70,13 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	private boolean outOfBounds(int k) {
 		if(k == FroggerScreen.LEFTARROWKEY) {
-			if(getX() - FroggerScreen.ROW_HEIGHT + getWidth() < 0) {
+			if(getX() - FroggerScreen.ROW_HEIGHT + getWidth() < 25) {
 				return true;
 			}
 		}
 		
 		if(k == FroggerScreen.RIGHTARROWKEY) {
-			if(getX() + FroggerScreen.ROW_HEIGHT > 800) {
+			if(getX() + FroggerScreen.ROW_HEIGHT > 775) {
 				return true;
 			}
 		}
