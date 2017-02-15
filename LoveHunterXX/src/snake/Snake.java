@@ -16,14 +16,18 @@ public class Snake {
 	private Direction direction;
 	
 	public Snake() {
+		// these two should go on snake head class.
 		this.posX = 0;
 		this.posY = 0;
+		
+		
 		this.direction = Direction.Down;
 		presentList = new ArrayList<Interactable>();
-		presentList.add(new SnakeHead(10,10,10,10));
+		// last parameter is file path of image.
+		presentList.add(new SnakeHead(10,10,10,10, null)); // adding head.
 	}
 
-	private void addPresent(Present p){
+	private void addPresent(Present p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
 		presentList.add(p);
@@ -55,6 +59,7 @@ public class Snake {
 			presentList.get(i).setX(presentList.get(i-1).getX());
 			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
+		
 		
 	}
 }

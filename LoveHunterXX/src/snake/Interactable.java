@@ -1,6 +1,8 @@
 package snake;
 
-public abstract class Interactable {
+import gui.components.Graphic;
+
+public abstract class Interactable extends Graphic{
 	// not sure what to put in this class so we can decide at a later time.
 	private boolean isDanger;
 	private int xPos;
@@ -8,7 +10,8 @@ public abstract class Interactable {
 	private int width;
 	private int height;
 	
-	public Interactable(int x, int y, int width, int height) {
+	public Interactable(int x, int y, int width, int height, String path) {
+		super(x, y, width, height, path);
 		this.xPos = x;
 		this.yPos = y;
 		this.width = width;
