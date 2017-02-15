@@ -55,10 +55,10 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 		tList.add(new Terrain(3,WINDOWBARHEIGHT+(10*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,-7));
 		tList.add(new Terrain(3,WINDOWBARHEIGHT+(11*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
 		tList.add(new Terrain(3,WINDOWBARHEIGHT+(12*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(13*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,WATER,0));
+		tList.add(new Terrain(3,WINDOWBARHEIGHT+(13*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
 		viewObjects.addAll(tList);
 		
-		player = getPlayer(400, 585 - ROW_HEIGHT, 20,20);
+		player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
 		viewObjects.add(player);
 	}
 	
