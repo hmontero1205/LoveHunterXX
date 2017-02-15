@@ -1,6 +1,8 @@
 package snake;
 
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import gui.components.MovingComponent;
@@ -64,6 +66,28 @@ public class Snake extends MovingComponent{
 			break;
 		}
 		
+		
+	}
+	
+	public double getPosx() {
+		return posX;
+	}
+
+	public void setPosx(int posX) {
+		this.posX = posX;
+	}
+	
+	public double getPosy() {
+		return posY;
+	}
+
+	public void setPosy(int posy) {
+		this.posY = posy;
+	}
+	
+	private void drawImage(Graphics2D g) {
+		g.setColor(Color.black);
+		g.fillOval(0,0,getWidth(),getHeight());
 		
 	}
 	

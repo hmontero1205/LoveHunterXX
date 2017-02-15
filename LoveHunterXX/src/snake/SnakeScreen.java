@@ -49,12 +49,12 @@ public class SnakeScreen extends Screen implements KeyListener {
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
 		Graphic background = new Graphic(0, 0, 800, 600, null);
-		Snake snake = new Snake();
+		//Snake snake = new Snake();
 		
 		
 		
 		view.add(background);
-		view.add(snake);
+		//view.add(snake);
 		
 	}
 	
