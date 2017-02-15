@@ -27,7 +27,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		viewObjects.add(bg);
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
-		viewObjects.add(player);	
+		viewObjects.add(player);
 	}
 
 	private void appearNewObstacle() {
@@ -52,7 +52,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
-			if(!player.getJump()){
+			if (!player.getJump()) {
 				player.setJump(true);
 			}
 		}
@@ -73,7 +73,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
