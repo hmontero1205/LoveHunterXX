@@ -85,10 +85,13 @@ public class Snake extends MovingComponent{
 		this.posY = posy;
 	}
 	
-	private void drawImage(Graphics2D g) {
-		g.setColor(Color.black);
-		g.fillOval(0,0,getWidth(),getHeight());
-		
+	public Direction getDirection(){
+		return this.direction;
 	}
+	
+	private void drawImage(Graphics2D g) {
+		moveCoors(getDirection());
+	}
+	
 	
 }
