@@ -46,7 +46,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

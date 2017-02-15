@@ -48,9 +48,7 @@ public class GuideScreen extends ClickableScreen {
 	
 	public void addLines(String str, List<Visible> v, int xStart){
 		// Will create individual TextArea lines for each sentence.
-		// specifically with the period at the end of each sentence.
-		System.out.println("Creating lines.");
-		ArrayList<String> lines = getLines(str);
+		ArrayList<String> lines = getLines(str); // delim
 		for(int i = 0, n = lines.size(); i < n; ++i){
 			v.add(new TextArea(xStart, (i + 2) * 40, 800, 600, lines.get(i)));
 		}
@@ -61,9 +59,18 @@ public class GuideScreen extends ClickableScreen {
 		// TODO Auto-generated method stub
 		// Background image.
 		Graphic background = new Graphic(0, 0, 800, 600, "resources/guidebackground.jpg");
+		// add it to the scene.
+		viewObjects.add(background);
 		
 		// Cart icon.
 		Graphic cartImg = new Graphic(550, 50, 100, 100, "resources/cart.png");
+		
+		// keyboard directions.
+		String[] directs = {"left", "up", "right", "down"};
+		// keyboard icons.
+		for(int i = 0, n = directs.length; i < n; ++i){
+			viewObjects.add(new Graphic((10 + i) * 50, 155, 50, 50, "resources/" + directs[i] + ".png"));
+		}
 		
 		
 		// button to be clicked to transition into the next screen.
@@ -72,12 +79,12 @@ public class GuideScreen extends ClickableScreen {
 			@Override
 			public void act() { // transition will occur here.
 				System.out.println("Let's continue!");
+				SnakeGame.sGame.setScreen(SnakeGame.sScreen);
 				
 			}
 		});
 		
 		// add items to the view list.
-		viewObjects.add(background);
 		viewObjects.add(button);
 		viewObjects.add(cartImg);
 		
