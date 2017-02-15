@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 public class Player extends LivingEntity {
-	
+
 	private String direction;
 
 	private HashMap<String, Integer> arsenal;
@@ -15,6 +15,8 @@ public class Player extends LivingEntity {
 		arsenal = new HashMap<String, Integer>();
 		arsenal.put("explosive", 5);
 		arsenal.put("alluring", 5);
+		
+		direction = "north";
 	}
 
 	public HashMap<String, Integer> getArsenal() {
@@ -46,10 +48,11 @@ public class Player extends LivingEntity {
 	public void toss(String proj) {
 		int wbx = this.getX();
 		int wby = this.getY();
-		
-				
+
 		ExplosiveBottle eb = new ExplosiveBottle(wbx, wby, direction);
 		eb.start();
+
+		ShooterGame.shooterScreen.addObject(eb);
 	}
 
 }

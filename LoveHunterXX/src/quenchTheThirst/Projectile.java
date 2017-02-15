@@ -1,7 +1,7 @@
 package quenchTheThirst;
 
 public abstract class Projectile extends Entity implements Runnable {
-	
+
 	private double velocity;
 	private double acceleration;
 	private String dir;
@@ -11,34 +11,32 @@ public abstract class Projectile extends Entity implements Runnable {
 	public Projectile(int x, int y, double scale, String imageLocation, String dir) {
 		super(x, y, scale, imageLocation);
 		this.dir = dir;
-		this.x = x;
-		this.y = y;
 		velocity = 10;
-		acceleration = -1;
+		acceleration = -0.5;
 	}
-	
+
 	@Override
 	public void run() {
 		while (velocity > 0) {
-			if(dir == "east"){
-				x += velocity;
+			if (dir.equals("east")) {
+				this.setX((int) (this.getX() - velocity));
 				velocity += acceleration;
 			}
-			if(dir == "south"){
-				y += velocity;
+			if (dir.equals("south")) {
+				this.setY((int) (this.getY() + velocity));
 				velocity += acceleration;
 			}
-			if(dir == "west"){
-				x -= velocity;
+			if (dir.equals("west")) {
+				this.setX((int) (this.getX() - velocity));
 				velocity += acceleration;
 			}
-			if(dir == "north"){
-				y -= velocity;
+			if (dir.equals("north")) {
+				this.setY((int) (this.getY() + velocity));
 				velocity += acceleration;
 			}
-			
+
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -52,11 +50,12 @@ public abstract class Projectile extends Entity implements Runnable {
 	public void setAcceleration(double acceleration) {
 		this.acceleration = acceleration;
 	}
-	
+
 	public void start() {
 		/**
-		 * thread updates projectile's position based on projectile's velocity and acceleration and direction
-		 * every interval add velocity to x and subtract acceleration from velocity(east)
+		 * thread updates projectile's position based on projectile's velocity
+		 * and acceleration and direction every interval add velocity to x and
+		 * subtract acceleration from velocity(east)
 		 */
 		Thread start = new Thread(this);
 		start.start();

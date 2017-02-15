@@ -18,7 +18,6 @@ public class QTTScreen extends Screen implements KeyListener {
 	private TextLabel alluring;
 	private TextLabel health;
 	private Player user;
-	// private ArrayList<Entity> entities; //all the entities(bottle,player,enemies)
 
 	public QTTScreen(int width, int height) {
 		super(width, height);
@@ -32,6 +31,7 @@ public class QTTScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		user = new Player(400, 300);
+		
 		// returns the int amount for explosive
 		int explosiveAmmo = user.getArsenal().get("explosive");
 		int alluringAmmo = user.getArsenal().get("alluring");
@@ -46,7 +46,6 @@ public class QTTScreen extends Screen implements KeyListener {
 		viewObjects.add(explosive);
 		viewObjects.add(alluring);
 		viewObjects.add(user);
-		// viewObjects.addAll(entities);
 	}
 
 	@Override
