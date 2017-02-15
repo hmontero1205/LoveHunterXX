@@ -31,12 +31,12 @@ public class QTTScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		user = new Player(400, 300);
-		
+
 		// returns the int amount for explosive
 		int explosiveAmmo = user.getArsenal().get("explosive");
 		int alluringAmmo = user.getArsenal().get("alluring");
 
-		health = new TextLabel(600,20,120,50,"HEALTH:"+user.getHealth());
+		health = new TextLabel(600, 20, 130, 50, "HEALTH:" + user.getHealth());
 		explosive = new TextLabel(500, 530, 120, 50, "explosive: " + explosiveAmmo);
 		alluring = new TextLabel(690, 530, 120, 50, "alluring: " + alluringAmmo);
 

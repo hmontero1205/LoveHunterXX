@@ -11,7 +11,7 @@ public abstract class Projectile extends Entity implements Runnable {
 	public Projectile(int x, int y, double scale, String imageLocation, String dir) {
 		super(x, y, scale, imageLocation);
 		this.dir = dir;
-		velocity = 10;
+		velocity = 15;
 		acceleration = -0.5;
 	}
 

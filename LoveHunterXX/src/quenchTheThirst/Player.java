@@ -10,7 +10,7 @@ public class Player extends LivingEntity {
 	private HashMap<String, Integer> arsenal;
 
 	public Player(int x, int y) {
-		super(x, y, .2, "resources/player.PNG");
+		super(x, y, .5, "resources/playerright.PNG");
 
 		arsenal = new HashMap<String, Integer>();
 		arsenal.put("explosive", 5);
@@ -25,21 +25,21 @@ public class Player extends LivingEntity {
 
 	public void handle(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.VK_W) {
-			this.setY(this.getY() - 4);
+			this.setY(this.getY() - 5);
 			direction = "north";
-			this.loadImages("resources/playerN.png", .2);
+			this.loadImages("resources/playerup.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_A) {
-			this.setX(this.getX() - 4);
+			this.setX(this.getX() - 5);
 			direction = "west";
-			this.loadImages("resources/playerW.png", .2);
+			this.loadImages("resources/playerleft.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_S) {
-			this.setY(this.getY() + 4);
+			this.setY(this.getY() + 5);
 			direction = "south";
-			this.loadImages("resources/playerS.png", .2);
+			this.loadImages("resources/playerdown.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_D) {
-			this.setX(this.getX() + 4);
+			this.setX(this.getX() + 5);
 			direction = "east";
-			this.loadImages("resources/player.PNG", .2);
+			this.loadImages("resources/playerright.PNG", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
 			toss("Water Bottle");
 		}

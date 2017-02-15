@@ -7,7 +7,7 @@ public abstract class LivingEntity extends Entity {
 	}
 
 	public int getHealth() {
-		return 0;
+		return 100;
 	}
 
 	public void damage(int damage) {
