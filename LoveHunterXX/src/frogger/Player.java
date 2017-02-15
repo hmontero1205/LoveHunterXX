@@ -17,6 +17,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public static final int RIGHT = 1;
 	public static final int UP = 2;
 	public static final int DOWN = 3;
+	public static final int moveDistance = 15;
 	private int dir;
 	private ArrayList<PowerUp> inventory;
 	private String[] pModels = {"resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png", "resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png"};
@@ -46,12 +47,12 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public void move(int k) {
 		if(k == FroggerScreen.LEFTARROWKEY) {
 			if(!outOfBounds(FroggerScreen.LEFTARROWKEY)) {
-				setX(getX() - FroggerScreen.ROW_HEIGHT);
+				setX(getX() - moveDistance);
 				dir = LEFT;
 			}
 		} else if(k == FroggerScreen.RIGHTARROWKEY) {
 			if(!outOfBounds(FroggerScreen.RIGHTARROWKEY)) {
-				setX(getX() + FroggerScreen.ROW_HEIGHT);
+				setX(getX() + moveDistance);
 				dir = RIGHT;
 			}
 		} else if(k == FroggerScreen.UPARROWKEY) {
@@ -70,13 +71,13 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	private boolean outOfBounds(int k) {
 		if(k == FroggerScreen.LEFTARROWKEY) {
-			if(getX() - FroggerScreen.ROW_HEIGHT + getWidth() < 25) {
+			if(getX() - moveDistance + getWidth() < 25) {
 				return true;
 			}
 		}
 		
 		if(k == FroggerScreen.RIGHTARROWKEY) {
-			if(getX() + FroggerScreen.ROW_HEIGHT > 775) {
+			if(getX() + moveDistance > 775) {
 				return true;
 			}
 		}
