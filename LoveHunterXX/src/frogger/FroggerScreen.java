@@ -16,7 +16,7 @@ import gui.components.Graphic;
 import gui.components.MovingComponent;
 import gui.components.Visible;
 
-public class FroggerScreen extends Screen implements KeyListener,Runnable{
+public class FroggerScreen extends Screen implements KeyListener, Runnable {
 
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
@@ -27,12 +27,11 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	public final static int ROW_WIDTH = 795;
 	public final static int GRASS = 0;
 	public final static int ROAD = 1;
-	public final static int WATER = 2;	
+	public final static int WATER = 2;
 	public ArrayList<Terrain> tList;
 	public PlayerInterface player;
 	public boolean playerCooldown;
 
-	
 	public FroggerScreen(int w, int h) {
 		super(w, h);
 		Thread fGame = new Thread(this);
@@ -42,69 +41,71 @@ public class FroggerScreen extends Screen implements KeyListener,Runnable{
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		tList = new ArrayList<Terrain>();
-		tList.add(new Terrain(3,WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+ROW_HEIGHT,ROW_WIDTH,ROW_HEIGHT,ROAD,-9));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(2*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,-5));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(3*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(4*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(5*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,5));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(6*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,4));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(7*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(8*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(9*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,-4));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(10*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,ROAD,-7));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(11*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(12*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
-		tList.add(new Terrain(3,WINDOWBARHEIGHT+(13*ROW_HEIGHT),ROW_WIDTH,ROW_HEIGHT,GRASS,0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, ROAD, -9));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -7));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
 		viewObjects.addAll(tList);
-		
+
 		player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
 		viewObjects.add(player);
 	}
-	
-	public PlayerInterface getPlayer(int x, int y, int w, int h){
+
+	public PlayerInterface getPlayer(int x, int y, int w, int h) {
 		return new Player(x, y, w, h);
 	}
+
 	@Override
 	public void run() {
-		
-		for(int i=0;i<tList.size();i++){
-			if(tList.get(i).getTerrain() == ROAD){
+
+		for (int i = 0; i < tList.size(); i++) {
+			if (tList.get(i).getTerrain() == ROAD) {
 				tList.get(i).startThread();
 			}
 		}
-		
+
 	}
-	public KeyListener getKeyListener(){
+
+	public KeyListener getKeyListener() {
 		return this;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent k) {
 		int keyCode = k.getKeyCode();
-		if(keyCode >= 37 && keyCode <= 40 /*&& !playerCooldown*/) {
+		if (keyCode >= 37 && keyCode <= 40 /* && !playerCooldown */) {
 			player.move(keyCode);
-//			playerCooldown = true;
-//			try {
-//				Thread.sleep(300);
-//				playerCooldown = false;
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			// playerCooldown = true;
+			// try {
+			// Thread.sleep(300);
+			// playerCooldown = false;
+			// } catch (InterruptedException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -15,12 +15,13 @@ import gui.components.Visible;
 public class Terrain extends Component implements Runnable {
 
 	private List<Obstacle> obs;
-	private String[] carSrcArr = {"bluecar.png","whiteconvert.png","greencar.png","purplecar.png"};
+	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
 	private ArrayList<Platform> pf;
 	private ArrayList<AnimatedPlatform> apf;
 	private int terrain;
 	private Color[] terrainColors = { Color.green, Color.darkGray, Color.blue };
-	private String[] terrainGraphics = {"resources/frogger/grass.png","resources/frogger/road.png","resources/frogger/water.png"};
+	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
+			"resources/frogger/water.png" };
 	private boolean superCreated;
 	private int carVelocity;
 
@@ -38,15 +39,14 @@ public class Terrain extends Component implements Runnable {
 		if (superCreated) {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			ImageIcon icon = new ImageIcon(getImgLoc());
-			g.drawImage(icon.getImage(),0,0,getWidth() - 1, getHeight(),null);
-			
-//			g.setColor(terrainColors[terrain]);
-//			g.fillRect(0, 0, getWidth() - 1, getHeight());
-//			g.setColor(Color.black);
-//			g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+			g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
+
+			// g.setColor(terrainColors[terrain]);
+			// g.fillRect(0, 0, getWidth() - 1, getHeight());
+			// g.setColor(Color.black);
+			// g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		}
 	}
-
 
 	public String getImgLoc() {
 		return terrainGraphics[this.terrain];
@@ -59,14 +59,14 @@ public class Terrain extends Component implements Runnable {
 
 	@Override
 	public void run() {
-		//generateObstacles();
+		// generateObstacles();
 		while (true) {
 			addCars();
 			checkCars();
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-			 // TODO Auto-generated catch block
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -92,46 +92,46 @@ public class Terrain extends Component implements Runnable {
 
 	}
 
-	 public void addCars(){
-		 if(obs.size()==0){
-			 int startingPos = (carVelocity>0) ? 0:800;
-			 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
-			 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
-			 obs.add(c1);
-			 FroggerGame.fs.addObject(c1);
-			 c1.play();
-		 }
-		 Obstacle backCar = obs.get(obs.size()-1);
-		 Obstacle frontCar = obs.get(0);
-		 if(carVelocity>0){
-			 if(/*frontCar.getX()<700 &&*/ backCar.getX()>100 && Math.random()<.1 ){
-				 int startingPos = 0;
-				 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
-				 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
-				 obs.add(c1);
-				 FroggerGame.fs.addObject(c1);
-				 c1.play();
-			 }
-		 }
-		 else{
-			 if(/*frontCar.getX()>100 &&*/ backCar.getX()<700 && Math.random()<.1 ){
-				 int startingPos = 800;
-				 String carSrc = carSrcArr[((int)(Math.random()*carSrcArr.length))];
-				 Obstacle c1 = new Obstacle(startingPos,getY()+10,50,25,this.carVelocity,"resources/frogger/"+carSrc);
-				 obs.add(c1);
-				 FroggerGame.fs.addObject(c1);
-				 c1.play();
-			 }
-		 }
-		 
-	 }
+	public void addCars() {
+		if (obs.size() == 0) {
+			int startingPos = (carVelocity > 0) ? 0 : 800;
+			String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
+			Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+					"resources/frogger/" + carSrc);
+			obs.add(c1);
+			FroggerGame.fs.addObject(c1);
+			c1.play();
+		}
+		Obstacle backCar = obs.get(obs.size() - 1);
+		Obstacle frontCar = obs.get(0);
+		if (carVelocity > 0) {
+			if (/* frontCar.getX()<700 && */ backCar.getX() > 100 && Math.random() < .1) {
+				int startingPos = 0;
+				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
+				Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+						"resources/frogger/" + carSrc);
+				obs.add(c1);
+				FroggerGame.fs.addObject(c1);
+				c1.play();
+			}
+		} else {
+			if (/* frontCar.getX()>100 && */ backCar.getX() < 700 && Math.random() < .1) {
+				int startingPos = 800;
+				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
+				Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+						"resources/frogger/" + carSrc);
+				obs.add(c1);
+				FroggerGame.fs.addObject(c1);
+				c1.play();
+			}
+		}
+
+	}
 
 	private void checkPlayer() {
 		// TODO Auto-generated method stub
 
 	}
-
-	
 
 	public int getTerrain() {
 		// TODO Auto-generated method stub
