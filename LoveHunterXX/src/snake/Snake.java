@@ -1,9 +1,11 @@
 package snake;
 
-import java.awt.List;
+
 import java.util.ArrayList;
 
-public class Snake {
+import gui.components.MovingComponent;
+
+public class Snake extends MovingComponent{
 
 	private ArrayList<Interactable> presentList;
 	
@@ -16,7 +18,8 @@ public class Snake {
 	private int posY;
 	private Direction direction;
 	
-	public Snake() {
+	public Snake(int x, int y, int w, int h) {
+		super(x, y, w, h);
 		// these two should go on snake head class.
 		this.posX = 0;
 		this.posY = 0;
@@ -63,4 +66,5 @@ public class Snake {
 		
 		
 	}
+	
 }
