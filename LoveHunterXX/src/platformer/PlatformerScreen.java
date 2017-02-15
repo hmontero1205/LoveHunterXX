@@ -7,18 +7,20 @@ import java.util.Collections;
 import java.util.List;
 
 import gui.Screen;
+import gui.components.Action;
 import gui.components.Graphic;
 import gui.components.Visible;
 
 public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private Graphic bg;
-	private Player player;
-	private ArrayList<Obstacle> obstacles;
-	private Obstacle obs;
+	public Player player;
+	public ArrayList<Obstacle> obstacles;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
+		Thread play = new Thread(this);
+		play.start();
 	}
 
 	@Override
@@ -31,18 +33,15 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	}
 
 	private void appearNewObstacle() {
-		obstacles = new ArrayList<Obstacle>();
-		while (true) {
-			try {
-				Thread.sleep(2000);
-				obs = new Obstacle(500, 370, 100, 100, -5, "resources/cactus.png");
-				obstacles.add(obs);
-				viewObjects.add(obs);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
+		obs.setAction(new Action(){
+			public void act(){
+				player.setHp(player.getHp()-1);
+				System.out.println(player.getHp());
 			}
-		}
+		});
+		obstacles.add(obs);
+		addObject(obs);
 	}
 
 	public KeyListener getKeyListener() {
@@ -69,10 +68,19 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		obstacles = new ArrayList<Obstacle>();
+		while (true) {
+			try {
+				Thread.sleep(2000);
+				appearNewObstacle();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 

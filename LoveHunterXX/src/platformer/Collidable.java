@@ -1,10 +1,12 @@
 package platformer;
 
+import gui.components.Action;
 import gui.components.Visible;
 
 public interface Collidable extends Visible {
 
-	public boolean isCollided(int x1, int x2, int h);
-
+	public boolean isCollided();
+	public void setAction(Action action);
 	public void act();
+	
 }

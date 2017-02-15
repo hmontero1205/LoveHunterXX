@@ -19,6 +19,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 	private ImageIcon icon;
 	private boolean load;
 	private Action action;
+	private boolean collided;
 
 	public Obstacle(int x, int y, int w, int h, int vx, String imageLocation) {
 		super(x, y, w, h);
@@ -48,13 +49,23 @@ public class Obstacle extends MovingComponent implements Collidable {
 
 	public void update(Graphics2D g) {
 		if (load) {
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null), null);
-			long currentTime = System.currentTimeMillis();
-			int diff = (int) (currentTime - getMoveTime());
-			if (diff >= REFRESH_RATE) {
-				setMoveTime(currentTime);
-				setPosx(getPosx() + getVx());
-				super.setX((int) getPosx());
+			if (isCollided() && !collided) {
+				collided = true;
+				this.act();
+			}
+			if (getX() < -50) {
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+			} else {
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
+						null);
+				long currentTime = System.currentTimeMillis();
+				int diff = (int) (currentTime - getMoveTime());
+				if (diff >= REFRESH_RATE) {
+					setMoveTime(currentTime);
+					setPosx(getPosx() + getVx());
+					super.setX((int) getPosx());
+				}
 			}
 
 		}
@@ -62,7 +73,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 
 	public void run() {
 		setRunning(true);
-		while(isRunning()){
+		while (isRunning()) {
 			try {
 				Thread.sleep(REFRESH_RATE);
 				update();
@@ -72,15 +83,24 @@ public class Obstacle extends MovingComponent implements Collidable {
 		}
 	}
 
-	@Override
-	public boolean isCollided(int x1, int x2, int h) {
-		// TODO Auto-generated method stub
+	public boolean isCollided() {
+		// TODO Auto-generated method stud
+		Player playTemp = PlatformerGame.cs.player;
+		//playTemp.getX() + playTemp.getWidth() > x && playTemp.getX() > x
+		//((playTemp.getX() + playTemp.getWidth()) > (x+w))
+		if (((playTemp.getX() + playTemp.getWidth()) > getPosx()) && (playTemp.getX() < (getPosx() + w)) 
+				&& ((playTemp.getY()+playTemp.getHeight()) > getPosy()) ) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public void act() {
 		action.act();
+	}
+	public void setAction(Action action){
+		this.action = action;
 	}
 
 }

@@ -39,8 +39,8 @@ public class Player extends MovingComponent{
 //		this.initialV = 5.5;
 //		this.grav = .5;
 		
-		this.initialV = 4;
-		this.grav = .39;
+		this.initialV = 6.3;
+		this.grav = 1;
 		
 		
 		setX(x);
@@ -91,7 +91,6 @@ public class Player extends MovingComponent{
 			int difference = (int)(current - startJump);
 			double newV = initialV - grav*(double)(difference/100);
 			if(getY() > 372){
-				System.out.println(getY());
 				setJump(false);
 				setY(370);
 			}
