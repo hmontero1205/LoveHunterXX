@@ -66,8 +66,6 @@ public class Snake extends MovingComponent{
 			presentList.get(0).setY(presentList.get(0).getY() + 10);
 			break;
 		}
-		
-		
 	}
 	
 	public double getPosx() {
@@ -92,8 +90,9 @@ public class Snake extends MovingComponent{
 	
 	@Override
 	public void drawImage(Graphics2D g) {
-		System.out.println(presentList);
-		//moveCoors(getDirection());
+		if (presentList!=null){
+			moveCoors(getDirection());
+		}
 	}
 	
 	
