@@ -9,6 +9,7 @@ import java.util.List;
 import gui.Screen;
 import gui.components.Action;
 import gui.components.Graphic;
+import gui.components.TextLabel;
 import gui.components.Visible;
 
 public class PlatformerScreen extends Screen implements KeyListener, Runnable {
@@ -16,6 +17,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	private Graphic bg;
 	public Player player;
 	public ArrayList<Obstacle> obstacles;
+	private TextLabel scoreLabel;
+	private int score;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
@@ -27,21 +30,26 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public void initObjects(List<Visible> viewObjects) {
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
+		scoreLabel = new TextLabel(50, 40, 80, 40, "0");
+		viewObjects.add(scoreLabel);
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
 	}
 
 	private void appearNewObstacle() {
-		Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
-		obs.setAction(new Action(){
-			public void act(){
-				player.setHp(player.getHp()-1);
-				System.out.println(player.getHp());
-			}
-		});
-		obstacles.add(obs);
-		addObject(obs);
+		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size()-1).getPosx() : 0;
+		if ((int) Math.floor(Math.random() * 550) > chance) {
+			Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
+			obs.setAction(new Action() {
+				public void act() {
+					player.setHp(player.getHp() - 1);
+					System.out.println(player.getHp());
+				}
+			});
+			obstacles.add(obs);
+			addObject(obs);
+		}
 	}
 
 	public KeyListener getKeyListener() {
@@ -68,19 +76,25 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void run() {
 		obstacles = new ArrayList<Obstacle>();
-		while (true) {
-			try {
-				Thread.sleep(2000);
-				appearNewObstacle();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		while (player.getHp() > 0) {
+			updateScore();
+			appearNewObstacle();
 		}
+
+	}
+
+	private void updateScore() {
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		score += 1;
+		scoreLabel.setText("" + score);
 
 	}
 
