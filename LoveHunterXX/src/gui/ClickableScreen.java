@@ -10,7 +10,7 @@ import gui.components.Visible;
 
 public abstract class ClickableScreen extends Screen implements MouseListener {
 
-	private ArrayList<Clickable> clickables;
+	private List<Clickable> clickables;
 	public ClickableScreen(int width, int height) {
 		super(width, height);
 		//this is a comment

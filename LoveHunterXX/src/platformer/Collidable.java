@@ -1,7 +1,12 @@
 package platformer;
 
-public interface Collidable {
+import gui.components.Action;
+import gui.components.Visible;
 
-	public int getWidth();
-	public int getHeight();
+public interface Collidable extends Visible {
+
+	public boolean isCollided();
+	public void setAction(Action action);
+	public void act();
+	
 }

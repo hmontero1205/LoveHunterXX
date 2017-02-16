@@ -4,11 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class AnimatedComponent extends MovingComponent{
-	private ArrayList<BufferedImage> frame; //the images that can be displayed
-	private ArrayList<Integer> times; //the time each image is displayed
-	private long displayTime; //the time when the last image switched
-	private int currentFrame; //the frame that is currently being displayed
+public class AnimatedComponent extends MovingComponent {
+	private ArrayList<BufferedImage> frame; // the images that can be displayed
+	private ArrayList<Integer> times; // the time each image is displayed
+	private long displayTime; // the time when the last image switched
+	private int currentFrame; // the frame that is currently being displayed
 	private boolean repeat;
 	public static final int REFRESH_RATE = 20;
 
@@ -20,14 +20,14 @@ public class AnimatedComponent extends MovingComponent{
 		repeat = true;
 	}
 
-	public void setRepeat(boolean b){
+	public void setRepeat(boolean b) {
 		repeat = b;
 	}
 
-	public boolean isAnimated(){
+	public boolean isAnimated() {
 		return true;
 	}
-	
+
 	public ArrayList<BufferedImage> getFrame() {
 		return frame;
 	}
@@ -68,29 +68,30 @@ public class AnimatedComponent extends MovingComponent{
 		return REFRESH_RATE;
 	}
 
-	public void addFrame(BufferedImage image, Integer time){
+	public void addFrame(BufferedImage image, Integer time) {
 		frame.add(image);
 		this.times.add(time);
 	}
 
 	public void drawImage(Graphics2D g) {
-		long currentTime = System.currentTimeMillis();//gets time now
-		//check if it's time to change the frame
-		//and make sure that there are images in the frame list
-		if(frame != null && frame.size() > 0 && frame.size() == times.size() && currentTime - displayTime > times.get(currentFrame)){
+		long currentTime = System.currentTimeMillis();// gets time now
+		// check if it's time to change the frame
+		// and make sure that there are images in the frame list
+		if (frame != null && frame.size() > 0 && frame.size() == times.size()
+				&& currentTime - displayTime > times.get(currentFrame)) {
 			displayTime = currentTime;
 
-			//increase the currentFrameIndex but don't exceed size()
-			currentFrame = (currentFrame+1)%frame.size();
-			//end animation if not on repeat
-			if(currentFrame == 0 && !repeat){
+			// increase the currentFrameIndex but don't exceed size()
+			currentFrame = (currentFrame + 1) % frame.size();
+			// end animation if not on repeat
+			if (currentFrame == 0 && !repeat) {
 				setRunning(false);
 				return;
 			}
-			//clear the previous image
+			// clear the previous image
 			g = clear();
 			BufferedImage newFrame = frame.get(currentFrame);
-			g.drawImage(newFrame, 0,0,getWidth(),getHeight(),0,0,newFrame.getWidth(),newFrame.getHeight(),null);
+			g.drawImage(newFrame, 0, 0, getWidth(), getHeight(), 0, 0, newFrame.getWidth(), newFrame.getHeight(), null);
 		}
 	}
 
