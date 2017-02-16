@@ -41,6 +41,9 @@ public abstract class Projectile extends Entity implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		if(velocity <= 0) {
+			ShooterGame.shooterScreen.removeObject(this);
+		}
 	}
 
 	public void setVelocity(double velocity) {
