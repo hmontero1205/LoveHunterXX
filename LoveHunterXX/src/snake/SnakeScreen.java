@@ -54,7 +54,6 @@ public class SnakeScreen extends Screen implements KeyListener {
 
 		
 		
-		
 		view.add(background);
 		view.add(snake);
 		
