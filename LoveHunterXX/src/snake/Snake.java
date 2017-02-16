@@ -1,6 +1,5 @@
 package snake;
 
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class Snake extends MovingComponent{
 		this.direction = Direction.Down;
 		presentList = new ArrayList<Interactable>();
 		// last parameter is file path of image.
-		presentList.add(new SnakeHead(10,10,10,10, "resources/cart.png")); // adding head.
+		presentList.add(new SnakeHead(10,10,10,10, null)); // adding head.
 	}
 
 	private void addPresent(Present p){ // adding body parts.
