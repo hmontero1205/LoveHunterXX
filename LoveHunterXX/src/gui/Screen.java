@@ -15,10 +15,10 @@ import java.util.List;
 import gui.components.Visible;
 
 public abstract class Screen {
-	private BufferedImage image;
-	private List<Visible> viewObjects;
+		private BufferedImage image;
+		private List<Visible> viewObjects;
+		public Screen(int width,int height){
 
-	public Screen(int width,int height){
 		viewObjects = Collections.synchronizedList(new ArrayList<Visible>());
 		initObjects(viewObjects);
 		initImage(width, height);
@@ -33,16 +33,14 @@ public abstract class Screen {
 		BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = image.createGraphics();
 		Graphics2D g = buffer.createGraphics();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setColor(new Color(204, 204, 255));
-		g.fillRect(0, 0, image.getWidth(), image.getHeight());
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setColor(new Color(204,204,255));
+		g.fillRect(0,0,image.getWidth(), image.getHeight());
 		g.setColor(Color.black);
-		for (int i = 0; i < viewObjects.size(); i++) {
-			Visible v = viewObjects.get(i);
-			g.drawImage(v.getImage(), v.getX(), v.getY(), null);
+		for(int i=0;i<viewObjects.size();i++){
+			g.drawImage(viewObjects.get(i).getImage(), viewObjects.get(i).getX(), viewObjects.get(i).getY(), null);
 		}
 		g2.drawImage(buffer, 0, 0, null);
-
 	}
 	public abstract void initObjects(List<Visible> viewObjects);
 	

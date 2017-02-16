@@ -6,6 +6,46 @@ import java.util.ArrayList;
 
 public class AnimatedComponent extends MovingComponent{
 
+	public ArrayList<BufferedImage> getFrame() {
+		return frame;
+	}
+
+	public void setFrame(ArrayList<BufferedImage> frame) {
+		this.frame = frame;
+	}
+
+	public ArrayList<Integer> getTimes() {
+		return times;
+	}
+
+	public void setTimes(ArrayList<Integer> times) {
+		this.times = times;
+	}
+
+	public long getDisplayTime() {
+		return displayTime;
+	}
+
+	public void setDisplayTime(long displayTime) {
+		this.displayTime = displayTime;
+	}
+
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
+
+	public void setCurrentFrame(int currentFrame) {
+		this.currentFrame = currentFrame;
+	}
+
+	public boolean isRepeat() {
+		return repeat;
+	}
+
+	public static int getRefreshRate() {
+		return REFRESH_RATE;
+	}
+
 	private ArrayList<BufferedImage> frame; //the images that can be displayed
 	private ArrayList<Integer> times; //the time each image is displayed
 	private long displayTime; //the time when the last image switched
