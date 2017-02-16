@@ -16,7 +16,7 @@ public class ShooterGame extends GUIApplication {
 		setScreen(shooterScreen);
 	}
 
-	public static void main(String[] string) {
+	public static void main(String[] args) {
 		shootGame = new ShooterGame(800, 600);
 		Thread game = new Thread(shootGame);
 		game.start();
