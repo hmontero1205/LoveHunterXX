@@ -88,7 +88,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 		Player playTemp = PlatformerGame.cs.player;
 		//playTemp.getX() + playTemp.getWidth() > x && playTemp.getX() > x
 		//((playTemp.getX() + playTemp.getWidth()) > (x+w))
-		if (((playTemp.getX() + playTemp.getWidth()) > getPosx()) && (playTemp.getX() < (getPosx() + w)) 
+		if (((playTemp.getX() + playTemp.getWidth()) > getPosx()) && ((playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)) 
 				&& ((playTemp.getY()+playTemp.getHeight()) > getPosy()) ) {
 			return true;
 		}
