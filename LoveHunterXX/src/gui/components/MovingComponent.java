@@ -122,7 +122,7 @@ public class MovingComponent extends Component implements Runnable {
 		drawImage(g);
 	}
 
-	private void drawImage(Graphics2D g) {
+	public void drawImage(Graphics2D g) {
 		g.setColor(Color.black);
 		g.fillOval(0,0,getWidth(),getHeight());
 		

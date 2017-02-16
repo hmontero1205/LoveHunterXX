@@ -89,7 +89,8 @@ public class Snake extends MovingComponent{
 		return this.direction;
 	}
 	
-	private void drawImage(Graphics2D g) {
+	@Override
+	public void drawImage(Graphics2D g) {
 		moveCoors(getDirection());
 	}
 	
