@@ -1,8 +1,8 @@
 package frogger;
 
-public class testtest {
+public class PowerUp {
 
-	public testtest() {
+	public PowerUp() {
 		// TODO Auto-generated constructor stub
 	}
 

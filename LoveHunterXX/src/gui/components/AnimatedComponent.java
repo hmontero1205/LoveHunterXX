@@ -11,7 +11,24 @@ public class AnimatedComponent extends MovingComponent{
 	private long displayTime; //the time when the last image switched
 	private int currentFrame; //the frame that is currently being displayed
 	private boolean repeat;
+	public static final int REFRESH_RATE = 20;
 
+	public AnimatedComponent(int x, int y, int w, int h) {
+		super(x, y, w, h);
+		frame = new ArrayList<BufferedImage>();
+		times = new ArrayList<Integer>();
+		currentFrame = 0;
+		repeat = true;
+	}
+
+	public void setRepeat(boolean b){
+		repeat = b;
+	}
+
+	public boolean isAnimated(){
+		return true;
+	}
+	
 	public ArrayList<BufferedImage> getFrame() {
 		return frame;
 	}
@@ -52,24 +69,6 @@ public class AnimatedComponent extends MovingComponent{
 		return REFRESH_RATE;
 	}
 
-	public static final int REFRESH_RATE = 20;
-
-	public AnimatedComponent(int x, int y, int w, int h) {
-		super(x, y, w, h);
-		frame = new ArrayList<BufferedImage>();
-		times = new ArrayList<Integer>();
-		currentFrame = 0;
-		repeat = true;
-	}
-
-	public void setRepeat(boolean b){
-		repeat = b;
-	}
-
-	public boolean isAnimated(){
-		return true;
-	}
-	
 	public void addFrame(BufferedImage image, Integer time){
 		frame.add(image);
 		this.times.add(time);
