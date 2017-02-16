@@ -10,14 +10,14 @@ public class Snake extends MovingComponent{
 
 	private ArrayList<Interactable> presentList;
 	
-	public enum Direction {
-	    Left, Up, Right, Down
-	}
-	
-	
+	public final static int LEFT = 0;
+	public final static int UP = 1;
+	public final static int RIGHT = 2;
+	public final static int DOWN = 3;
+	public final static int DISTANCE = 20;
 	private int posX;
 	private int posY;
-	private Direction direction;
+	private int direction;
 	
 	public Snake(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -26,23 +26,30 @@ public class Snake extends MovingComponent{
 		this.posY = 0;
 		
 		
-		this.direction = Direction.Down;
+		this.direction = DOWN;
 		presentList = new ArrayList<Interactable>();
 		// last parameter is file path of image.
-		presentList.add(new SnakeHead(10,100,50,50, "resources/cart.png")); // adding head.
+		presentList.add(new SnakeHead(30,60,50,50, "resources/cart.png")); // adding head.
+		presentList.add(new Present(0,0,30,30,"resources/present.png")); //testing follow feature
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 	}
 
-	private void addPresent(Present p){ // adding body parts.
+	public void addPresent(Present p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
 		presentList.add(p);
 	}
 	
-	private void removeLastPresent(){
+	public void removeLastPresent(){
 		presentList.remove(presentList.size()-1);
 	}
 	
-	private void moveCoors(Direction d){
+	public void moveCoors(int d){
 		if(presentList == null) return;
 		System.out.println(presentList.size());
 		// this moves the body parts.
@@ -53,17 +60,17 @@ public class Snake extends MovingComponent{
 		
 		// this moves the head.
 		switch(d){
-		case Left:
-			presentList.get(0).setX(presentList.get(0).getX() - 10);			
+		case LEFT:
+			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);			
 			break;
-		case Up:
-			presentList.get(0).setY(presentList.get(0).getY() - 10);
+		case UP:
+			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
 			break;
-		case Right:
-			presentList.get(0).setX(presentList.get(0).getX() + 10);
+		case RIGHT:
+			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
 			break;
-		case Down:
-			presentList.get(0).setY(presentList.get(0).getY() + 10);
+		case DOWN:
+			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
 			break;
 		}
 	}
@@ -84,7 +91,7 @@ public class Snake extends MovingComponent{
 		this.posY = posy;
 	}
 	
-	public Direction getDirection(){
+	public int getDirection(){
 		return this.direction;
 	}
 	
