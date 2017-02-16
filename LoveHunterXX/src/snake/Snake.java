@@ -51,7 +51,7 @@ public class Snake extends MovingComponent{
 	
 	public void moveCoors(int d){
 		if(presentList == null) return;
-		System.out.println(presentList.size());
+		//System.out.println(presentList.size());
 		// this moves the body parts.
 		for(int i = presentList.size()-1; i>0; i--){
 			presentList.get(i).setX(presentList.get(i-1).getX());
