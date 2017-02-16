@@ -29,7 +29,7 @@ public class Snake extends MovingComponent{
 		this.direction = Direction.Down;
 		presentList = new ArrayList<Interactable>();
 		// last parameter is file path of image.
-		presentList.add(new SnakeHead(10,10,10,10, null)); // adding head.
+		presentList.add(new SnakeHead(10,100,50,50, "resources/cart.png")); // adding head.
 	}
 
 	private void addPresent(Present p){ // adding body parts.
@@ -93,6 +93,10 @@ public class Snake extends MovingComponent{
 		if (presentList!=null){
 			moveCoors(getDirection());
 		}
+	}
+	
+	public ArrayList<Interactable> getItems(){
+		return presentList;
 	}
 	
 	
