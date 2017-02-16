@@ -48,7 +48,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
-		Graphic background = new Graphic(0, 0, 800, 600, "resources/snakebackground.png");
+		Graphic background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
 		Snake snake = new Snake(0, 0, 100, 100);
 		
 		
