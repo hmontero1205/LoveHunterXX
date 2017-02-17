@@ -20,7 +20,7 @@ public class Terrain extends Component implements Runnable {
 	private ArrayList<AnimatedPlatform> apf;
 	private int terrain;
 	private Color[] terrainColors = { Color.green, Color.darkGray, Color.blue };
-	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
+	private String[] terrainGraphics = { "resources/frogger/grass.jpg", "resources/frogger/road.png",
 			"resources/frogger/water.png" };
 	private boolean superCreated;
 	private int carVelocity;
