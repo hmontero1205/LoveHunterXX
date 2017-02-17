@@ -7,21 +7,15 @@ import java.util.ArrayList;
 import gui.components.MovingComponent;
 
 public class Snake extends MovingComponent{
-
-	private ArrayList<Interactable> presentList;
-	
-	public enum Direction{
-		left, up, right, down
-	}
-	
-	/*public final static int LEFT = 0;
-	public final static int UP = 1;
-	public final static int RIGHT = 2;
-	public final static int DOWN = 3;*/
 	public final static int DISTANCE = 20;
+	private int REFRESH_R = 150;
 	private int posX;
 	private int posY;
 	private Direction direction;
+	private ArrayList<Interactable> presentList;
+	public enum Direction{
+		left, up, right, down
+	}
 
 	public Snake(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -32,9 +26,8 @@ public class Snake extends MovingComponent{
 		
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
-		// last parameter is file path of image.
-		presentList.add(new SnakeHead(30,60,30,30, "resources/cart.png")); // adding head.
-		presentList.add(new Present(0,0,30,30,"resources/present.png")); //testing follow feature
+		presentList.add(new SnakeHead(30,60,30,30, "resources/cart.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
@@ -124,7 +117,7 @@ public class Snake extends MovingComponent{
 		setMoveTime(System.currentTimeMillis());
 		while(isRunning()){
 			try {
-				Thread.sleep(150); // rate changed.
+				Thread.sleep(REFRESH_R); // rate changed.
 				//checkCollision here
 				update();
 			} catch (InterruptedException e) {
