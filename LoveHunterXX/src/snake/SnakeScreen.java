@@ -84,7 +84,6 @@ public class SnakeScreen extends Screen implements KeyListener {
 
 		view.add(background);
 		for(Interactable i: snake.getItems()){
-			//System.out.println(i);
 			view.add(i);
 		}
 		
