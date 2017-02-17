@@ -33,7 +33,7 @@ public class Snake extends MovingComponent{
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		// last parameter is file path of image.
-		presentList.add(new SnakeHead(30,60,50,50, "resources/cart.png")); // adding head.
+		presentList.add(new SnakeHead(30,60,30,30, "resources/cart.png")); // adding head.
 		presentList.add(new Present(0,0,30,30,"resources/present.png")); //testing follow feature
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
