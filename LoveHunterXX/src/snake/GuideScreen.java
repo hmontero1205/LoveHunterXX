@@ -80,6 +80,7 @@ public class GuideScreen extends ClickableScreen {
 			public void act() { // transition will occur here.
 				System.out.println("Let's continue!");
 				SnakeGame.sGame.setScreen(SnakeGame.sScreen);
+				SnakeGame.sScreen.snake.play();
 				
 			}
 		});

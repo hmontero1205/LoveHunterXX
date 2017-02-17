@@ -8,12 +8,15 @@ public class SnakeGame extends GUIApplication {
 	public static IntroScreen iScreen; // screen for introduction.
 	public static SnakeScreen sScreen; // screen for game.
 	public static GuideScreen gScreen; // screen for instructions.
+	
+	public static boolean gameStart;
 
 	public SnakeGame(int width, int height) {
 		super(width, height);
 	}
 
 	public void initScreen() {
+		gameStart = false;
 		sScreen = new SnakeScreen(getWidth(),getHeight());
 		iScreen = new IntroScreen(getWidth(),getHeight());
 		gScreen = new GuideScreen(getWidth(),getHeight());
@@ -25,5 +28,5 @@ public class SnakeGame extends GUIApplication {
 		Thread game = new Thread(sGame);
 		game.start();
 	}
-}
+} 
 

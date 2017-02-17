@@ -10,15 +10,19 @@ public class Snake extends MovingComponent{
 
 	private ArrayList<Interactable> presentList;
 	
-	public final static int LEFT = 0;
+	public enum Direction{
+		left, up, right, down
+	}
+	
+	/*public final static int LEFT = 0;
 	public final static int UP = 1;
 	public final static int RIGHT = 2;
-	public final static int DOWN = 3;
+	public final static int DOWN = 3;*/
 	public final static int DISTANCE = 20;
 	private int posX;
 	private int posY;
-	private int direction;
-	
+	private Direction direction;
+
 	public Snake(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		// these two should go on snake head class.
@@ -26,7 +30,7 @@ public class Snake extends MovingComponent{
 		this.posY = 0;
 		
 		
-		this.direction = DOWN;
+		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		// last parameter is file path of image.
 		presentList.add(new SnakeHead(30,60,50,50, "resources/cart.png")); // adding head.
@@ -49,27 +53,29 @@ public class Snake extends MovingComponent{
 		presentList.remove(presentList.size()-1);
 	}
 	
-	public void moveCoors(int d){
+	public void moveCoors(Direction d){
 		if(presentList == null) return;
-		//System.out.println(presentList.size());
 		// this moves the body parts.
+		// change direction to new direction.
+		this.direction = d;
+		
 		for(int i = presentList.size()-1; i>0; i--){
 			presentList.get(i).setX(presentList.get(i-1).getX());
 			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
 		
 		// this moves the head.
-		switch(d){
-		case LEFT:
+		switch(this.direction){
+		case left:
 			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);			
 			break;
-		case UP:
+		case up:
 			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
 			break;
-		case RIGHT:
+		case right:
 			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
 			break;
-		case DOWN:
+		case down:
 			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
 			break;
 		}
@@ -91,7 +97,7 @@ public class Snake extends MovingComponent{
 		this.posY = posy;
 	}
 	
-	public int getDirection(){
+	public Direction getDirection(){
 		return this.direction;
 	}
 	
@@ -104,6 +110,29 @@ public class Snake extends MovingComponent{
 	
 	public ArrayList<Interactable> getItems(){
 		return presentList;
+	}
+	
+	public void setDirection(Direction d){
+		this.direction = d;
+	}
+	
+	@Override
+	public void run() {
+//		posx=getX();
+//		posy=getY();
+		setRunning(true);
+		setMoveTime(System.currentTimeMillis());
+		while(isRunning()){
+			try {
+				Thread.sleep(150); // rate changed.
+				//checkCollision here
+				update();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 	

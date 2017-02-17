@@ -14,16 +14,16 @@ import gui.components.Graphic;
 import gui.components.Visible;
 
 public class SnakeScreen extends Screen implements KeyListener {
-	//private ArrayList<> snakeParts;
+	
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
 	public final static int RIGHTARROWKEY = 39;
 	public final static int DOWNARROWKEY = 40;
 	
-	public final static int LEFT = 0;
+	/*public final static int LEFT = 0;
 	public final static int UP = 1;
 	public final static int RIGHT = 2;
-	public final static int DOWN = 3;
+	public final static int DOWN = 3;*/
 
 	public Snake snake;
 	
@@ -37,16 +37,24 @@ public class SnakeScreen extends Screen implements KeyListener {
 		int keyCode = e.getKeyCode();
 		switch(keyCode){
 		case LEFTARROWKEY:
-			snake.moveCoors(LEFT);
+			if(snake.getDirection() != Snake.Direction.right){
+				snake.moveCoors(Snake.Direction.left);
+			}
 			break;
 		case UPARROWKEY:
-			snake.moveCoors(UP);
+			if(snake.getDirection() != Snake.Direction.down){
+				snake.moveCoors(Snake.Direction.up);
+			}
 			break;
 		case RIGHTARROWKEY:
-			snake.moveCoors(RIGHT);
+			if(snake.getDirection() != Snake.Direction.left){
+				snake.moveCoors(Snake.Direction.right);
+			}
 			break;
 		case DOWNARROWKEY:
-			snake.moveCoors(DOWN);
+			if(snake.getDirection() != Snake.Direction.up){
+				snake.moveCoors(Snake.Direction.down);
+			}
 			break;
 		}
 	}
