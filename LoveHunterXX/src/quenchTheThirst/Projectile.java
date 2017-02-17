@@ -42,7 +42,7 @@ public abstract class Projectile extends Entity implements Runnable {
 			}
 		}
 		if(velocity <= 0) {
-			ShooterGame.shooterScreen.removeObject(this);
+			ShooterGame.shooterScreen.remove(this);
 		}
 	}
 
