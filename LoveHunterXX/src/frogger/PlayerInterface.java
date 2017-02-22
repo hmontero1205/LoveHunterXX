@@ -10,7 +10,7 @@ public interface PlayerInterface extends Visible {
 	
 	boolean outOfBounds(int dir);
 	
-	void ridePlatform(Platform p);
+	void ridePlatform(Log p);
 	
 	void die();
 

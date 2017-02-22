@@ -2,7 +2,7 @@ package frogger;
 
 import gui.components.AnimatedComponent;
 
-public class AnimatedPlatform extends AnimatedComponent implements PlatformInterface {
+public class AnimatedPlatform extends AnimatedComponent implements CollisionInterface {
 
 	public AnimatedPlatform(int x, int y, int w, int h) {
 		super(x, y, w, h);

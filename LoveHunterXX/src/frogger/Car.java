@@ -1,16 +1,13 @@
 package frogger;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
 
-public class Platform extends MovingComponent implements PlatformInterface {
-
+public class Car extends MovingComponent implements CollisionInterface{
 	private boolean touchable;
 	private String imgLoc;
 
@@ -29,7 +26,7 @@ public class Platform extends MovingComponent implements PlatformInterface {
 	 *            location of the image for this component
 	 */
 
-	public Platform(int x, int y, int w, int h, int vx, String imgLoc) {
+	public Car(int x, int y, int w, int h, int vx, String imgLoc) {
 		super(x, y, w, h);
 		touchable = true;
 		this.imgLoc = imgLoc;
@@ -62,7 +59,6 @@ public class Platform extends MovingComponent implements PlatformInterface {
 		while (isRunning()) {
 			try {
 				Thread.sleep(REFRESH_RATE);
-				// checkBehaviors();
 				update();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -100,17 +96,17 @@ public class Platform extends MovingComponent implements PlatformInterface {
 		}
 	}
 
-//	public void checkBehaviors() {
-//		if(getVx() > 0) {
-//			if(getX() > 800) {
-//				setX(0 - getWidth());
-//			}
-//		} else if(getVx() < 0) {
-//			if(getX() + getWidth() < 0) {
-//				setX(800);
-//			}
-//		}
-//	}
+	public void checkBehaviors() {
+		if (getVx() > 0) {
+			if (getX() > 800) {
+				setX(0 - getWidth());
+			}
+		} else if (getVx() < 0) {
+			if (getX() + getWidth() < 0) {
+				setX(800);
+			}
+		}
+	}
 
 	public void play() {
 		if (!isRunning()) {

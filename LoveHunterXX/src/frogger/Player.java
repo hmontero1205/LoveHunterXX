@@ -99,7 +99,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 
 	@Override
-	public void ridePlatform(Platform p) {
+	public void ridePlatform(Log p) {
 		// TODO Auto-generated method stub
 		
 	}
