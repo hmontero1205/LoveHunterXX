@@ -110,4 +110,5 @@ public class Player extends MovingComponent implements PlayerInterface {
 		
 	}
 
+
 }

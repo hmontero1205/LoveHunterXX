@@ -55,7 +55,7 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 		tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4));
 		tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -7));
 		tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
+		tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3));
 		tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0));
 		viewObjects.addAll(tList);
 
@@ -70,7 +70,7 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		for (int i = 0; i < tList.size(); i++) {
-			if (tList.get(i).getTerrain() == ROAD) {
+			if (tList.get(i).getTerrain() == ROAD || tList.get(i).getTerrain() == WATER ) {
 				tList.get(i).startThread();
 			}
 		}

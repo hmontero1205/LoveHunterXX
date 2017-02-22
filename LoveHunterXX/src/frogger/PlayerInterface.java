@@ -14,4 +14,6 @@ public interface PlayerInterface extends Visible {
 	
 	void die();
 
+	void setVx(double vx);
+
 }
