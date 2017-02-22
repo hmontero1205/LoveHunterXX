@@ -98,15 +98,7 @@ public class Log extends MovingComponent implements CollisionInterface {
 	}
 
 	public void checkBehaviors() {
-		if (getVx() > 0) {
-			if (getX() > 800) {
-				setX(0 - getWidth());
-			}
-		} else if (getVx() < 0) {
-			if (getX() + getWidth() < 0) {
-				setX(800);
-			}
-		}
+		
 	}
 
 	public void play() {
