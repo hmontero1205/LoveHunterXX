@@ -14,9 +14,9 @@ import gui.components.Visible;
 
 public class Terrain extends Component implements Runnable {
 
-	private List<Obstacle> obs;
+	private List<Car> obs;
 	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
-	private ArrayList<Platform> pf;
+	private ArrayList<Log> pf;
 	private ArrayList<AnimatedPlatform> apf;
 	private int terrain;
 	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
@@ -29,7 +29,7 @@ public class Terrain extends Component implements Runnable {
 	public Terrain(int x, int y, int w, int h, int terrain, int carVelocity) {
 		super(x, y, w, h);
 		this.terrain = terrain;
-		obs = Collections.synchronizedList(new ArrayList<Obstacle>());
+		obs = Collections.synchronizedList(new ArrayList<Car>());
 		this.carVelocity = carVelocity;
 		superCreated = true;
 		safeRoad = true;
@@ -73,14 +73,14 @@ public class Terrain extends Component implements Runnable {
 
 	public void checkCars() {
 		if (carVelocity < 0 && obs.size() > 0) {
-			Obstacle leadingCar = obs.get(0);
+			Car leadingCar = obs.get(0);
 			if (leadingCar.getX() < 0) {
 				obs.remove(leadingCar);
 				FroggerGame.fs.remove(leadingCar);
 			}
 		} else {
 			if (carVelocity > 0 && obs.size() > 0) {
-				Obstacle leadingCar = obs.get(0);
+				Car leadingCar = obs.get(0);
 				if (leadingCar.getX() > 780) {
 					obs.remove(leadingCar);
 					FroggerGame.fs.remove(leadingCar);
@@ -94,19 +94,19 @@ public class Terrain extends Component implements Runnable {
 		if (obs.size() == 0) {
 			int startingPos = (carVelocity > 0) ? 0 : 800;
 			String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-			Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+			Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.carVelocity,
 					"resources/frogger/" + carSrc);
 			obs.add(c1);
 			FroggerGame.fs.addObject(c1);
 			c1.play();
 		}
-		Obstacle backCar = obs.get(obs.size() - 1);
-		Obstacle frontCar = obs.get(0);
+		Car backCar = obs.get(obs.size() - 1);
+		Car frontCar = obs.get(0);
 		if (carVelocity > 0) {
 			if (/* frontCar.getX()<700 && */ backCar.getX() > 100 && Math.random() < .1) {
 				int startingPos = 0;
 				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-				Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+				Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.carVelocity,
 						"resources/frogger/" + carSrc);
 				obs.add(c1);
 				FroggerGame.fs.addObject(c1);
@@ -116,7 +116,7 @@ public class Terrain extends Component implements Runnable {
 			if (/* frontCar.getX()>100 && */ backCar.getX() < 700 && Math.random() < .1) {
 				int startingPos = 800;
 				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-				Obstacle c1 = new Obstacle(startingPos, getY() + 10, 50, 25, this.carVelocity,
+				Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.carVelocity,
 						"resources/frogger/" + carSrc);
 				obs.add(c1);
 				FroggerGame.fs.addObject(c1);
