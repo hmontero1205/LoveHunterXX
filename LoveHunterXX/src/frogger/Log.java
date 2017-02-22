@@ -116,19 +116,15 @@ public class Log extends MovingComponent implements CollisionInterface {
 		}
 	}
 
+
 	@Override
-	public boolean isTouchingPlayer(Player p) {
-		boolean touching = false;
-		if(p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX() || p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
-			if(p.getY() <= this.getY() + this.getHeight() && p.getY() >= this.getY() || p.getY() + p.getHeight() <= this.getY() + this.getHeight() && p.getY() + p.getHeight() >= this.getY()) {
-				touching = true;
-			}
-		}
-		return touching;
+	public boolean isTouchingPlayer(PlayerInterface p) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public boolean isApproachingPlayer(Player p) {
+	public boolean isApproachingPlayer(PlayerInterface p) {
 		// TODO Auto-generated method stub
 		return false;
 	}

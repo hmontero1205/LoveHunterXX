@@ -60,7 +60,6 @@ public class Car extends MovingComponent implements CollisionInterface {
 		while (isRunning()) {
 			try {
 				Thread.sleep(REFRESH_RATE);
-				if(isTouchingPlayer((Player) FroggerScreen.player) == true) System.out.println(isTouchingPlayer((Player) FroggerScreen.player));
 				update();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -117,7 +116,7 @@ public class Car extends MovingComponent implements CollisionInterface {
 	}
 
 	@Override
-	public boolean isTouchingPlayer(Player p) {
+	public boolean isTouchingPlayer(PlayerInterface p) {
 		boolean touching = false;
 		if(p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX() || p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
 			if(p.getY() <= this.getY() + this.getHeight() && p.getY() >= this.getY() || p.getY() + p.getHeight() <= this.getY() + this.getHeight() && p.getY() + p.getHeight() >= this.getY()) {
@@ -128,7 +127,7 @@ public class Car extends MovingComponent implements CollisionInterface {
 	}
 
 	@Override
-	public boolean isApproachingPlayer(Player p) {
+	public boolean isApproachingPlayer(PlayerInterface p) {
 		// TODO Auto-generated method stub
 		return false;
 	}
