@@ -10,15 +10,16 @@ public class AnimatedPlatform extends AnimatedComponent implements CollisionInte
 	}
 
 	@Override
-	public boolean isTouchingPlayer(Player p) {
+	public boolean isTouchingPlayer(PlayerInterface p) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean isApproachingPlayer(Player p) {
+	public boolean isApproachingPlayer(PlayerInterface p) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 }
