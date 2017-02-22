@@ -31,8 +31,8 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	public ArrayList<Terrain> tList;
 	public static PlayerInterface player;
 	public boolean playerCooldown;
-	public int currentRow;
-	public boolean gameOver;
+	public static int currentRow;
+	public static boolean gameOver = false;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
