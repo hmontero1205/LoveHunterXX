@@ -1,5 +1,6 @@
 package frogger;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
@@ -7,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
 
-public class Car extends MovingComponent implements CollisionInterface{
+public class Car extends MovingComponent implements CollisionInterface {
 	private boolean touchable;
 	private String imgLoc;
 
@@ -59,6 +60,7 @@ public class Car extends MovingComponent implements CollisionInterface{
 		while (isRunning()) {
 			try {
 				Thread.sleep(REFRESH_RATE);
+				if(isTouchingPlayer((Player) FroggerScreen.player) == true) System.out.println(isTouchingPlayer((Player) FroggerScreen.player));
 				update();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -91,7 +93,6 @@ public class Car extends MovingComponent implements CollisionInterface{
 				at.rotate(Math.PI);
 				at.translate(-icon.getIconWidth() / 2, -icon.getIconHeight() / 2);
 			}
-
 			g.drawImage(icon.getImage(), at, null);
 		}
 	}
@@ -117,8 +118,13 @@ public class Car extends MovingComponent implements CollisionInterface{
 
 	@Override
 	public boolean isTouchingPlayer(Player p) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean touching = false;
+		if(p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX() || p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
+			if(p.getY() <= this.getY() + this.getHeight() && p.getY() >= this.getY() || p.getY() + p.getHeight() <= this.getY() + this.getHeight() && p.getY() + p.getHeight() >= this.getY()) {
+				touching = true;
+			}
+		}
+		return touching;
 	}
 
 	@Override

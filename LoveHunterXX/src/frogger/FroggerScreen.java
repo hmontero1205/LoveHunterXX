@@ -29,7 +29,7 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	public final static int ROAD = 1;
 	public final static int WATER = 2;
 	public ArrayList<Terrain> tList;
-	public PlayerInterface player;
+	public static PlayerInterface player;
 	public boolean playerCooldown;
 
 	public FroggerScreen(int w, int h) {
