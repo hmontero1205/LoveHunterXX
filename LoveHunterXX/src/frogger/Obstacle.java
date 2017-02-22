@@ -28,15 +28,4 @@ public class Obstacle extends Platform{
 		}
 	}
 
-	@Override
-	public boolean isTouchingPlayer(Player p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isApproachingPlayer(Player p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

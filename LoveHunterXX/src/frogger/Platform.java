@@ -120,13 +120,12 @@ public class Platform extends MovingComponent implements PlatformInterface {
 	}
 
 	@Override
-	public boolean isTouchingPlayer(Player p) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isTouchingPlayer(PlayerInterface p) {
+		return ((p.getX()>this.getX() && p.getX()<(this.getX()+this.getWidth())));
 	}
 
 	@Override
-	public boolean isApproachingPlayer(Player p) {
+	public boolean isApproachingPlayer(PlayerInterface p) {
 		// TODO Auto-generated method stub
 		return false;
 	}

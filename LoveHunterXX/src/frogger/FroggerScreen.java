@@ -31,6 +31,8 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	public ArrayList<Terrain> tList;
 	public PlayerInterface player;
 	public boolean playerCooldown;
+	public int currentRow;
+	public boolean gameOver;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -67,13 +69,20 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-
 		for (int i = 0; i < tList.size(); i++) {
 			if (tList.get(i).getTerrain() == ROAD) {
 				tList.get(i).startThread();
 			}
 		}
+		
+	}
 
+	public void checkPlayerRow() {
+		tList.get(currentRow).setCheckPlayer(false);
+		currentRow = player.getY()/ROW_HEIGHT;
+		tList.get(currentRow).setCheckPlayer(true);
+		
+		
 	}
 
 	public KeyListener getKeyListener() {
@@ -81,23 +90,18 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent k) {
-		int keyCode = k.getKeyCode();
-		if (keyCode >= 37 && keyCode <= 40 /* && !playerCooldown */) {
-			player.move(keyCode);
-			// playerCooldown = true;
-			// try {
-			// Thread.sleep(300);
-			// playerCooldown = false;
-			// } catch (InterruptedException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
+	public void keyReleased(KeyEvent k) {
+		if(!gameOver){
+			int keyCode = k.getKeyCode();
+			if (keyCode >= 37 && keyCode <= 40 /* && !playerCooldown */) {
+				player.move(keyCode);
+				checkPlayerRow();
+			}
 		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
@@ -106,6 +110,12 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void gameOver() {
+		this.gameOver = true;
+		tList.get(currentRow).setCheckPlayer(false);
+		
 	}
 
 }

@@ -1,7 +1,7 @@
 package frogger;
 
 public interface PlatformInterface {
-	boolean isTouchingPlayer(Player p);
+	boolean isTouchingPlayer(PlayerInterface p);
 	
-	boolean isApproachingPlayer(Player p);
+	boolean isApproachingPlayer(PlayerInterface p);
 }

@@ -19,11 +19,12 @@ public class Terrain extends Component implements Runnable {
 	private ArrayList<Platform> pf;
 	private ArrayList<AnimatedPlatform> apf;
 	private int terrain;
-	private Color[] terrainColors = { Color.green, Color.darkGray, Color.blue };
-	private String[] terrainGraphics = { "resources/frogger/grass.jpg", "resources/frogger/road.png",
+	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
 			"resources/frogger/water.png" };
 	private boolean superCreated;
 	private int carVelocity;
+	private boolean checkPlayer;
+	private boolean safeRoad;
 
 	public Terrain(int x, int y, int w, int h, int terrain, int carVelocity) {
 		super(x, y, w, h);
@@ -31,6 +32,7 @@ public class Terrain extends Component implements Runnable {
 		obs = Collections.synchronizedList(new ArrayList<Obstacle>());
 		this.carVelocity = carVelocity;
 		superCreated = true;
+		safeRoad = true;
 		update();
 	}
 
@@ -40,11 +42,6 @@ public class Terrain extends Component implements Runnable {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			ImageIcon icon = new ImageIcon(getImgLoc());
 			g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
-
-			// g.setColor(terrainColors[terrain]);
-			// g.fillRect(0, 0, getWidth() - 1, getHeight());
-			// g.setColor(Color.black);
-			// g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		}
 	}
 
@@ -59,10 +56,11 @@ public class Terrain extends Component implements Runnable {
 
 	@Override
 	public void run() {
-		// generateObstacles();
-		while (true) {
+		while (safeRoad) {
 			addCars();
 			checkCars();
+			if(checkPlayer)
+				checkPlayer();
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
@@ -128,14 +126,28 @@ public class Terrain extends Component implements Runnable {
 
 	}
 
-	private void checkPlayer() {
-		// TODO Auto-generated method stub
+	public void checkPlayer() {
+		for(int i=0;i<obs.size();i++){
+			if(obs.get(i).isTouchingPlayer(FroggerGame.fs.player)){
+				for(int j=i;j<obs.size();j++){
+					obs.get(j).setVx(0);
+				}
+				System.out.println("GAME OVER!");
+				safeRoad = false;
+				FroggerGame.fs.gameOver();
+				break;
+			}
+		}
 
 	}
 
 	public int getTerrain() {
 		// TODO Auto-generated method stub
 		return terrain;
+	}
+
+	public void setCheckPlayer(boolean b){
+		checkPlayer = b;
 	}
 
 }
