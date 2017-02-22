@@ -131,7 +131,7 @@ public class Terrain extends Component implements Runnable {
 		for(int i=0;i<cars.size();i++){
 			if(cars.get(i).isTouchingPlayer(FroggerGame.fs.player)){
 				for(int j=i;j<cars.size();j++){
-					cars.get(j).setVx(0);
+					cars.get(j).setRunning(false);
 				}
 				System.out.println("GAME OVER!");
 				safeRoad = false;
