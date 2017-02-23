@@ -115,7 +115,7 @@ public class Terrain extends Component implements Runnable {
 		
 	}
 
-	private void addLogs() {{
+	private void addLogs() {
 		if(logs.size() == 0) {
 			int startingPos = (obVelocity > 0) ? 0 : 800;
 			Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity, "resources/frogger/log.png");
@@ -136,19 +136,16 @@ public class Terrain extends Component implements Runnable {
 				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 				l1.play();
 			}
-		} else {
+		} 
+		else {
 			if (/* frontCar.getX()>100 && */ backLog.getX() < 700 && Math.random() < .1) {
 				int startingPos = 800;
-				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-				Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,
-						"resources/frogger/log.png");
+				Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
 				logs.add(l1);
-				FroggerGame.fs.moveToFront(l1);
+				FroggerGame.fs.addObject(l1);
 				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-				//FroggerGame.fs.moveToBack(FroggerGame.fs.player);
 				l1.play();
 			}
-		}
 		}
 	}
 
