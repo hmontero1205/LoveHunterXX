@@ -34,40 +34,43 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	@Override
 	public void update(Graphics2D g) {
+		if(getVx() != 0) {
+			long currentTime = System.currentTimeMillis();
+			int diff = (int) (currentTime - getMoveTime());
+			if (diff >= REFRESH_RATE) {
+				setMoveTime(currentTime);
+				setPosx(getPosx() + getVx() * (double) diff / REFRESH_RATE);
+				setPosy(getPosy() + getVy() * (double) diff / REFRESH_RATE);
+				super.setX((int) getPosx());
+				super.setY((int) getPosy());
+			}
+		}
 		if (pModels != null) {
 			g = clear();
 			ImageIcon icon = new ImageIcon(pModels[dir]);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g.drawImage(icon.getImage(), 0, 0, getWidth() - 3, getHeight() - 3, 0, 0, icon.getIconWidth(),
 					icon.getIconHeight(), null);
-			// g.setColor(Color.RED);
-			// g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 		}
 	}
 
 	@Override
 	public void move(int k) {
-		if (k == FroggerScreen.LEFTARROWKEY) {
-			if (!outOfBounds(FroggerScreen.LEFTARROWKEY)) {
-				setX(getX() - moveDistance);
-				dir = LEFT;
-			}
-		} else if (k == FroggerScreen.RIGHTARROWKEY) {
-			if (!outOfBounds(FroggerScreen.RIGHTARROWKEY)) {
-				setX(getX() + moveDistance);
-				dir = RIGHT;
-			}
-		} else if (k == FroggerScreen.UPARROWKEY) {
-			if (!outOfBounds(FroggerScreen.UPARROWKEY)) {
-				setY(getY() - FroggerScreen.ROW_HEIGHT);
-				dir = UP;
-			}
-		} else if (k == FroggerScreen.DOWNARROWKEY) {
-			if (!outOfBounds(FroggerScreen.DOWNARROWKEY)) {
-				setY(getY() + FroggerScreen.ROW_HEIGHT);
-				dir = DOWN;
-			}
+		if (k == FroggerScreen.LEFTARROWKEY && !outOfBounds(FroggerScreen.LEFTARROWKEY)) {
+			setX(getX() - moveDistance);
+			dir = LEFT;
+		} else if (k == FroggerScreen.RIGHTARROWKEY && !outOfBounds(FroggerScreen.RIGHTARROWKEY)) {
+			setX(getX() + moveDistance);
+			dir = RIGHT;
+		} else if (k == FroggerScreen.UPARROWKEY && !outOfBounds(FroggerScreen.UPARROWKEY)) {
+			setY(getY() - FroggerScreen.ROW_HEIGHT);
+			dir = UP;
+		} else if (k == FroggerScreen.DOWNARROWKEY && !outOfBounds(FroggerScreen.DOWNARROWKEY)) {
+			setY(getY() + FroggerScreen.ROW_HEIGHT);
+			dir = DOWN;
 		}
+		setVx(0);
+		setRunning(false);
 		update();
 	}
 
@@ -100,14 +103,35 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	@Override
 	public void ridePlatform(Log p) {
-		// TODO Auto-generated method stub
-		
+		this.setVx(p.getVx());
+		play();
+	}
+	
+	public void run() {
+		setPosx(getX());
+		setPosy(getY());
+		setRunning(true);
+		setMoveTime(System.currentTimeMillis());
+		while (isRunning()) {
+			try {
+				Thread.sleep(REFRESH_RATE);
+				update();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
+	public void play(){
+		if(!isRunning()){
+			Thread go = new Thread(this);
+			go.start();
+		}
+	}
 	@Override
 	public void die() {
-		// TODO Auto-generated method stub
-		
+		// change image to a bloody mess
 	}
 
 

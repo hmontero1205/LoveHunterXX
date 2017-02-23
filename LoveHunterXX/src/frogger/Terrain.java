@@ -225,7 +225,6 @@ public class Terrain extends Component implements Runnable {
 					for(int j=i;j<cars.size();j++){
 						cars.get(j).setRunning(false);
 					}
-					System.out.println("GAME OVER!");
 					safeRoad = false;
 					FroggerGame.fs.gameOver();
 					break;
@@ -236,6 +235,8 @@ public class Terrain extends Component implements Runnable {
 			for(int i=0;i<logs.size();i++){
 				if(logs.get(i).isTouchingPlayer(FroggerGame.fs.player)){
 					FroggerGame.fs.player.ridePlatform(logs.get(i));
+					// hans, make it game over when the player is out of the map x<0 and x>800
+					// also make the player die when they step off the log
 					break;
 				}
 			}

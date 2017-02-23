@@ -1,6 +1,5 @@
 package frogger;
 
-import java.awt.event.KeyEvent;
 
 import gui.components.Visible;
 
