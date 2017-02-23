@@ -29,6 +29,7 @@ public class Terrain extends Component implements Runnable {
 	private final int GRASS = 0;
 	private final int ROAD = 1;
 	private final int WATER = 2;
+	private boolean postGame;
 
 	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity) {
 		super(x, y, w, h);
@@ -43,6 +44,7 @@ public class Terrain extends Component implements Runnable {
 				logs = Collections.synchronizedList(new ArrayList<Log>());
 				break;
 		}	
+		postGame = false;
 		superCreated = true;
 		update();
 	}
@@ -82,7 +84,7 @@ public class Terrain extends Component implements Runnable {
 		while (true) {
 			addLogs();
 			checkLogs();
-			if(checkPlayer)
+			if(postGame)
 				checkPlayer();
 			try {
 				Thread.sleep(40);
@@ -113,12 +115,13 @@ public class Terrain extends Component implements Runnable {
 		
 	}
 
-	private void addLogs() {
+	private void addLogs() {{
 		if(logs.size() == 0) {
 			int startingPos = (obVelocity > 0) ? 0 : 800;
 			Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity, "resources/frogger/log.png");
 			logs.add(l1);
 			FroggerGame.fs.addObject(l1);
+			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 			l1.play();
 		}
 		Log backLog = logs.get(logs.size() - 1);
@@ -130,7 +133,7 @@ public class Terrain extends Component implements Runnable {
 						"resources/frogger/log.png");
 				logs.add(l1);
 				FroggerGame.fs.addObject(l1);
-				//FroggerGame.fs.moveToBack(FroggerGame.fs.player);
+				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 				l1.play();
 			}
 		} else {
@@ -141,11 +144,12 @@ public class Terrain extends Component implements Runnable {
 						"resources/frogger/log.png");
 				logs.add(l1);
 				FroggerGame.fs.moveToFront(l1);
+				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 				//FroggerGame.fs.moveToBack(FroggerGame.fs.player);
 				l1.play();
 			}
 		}
-		
+		}
 	}
 
 	public void runRoad(){
@@ -190,6 +194,7 @@ public class Terrain extends Component implements Runnable {
 					"resources/frogger/" + carSrc);
 			cars.add(c1);
 			FroggerGame.fs.addObject(c1);
+			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 			c1.play();
 		}
 		Car backCar = cars.get(cars.size() - 1);
@@ -202,6 +207,7 @@ public class Terrain extends Component implements Runnable {
 						"resources/frogger/" + carSrc);
 				cars.add(c1);
 				FroggerGame.fs.addObject(c1);
+				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 				c1.play();
 			}
 		} else {
@@ -212,6 +218,7 @@ public class Terrain extends Component implements Runnable {
 						"resources/frogger/" + carSrc);
 				cars.add(c1);
 				FroggerGame.fs.addObject(c1);
+				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 				c1.play();
 			}
 		}
@@ -240,6 +247,7 @@ public class Terrain extends Component implements Runnable {
 					break;
 				}
 			}
+			
 		}
 
 	}
@@ -251,6 +259,11 @@ public class Terrain extends Component implements Runnable {
 
 	public void setCheckPlayer(boolean b){
 		checkPlayer = b;
+		if(b)
+			checkPlayer();
+	}
+	public void setPostGame(boolean b){
+		this.postGame = true;
 	}
 
 }

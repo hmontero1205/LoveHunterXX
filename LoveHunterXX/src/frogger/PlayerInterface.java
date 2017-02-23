@@ -15,4 +15,6 @@ public interface PlayerInterface extends Visible {
 
 	void setVx(double vx);
 
+	boolean isOnPlatform();
+
 }

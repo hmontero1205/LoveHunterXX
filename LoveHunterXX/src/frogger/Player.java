@@ -22,6 +22,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private ArrayList<PowerUp> inventory;
 	private String[] pModels = { "resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png",
 			"resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png" };
+	private boolean onPlatform;
 
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -71,6 +72,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 		}
 		setVx(0);
 		setRunning(false);
+		this.onPlatform = false;
 		update();
 	}
 
@@ -103,6 +105,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	@Override
 	public void ridePlatform(Log p) {
+		this.onPlatform = true;
 		this.setVx(p.getVx());
 		play();
 	}
@@ -132,6 +135,10 @@ public class Player extends MovingComponent implements PlayerInterface {
 	@Override
 	public void die() {
 		// change image to a bloody mess
+	}
+	
+	public boolean isOnPlatform(){
+		return onPlatform;
 	}
 
 
