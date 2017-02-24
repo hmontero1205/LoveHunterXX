@@ -12,17 +12,20 @@ import gui.components.AnimatedComponent;
 
 public class Turtle extends AnimatedComponent implements CollisionInterface {
 
-	private static int goingDownTime = 400;
 	private boolean touchable;
-	private String[] swimAnimation = {"resources/frogger/turtle0.png", "resources/frogger/turtle1.png"};
-	private String[] diveAnimation = {"resources/frogger/down0.png", "resources/frogger/down1.png", "resources/frogger/down2.png", "resources/frogger/down3.png"};
+	private String[] swimAnimation = { "resources/frogger/turtle0.png", "resources/frogger/turtle1.png" };
+	private String[] diveAnimation = { "resources/frogger/down0.png", "resources/frogger/down1.png",
+			"resources/frogger/down2.png", "resources/frogger/down3.png" };
 	private int swimTime;
 	private int swimSeq = 0;
-	private boolean diving;
-	private boolean descending;
+	private int submergeFrameInterval = 400;
+	private int submergeCurrentFrameTime = 0;
+	private int timeBeforeAscending;
+	private int underWaterTime = 0;
+	private boolean isSubmerging;
 	private boolean loop;
 	private boolean superCreated;
-	
+
 	/**
 	 * @param x
 	 *            initial x location of the turtle
@@ -36,11 +39,14 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	 *            x velocity of turtle
 	 * @param swimTime
 	 *            time before next frame
+	 * @param timeBeforeAscending
+	 *            time that the turtles stay under water     
 	 */
 
-	public Turtle(int x, int y, int w, int h, int vx, int swimTime) {
+	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending) {
 		super(x, y, w, h);
 		this.swimTime = swimTime;
+		this.timeBeforeAscending = timeBeforeAscending;
 		setX(x);
 		setY(y);
 		setVx(vx);
@@ -71,46 +77,65 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	}
 
 	public void drawImage(Graphics2D g) {
-		if(superCreated) {
+		if (superCreated) {
 			long currentTime = System.currentTimeMillis();
-			if(currentTime - getDisplayTime() > swimTime) {
-				diving = true;
+			if (currentTime - getDisplayTime() > swimTime) {
 				if (getFrame() != null && getFrame().size() > 0 && getFrame().size() == getTimes().size()) {
 					g = clear();
 					ImageIcon icon = new ImageIcon(diveAnimation[getCurrentFrame()]);
 					AffineTransform at = new AffineTransform();
 					at.scale(1.3, 1);
-					if (getVx() > 0) at.rotate(Math.toRadians(180), icon.getIconWidth()/2, icon.getIconHeight()/2);
+					if (getVx() > 0) {
+						at.rotate(Math.toRadians(180), icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+					} else {
+						at.translate(-2, -8); // little bit of hard coding here cause the turtles won't center for some reason :/
+					}
 					g.drawImage(icon.getImage(), at, null);
-					if(getCurrentFrame() == 0) {
-						descending = true;
-						if(loop) {
+					g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+					
+					// determines what order the frames should play, plays backward if the turtles are ascend and plays forward if the turtles are submerging
+					if (getCurrentFrame() == 0) {
+						isSubmerging = true;
+						if (loop) {
 							setDisplayTime(currentTime);
 							loop = false;
+							underWaterTime = 0;
 						}
-					} else if (getCurrentFrame() > 1){
-						descending = false;
+					} else if (getCurrentFrame() > 2) {
+						isSubmerging = false;
 					}
-					if(!descending) {
-						setCurrentFrame(getCurrentFrame() - 1);
-						loop = true;
-					} else {
-						setCurrentFrame(getCurrentFrame() + 1);
+
+					// changes the frame based on the logics above ^
+					if (submergeFrameInterval - submergeCurrentFrameTime <= 0) {
+						if (!isSubmerging && timeBeforeAscending - underWaterTime <= 0) {
+							setCurrentFrame(getCurrentFrame() - 1);
+							loop = true;
+						} else if(isSubmerging){
+							setCurrentFrame(getCurrentFrame() + 1);
+						}
+						submergeCurrentFrameTime = 0;
 					}
+					
 					if (getCurrentFrame() == 0 && !isRepeat()) {
 						setRunning(false);
 						return;
 					}
+					if(!isSubmerging) underWaterTime += REFRESH_RATE;
+					submergeCurrentFrameTime += REFRESH_RATE;
 				}
 			} else {
-				diving = false;
 				g = clear();
 				swimSeq = (swimSeq + 1) % 2;
 				ImageIcon icon = new ImageIcon(swimAnimation[swimSeq]);
 				AffineTransform at = new AffineTransform();
 				at.scale(1.3, 1);
-				if (getVx() > 0) at.rotate(Math.toRadians(180), icon.getIconWidth()/2, icon.getIconHeight()/2);
+				if (getVx() > 0) {
+					at.rotate(Math.toRadians(180), icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+				} else {
+					at.translate(-2, -6);
+				}
 				g.drawImage(icon.getImage(), at, null);
+				g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 			}
 		}
 	}
@@ -122,11 +147,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 		setMoveTime(System.currentTimeMillis());
 		while (isRunning()) {
 			try {
-				if(diving) {
-					Thread.sleep(goingDownTime);
-				} else {
-					Thread.sleep(REFRESH_RATE);
-				}
+				Thread.sleep(REFRESH_RATE);
 				update();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
