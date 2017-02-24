@@ -106,7 +106,6 @@ public class Terrain extends Component implements Runnable {
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
