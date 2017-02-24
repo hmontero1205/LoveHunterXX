@@ -69,7 +69,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 			super.setY((int) getPosy());
 		}
 		drawImage(g);
-		if (getCurrentFrame() >= 2) {
+		if (getCurrentFrame() > 2) {
 			touchable = false;
 		} else {
 			touchable = true;
@@ -91,7 +91,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 						at.translate(-2, -8); // little bit of hard coding here cause the turtles won't center for some reason :/
 					}
 					g.drawImage(icon.getImage(), at, null);
-					g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+					//g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 					
 					// determines what order the frames should play, plays backward if the turtles are ascend and plays forward if the turtles are submerging
 					if (getCurrentFrame() == 0) {
@@ -135,7 +135,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 					at.translate(-2, -6);
 				}
 				g.drawImage(icon.getImage(), at, null);
-				g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+				//g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 			}
 		}
 	}

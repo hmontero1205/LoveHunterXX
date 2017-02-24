@@ -23,6 +23,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private String[] pModels = { "resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png",
 			"resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png" };
 	private boolean onPlatform;
+	private MovingComponent currentPlatform;
 
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -104,10 +105,26 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 
 	@Override
-	public void ridePlatform(Log p) {
-		this.onPlatform = true;
-		this.setVx(p.getVx());
-		play();
+	public void ridePlatform(MovingComponent p) {
+		if(p instanceof Turtle){
+			if(((Turtle) p).isTouchable()){
+				this.onPlatform = true;
+				this.setVx(p.getVx());
+				play();
+			}
+			else{
+				this.onPlatform = false;
+				this.setVx(p.getVx());
+				play();
+			}
+		}
+		else{
+			this.onPlatform = true;
+			this.setVx(p.getVx());
+			play();	
+		}
+		currentPlatform = p;
+		
 	}
 	
 	public void run() {
@@ -125,9 +142,13 @@ public class Player extends MovingComponent implements PlayerInterface {
 				e.printStackTrace();
 			}
 			
-			if(getX()>800 || getX() < 0){
+			if((getX()>800 || getX() < 0) && !FroggerGame.fs.gameOver){
 				setRunning(false);
 				FroggerGame.fs.gameOver("You were swept away by the current!");
+			}
+			
+			if(currentPlatform instanceof Turtle && !((Turtle) currentPlatform).isTouchable() && !FroggerGame.fs.gameOver){
+				FroggerGame.fs.gameOver("The turtle betrayed you.");
 			}
 		}
 

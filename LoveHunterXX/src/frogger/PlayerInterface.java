@@ -1,6 +1,7 @@
 package frogger;
 
 
+import gui.components.MovingComponent;
 import gui.components.Visible;
 
 public interface PlayerInterface extends Visible {
@@ -9,7 +10,7 @@ public interface PlayerInterface extends Visible {
 	
 	boolean outOfBounds(int dir);
 	
-	void ridePlatform(Log p);
+	void ridePlatform(MovingComponent p);
 	
 	void die();
 

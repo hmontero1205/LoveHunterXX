@@ -29,8 +29,10 @@ public class Terrain extends Component implements Runnable {
 	private final int ROAD = 1;
 	private final int WATER = 2;
 	private boolean postGame;
+	private int numTurtles;
+	private boolean genTurtles;
 
-	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity) {
+	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity, boolean genTurtles) {
 		super(x, y, w, h);
 		this.terrain = terrain;
 		this.obVelocity = obVelocity;
@@ -46,10 +48,13 @@ public class Terrain extends Component implements Runnable {
 //				mcList = Collections.synchronizedList(new ArrayList<Log>());
 //				break;
 //		}	
+		
+		this.genTurtles = genTurtles;
 		postGame = false;
 		superCreated = true;
 		update();
 	}
+	
 
 	@Override
 	public void update(Graphics2D g) {
@@ -114,9 +119,9 @@ public class Terrain extends Component implements Runnable {
 	
 	public void addMovingComponents() {
 		int startingPos = (obVelocity > 0) ? 0 : 800;	
-		String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
+		//String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
 		if(mcList.size() == 0){
-			MovingComponent m = (terrain==ROAD) ? new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc) : new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc);
+			MovingComponent m = determineMovingComponent(startingPos);
 			mcList.add(m);
 			FroggerGame.fs.addObject(m);
 			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
@@ -125,13 +130,26 @@ public class Terrain extends Component implements Runnable {
 		MovingComponent trailing = mcList.get(mcList.size() - 1);
 		//Car frontCar = cars.get(0);	
 		if((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)){
-			MovingComponent m = (terrain==ROAD) ? new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc) : new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc);
+			MovingComponent m = determineMovingComponent(startingPos);
 			mcList.add(m);
 			FroggerGame.fs.addObject(m);
 			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 			m.play();
 		}
 
+	}
+	
+	public MovingComponent determineMovingComponent(int s){
+		if(terrain == ROAD)
+			return new Car(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
+		else{
+			if(genTurtles){
+				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity);
+			}
+			else
+				return new Log(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
+		}
+		
 	}
 	
 	public void checkMovingComponents() {
@@ -158,11 +176,23 @@ public class Terrain extends Component implements Runnable {
 		}
 		if(terrain==WATER){
 			for(int i=0;i<mcList.size();i++){
-				Log l = (Log) mcList.get(i);
-				if(l.isTouchingPlayer(FroggerGame.fs.player)){
-					FroggerGame.fs.player.ridePlatform(l);
-					break;
+				MovingComponent p;
+				if(genTurtles){
+					p = mcList.get(i);
+					if(((Turtle) p).isTouchingPlayer(FroggerGame.fs.player)){
+						FroggerGame.fs.player.ridePlatform(p);
+						break;
+					}
 				}
+				else{
+					p = mcList.get(i);
+					if(((Log) p).isTouchingPlayer(FroggerGame.fs.player)){
+						FroggerGame.fs.player.ridePlatform(p);
+						break;
+					}
+				}
+				
+				
 			}
 			
 		}
