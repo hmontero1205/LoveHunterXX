@@ -18,7 +18,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 			"resources/frogger/down2.png", "resources/frogger/down3.png" };
 	private int swimTime;
 	private int swimSeq = 0;
-	private int submergeFrameInterval = 400;
+	private int submergeFrameInterval;
 	private int submergeCurrentFrameTime = 0;
 	private int timeBeforeAscending;
 	private int underWaterTime = 0;
@@ -43,10 +43,11 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	 *            time that the turtles stay under water     
 	 */
 
-	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending) {
+	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending, int submergeFrameInterval) {
 		super(x, y, w, h);
 		this.swimTime = swimTime;
 		this.timeBeforeAscending = timeBeforeAscending;
+		this.submergeFrameInterval = submergeFrameInterval;
 		setX(x);
 		setY(y);
 		setVx(vx);
