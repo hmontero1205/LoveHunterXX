@@ -144,7 +144,7 @@ public class Terrain extends Component implements Runnable {
 			return new Car(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
 			if(genTurtles){
-				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity);
+				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity,500);
 			}
 			else
 				return new Log(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
