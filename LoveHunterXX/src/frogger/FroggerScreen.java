@@ -61,11 +61,11 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 //		player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
 //		viewObjects.add(player);
 		
-		Turtle turtle = new Turtle(0 - 50, WINDOWBARHEIGHT + 25, 50, 25, 1, 1000, 1000, 5000);
+		Turtle turtle = new Turtle(0 - 50, WINDOWBARHEIGHT + 25, 50, 25, 1, 1000, 1000, 1000);
 		viewObjects.add(turtle);
 		turtle.play();
 		
-		turtle = new Turtle(800, WINDOWBARHEIGHT + 25, 50, 25, -1, 1000, 1000, 5000);
+		turtle = new Turtle(800, WINDOWBARHEIGHT + 25, 50, 25, -1, 1000, 1000, 100);
 		viewObjects.add(turtle);
 		turtle.play();
 		}
