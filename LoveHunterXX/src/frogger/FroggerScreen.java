@@ -95,7 +95,7 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	
 	public void checkDrown(){
 		if(tList.get(currentRow).getTerrain() == WATER && !player.isOnPlatform()){
-			gameOver();
+			gameOver("You drowned!!");
 			tList.get(currentRow).setPostGame(true);
 			
 		}
@@ -128,9 +128,9 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 
 	}
 
-	public void gameOver() {
+	public void gameOver(String m) {
 		gameOver = true;
-		System.out.println("GAME OVER!");
+		System.out.println("GAME OVER!\n"+m);
 		tList.get(currentRow).setCheckPlayer(false);
 		
 	}

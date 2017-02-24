@@ -119,8 +119,15 @@ public class Player extends MovingComponent implements PlayerInterface {
 			try {
 				Thread.sleep(REFRESH_RATE);
 				update();
+				
+					
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			
+			if(getX()>800 || getX() < 0){
+				setRunning(false);
+				FroggerGame.fs.gameOver("You were swept away by the current!");
 			}
 		}
 

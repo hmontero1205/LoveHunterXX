@@ -15,9 +15,8 @@ import gui.components.Visible;
 
 public class Terrain extends Component implements Runnable {
 
-	private List<Car> cars;
+	private List<MovingComponent> mcList;
 	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
-	private List<Log> logs;
 	//private List<AnimatedPlatform> apf;
 	private int terrain;
 	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
@@ -35,15 +34,18 @@ public class Terrain extends Component implements Runnable {
 		super(x, y, w, h);
 		this.terrain = terrain;
 		this.obVelocity = obVelocity;
-		switch(this.terrain){
-			case ROAD:
-				cars = Collections.synchronizedList(new ArrayList<Car>());
-				safeRoad = true;
-				break;
-			case WATER:
-				logs = Collections.synchronizedList(new ArrayList<Log>());
-				break;
-		}	
+		mcList = Collections.synchronizedList(new ArrayList<MovingComponent>());
+		if(terrain == ROAD)
+			safeRoad = true;
+//		switch(this.terrain){
+//			case ROAD:
+//				cars = Collections.synchronizedList(new ArrayList<Car>());
+//				safeRoad = true;
+//				break;
+//			case WATER:
+//				mcList = Collections.synchronizedList(new ArrayList<Log>());
+//				break;
+//		}	
 		postGame = false;
 		superCreated = true;
 		update();
@@ -78,81 +80,12 @@ public class Terrain extends Component implements Runnable {
 				break;
 		}
 		
-
 	}
-	public void runWater() {
-		while (true) {
-			addLogs();
-			checkLogs();
-			if(postGame)
-				checkPlayer();
-			try {
-				Thread.sleep(40);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}
-
-	private void checkLogs() {
-		if (obVelocity < 0 && logs.size() > 0) {
-			Log leadingLog = logs.get(0);
-			if (leadingLog.getX() < 0) {
-				logs.remove(leadingLog);
-				FroggerGame.fs.remove(leadingLog);
-			}
-		} else {
-			if (obVelocity > 0 && logs.size() > 0) {
-				Log leadingLog = logs.get(0);
-				if (leadingLog.getX() > 780) {
-					logs.remove(leadingLog);
-					FroggerGame.fs.remove(leadingLog);
-				}
-			}
-		}
-		
-	}
-
-	private void addLogs() {
-		if(logs.size() == 0) {
-			int startingPos = (obVelocity > 0) ? 0 : 800;
-			Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity, "resources/frogger/log.png");
-			logs.add(l1);
-			FroggerGame.fs.addObject(l1);
-			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-			l1.play();
-		}
-		Log backLog = logs.get(logs.size() - 1);
-		Log frontLog = logs.get(0);
-		if (obVelocity > 0) {
-			if (/* frontCar.getX()<700 && */ backLog.getX() > 100 && Math.random() < .1) {
-				int startingPos = 0;
-				Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,
-						"resources/frogger/log.png");
-				logs.add(l1);
-				FroggerGame.fs.addObject(l1);
-				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-				l1.play();
-			}
-		} 
-		else {
-			if (/* frontCar.getX()>100 && */ backLog.getX() < 700 && Math.random() < .1) {
-				int startingPos = 800;
-				Log l1 = new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
-				logs.add(l1);
-				FroggerGame.fs.addObject(l1);
-				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-				l1.play();
-			}
-		}
-	}
-
+	
 	public void runRoad(){
 		while (safeRoad) {
-			addCars();
-			checkCars();
+			addMovingComponents();
+			checkMovingComponents();
 			if(checkPlayer)
 				checkPlayer();
 			try {
@@ -164,83 +97,71 @@ public class Terrain extends Component implements Runnable {
 		}
 	}
 	
-	public void checkCars() {
-		if (obVelocity < 0 && cars.size() > 0) {
-			Car leadingCar = cars.get(0);
-			if (leadingCar.getX() < 0) {
-				cars.remove(leadingCar);
-				FroggerGame.fs.remove(leadingCar);
+	public void runWater() {
+		while (true) {
+			addMovingComponents();
+			checkMovingComponents();
+			if(postGame)
+				checkPlayer();
+			try {
+				Thread.sleep(40);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} else {
-			if (obVelocity > 0 && cars.size() > 0) {
-				Car leadingCar = cars.get(0);
-				if (leadingCar.getX() > 780) {
-					cars.remove(leadingCar);
-					FroggerGame.fs.remove(leadingCar);
-				}
-			}
+		}
+		
+	}
+	
+	public void addMovingComponents() {
+		int startingPos = (obVelocity > 0) ? 0 : 800;	
+		String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
+		if(mcList.size() == 0){
+			MovingComponent m = (terrain==ROAD) ? new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc) : new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc);
+			mcList.add(m);
+			FroggerGame.fs.addObject(m);
+			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
+			m.play();
+		}
+		MovingComponent trailing = mcList.get(mcList.size() - 1);
+		//Car frontCar = cars.get(0);	
+		if((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)){
+			MovingComponent m = (terrain==ROAD) ? new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc) : new Log(startingPos, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + imgSrc);
+			mcList.add(m);
+			FroggerGame.fs.addObject(m);
+			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
+			m.play();
 		}
 
 	}
-
-	public void addCars() {
-		if (cars.size() == 0) {
-			int startingPos = (obVelocity > 0) ? 0 : 800;
-			String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-			Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,
-					"resources/frogger/" + carSrc);
-			cars.add(c1);
-			FroggerGame.fs.addObject(c1);
-			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-			c1.play();
+	
+	public void checkMovingComponents() {
+		MovingComponent leading = mcList.get(0);
+		if((leading.getX() < -0 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
+			mcList.remove(leading);
+			FroggerGame.fs.remove(leading);
 		}
-		Car backCar = cars.get(cars.size() - 1);
-		Car frontCar = cars.get(0);
-		if (obVelocity > 0) {
-			if (/* frontCar.getX()<700 && */ backCar.getX() > 100 && Math.random() < .1) {
-				int startingPos = 0;
-				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-				Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,
-						"resources/frogger/" + carSrc);
-				cars.add(c1);
-				FroggerGame.fs.addObject(c1);
-				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-				c1.play();
-			}
-		} else {
-			if (/* frontCar.getX()>100 && */ backCar.getX() < 700 && Math.random() < .1) {
-				int startingPos = 800;
-				String carSrc = carSrcArr[((int) (Math.random() * carSrcArr.length))];
-				Car c1 = new Car(startingPos, getY() + 10, 50, 25, this.obVelocity,
-						"resources/frogger/" + carSrc);
-				cars.add(c1);
-				FroggerGame.fs.addObject(c1);
-				FroggerGame.fs.moveToFront(FroggerGame.fs.player);
-				c1.play();
-			}
-		}
-
 	}
 
 	public void checkPlayer() {
 		if(terrain==ROAD){
-			for(int i=0;i<cars.size();i++){
-				if(cars.get(i).isTouchingPlayer(FroggerGame.fs.player)){
-					for(int j=i;j<cars.size();j++){
-						cars.get(j).setRunning(false);
+			for(int i=0;i<mcList.size();i++){
+				Car c = (Car) mcList.get(i);
+				if(c.isTouchingPlayer(FroggerGame.fs.player)){
+					for(int j=i;j<mcList.size();j++){
+						mcList.get(j).setRunning(false);
 					}
 					safeRoad = false;
-					FroggerGame.fs.gameOver();
+					FroggerGame.fs.gameOver("You were run over by a car!!");
 					break;
 				}
 			}
 		}
 		if(terrain==WATER){
-			for(int i=0;i<logs.size();i++){
-				if(logs.get(i).isTouchingPlayer(FroggerGame.fs.player)){
-					FroggerGame.fs.player.ridePlatform(logs.get(i));
-					// hans, make it game over when the player is out of the map x<0 and x>800
-					// also make the player die when they step off the log
+			for(int i=0;i<mcList.size();i++){
+				Log l = (Log) mcList.get(i);
+				if(l.isTouchingPlayer(FroggerGame.fs.player)){
+					FroggerGame.fs.player.ridePlatform(l);
 					break;
 				}
 			}
