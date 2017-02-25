@@ -10,12 +10,14 @@ public interface PlayerInterface extends Visible {
 	
 	boolean outOfBounds(int dir);
 	
-	void ridePlatform(MovingComponent p);
-	
-	void die();
+	void ridePlatform(CollisionInterface p);
 
 	void setVx(double vx);
 
 	boolean isOnPlatform();
+
+	void die();
+	
+	public void setTerrain(Terrain t);
 
 }

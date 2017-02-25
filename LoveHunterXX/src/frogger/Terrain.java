@@ -15,7 +15,7 @@ import gui.components.Visible;
 
 public class Terrain extends Component implements Runnable {
 
-	private List<MovingComponent> mcList;
+	private List<CollisionInterface> mcList;
 	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
 	//private List<AnimatedPlatform> apf;
 	private int terrain;
@@ -36,7 +36,7 @@ public class Terrain extends Component implements Runnable {
 		super(x, y, w, h);
 		this.terrain = terrain;
 		this.obVelocity = obVelocity;
-		mcList = Collections.synchronizedList(new ArrayList<MovingComponent>());
+		mcList = Collections.synchronizedList(new ArrayList<CollisionInterface>());
 		if(terrain == ROAD)
 			safeRoad = true;
 //		switch(this.terrain){
@@ -121,16 +121,16 @@ public class Terrain extends Component implements Runnable {
 		int startingPos = (obVelocity > 0) ? 0 : 800;	
 		//String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
 		if(mcList.size() == 0){
-			MovingComponent m = determineMovingComponent(startingPos);
+			CollisionInterface m = determineMovingComponent(startingPos);
 			mcList.add(m);
 			FroggerGame.fs.addObject(m);
 			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 			m.play();
 		}
-		MovingComponent trailing = mcList.get(mcList.size() - 1);
+		CollisionInterface trailing = mcList.get(mcList.size() - 1);
 		//Car frontCar = cars.get(0);	
 		if((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)){
-			MovingComponent m = determineMovingComponent(startingPos);
+			CollisionInterface m = determineMovingComponent(startingPos);
 			mcList.add(m);
 			FroggerGame.fs.addObject(m);
 			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
@@ -139,12 +139,12 @@ public class Terrain extends Component implements Runnable {
 
 	}
 	
-	public MovingComponent determineMovingComponent(int s){
+	public CollisionInterface determineMovingComponent(int s){
 		if(terrain == ROAD)
 			return new Car(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
 			if(genTurtles){
-				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity,500);
+				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity,150*(obVelocity/2));
 			}
 			else
 				return new Log(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
@@ -153,50 +153,33 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public void checkMovingComponents() {
-		MovingComponent leading = mcList.get(0);
+		CollisionInterface leading = mcList.get(0);
 		if((leading.getX() < -0 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
 			mcList.remove(leading);
 			FroggerGame.fs.remove(leading);
 		}
 	}
 
-	public void checkPlayer() {
-		if(terrain==ROAD){
-			for(int i=0;i<mcList.size();i++){
-				Car c = (Car) mcList.get(i);
-				if(c.isTouchingPlayer(FroggerGame.fs.player)){
+	public void checkPlayer() {	
+		for(int i=0;i<mcList.size();i++){
+			CollisionInterface p = mcList.get(i);
+			if(p.isTouchingPlayer(FroggerGame.fs.player)){
+				if(p instanceof Car){
 					for(int j=i;j<mcList.size();j++){
-						mcList.get(j).setRunning(false);
+						Car c2 = (Car) mcList.get(j);
+						c2.setRunning(false);
 					}
 					safeRoad = false;
 					FroggerGame.fs.gameOver("You were run over by a car!!");
-					break;
-				}
-			}
-		}
-		if(terrain==WATER){
-			for(int i=0;i<mcList.size();i++){
-				MovingComponent p;
-				if(genTurtles){
-					p = mcList.get(i);
-					if(((Turtle) p).isTouchingPlayer(FroggerGame.fs.player)){
-						FroggerGame.fs.player.ridePlatform(p);
-						break;
-					}
+					FroggerGame.fs.player.die();
 				}
 				else{
-					p = mcList.get(i);
-					if(((Log) p).isTouchingPlayer(FroggerGame.fs.player)){
+					if(!FroggerGame.fs.player.isOnPlatform())
 						FroggerGame.fs.player.ridePlatform(p);
-						break;
-					}
 				}
-				
-				
-			}
-			
+				break;
+			}	
 		}
-
 	}
 
 	public int getTerrain() {

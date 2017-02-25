@@ -101,10 +101,6 @@ public class MovingComponent extends Component implements Runnable {
 	}
 
 	public void checkBehaviors() {
-		if(getY()>300){
-			setY(300);
-			setVy(-vy);
-		}
 		
 	}
 
@@ -123,8 +119,7 @@ public class MovingComponent extends Component implements Runnable {
 	}
 
 	private void drawImage(Graphics2D g) {
-		g.setColor(Color.red);
-		g.fillOval(0,0,getWidth(),getHeight());
+
 	}
 	
 	public void play(){

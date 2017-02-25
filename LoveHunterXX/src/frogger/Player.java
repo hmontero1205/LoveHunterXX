@@ -23,7 +23,9 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private String[] pModels = { "resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png",
 			"resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png" };
 	private boolean onPlatform;
-	private MovingComponent currentPlatform;
+	private CollisionInterface currentPlatform;
+	private Terrain currentTerrain;
+	private boolean deathGraphic;
 
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -49,7 +51,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 		}
 		if (pModels != null) {
 			g = clear();
-			ImageIcon icon = new ImageIcon(pModels[dir]);
+			ImageIcon icon = (deathGraphic) ? new ImageIcon("resources/frogger/player/dead.png") : new ImageIcon(pModels[dir]);
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g.drawImage(icon.getImage(), 0, 0, getWidth() - 3, getHeight() - 3, 0, 0, icon.getIconWidth(),
 					icon.getIconHeight(), null);
@@ -105,7 +107,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 
 	@Override
-	public void ridePlatform(MovingComponent p) {
+	public void ridePlatform(CollisionInterface p) {
 		if(p instanceof Turtle){
 			if(((Turtle) p).isTouchable()){
 				this.onPlatform = true;
@@ -142,13 +144,18 @@ public class Player extends MovingComponent implements PlayerInterface {
 				e.printStackTrace();
 			}
 			
-			if((getX()>800 || getX() < 0) && !FroggerGame.fs.gameOver){
+			if((getX()>780 || getX() < 10)){
 				setRunning(false);
+				currentTerrain.setCheckPlayer(false);
+				currentTerrain.setPostGame(false);
+				setVx(0);
 				FroggerGame.fs.gameOver("You were swept away by the current!");
+				die();
 			}
 			
 			if(currentPlatform instanceof Turtle && !((Turtle) currentPlatform).isTouchable() && !FroggerGame.fs.gameOver){
 				FroggerGame.fs.gameOver("The turtle betrayed you.");
+				die();
 			}
 		}
 
@@ -160,13 +167,19 @@ public class Player extends MovingComponent implements PlayerInterface {
 			go.start();
 		}
 	}
+	
 	@Override
 	public void die() {
-		// change image to a bloody mess
+		this.deathGraphic = true;
+		update();
 	}
 	
 	public boolean isOnPlatform(){
 		return onPlatform;
+	}
+	
+	public void setTerrain(Terrain t){
+		this.currentTerrain = t;
 	}
 
 
