@@ -8,6 +8,7 @@ import gui.components.MovingComponent;
 
 public class Snake extends MovingComponent{
 	public final static int DISTANCE = 20;
+	public SnakeHead cart;
 	private int REFRESH_R = 150;
 	private int posX;
 	private int posY;
@@ -22,11 +23,11 @@ public class Snake extends MovingComponent{
 		// these two should go on snake head class.
 		this.posX = 0;
 		this.posY = 0;
-		
+		cart = new SnakeHead(30,60,30,30, "resources/cartRight.png");
 		
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
-		presentList.add(new SnakeHead(30,60,30,30, "resources/cart.png"));
+		presentList.add(cart);
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
 		presentList.add(new Present(0,0,30,30,"resources/present.png"));
@@ -60,13 +61,15 @@ public class Snake extends MovingComponent{
 		// this moves the head.
 		switch(this.direction){
 		case left:
-			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);			
+			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);
+			cart.setSprite("resources/cartLeft.png");
 			break;
 		case up:
 			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
 			break;
 		case right:
 			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
+			cart.setSprite("resources/cartRight.png");
 			break;
 		case down:
 			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
