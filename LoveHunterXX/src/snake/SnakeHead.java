@@ -9,7 +9,7 @@ public class SnakeHead extends Interactable {
 	}
 
 	public void setSprite(String str){
-		this.sprite = str;
+		loadImages(str,30,30);
 		System.out.println("I was called");
 	}
 }
