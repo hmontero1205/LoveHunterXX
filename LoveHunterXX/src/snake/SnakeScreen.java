@@ -29,7 +29,6 @@ public class SnakeScreen extends Screen implements KeyListener {
 	
 	public SnakeScreen(int width, int height) {
 		super(width, height);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 			if(direction != Snake.Direction.up && direction != Snake.Direction.down){
 				snake.moveCoors(Snake.Direction.down);
 			}
-			break;//
+			break;
 		}
 	}
 	
