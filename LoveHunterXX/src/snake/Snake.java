@@ -133,7 +133,7 @@ public class Snake extends MovingComponent{
 	
 	public boolean checkLose(){
 		//not sure why it isn't checking for collision with self. I think it's something with looping through an arraylist...
-		for(int i = 1; i>presentList.size(); i++){
+		for(int i = 1; i<presentList.size(); i++){
 			if (cart.isCollided(presentList.get(i))){
 				distance = 0;
 				refresh_r = 999999;
