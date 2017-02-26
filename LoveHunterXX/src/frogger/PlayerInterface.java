@@ -20,4 +20,6 @@ public interface PlayerInterface extends Visible {
 	
 	public void setTerrain(Terrain t);
 
+	void setRunning(boolean b);
+
 }

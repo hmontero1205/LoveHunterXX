@@ -14,7 +14,6 @@ import gui.components.MovingComponent;
 import gui.components.Visible;
 
 public class Terrain extends Component implements Runnable {
-
 	private List<CollisionInterface> mcList;
 	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
 	//private List<AnimatedPlatform> apf;
@@ -24,13 +23,14 @@ public class Terrain extends Component implements Runnable {
 	private boolean superCreated;
 	private int obVelocity;
 	private boolean checkPlayer;
-	private boolean safeRoad;
+	private boolean genCars;
 	private final int GRASS = 0;
 	private final int ROAD = 1;
 	private final int WATER = 2;
 	private boolean postGame;
 	private int numTurtles;
 	private boolean genTurtles;
+	private boolean isRunning;
 
 	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity, boolean genTurtles) {
 		super(x, y, w, h);
@@ -38,11 +38,11 @@ public class Terrain extends Component implements Runnable {
 		this.obVelocity = obVelocity;
 		mcList = Collections.synchronizedList(new ArrayList<CollisionInterface>());
 		if(terrain == ROAD)
-			safeRoad = true;
+			genCars = true;
 //		switch(this.terrain){
 //			case ROAD:
 //				cars = Collections.synchronizedList(new ArrayList<Car>());
-//				safeRoad = true;
+//				genCars = true;
 //				break;
 //			case WATER:
 //				mcList = Collections.synchronizedList(new ArrayList<Log>());
@@ -52,6 +52,7 @@ public class Terrain extends Component implements Runnable {
 		this.genTurtles = genTurtles;
 		postGame = false;
 		superCreated = true;
+		isRunning = false;
 		update();
 	}
 	
@@ -76,6 +77,7 @@ public class Terrain extends Component implements Runnable {
 
 	@Override
 	public void run() {
+		isRunning = true;
 		switch(terrain){
 			case ROAD:
 				runRoad();
@@ -88,8 +90,9 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public void runRoad(){
-		while (safeRoad) {
-			addMovingComponents();
+		while (isRunning) {
+			if(genCars)
+				addMovingComponents();
 			checkMovingComponents();
 			if(checkPlayer)
 				checkPlayer();
@@ -103,7 +106,7 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public void runWater() {
-		while (true) {
+		while (isRunning) {
 			addMovingComponents();
 			checkMovingComponents();
 			if(postGame)
@@ -118,6 +121,7 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public void addMovingComponents() {
+		
 		int startingPos = (obVelocity > 0) ? 0 : 800;	
 		//String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
 		if(mcList.size() == 0){
@@ -128,6 +132,9 @@ public class Terrain extends Component implements Runnable {
 			m.play();
 		}
 		CollisionInterface trailing = mcList.get(mcList.size() - 1);
+		if(obVelocity>0){
+			System.out.println("X:"+trailing.getX()+" Velocity:"+obVelocity);
+		}
 		//Car frontCar = cars.get(0);	
 		if((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)){
 			CollisionInterface m = determineMovingComponent(startingPos);
@@ -135,8 +142,8 @@ public class Terrain extends Component implements Runnable {
 			FroggerGame.fs.addObject(m);
 			FroggerGame.fs.moveToFront(FroggerGame.fs.player);
 			m.play();
+			
 		}
-
 	}
 	
 	public CollisionInterface determineMovingComponent(int s){
@@ -144,7 +151,7 @@ public class Terrain extends Component implements Runnable {
 			return new Car(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
 			if(genTurtles){
-				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, 4000/obVelocity, 1000/obVelocity,150*(obVelocity/2));
+				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, (int) (1500*Math.random()), (int) (800*Math.random()),(int) (1000*(Math.random())));
 			}
 			else
 				return new Log(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
@@ -153,10 +160,12 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public void checkMovingComponents() {
-		CollisionInterface leading = mcList.get(0);
-		if((leading.getX() < -0 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
-			mcList.remove(leading);
-			FroggerGame.fs.remove(leading);
+		if(mcList.size()>0){
+			CollisionInterface leading = mcList.get(0);
+			if((leading.getX() < 0 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
+				mcList.remove(leading);
+				FroggerGame.fs.remove(leading);
+			}
 		}
 	}
 
@@ -165,13 +174,19 @@ public class Terrain extends Component implements Runnable {
 			CollisionInterface p = mcList.get(i);
 			if(p.isTouchingPlayer(FroggerGame.fs.player)){
 				if(p instanceof Car){
+					genCars = false;
+					FroggerGame.fs.gameOver("You were run over by a car!!");
+					FroggerGame.fs.player.die();
+					try {
+						Thread.sleep(40);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					for(int j=i;j<mcList.size();j++){
 						Car c2 = (Car) mcList.get(j);
 						c2.setRunning(false);
 					}
-					safeRoad = false;
-					FroggerGame.fs.gameOver("You were run over by a car!!");
-					FroggerGame.fs.player.die();
 				}
 				else{
 					if(!FroggerGame.fs.player.isOnPlatform())
@@ -195,5 +210,19 @@ public class Terrain extends Component implements Runnable {
 	public void setPostGame(boolean b){
 		this.postGame = true;
 	}
+	
+	public boolean isRunning() {
+		return isRunning;
+	}
 
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
+	public List<CollisionInterface> getMcList(){
+		return this.mcList;
+	}
+
+	
 }

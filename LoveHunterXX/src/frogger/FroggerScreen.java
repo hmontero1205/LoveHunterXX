@@ -4,6 +4,7 @@
  */
 package frogger;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -12,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gui.Screen;
+import gui.components.Action;
+import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.MovingComponent;
 import gui.components.Visible;
 
-public class FroggerScreen extends Screen implements KeyListener, Runnable {
+public class FroggerScreen extends Screen implements KeyListener,MouseListener, Runnable {
 
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
@@ -29,47 +32,92 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 	public final static int ROAD = 1;
 	public final static int WATER = 2;
 	public ArrayList<Terrain> tList;
+//	public Terrain[][] levels = {
+//			{new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, WATER, 6,true),new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD,-5,false),new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false),new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false),new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false),new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4,false),new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,true),new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false),new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5,false),new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false)}
+//	};
 	public static PlayerInterface player;
 	public static Terrain currentRow;
-	public static boolean gameOver = false;
+	public static boolean gameOver;
+	private Button b;
+	private boolean superCreated;
+	private boolean playerLocked;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
-		Thread fGame = new Thread(this);
-		fGame.start();
-		currentRow = tList.get(tList.size()-1);
+		superCreated = true;
+		startGame();
 	}
 
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
-		tList = new ArrayList<Terrain>();
-		tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, ROAD, -9,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 7,true));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false));
-		tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
-		viewObjects.addAll(tList);
-
-		player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
-		viewObjects.add(player);
-//		
-//		Turtle turtle = new Turtle(0 - 50, WINDOWBARHEIGHT + 25, 50, 25, 1, 1000, 1000, 1000);
-//		viewObjects.add(turtle);
-//		turtle.play();
-//		
-//		turtle = new Turtle(800, WINDOWBARHEIGHT + 25, 50, 25, -1, 1000, 1000, 500);
-//		viewObjects.add(turtle);
-//		turtle.play();
+		if(superCreated){
+			endThreads(viewObjects);
+			viewObjects.clear();
+			tList = new ArrayList<Terrain>();
+//			for(Terrain t:levels[0]){
+//				tList.add(t);
+//			}			
+			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, WATER, 6,true));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD,-5,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,true));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5,false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false));
+			viewObjects.addAll(tList);
+	
+			player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
+			viewObjects.add(player);
+			
+			b = new Button(695, 561,100,35, "Restart", Color.green, new Action(){
+	
+				@Override
+				public void act() {
+					startGame();	
+				};
+			
+			
+			});
+			viewObjects.add(b);
+	//		
+	//		Turtle turtle = new Turtle(0 - 50, WINDOWBARHEIGHT + 25, 50, 25, 1, 1000, 1000, 1000);
+	//		viewObjects.add(turtle);
+	//		turtle.play();
+	//		
+	//		turtle = new Turtle(800, WINDOWBARHEIGHT + 25, 50, 25, -1, 1000, 1000, 500);
+	//		viewObjects.add(turtle);
+	//		turtle.play();
 		}
+	}
+
+	public void endThreads(List<Visible> viewObjects) {
+		if(tList!=null){
+			for(int i=0;i<tList.size();i++){
+				//System.out.println("Terrain length: "+tList.size());
+				Terrain t = tList.get(i);
+				t.setRunning(false);
+				List<CollisionInterface> tObList = t.getMcList();
+				//System.out.println("Car length: "+tObList.size());
+				if(tObList.size()>0){
+					for(int j=0;j<tObList.size();j++){
+						CollisionInterface c = tObList.get(j);
+						c.setRunning(false);
+					}
+				}
+			}
+		}
+		if(player!=null){
+			player.setRunning(false);
+		}
+		
+	}
 
 	public PlayerInterface getPlayer(int x, int y, int w, int h) {
 		return new Player(x, y, w, h);
@@ -80,8 +128,16 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 		for (int i = 0; i < tList.size(); i++) {
 			if (tList.get(i).getTerrain() == ROAD || tList.get(i).getTerrain() == WATER ) {
 				tList.get(i).startThread();
+				System.out.println("Terrain"+i+" started");
 			}
 		}
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		playerLocked = false;
 		
 	}
 
@@ -109,9 +165,12 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 		return this;
 	}
 
+	public MouseListener getMouseListener(){
+		return this;
+	}
 	@Override
 	public void keyReleased(KeyEvent k) {
-		if(!gameOver){
+		if(!gameOver && !playerLocked){
 			int keyCode = k.getKeyCode();
 			if (keyCode >= 37 && keyCode <= 40) {
 				player.move(keyCode);
@@ -138,6 +197,48 @@ public class FroggerScreen extends Screen implements KeyListener, Runnable {
 			System.out.println("GAME OVER!\n"+m);
 			currentRow.setCheckPlayer(false);
 		}
+		
+	}
+	
+	public void startGame(){
+		System.out.println("Game started");
+		initObjects(getViewObjects());
+		Thread fGame = new Thread(this);
+		fGame.start();
+		currentRow = tList.get(tList.size()-1);
+		gameOver = false;
+		playerLocked = true;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(b.isHovered(e.getX(), e.getY())){
+			b.act();
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

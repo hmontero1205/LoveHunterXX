@@ -72,8 +72,7 @@ public abstract class Screen {
 		return null;
 	}
 
-	public void addObject(Visible v) {
-			
+	public void addObject(Visible v) {	
 		viewObjects.add(v);
 	}
 
@@ -93,6 +92,10 @@ public abstract class Screen {
 			viewObjects.remove(v);
 			viewObjects.add(v);
 		}
+	}
+	
+	public List<Visible> getViewObjects(){
+		return viewObjects;
 	}
 
 	public MouseWheelListener getMouseWheelListener() {
