@@ -13,7 +13,7 @@ public class Snake extends MovingComponent{
 	private int posX;
 	private int posY;
 	private Direction direction;
-	private ArrayList<Interactable> presentList;
+	public ArrayList<Interactable> presentList;
 	public enum Direction{
 		left, up, right, down
 	}
@@ -142,7 +142,7 @@ public class Snake extends MovingComponent{
 			}
 		}
 		
-		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 10 || cart.getY() > 435){
+		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 10 || cart.getY() > 440){
 			distance = 0;
 			refresh_r = 999999;
 			System.out.println("Game Over. You ran into a wall.");

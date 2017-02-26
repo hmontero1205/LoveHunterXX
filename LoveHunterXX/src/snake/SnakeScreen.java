@@ -11,6 +11,7 @@ import java.util.List;
 
 import gui.Screen;
 import gui.components.Graphic;
+import gui.components.TextArea;
 import gui.components.Visible;
 
 public class SnakeScreen extends Screen implements KeyListener {
@@ -82,11 +83,18 @@ public class SnakeScreen extends Screen implements KeyListener {
 	@Override
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
-
-		Graphic background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
 		snake = new Snake(0, 0, 100, 100);
+		Graphic background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
+		Graphic sbBack = new Graphic(465,40,320,200,"resources/snakebackground.png");
+		TextArea line = new TextArea(525,50,300,200, "You have collected:");
+		TextArea scoreCount = new TextArea(600,75,250,200,"");
+		scoreCount.setSize(46);
+		scoreCount.setText("" + (snake.presentList.size()-1));
 
 		view.add(background);
+		view.add(sbBack);
+		view.add(line);
+		view.add(scoreCount);
 		for(Interactable i: snake.getItems()){ // add each snake body part.
 			view.add(i);
 		}
