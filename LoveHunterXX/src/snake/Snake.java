@@ -3,8 +3,10 @@ package snake;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.components.MovingComponent;
+import gui.components.Visible;
 
 public class Snake extends MovingComponent{
 	public static int distance = 20;
@@ -28,13 +30,13 @@ public class Snake extends MovingComponent{
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		presentList.add(cart);
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
-		presentList.add(new Present(0,0,30,30,"resources/present.png"));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
 	}
 
 	public void addPresent(Present p){ // adding body parts.
@@ -148,6 +150,18 @@ public class Snake extends MovingComponent{
 			System.out.println("Game Over. You ran into a wall.");
 			return true;
 		}
+		
+		return false;
+	}
+	
+	
+	public boolean isGenCollision(List<Visible> view){
+		for(int i = 0; i < view.size(); ++i){
+			if(view.get(i) instanceof Present){
+				return true;
+			}
+		}
+		
 		
 		return false;
 	}

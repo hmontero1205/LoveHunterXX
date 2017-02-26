@@ -6,6 +6,11 @@ import gui.components.Visible;
 
 public class Present extends Interactable implements PresentInterface, Generatable{
 	
+	private int reward;
+	private String name;
+	private boolean collectable;
+	private boolean collected;
+	
 	
 	
 	public Present(int x, int y, int width, int height, String path) {
@@ -13,10 +18,32 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated constructor stub
 	}
 	
-	private int reward;
-	private String name;
+	public Present(int x, int y, int width, int height, String path, boolean collectable, boolean collected) {
+		super(x, y, width, height, path);
+		this.collectable = collectable;
+		this.collected = collected;
+	}
 	
-	
+	@Override
+	public void setCollectable(boolean b) {
+		// TODO Auto-generated method stub
+		collectable = b;
+	}
+	@Override
+	public void setCollected(boolean b) {
+		// TODO Auto-generated method stub
+		collected = b;
+	}
+	@Override
+	public boolean isCollectable() {
+		// TODO Auto-generated method stub
+		return collectable;
+	}
+	@Override
+	public boolean isCollected() {
+		// TODO Auto-generated method stub
+		return collected;
+	}
 	@Override
 	public void setReward(int r) {
 		// TODO Auto-generated method stub
@@ -57,7 +84,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	}
 	@Override
 	public boolean isEmptyX(int x, List<Visible> view) {
-		// Usage of lambda function would've been better.
+		// Usage of lambdas would've been better.
 		for(int i = 0; i < view.size(); ++i){
 			if(view.get(i).getX() == x) return false;
 		}
@@ -76,7 +103,8 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated method stub
 		int x;
 		do{
-			x = getRandBetween(30, 440);
+			//x = getRandBetween(30, 440);
+			x = 30 + (30 * getRandBetween(0, 13));
 		}while(!isEmptyX(x, view));
 		System.out.println("x: " + x);
 		return x;
@@ -86,9 +114,10 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated method stub
 		int y;
 		do{
-			y = getRandBetween(60, 460);
+			y = 60 + (30 * getRandBetween(0, 13));
 		}while(!isEmptyX(y, view));
 		System.out.print("y: " + y);
 		return y;
 	}
+	
 }

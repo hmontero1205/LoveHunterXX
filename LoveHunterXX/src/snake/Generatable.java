@@ -13,5 +13,9 @@ public interface Generatable {
 	public boolean isEmptyY(int y, List<Visible> view);
 	public int getNewX(List<Visible> view);
 	public int getNewY(List<Visible> view);
+	public void setCollectable(boolean b);
+	public void setCollected(boolean b);
+	public boolean isCollectable();
+	public boolean isCollected();
 
 }

@@ -40,4 +40,10 @@ public abstract class Interactable extends Graphic{
 	public int getRandBetween(int min, int max){
 		return (min + (int)(Math.random() * ((max - min) + 1)));
 	}
+
+	
+	
+	
+	
+	
 }
