@@ -1,6 +1,6 @@
 package snake;
 
-public interface PresentInterface {
+public interface PresentInterface{
 	
 	public void setReward(int r);
 	public int getReward();
