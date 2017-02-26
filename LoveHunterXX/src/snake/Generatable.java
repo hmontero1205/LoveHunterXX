@@ -1,7 +1,7 @@
 package snake;
 
 public interface Generatable {
-	public void generate();
-	
+	public void generateNew();
+	public void destroy();
 
 }
