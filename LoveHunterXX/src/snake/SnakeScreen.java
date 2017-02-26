@@ -35,24 +35,26 @@ public class SnakeScreen extends Screen implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		Snake.Direction direction = snake.getDirection();
+		
 		switch(keyCode){
 		case LEFTARROWKEY:
-			if(snake.getDirection() != Snake.Direction.right){
+			if(direction != Snake.Direction.right && direction != Snake.Direction.left){
 				snake.moveCoors(Snake.Direction.left);
 			}
 			break;
 		case UPARROWKEY:
-			if(snake.getDirection() != Snake.Direction.down){
+			if(direction != Snake.Direction.down && direction != Snake.Direction.up){
 				snake.moveCoors(Snake.Direction.up);
 			}
 			break;
 		case RIGHTARROWKEY:
-			if(snake.getDirection() != Snake.Direction.left){
+			if(direction != Snake.Direction.left && direction != Snake.Direction.right){
 				snake.moveCoors(Snake.Direction.right);
 			}
 			break;
 		case DOWNARROWKEY:
-			if(snake.getDirection() != Snake.Direction.up){
+			if(direction != Snake.Direction.up && direction != Snake.Direction.down){
 				snake.moveCoors(Snake.Direction.down);
 			}
 			break;
@@ -83,7 +85,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 		snake = new Snake(0, 0, 100, 100);
 
 		view.add(background);
-		for(Interactable i: snake.getItems()){
+		for(Interactable i: snake.getItems()){ // add each snake body part.
 			view.add(i);
 		}
 		
