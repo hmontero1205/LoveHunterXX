@@ -26,6 +26,8 @@ public class SnakeScreen extends Screen implements KeyListener {
 	public final static int DOWN = 3;*/
 
 	public Snake snake;
+	private ArrayList<Generatable> gens; // generated objects.
+	
 	
 	public SnakeScreen(int width, int height) {
 		super(width, height);
@@ -75,6 +77,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+
 
 	@Override
 	public void initObjects(List<Visible> view) {
