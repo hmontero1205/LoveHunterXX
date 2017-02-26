@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import gui.components.MovingComponent;
 
 public class Snake extends MovingComponent{
-	public final static int DISTANCE = 20;
+	public static int distance = 20;
 	public SnakeHead cart;
-	private int REFRESH_R = 150;
+	private int refresh_r = 150;
 	private int posX;
 	private int posY;
 	private Direction direction;
@@ -61,20 +61,21 @@ public class Snake extends MovingComponent{
 		// this moves the head.
 		switch(this.direction){
 		case left:
-			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);
+			presentList.get(0).setX(presentList.get(0).getX() - distance);
 			cart.setSprite("resources/cartLeft.png");
 			break;
 		case up:
-			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
+			presentList.get(0).setY(presentList.get(0).getY() - distance);
 			break;
 		case right:
-			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
+			presentList.get(0).setX(presentList.get(0).getX() + distance);
 			cart.setSprite("resources/cartRight.png");
 			break;
 		case down:
-			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
+			presentList.get(0).setY(presentList.get(0).getY() + distance);
 			break;
 		}
+		checkLose();
 	}
 	
 	public double getPosx() {
@@ -120,7 +121,7 @@ public class Snake extends MovingComponent{
 		setMoveTime(System.currentTimeMillis());
 		while(isRunning()){
 			try {
-				Thread.sleep(REFRESH_R); // rate changed.
+				Thread.sleep(refresh_r); // rate changed.
 				//checkCollision here
 				update();
 			} catch (InterruptedException e) {
@@ -128,8 +129,27 @@ public class Snake extends MovingComponent{
 				e.printStackTrace();
 			}
 		}
-
 	}
 	
+	public boolean checkLose(){
+		//not sure why it isn't checking for collision with self. I think it's something with looping through an arraylist...
+		for(int i = 1; i>presentList.size(); i++){
+			if (cart.isCollided(presentList.get(i))){
+				distance = 0;
+				refresh_r = 999999;
+				System.out.println("Game Over. You ran into yourself.");
+				return true;
+			}
+		}
+		
+		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 10 || cart.getY() > 435){
+			distance = 0;
+			refresh_r = 999999;
+			System.out.println("Game Over. You ran into a wall.");
+			return true;
+		}
+		
+		return false;
+	}
 	
 }
