@@ -57,7 +57,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 			if(direction != Snake.Direction.up && direction != Snake.Direction.down){
 				snake.moveCoors(Snake.Direction.down);
 			}
-			break;
+			break;//
 		}
 	}
 	
