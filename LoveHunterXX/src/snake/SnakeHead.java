@@ -11,12 +11,4 @@ public class SnakeHead extends Interactable {
 	public void setSprite(String str){
 		loadImages(str,30,30);
 	}
-
-	public boolean isCollided(Interactable interactable) {
-		if (this.getX() == interactable.getX() && this.getY() == interactable.getY()){
-			return true;
-		}else{
-			return false;
-		}
-	}
 }

@@ -8,6 +8,10 @@ import gui.components.Visible;
 public interface Generatable {
 	public void generateNew(List<Visible> view, int presentLen);
 	public void destroy();
-	public Generatable getNewObject();
+	public Generatable getNewObject(int x, int y);
+	public boolean isEmptyX(int x, List<Visible> view);
+	public boolean isEmptyY(int y, List<Visible> view);
+	public int getNewX(List<Visible> view);
+	public int getNewY(List<Visible> view);
 
 }

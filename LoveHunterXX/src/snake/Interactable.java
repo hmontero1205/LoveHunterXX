@@ -34,4 +34,10 @@ public abstract class Interactable extends Graphic{
 	public void setY(int y){
 		this.yPos = y;
 	}
+	public boolean isCollided(Interactable interactable) {
+		return (this.getX() == interactable.getX() && this.getY() == interactable.getY());
+	}
+	public int getRandBetween(int min, int max){
+		return (min + (int)(Math.random() * ((max - min) + 1)));
+	}
 }
