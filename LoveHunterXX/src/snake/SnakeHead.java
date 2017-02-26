@@ -1,7 +1,5 @@
 package snake;
 
-import snake.Snake.Direction;
-
 public class SnakeHead extends Interactable {
 	
 	private String sprite;
