@@ -78,6 +78,7 @@ public class Snake extends MovingComponent{
 			break;
 		}
 		checkLose();
+		checkGenCollision();
 	}
 	
 	public double getPosx() {
@@ -139,7 +140,7 @@ public class Snake extends MovingComponent{
 			if (cart.isCollided(presentList.get(i))){
 				refresh_r = 999999;
 				System.out.println("Game Over. You ran into yourself.");
-				return true;
+				return true;                   
 			}
 		}
 		
@@ -155,8 +156,11 @@ public class Snake extends MovingComponent{
 	
 	public void checkGenCollision(){
 		for(int i = 0; i < SnakeScreen.gens.size(); ++i){
-			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i)) && SnakeScreen.gens.get(i).isCollectable()){
-				
+			System.out.println("cart: " + cart.getX() + ", " + cart.getY());
+			Present p = (Present) SnakeScreen.gens.get(i);
+			System.out.println("presnet: " + p.getX() + ", " + p.getY());
+			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
+				System.out.println("Present has been collided.");
 			}
 		}
 		
