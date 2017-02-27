@@ -132,9 +132,6 @@ public class Terrain extends Component implements Runnable {
 			m.play();
 		}
 		CollisionInterface trailing = mcList.get(mcList.size() - 1);
-		if(obVelocity>0){
-			System.out.println("X:"+trailing.getX()+" Velocity:"+obVelocity);
-		}
 		//Car frontCar = cars.get(0);	
 		if((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)){
 			CollisionInterface m = determineMovingComponent(startingPos);
