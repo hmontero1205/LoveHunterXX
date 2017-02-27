@@ -5,10 +5,10 @@ import java.util.List;
 
 import gui.components.Visible;
 
-public interface Generatable {
-	public void generateNew(List<Visible> view, List<Generatable> presents, int presentLen);
+public interface GeneratableInterface {
+	public void generateNew(List<Visible> view, List<GeneratableInterface> presents, int presentLen);
 	public void destroy();
-	public Generatable getNewObject(int x, int y);
+	public GeneratableInterface getNewObject(int x, int y);
 	public boolean isEmptyX(int x, List<Visible> view);
 	public boolean isEmptyY(int y, List<Visible> view);
 	public int getNewX(List<Visible> view);

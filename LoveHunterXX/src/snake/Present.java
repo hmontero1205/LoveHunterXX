@@ -4,7 +4,7 @@ import java.util.List;
 
 import gui.components.Visible;
 
-public class Present extends Interactable implements PresentInterface, Generatable{
+public class Present extends Interactable implements PresentInterface, GeneratableInterface{
 	
 	private int reward;
 	private String name;
@@ -66,7 +66,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		name = s;
 	}
 	@Override
-	public void generateNew(List<Visible> view, List<Generatable> presents, int presentLen) {
+	public void generateNew(List<Visible> view, List<GeneratableInterface> presents, int presentLen) {
 		// TODO Auto-generated method stub
 		
 		presents.add(getNewObject(getNewX(view),getNewY(view)));
@@ -74,7 +74,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		
 	}
 	
-	public Generatable getNewObject(int x, int y){
+	public GeneratableInterface getNewObject(int x, int y){
 		return new Present(x ,y, 30,30, "resources/present.png");
 	}
 	@Override
