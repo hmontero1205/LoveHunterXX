@@ -153,14 +153,13 @@ public class Snake extends MovingComponent{
 	}
 	
 	
-	public boolean isGenCollision(List<Visible> view){
-		for(int i = 0; i < view.size(); ++i){
-			if(view.get(i) instanceof Present){
-				return true;
+	public void checkGenCollision(){
+		for(int i = 0; i < SnakeScreen.gens.size(); ++i){
+			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i)) && SnakeScreen.gens.get(i).isCollectable()){
+				
 			}
 		}
 		
-		return false;
 	}
 	
 }

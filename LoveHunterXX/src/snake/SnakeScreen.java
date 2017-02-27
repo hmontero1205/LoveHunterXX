@@ -27,7 +27,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	public final static int DOWN = 3;*/
 
 	public Snake snake;
-	private ArrayList<Generatable> gens; // generated objects.
+	public static List<Generatable> gens; // generated objects.
 	
 	
 	public SnakeScreen(int width, int height) {
