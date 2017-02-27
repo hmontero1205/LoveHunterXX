@@ -70,7 +70,7 @@ public class Player extends LivingEntity {
 		}
 
 		projectile.start();
-		ShooterGame.shooterScreen.spawnEntity(projectile);;
+		ShooterGame.shooterScreen.spawnEntity(projectile);
 	}
 
 }

@@ -14,13 +14,20 @@ public class ExplosiveBottle extends Projectile {
 	}
 	
 	public void explode() {
-		for (int i = 0; i < frames.length; i++) {
-			loadImages(frames[i], 1.0);
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//		for (int i = 0; i < frames.length; i++) {
+//			loadImages(frames[i], 1.0);
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
+		loadImages("resources/explode.png", 0.1);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		
 		ShooterGame.shooterScreen.kill(this);
@@ -29,7 +36,7 @@ public class ExplosiveBottle extends Projectile {
 	@Override
 	public void hit() {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
