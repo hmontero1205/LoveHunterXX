@@ -160,7 +160,6 @@ public class Snake extends MovingComponent{
 			}
 		}
 		
-		
 		return false;
 	}
 	
