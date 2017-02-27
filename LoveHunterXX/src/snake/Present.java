@@ -66,11 +66,11 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		name = s;
 	}
 	@Override
-	public void generateNew(List<Visible> view, int presentLen) {
+	public void generateNew(List<Visible> view, List<Generatable> presents, int presentLen) {
 		// TODO Auto-generated method stub
 		
-		
-		view.add((Visible) getNewObject(getNewX(view),getNewY(view))); // adds the new generatable to the scene.
+		presents.add(getNewObject(getNewX(view),getNewY(view)));
+		view.add((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		
 	}
 	
