@@ -9,7 +9,7 @@ import gui.components.MovingComponent;
 import gui.components.Visible;
 
 public class Snake extends MovingComponent{
-	public static int distance = 20;
+	public static final int DISTANCE = 20;
 	public SnakeHead cart;
 	private int refresh_r = 150;
 	private int posX;
@@ -63,18 +63,18 @@ public class Snake extends MovingComponent{
 		// this moves the head.
 		switch(this.direction){
 		case left:
-			presentList.get(0).setX(presentList.get(0).getX() - distance);
+			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE);
 			cart.setSprite("resources/cartLeft.png");
 			break;
 		case up:
-			presentList.get(0).setY(presentList.get(0).getY() - distance);
+			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
 			break;
 		case right:
-			presentList.get(0).setX(presentList.get(0).getX() + distance);
+			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
 			cart.setSprite("resources/cartRight.png");
 			break;
 		case down:
-			presentList.get(0).setY(presentList.get(0).getY() + distance);
+			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
 			break;
 		}
 		checkLose();
@@ -137,7 +137,6 @@ public class Snake extends MovingComponent{
 		//not sure why it isn't checking for collision with self. I think it's something with looping through an arraylist...
 		for(int i = 1; i<presentList.size(); i++){
 			if (cart.isCollided(presentList.get(i))){
-				distance = 0;
 				refresh_r = 999999;
 				System.out.println("Game Over. You ran into yourself.");
 				return true;
@@ -145,7 +144,6 @@ public class Snake extends MovingComponent{
 		}
 		
 		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 10 || cart.getY() > 440){
-			distance = 0;
 			refresh_r = 999999;
 			System.out.println("Game Over. You ran into a wall.");
 			return true;
