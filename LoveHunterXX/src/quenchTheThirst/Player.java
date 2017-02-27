@@ -8,6 +8,7 @@ public class Player extends LivingEntity {
 	private String direction;
 
 	private HashMap<String, Integer> arsenal;
+	private String equipped;
 
 	public Player(int x, int y) {
 		super(x, y, .5, "resources/playerright.PNG");
@@ -15,6 +16,8 @@ public class Player extends LivingEntity {
 		arsenal = new HashMap<String, Integer>();
 		arsenal.put("explosive", 5);
 		arsenal.put("alluring", 5);
+		
+		equipped = "explosive";
 		
 		direction = "east";
 	}
@@ -41,18 +44,33 @@ public class Player extends LivingEntity {
 			direction = "east";
 			this.loadImages("resources/playerright.PNG", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-			toss("Water Bottle");
+			toss(equipped);
+		} else if (event.getKeyCode() == KeyEvent.VK_E) {
+			equipped = equipped("explosive") ? "alluring" : "explosive";
 		}
+	}
+	
+	public boolean equipped(String weapon) {
+		return equipped.equals(weapon);
 	}
 
 	public void toss(String proj) {
 		int wbx = this.getX();
 		int wby = this.getY();
 
-		ExplosiveBottle eb = new ExplosiveBottle(wbx, wby, direction);
-		eb.start();
+		if (arsenal.get(proj) == 0) {
+			return;
+		}
+		
+		Projectile projectile = null;
+		if (proj.equals("explosive")) {
+			projectile = new ExplosiveBottle(wbx, wby, direction);
+		} else if (proj.equals("alluring")) {
+			projectile = new AlluringBottle(wbx, wby, direction);
+		}
 
-		ShooterGame.shooterScreen.addObject(eb);
+		projectile.start();
+		ShooterGame.shooterScreen.spawnEntity(projectile);;
 	}
 
 }

@@ -15,4 +15,6 @@ public abstract class Entity extends Graphic {
 	public void move() {
 
 	}
+	
+	
 }

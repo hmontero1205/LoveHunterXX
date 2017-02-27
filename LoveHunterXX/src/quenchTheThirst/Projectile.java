@@ -11,9 +11,12 @@ public abstract class Projectile extends Entity implements Runnable {
 	public Projectile(int x, int y, double scale, String imageLocation, String dir) {
 		super(x, y, scale, imageLocation);
 		this.dir = dir;
-		velocity = 15;
+		velocity = 10;
 		acceleration = -0.5;
 	}
+	
+	// called when projectile hit destination
+	public abstract void hit();
 
 	@Override
 	public void run() {
@@ -41,9 +44,8 @@ public abstract class Projectile extends Entity implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		if(velocity <= 0) {
-			ShooterGame.shooterScreen.remove(this);
-		}
+		
+		hit();
 	}
 
 	public void setVelocity(double velocity) {
