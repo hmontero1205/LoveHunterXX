@@ -19,7 +19,7 @@ public abstract class Interactable extends Graphic{
 	}
 
 	public int getX() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub lol.
 		return xPos;
 	}
 	
