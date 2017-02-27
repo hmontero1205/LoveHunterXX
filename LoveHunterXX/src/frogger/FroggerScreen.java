@@ -128,7 +128,6 @@ public class FroggerScreen extends Screen implements KeyListener,MouseListener, 
 		for (int i = 0; i < tList.size(); i++) {
 			if (tList.get(i).getTerrain() == ROAD || tList.get(i).getTerrain() == WATER ) {
 				tList.get(i).startThread();
-				System.out.println("Terrain"+i+" started");
 			}
 		}
 //		try {
