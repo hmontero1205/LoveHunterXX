@@ -1,6 +1,7 @@
 package platformer;
 
 import java.awt.Graphics2D;
+
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -51,7 +52,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 		if (load) {
 			if (isCollided() && !collided) {
 				collided = true;
-				this.act();
+				act();
 			}
 			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
@@ -89,7 +90,6 @@ public class Obstacle extends MovingComponent implements Collidable {
 		return false;
 	}
 
-	@Override
 	public void act() {
 		action.act();
 	}

@@ -39,7 +39,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private void appearNewObstacle() {
 		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
-		if ((int) Math.floor(Math.random() * 550) > chance) {
+		if ((int) Math.floor(Math.random() * 400) > chance) {
 			Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
 			switch ((int) (Math.random() * 2)) {
 			case 0:
