@@ -162,8 +162,7 @@ public class Snake extends MovingComponent{
 			System.out.println("presnet: " + p.getX() + ", " + p.getY());
 			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
 				System.out.println("Present has been collided.");
-				SnakeScreen.
-				SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(, SnakeScreen.gens);
+				SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
 				presentList.add((Interactable) SnakeScreen.gens.remove(i));
 			}
 			
