@@ -99,10 +99,10 @@ public class SnakeScreen extends Screen implements KeyListener {
 		for(Interactable i: snake.getItems()){ // add each snake body part.
 			view.add(i);
 		}
-		Present p = new Present(60, 60, 30, 30, "resources/present.png", true, false);
-		gens.add(p);
-		this.addObject(p);
-		//p.generateNew(view, gens, 0);
+		
+		
+		Present p = new Present(0 , 0, 30, 30, "resources/present.png", true, false);
+		p.generateNew(view, gens, 0);
 		
 	}
 	
