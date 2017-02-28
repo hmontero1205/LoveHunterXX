@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import gui.components.Graphic;
 import gui.components.MovingComponent;
 import gui.components.Visible;
 
-public class FroggerScreen extends Screen implements KeyListener,MouseListener, Runnable {
+public class FroggerScreen extends Screen implements KeyListener,MouseListener, Runnable, MouseWheelListener {
 
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
@@ -130,12 +132,12 @@ public class FroggerScreen extends Screen implements KeyListener,MouseListener, 
 				tList.get(i).startThread();
 			}
 		}
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		playerLocked = false;
 		
 	}
@@ -167,6 +169,11 @@ public class FroggerScreen extends Screen implements KeyListener,MouseListener, 
 	public MouseListener getMouseListener(){
 		return this;
 	}
+	
+	public MouseWheelListener getMouseWheelListener() {
+		return this;
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent k) {
 		if(!gameOver && !playerLocked){
@@ -239,6 +246,15 @@ public class FroggerScreen extends Screen implements KeyListener,MouseListener, 
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if(e.getWheelRotation() < 0) {
+			System.out.println("Scrolled Down");
+		} else {
+			System.out.println("Scrolled Up");
+		}
 	}
 
 }

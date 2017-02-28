@@ -22,6 +22,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	private int submergeCurrentFrameTime = 0;
 	private int timeBeforeAscending;
 	private int underWaterTime = 0;
+	private long currentTime;
 	private boolean isSubmerging;
 	private boolean loop;
 	private boolean superCreated;
@@ -79,7 +80,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 
 	public void drawImage(Graphics2D g) {
 		if (superCreated) {
-			long currentTime = System.currentTimeMillis();
+			currentTime = System.currentTimeMillis();
 			if (currentTime - getDisplayTime() > swimTime) {
 				if (getFrame() != null && getFrame().size() > 0 && getFrame().size() == getTimes().size()) {
 					g = clear();
@@ -92,30 +93,11 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 						at.translate(-2, -8); // little bit of hard coding here cause the turtles won't center for some reason :/
 					}
 					g.drawImage(icon.getImage(), at, null);
-					//g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 					
 					// determines what order the frames should play, plays backward if the turtles are ascend and plays forward if the turtles are submerging
-					if (getCurrentFrame() == 0) {
-						isSubmerging = true;
-						if (loop) {
-							setDisplayTime(currentTime);
-							loop = false;
-							underWaterTime = 0;
-						}
-					} else if (getCurrentFrame() > 2) {
-						isSubmerging = false;
-					}
-
+					checkFrame();
 					// changes the frame based on the logics above ^
-					if (submergeFrameInterval - submergeCurrentFrameTime <= 0) {
-						if (!isSubmerging && timeBeforeAscending - underWaterTime <= 0) {
-							setCurrentFrame(getCurrentFrame() - 1);
-							loop = true;
-						} else if(isSubmerging){
-							setCurrentFrame(getCurrentFrame() + 1);
-						}
-						submergeCurrentFrameTime = 0;
-					}
+					changeFrame();
 					
 					if (getCurrentFrame() == 0 && !isRepeat()) {
 						setRunning(false);
@@ -136,9 +118,33 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 					at.translate(-2, -6);
 				}
 				g.drawImage(icon.getImage(), at, null);
-				//g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 			}
 		}
+	}
+
+	private void changeFrame() {
+		if (submergeFrameInterval - submergeCurrentFrameTime <= 0) {
+			if (!isSubmerging && timeBeforeAscending - underWaterTime <= 0) {
+				setCurrentFrame(getCurrentFrame() - 1);
+				loop = true;
+			} else if(isSubmerging){
+				setCurrentFrame(getCurrentFrame() + 1);
+			}
+			submergeCurrentFrameTime = 0;
+		}
+	}
+
+	private void checkFrame() {
+		if (getCurrentFrame() == 0) {
+			isSubmerging = true;
+			if (loop) {
+				setDisplayTime(currentTime);
+				loop = false;
+				underWaterTime = 0;
+			}
+		} else if (getCurrentFrame() > 2) {
+			isSubmerging = false;
+		}		
 	}
 
 	public void run() {
