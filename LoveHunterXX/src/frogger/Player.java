@@ -225,22 +225,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 		inventory.add(pu);
 	}
 
-	public ArrayList<PowerUpInterface> getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(ArrayList<PowerUpInterface> inventory) {
-		this.inventory = inventory;
-	}
-
 	public int getCurrentPowerUp() {
 		return currentPowerUp;
 	}
-
-	public void setCurrentPowerUp(int currentPowerUp) {
-		this.currentPowerUp = currentPowerUp;
-	}
-
-
 
 }
