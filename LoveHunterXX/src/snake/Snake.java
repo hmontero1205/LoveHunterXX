@@ -79,9 +79,6 @@ public class Snake extends MovingComponent{
 			break;
 		}
 		
-		// check for any collisions.
-		checkGenCollision();
-		checkLose();
 	}
 	
 	public double getPosx() {
@@ -107,7 +104,13 @@ public class Snake extends MovingComponent{
 	@Override
 	public void drawImage(Graphics2D g) {
 		if (presentList!=null){
+			
+			// move coordinates.
 			moveCoors(getDirection());
+			
+			// check for any collisions.
+			checkGenCollision();
+			checkLose();
 		}
 	}
 	
