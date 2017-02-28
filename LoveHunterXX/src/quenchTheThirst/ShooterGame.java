@@ -4,7 +4,7 @@ import gui.GUIApplication;
 
 public class ShooterGame extends GUIApplication {
 
-	public static ShooterGame shootGame; // the main class to run game.
+	public static ShooterGame shootGame;
 	public static QTTScreen shooterScreen;
 
 	public ShooterGame(int width, int height) {

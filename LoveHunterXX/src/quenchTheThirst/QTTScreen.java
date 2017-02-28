@@ -40,7 +40,7 @@ public class QTTScreen extends Screen implements KeyListener {
 
 		health = new TextLabel(600, 20, 130, 50, "HEALTH:" + user.getHealth());
 		explosive = new TextLabel(500, 530, 140, 50, (user.equipped("explosive") ? "*" : "") + "explosive: " + explosiveAmmo);
-		alluring = new TextLabel(690, 530, 140, 50, (user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
+		alluring = new TextLabel(680, 530, 140, 50, (user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
 
 		map = new Graphic(0, 0, 800, 600, "resources/map.png");
 		viewObjects.add(map);
