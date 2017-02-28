@@ -47,7 +47,7 @@ public class QTTScreen extends Screen implements KeyListener {
 		viewObjects.add(health);
 		viewObjects.add(explosive);
 		viewObjects.add(alluring);
-		viewObjects.add(user);
+		
 		Obstacle longwall = new Obstacle(75,75,.75, "resources/mapparts/longwall.png");
 		viewObjects.add(longwall);
 		
@@ -72,6 +72,8 @@ public class QTTScreen extends Screen implements KeyListener {
 		
 		Obstacle bushes = new Obstacle(200,250,.3, "resources/mapparts/bushes.png");
 		viewObjects.add(bushes);
+		viewObjects.add(user);
+		moveToFront(user);
 	}
 	
 	public void spawnEntity(Entity e) {

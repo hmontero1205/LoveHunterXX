@@ -9,6 +9,7 @@ public class ShooterGame extends GUIApplication {
 
 	public ShooterGame(int width, int height) {
 		super(width, height);
+		setResizable(false);
 	}
 
 	public void initScreen() {
