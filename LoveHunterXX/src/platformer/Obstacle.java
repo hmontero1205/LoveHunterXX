@@ -53,7 +53,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 				collided = true;
 				this.act();
 			}
-			if (getX() < -50) {
+			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
 			} else {

@@ -19,8 +19,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public ArrayList<Obstacle> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
-	private Obstacle[] possibleObstacles = {new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png"), };
-	
+
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
 		Thread play = new Thread(this);
@@ -39,15 +38,29 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	}
 
 	private void appearNewObstacle() {
-		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size()-1).getPosx() : 0;
+		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
 		if ((int) Math.floor(Math.random() * 550) > chance) {
 			Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
-			obs.setAction(new Action() {
-				public void act() {
-					player.setHp(player.getHp() - 1);
-					System.out.println(player.getHp());
-				}
-			});
+			switch ((int) (Math.random() * 2)) {
+			case 0:
+				obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
+				obs.setAction(new Action() {
+					public void act() {
+						player.setHp(player.getHp() - 1);
+						System.out.println(player.getHp());
+					}
+				});
+				break;
+			case 1:
+				obs = new Obstacle(850, 470, 50, 50, -7, "resources/crab.png");
+				obs.setAction(new Action() {
+					public void act() {
+						player.setHp(player.getHp() - 1);
+						System.out.println(player.getHp());
+					}
+				});
+				break;
+			}
 			obstacles.add(obs);
 			addObject(obs);
 		}
