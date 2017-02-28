@@ -163,7 +163,8 @@ public class Snake extends MovingComponent{
 			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
 				System.out.println("Present has been collided.");
 				SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
-				presentList.add((Interactable) SnakeScreen.gens.remove(i));
+				addPresent((Present) SnakeScreen.gens.remove(i));
+				//SnakeScreen.gens.add(e)
 			}
 			
 		}

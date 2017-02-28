@@ -104,6 +104,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		int x;
 		do{
 			//x = getRandBetween(30, 440);
+			System.out.println("stucccck");
 			x = 30 + (20 * getRandBetween(0, 13));
 		}while(!isEmptyX(x));
 		System.out.println("x: " + x);
