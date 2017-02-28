@@ -1,8 +1,8 @@
 package frogger;
 
-public interface PowerUpInterface {
+public interface PowerUpInterface extends CollisionInterface {
 	
-	public String getPowerUpName();
+	String getPowerUpName();
+	void activatePowerUp();
 	
-	public void activatePowerUp();
 }

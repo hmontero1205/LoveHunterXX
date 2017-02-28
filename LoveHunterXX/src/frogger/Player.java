@@ -19,7 +19,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public static final int DOWN = 3;
 	public static final int moveDistance = 30;
 	private int dir;
-	private ArrayList<PowerUp> inventory;
+	private ArrayList<PowerUpInterface> inventory;
+	private int currentPowerUp = 0;
 	private String[] pModels = { "resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png",
 			"resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png" };
 	private boolean onPlatform;
@@ -30,8 +31,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		dir = UP;
-		inventory = new ArrayList<PowerUp>();
-		// TODO inventory stuff
+		inventory = new ArrayList<PowerUpInterface>();
 		update();
 
 	}
@@ -180,6 +180,27 @@ public class Player extends MovingComponent implements PlayerInterface {
 	
 	public void setTerrain(Terrain t){
 		this.currentTerrain = t;
+	}
+
+	@Override
+	public void pickUpItem(PowerUpInterface pu) {
+		inventory.add(pu);
+	}
+	
+	public ArrayList<PowerUpInterface> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(ArrayList<PowerUpInterface> inventory) {
+		this.inventory = inventory;
+	}
+
+	public int getCurrentPowerUp() {
+		return currentPowerUp;
+	}
+
+	public void setCurrentPowerUp(int currentPowerUp) {
+		this.currentPowerUp = currentPowerUp;
 	}
 
 
