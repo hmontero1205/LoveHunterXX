@@ -42,12 +42,36 @@ public class QTTScreen extends Screen implements KeyListener {
 		explosive = new TextLabel(500, 530, 140, 50, (user.equipped("explosive") ? "*" : "") + "explosive: " + explosiveAmmo);
 		alluring = new TextLabel(680, 530, 140, 50, (user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
 
-		map = new Graphic(0, 0, 800, 600, "resources/map.png");
+		map = new Graphic(0, 0, 800, 600, "resources/mapparts/map.png");
 		viewObjects.add(map);
 		viewObjects.add(health);
 		viewObjects.add(explosive);
 		viewObjects.add(alluring);
 		viewObjects.add(user);
+		Obstacle longwall = new Obstacle(75,75,.75, "resources/mapparts/longwall.png");
+		viewObjects.add(longwall);
+		
+		Obstacle shortwall = new Obstacle(75,75,.75, "resources/mapparts/shortwall.png");
+		viewObjects.add(shortwall);
+	
+		Obstacle shortwall2 = new Obstacle(75,325,.75, "resources/mapparts/shortwall.png");
+		viewObjects.add(shortwall2);
+		
+		
+		Obstacle shortwall3 = new Obstacle(655,75,.75, "resources/mapparts/shortwall.png");
+		viewObjects.add(shortwall3);
+		
+		Obstacle shortwall4 = new Obstacle(655,325,.75, "resources/mapparts/shortwall.png");
+		viewObjects.add(shortwall4);
+		
+		Obstacle longwall2 = new Obstacle(73,495,.76, "resources/mapparts/longwall.png");
+		viewObjects.add(longwall2);
+		
+		Obstacle bench = new Obstacle(140,140,.15, "resources/mapparts/bench.png");
+		viewObjects.add(bench);
+		
+		Obstacle bushes = new Obstacle(200,250,.3, "resources/mapparts/bushes.png");
+		viewObjects.add(bushes);
 	}
 	
 	public void spawnEntity(Entity e) {
