@@ -37,8 +37,7 @@ public class Terrain extends Component implements Runnable {
 		this.terrain = terrain;
 		this.obVelocity = obVelocity;
 		mcList = Collections.synchronizedList(new ArrayList<CollisionInterface>());
-		if(terrain == ROAD)
-			genCars = true;
+		
 //		switch(this.terrain){
 //			case ROAD:
 //				cars = Collections.synchronizedList(new ArrayList<Car>());
@@ -50,13 +49,15 @@ public class Terrain extends Component implements Runnable {
 //		}	
 		
 		this.genTurtles = genTurtles;
-		postGame = false;
 		superCreated = true;
+		mcList.clear();
+		if(terrain == ROAD)
+			genCars = true;
 		isRunning = false;
+		postGame = false;
 		update();
 	}
 	
-
 	@Override
 	public void update(Graphics2D g) {
 		if (superCreated) {
