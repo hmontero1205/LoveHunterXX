@@ -115,7 +115,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated method stub
 		int y;
 		do{
-			y = 50 + (20 * getRandBetween(0, 13));
+			y = 60 + (20 * getRandBetween(0, 13));
 		}while(!isEmptyX(y));
 		System.out.print("y: " + y);
 		return y;
