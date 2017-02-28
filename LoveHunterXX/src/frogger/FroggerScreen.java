@@ -251,9 +251,17 @@ public class FroggerScreen extends Screen implements KeyListener,MouseListener, 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if(e.getWheelRotation() < 0) {
-			System.out.println("Scrolled Down");
+			if(player.getCurrentPowerUp() - 1 < 0) {
+				player.setCurrentPowerUp(player.getInventory().size() - 1);
+			} else {
+				player.setCurrentPowerUp(player.getCurrentPowerUp() - 1);
+			}
 		} else {
-			System.out.println("Scrolled Up");
+			if(player.getCurrentPowerUp() + 1 > player.getInventory().size() - 1) {
+				player.setCurrentPowerUp(0);
+			} else {
+				player.setCurrentPowerUp(player.getCurrentPowerUp() + 1);
+			}
 		}
 	}
 
