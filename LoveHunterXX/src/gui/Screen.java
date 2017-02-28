@@ -85,4 +85,8 @@ public abstract class Screen {
 		return null;
 	}
 	
+	public  List<Visible> getViewObjects(){
+		return viewObjects;
+	}
+	
 }

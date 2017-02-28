@@ -78,7 +78,10 @@ public class SnakeScreen extends Screen implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	public  List<Visible> getViewObjects(){
+		return viewObjects;
+	}
 
 	@Override
 	public void initObjects(List<Visible> view) {
@@ -100,10 +103,8 @@ public class SnakeScreen extends Screen implements KeyListener {
 			view.add(i);
 		}
 		
-		
 		Present p = new Present(0 , 0, 30, 30, "resources/present.png", true, false);
-		p.generateNew(view, gens, 0);
-		
+		p.generateNew(view, gens);
 	}
 	
 

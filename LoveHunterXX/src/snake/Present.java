@@ -66,11 +66,11 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		name = s;
 	}
 	@Override
-	public void generateNew(List<Visible> view, List<GeneratableInterface> presents, int presentLen) {
+	public void generateNew(List<GeneratableInterface> presents) {
 		// TODO Auto-generated method stub
 		
-		presents.add(getNewObject(getNewX(view),getNewY(view)));
-		view.add((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
+		presents.add(getNewObject(getNewX(),getNewY()));
+		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		
 	}
 	
@@ -83,39 +83,39 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		
 	}
 	@Override
-	public boolean isEmptyX(int x, List<Visible> view) {
+	public boolean isEmptyX(int x) {
 		// Usage of lambdas would've been better.
-		for(int i = 0; i < view.size(); ++i){
-			if(view.get(i).getX() == x) return false;
+		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
+			if(SnakeGame.sScreen.getViewObjects().get(i).getX() == x) return false;
 		}
 		return true;
 	}
 	@Override
-	public boolean isEmptyY(int y, List<Visible> view) {
+	public boolean isEmptyY(int y) {
 		// TODO Auto-generated method stub
-		for(int i = 0; i < view.size(); ++i){
-			if(view.get(i).getY() == y) return false;
+		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
+			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y) return false;
 		}
 		return true;
 	}
 	@Override
-	public int getNewX(List<Visible> view) {
+	public int getNewX() {
 		// TODO Auto-generated method stub
 		int x;
 		do{
 			//x = getRandBetween(30, 440);
 			x = 30 + (20 * getRandBetween(0, 13));
-		}while(!isEmptyX(x, view));
+		}while(!isEmptyX(x));
 		System.out.println("x: " + x);
 		return x;
 	}
 	@Override
-	public int getNewY(List<Visible> view) {
+	public int getNewY() {
 		// TODO Auto-generated method stub
 		int y;
 		do{
-			y = 60 + (20 * getRandBetween(0, 13));
-		}while(!isEmptyX(y, view));
+			y = 50 + (20 * getRandBetween(0, 13));
+		}while(!isEmptyX(y));
 		System.out.print("y: " + y);
 		return y;
 	}

@@ -52,6 +52,7 @@ public class Snake extends MovingComponent{
 	public void moveCoors(Direction d){
 		if(presentList == null) return;
 		// this moves the body parts.
+		
 		// change direction to new direction.
 		this.direction = d;
 		
@@ -77,8 +78,10 @@ public class Snake extends MovingComponent{
 			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
 			break;
 		}
-		checkLose();
+		
+		// check for any collisions.
 		checkGenCollision();
+		checkLose();
 	}
 	
 	public double getPosx() {
@@ -118,8 +121,6 @@ public class Snake extends MovingComponent{
 	
 	@Override
 	public void run() {
-//		posx=getX();
-//		posy=getY();
 		setRunning(true);
 		setMoveTime(System.currentTimeMillis());
 		while(isRunning()){
@@ -161,7 +162,11 @@ public class Snake extends MovingComponent{
 			System.out.println("presnet: " + p.getX() + ", " + p.getY());
 			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
 				System.out.println("Present has been collided.");
+				SnakeScreen.
+				SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(, SnakeScreen.gens);
+				presentList.add((Interactable) SnakeScreen.gens.remove(i));
 			}
+			
 		}
 		
 	}
