@@ -19,7 +19,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public ArrayList<Obstacle> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
-
+	private Obstacle[] possibleObstacles = {new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png"), };
+	
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
 		Thread play = new Thread(this);

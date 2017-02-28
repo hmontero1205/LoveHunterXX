@@ -59,13 +59,8 @@ public class Obstacle extends MovingComponent implements Collidable {
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
 						null);
-				long currentTime = System.currentTimeMillis();
-				int diff = (int) (currentTime - getMoveTime());
-				if (diff >= REFRESH_RATE) {
-					setMoveTime(currentTime);
-					setPosx(getPosx() + getVx());
-					super.setX((int) getPosx());
-				}
+				setPosx(getPosx() + getVx());
+				super.setX((int) getPosx());
 			}
 
 		}
@@ -86,10 +81,9 @@ public class Obstacle extends MovingComponent implements Collidable {
 	public boolean isCollided() {
 		// TODO Auto-generated method stud
 		Player playTemp = PlatformerGame.cs.player;
-		//playTemp.getX() + playTemp.getWidth() > x && playTemp.getX() > x
-		//((playTemp.getX() + playTemp.getWidth()) > (x+w))
-		if (((playTemp.getX() + playTemp.getWidth()) > getPosx()) && ((playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)) 
-				&& ((playTemp.getY()+playTemp.getHeight()) > getPosy()) ) {
+		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
+				&& ((playTemp.getX() + playTemp.getWidth()) < (getPosx() + w))
+				&& ((playTemp.getY() + playTemp.getHeight()) > getPosy())) {
 			return true;
 		}
 		return false;
@@ -99,7 +93,8 @@ public class Obstacle extends MovingComponent implements Collidable {
 	public void act() {
 		action.act();
 	}
-	public void setAction(Action action){
+
+	public void setAction(Action action) {
 		this.action = action;
 	}
 

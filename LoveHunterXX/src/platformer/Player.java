@@ -39,8 +39,8 @@ public class Player extends MovingComponent{
 //		this.initialV = 5.5;
 //		this.grav = .5;
 		
-		this.initialV = 6.3;
-		this.grav = 1;
+		this.initialV = 9;
+		this.grav = 1.5;
 		
 		
 		setX(x);
@@ -63,7 +63,6 @@ public class Player extends MovingComponent{
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			if(jump){
 				setPosy(getPosy() + getVy());
-				System.out.println(getPosy());
 				super.setY((int)getPosy());
 			}
 		}
