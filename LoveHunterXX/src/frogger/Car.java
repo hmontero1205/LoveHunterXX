@@ -85,14 +85,11 @@ public class Car extends MovingComponent implements CollisionInterface {
 			double xScale = getWidth() / icon.getIconWidth();
 			double yScale = getHeight() / icon.getIconHeight();
 			at.scale(xScale, yScale);
-			if (getVx() > 0) at.rotate(Math.toRadians(180), icon.getIconWidth()/2, icon.getIconHeight()/2);
+			if (getVx() > 0)
+				at.rotate(Math.toRadians(180), icon.getIconWidth() / 2, icon.getIconHeight() / 2);
 			g.setColor(Color.black);
 			g.drawImage(icon.getImage(), at, null);
 		}
-	}
-
-	public void checkBehaviors() {
-	
 	}
 
 	public void play() {

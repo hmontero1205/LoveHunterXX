@@ -41,10 +41,11 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	 * @param swimTime
 	 *            time before next frame
 	 * @param timeBeforeAscending
-	 *            time that the turtles stay under water     
+	 *            time that the turtles stay under water
 	 */
 
-	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending, int submergeFrameInterval) {
+	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending,
+			int submergeFrameInterval) {
 		super(x, y, w, h);
 		this.swimTime = swimTime;
 		this.timeBeforeAscending = timeBeforeAscending;
@@ -90,20 +91,25 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 					if (getVx() > 0) {
 						at.rotate(Math.toRadians(180), icon.getIconWidth() / 2, icon.getIconHeight() / 2);
 					} else {
-						at.translate(-2, -8); // little bit of hard coding here cause the turtles won't center for some reason :/
+						at.translate(-2, -8); // little bit of hard coding here
+												// cause the turtles won't
+												// center for some reason :/
 					}
 					g.drawImage(icon.getImage(), at, null);
-					
-					// determines what order the frames should play, plays backward if the turtles are ascend and plays forward if the turtles are submerging
+
+					// determines what order the frames should play, plays
+					// backward if the turtles are ascend and plays forward if
+					// the turtles are submerging
 					checkFrame();
 					// changes the frame based on the logics above ^
 					changeFrame();
-					
+
 					if (getCurrentFrame() == 0 && !isRepeat()) {
 						setRunning(false);
 						return;
 					}
-					if(!isSubmerging) underWaterTime += REFRESH_RATE;
+					if (!isSubmerging)
+						underWaterTime += REFRESH_RATE;
 					submergeCurrentFrameTime += REFRESH_RATE;
 				}
 			} else {
@@ -127,7 +133,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 			if (!isSubmerging && timeBeforeAscending - underWaterTime <= 0) {
 				setCurrentFrame(getCurrentFrame() - 1);
 				loop = true;
-			} else if(isSubmerging){
+			} else if (isSubmerging) {
 				setCurrentFrame(getCurrentFrame() + 1);
 			}
 			submergeCurrentFrameTime = 0;
@@ -144,7 +150,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 			}
 		} else if (getCurrentFrame() > 2) {
 			isSubmerging = false;
-		}		
+		}
 	}
 
 	public void run() {
