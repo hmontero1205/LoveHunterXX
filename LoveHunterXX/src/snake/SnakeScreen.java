@@ -100,7 +100,9 @@ public class SnakeScreen extends Screen implements KeyListener {
 		}
 		
 		Present p = new Present(0 , 0, 30, 30, "resources/present.png", true, false);
-		p.generateNew(gens);
+		if(view != null){
+			p.generateNew(gens);
+		}
 	}
 	
 

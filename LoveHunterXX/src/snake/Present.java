@@ -68,7 +68,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	@Override
 	public void generateNew(List<GeneratableInterface> presents) {
 		// TODO Auto-generated method stub
-		
+		if(SnakeGame.sScreen.getViewObjects() == null) return ;
 		presents.add(getNewObject(getNewX(),getNewY()));
 		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		
@@ -85,6 +85,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	@Override
 	public boolean isEmptyX(int x) {
 		// Usage of lambdas would've been better.
+		if(SnakeGame.sScreen.getViewObjects() == null) return false;
 		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
 			if(SnakeGame.sScreen.getViewObjects().get(i).getX() == x) return false;
 		}
@@ -93,6 +94,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	@Override
 	public boolean isEmptyY(int y) {
 		// TODO Auto-generated method stub
+		if(SnakeGame.sScreen.getViewObjects() == null) return false;
 		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
 			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y) return false;
 		}
