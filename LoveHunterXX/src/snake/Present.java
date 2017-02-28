@@ -68,7 +68,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	@Override
 	public void generateNew(List<GeneratableInterface> presents) {
 		// TODO Auto-generated method stub
-		if(SnakeGame.sScreen.getViewObjects() == null) return ;
+		if(SnakeGame.sScreen == null) return ;
 		presents.add(getNewObject(getNewX(),getNewY()));
 		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		
