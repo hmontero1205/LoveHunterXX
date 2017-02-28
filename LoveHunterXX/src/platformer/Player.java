@@ -62,13 +62,9 @@ public class Player extends MovingComponent{
 		if(load){
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			if(jump){
-				long currentTime = System.currentTimeMillis();
-				int diff = (int)(currentTime - getMoveTime());
-				if(diff >= REFRESH_RATE){
-					setMoveTime(currentTime);
-					setPosy(getPosy() + getVy());
-					super.setY((int)getPosy());
-				}
+				setPosy(getPosy() + getVy());
+				System.out.println(getPosy());
+				super.setY((int)getPosy());
 			}
 		}
 	}
@@ -94,9 +90,7 @@ public class Player extends MovingComponent{
 				setY(370);
 			}
 			else{
-				
-					super.setVy(-newV);
-				
+				super.setVy(-newV);
 			}
 		}
 	}
@@ -128,12 +122,14 @@ public class Player extends MovingComponent{
 	}
 	public void setW(int w) {
 		this.w = w;
+		update();
 	}
 	public int getH() {
 		return h;
 	}
 	public void setH(int h) {
 		this.h = h;
+		update();
 	}
 	
 }
