@@ -33,21 +33,19 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public void initObjects(List<Visible> viewObjects) {
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
-		
+
 		scoreLabel = new TextLabel(50, 40, 80, 40, "0");
 		viewObjects.add(scoreLabel);
-		
+
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
 	}
 
 	private void appearNewObstacle() {
-		/*
-		 * Problem was kind of fixed by adding an Obstacle field instead of it being local.
-		 * Problem was due to the statement making an Obstacle, but the constructor has a play() so that the thread runs
-		 * despite not being added to viewObjects yet
-		 */
+		/*trying to do a thing where the image of the player changes when they get hit and they are invulnerable for a 
+		 * second... can you finish the job on this one? 
+		 * also changed the effect of the crab to temporarily root the player... */
 		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
 		int x1 = (int) Math.floor(Math.random() * 400);
 		if (x1 > chance) {
@@ -56,8 +54,9 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
 				obs.setAction(new Action() {
 					public void act() {
-						
 						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+						PlatformerGame.cs.player.setImgSrc("resources/platformerplayerinvul.png");
+						System.out.println(PlatformerGame.cs.player.getHp());
 					}
 				});
 				break;
@@ -65,15 +64,26 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				obs = new Obstacle(850, 470, 50, 50, -7, "resources/crab.png");
 				obs.setAction(new Action() {
 					public void act() {
-						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
+						// - 1);
+						int currentScore = PlatformerGame.cs.getScore();
+						PlatformerGame.cs.player.setInitialV(0);
+						while(PlatformerGame.cs.getScore() < (currentScore+5)){
+							try {
+								Thread.sleep(20);
+								update();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						PlatformerGame.cs.player.setInitialV(9);
 					}
 				});
 				break;
 			}
 			obstacles.add(obs);
 			addObject(obs);
-			
-			
+
 		}
 	}
 
@@ -120,6 +130,10 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		score += 1;
 		scoreLabel.setText("" + score);
 
+	}
+	
+	public int getScore(){
+		return this.score;
 	}
 
 }

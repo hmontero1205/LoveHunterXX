@@ -22,9 +22,10 @@ public class Player extends MovingComponent{
 	private boolean load;
 	private long startJump;
 	
-	private final double initialV;
+	private double initialV;
 	private double grav;
 	private int hp;
+	private String imageSrc = "resources/player.png";
 	public Player(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		
@@ -49,7 +50,7 @@ public class Player extends MovingComponent{
 	}
 	private void loadImage() {
 		try{
-			image = new ImageIcon("resources/player.png").getImage();
+			image = new ImageIcon(imageSrc).getImage();
 			load = true;
 			update();
 		}
@@ -130,5 +131,14 @@ public class Player extends MovingComponent{
 		this.h = h;
 		update();
 	}
-	
+	public void setGravity(double g){
+		this.grav = g;
+	}
+	public void setInitialV(double v){
+		this.initialV = v;
+	}
+	public void setImgSrc(String src){
+		this.imageSrc = src;
+		loadImage();
+	}
 }
