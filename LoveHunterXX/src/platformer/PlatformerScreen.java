@@ -43,11 +43,6 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	}
 
 	private void appearNewObstacle() {
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		/*
 		 * Problem was kind of fixed by adding an Obstacle field instead of it being local.
 		 * Problem was due to the statement making an Obstacle, but the constructor has a play() so that the thread runs
@@ -110,7 +105,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		obstacles = new ArrayList<Obstacle>();
-		while (player.getHp() >= 0) {
+		while (player.getHp() > 0) {
 			updateScore();
 			appearNewObstacle();
 		}
