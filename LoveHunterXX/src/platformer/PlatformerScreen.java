@@ -19,9 +19,12 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public ArrayList<Obstacle> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
+	private Obstacle obs;
+	public int test;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
+		test = 5;
 		Thread play = new Thread(this);
 		play.start();
 	}
@@ -30,24 +33,35 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public void initObjects(List<Visible> viewObjects) {
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
+		
 		scoreLabel = new TextLabel(50, 40, 80, 40, "0");
 		viewObjects.add(scoreLabel);
+		
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
 	}
 
 	private void appearNewObstacle() {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		/*
+		 * Problem was kind of fixed by adding an Obstacle field instead of it being local.
+		 * Problem was due to the statement making an Obstacle, but the constructor has a play() so that the thread runs
+		 * despite not being added to viewObjects yet
+		 */
 		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
-		if ((int) Math.floor(Math.random() * 400) > chance) {
-			Obstacle obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
+		int x1 = (int) Math.floor(Math.random() * 400);
+		if (x1 > chance) {
 			switch ((int) (Math.random() * 2)) {
 			case 0:
 				obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
 				obs.setAction(new Action() {
 					public void act() {
 						player.setHp(player.getHp() - 1);
-						System.out.println(player.getHp());
 					}
 				});
 				break;
@@ -56,13 +70,14 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				obs.setAction(new Action() {
 					public void act() {
 						player.setHp(player.getHp() - 1);
-						System.out.println(player.getHp());
 					}
 				});
 				break;
 			}
 			obstacles.add(obs);
 			addObject(obs);
+			
+			
 		}
 	}
 
@@ -94,11 +109,10 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		obstacles = new ArrayList<Obstacle>();
-		while (player.getHp() > 0) {
+		while (player.getHp() >= 0) {
 			updateScore();
 			appearNewObstacle();
 		}
-
 	}
 
 	private void updateScore() {

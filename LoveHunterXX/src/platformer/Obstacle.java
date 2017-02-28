@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import gui.components.Action;
 import gui.components.MovingComponent;
 
-public class Obstacle extends MovingComponent implements Collidable {
+public class Obstacle extends MovingComponent implements Collidable, Action {
 
 	private int x;
 	private int y;
@@ -21,6 +21,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 	private boolean load;
 	private Action action;
 	private boolean collided;
+	private int id;
 
 	public Obstacle(int x, int y, int w, int h, int vx, String imageLocation) {
 		super(x, y, w, h);
@@ -28,6 +29,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.id = id;
 		this.imgLoc = imageLocation;
 		load = false;
 		setX(x);
@@ -41,7 +43,6 @@ public class Obstacle extends MovingComponent implements Collidable {
 		try {
 			image = new ImageIcon(imgLoc).getImage();
 			load = true;
-			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,9 +51,15 @@ public class Obstacle extends MovingComponent implements Collidable {
 
 	public void update(Graphics2D g) {
 		if (load) {
+			//Instead of an error, act() isn't being used?
 			if (isCollided() && !collided) {
+				Player playTemp = PlatformerGame.cs.player;
 				collided = true;
+				System.out.println(imgLoc);
+//				playTemp.setHp(playTemp.getHp() - 1);
+//				System.out.println(playTemp.getHp());
 				act();
+				System.out.println("hi");
 			}
 			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
@@ -63,7 +70,6 @@ public class Obstacle extends MovingComponent implements Collidable {
 				setPosx(getPosx() + getVx());
 				super.setX((int) getPosx());
 			}
-
 		}
 	}
 
@@ -83,8 +89,8 @@ public class Obstacle extends MovingComponent implements Collidable {
 		// TODO Auto-generated method stud
 		Player playTemp = PlatformerGame.cs.player;
 		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
-				&& ((playTemp.getX() + playTemp.getWidth()) < (getPosx() + w))
-				&& ((playTemp.getY() + playTemp.getHeight()) > getPosy())) {
+				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
+				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()) {
 			return true;
 		}
 		return false;
@@ -95,6 +101,7 @@ public class Obstacle extends MovingComponent implements Collidable {
 	}
 
 	public void setAction(Action action) {
+	
 		this.action = action;
 	}
 
