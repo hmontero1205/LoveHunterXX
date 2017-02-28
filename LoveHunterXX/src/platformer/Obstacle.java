@@ -53,13 +53,13 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 		if (load) {
 			//Instead of an error, act() isn't being used?
 			if (isCollided() && !collided) {
-				Player playTemp = PlatformerGame.cs.player;
 				collided = true;
 				System.out.println(imgLoc);
 //				playTemp.setHp(playTemp.getHp() - 1);
 //				System.out.println(playTemp.getHp());
 				act();
-				System.out.println("hi");
+				Player playTemp = PlatformerGame.cs.player;
+				System.out.println(playTemp.getHp());
 			}
 			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
@@ -101,7 +101,6 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 	}
 
 	public void setAction(Action action) {
-	
 		this.action = action;
 	}
 
