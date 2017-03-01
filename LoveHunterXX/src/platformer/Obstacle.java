@@ -54,8 +54,6 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 			//Instead of an error, act() isn't being used?
 			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
 				collided = true;
-				PlatformerGame.cs.player.setInvuln(true);
-				PlatformerGame.cs.player.setStartInvuln(System.currentTimeMillis());
 				act();
 			}
 			if (getX() < w*-1) {

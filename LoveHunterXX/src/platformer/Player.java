@@ -23,6 +23,7 @@ public class Player extends AnimatedComponent{
 	private boolean jump;
 	public boolean invuln;
 	private boolean load;
+	private boolean damaged;
 	
 	private long startInvuln;
 	private long startJump;
@@ -34,6 +35,8 @@ public class Player extends AnimatedComponent{
 	private double grav;
 	private int hp;
 	private String imageSrc = "resources/player.png";
+	private Graphics2D global;
+	
 	public Player(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		
@@ -44,7 +47,7 @@ public class Player extends AnimatedComponent{
 		this.load = false;
 		this.jump = false;
 		this.hp = 3;
-		this.invulnLength = 950;
+		this.invulnLength = 350;
 		
 		this.imgID = 0;
 		this.initialV = 9;
@@ -68,7 +71,7 @@ public class Player extends AnimatedComponent{
 		try{
 			image = new ImageIcon(imageSrc).getImage();
 			load = true;
-			update();
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -80,6 +83,7 @@ public class Player extends AnimatedComponent{
 	}
 	public void update(Graphics2D g){
 		if(load){
+			
 //			image = new ImageIcon(imageSrc).getImage(); 
 //			if(invuln){
 //				if(imgID == 0){
@@ -94,11 +98,41 @@ public class Player extends AnimatedComponent{
 //				}
 //				image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
 //			}
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+			
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+//				clear();
+//				imageSrc = "resources/playerhit.png";
+//				loadImage();
+//				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+				global = g;
 			if(jump){
 				setPosy(getPosy() + getVy());
 				super.setY((int)getPosy());
 			}
+		}
+	}
+	public void flicker(Graphics2D g){
+		try {
+			clear();
+			Thread.sleep(100);
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+			Thread.sleep(100);
+			System.out.println("dawda");
+			
+			clear();
+			Thread.sleep(100);
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+			Thread.sleep(100);
+			System.out.println("da");
+			
+			clear();
+			Thread.sleep(100);
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+			clear();
+			
+			damaged = !damaged;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	public void run() {
@@ -107,8 +141,12 @@ public class Player extends AnimatedComponent{
 			try {
 				Thread.sleep(REFRESH_RATE);
 				checkBehaviors();
-				update();
-				System.out.println(invuln);
+				if(damaged){
+					flicker(global);
+				}
+				else{
+					update();
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -127,16 +165,16 @@ public class Player extends AnimatedComponent{
 				super.setVy(-newV);
 			}
 		}
-		if(invuln){
-			image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
-			if(System.currentTimeMillis() - startInvuln > invulnLength){
-				invuln = false;
-				image = new ImageIcon("resources/player.png").getImage();
-			}
-		}
-		else{
-			image = new ImageIcon(imageSrc).getImage();
-		}
+//		if(invuln){
+//			image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
+//			if(System.currentTimeMillis() - startInvuln > invulnLength){
+//				invuln = false;
+//				image = new ImageIcon("resources/player.png").getImage();
+//			}
+//		}
+//		else{
+//			image = new ImageIcon(imageSrc).getImage();
+//		}
 	}
 	public int getHp() {
 		return hp;
@@ -191,5 +229,9 @@ public class Player extends AnimatedComponent{
 	}
 	public void setStartInvuln(long i){
 		this.startInvuln = i;
+	}
+	public void setDamaged(boolean b) {
+		this.damaged = b;
+		
 	}
 }
