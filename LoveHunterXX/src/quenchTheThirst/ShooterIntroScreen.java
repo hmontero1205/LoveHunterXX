@@ -21,7 +21,7 @@ public class ShooterIntroScreen extends ClickableScreen {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		introBack = new Grapic(0,0,800,600,"resource/shootDesign");
+		introBack = new Grapic(0,0,800,600,"resource/introBack.PNG");
 		b = new Button(350, 250, 100, 100, "Click Here To Continue", Color.white, new Action() {
 
 			@Override
