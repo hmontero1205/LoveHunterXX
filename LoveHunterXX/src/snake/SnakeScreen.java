@@ -28,7 +28,10 @@ public class SnakeScreen extends Screen implements KeyListener {
 
 	public Snake snake;
 	public static List<GeneratableInterface> gens; // generated objects.
-	
+	Graphic background;
+	Graphic sbBack;
+	TextArea line;
+	TextArea scoreCount;
 	
 	public SnakeScreen(int width, int height) {
 		super(width, height);
@@ -78,16 +81,20 @@ public class SnakeScreen extends Screen implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void updateScore(){
+		scoreCount.setText(snake.presentList.size() - 1 + "");
+	}
 
 	@Override
 	public void initObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
 		gens = new ArrayList<GeneratableInterface>();
 		snake = new Snake(0, 0, 100, 100);
-		Graphic background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
-		Graphic sbBack = new Graphic(465,40,320,200,"resources/snakebackground.png");
-		TextArea line = new TextArea(525,50,300,200, "You have collected:");
-		TextArea scoreCount = new TextArea(600,75,250,200,"");
+		background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
+		sbBack = new Graphic(465,40,320,200,"resources/snakebackground.png");
+		line = new TextArea(525,50,300,200, "You have collected:");
+		scoreCount = new TextArea(600,75,250,200,"");
 		scoreCount.setSize(46);
 		scoreCount.setText("" + (snake.presentList.size()-1));
 
