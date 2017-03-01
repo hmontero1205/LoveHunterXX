@@ -35,7 +35,7 @@ public class ExplosiveBottle extends Projectile {
 
 	private boolean distance(Entity e, int i) {
 		//x2 = this.getX() x1 = e.getX()
-		if(Math.sqrt((Math.pow(this.getX()-e.getX(), 2))+(Math.pow(this.getY()-e.getY(), 2)))<i){
+		if(Math.abs(Math.sqrt((Math.pow(this.getX()-e.getX(), 2))+(Math.pow(this.getY()-e.getY(), 2))))<i){
 			return true;
 		}
 		return false;
