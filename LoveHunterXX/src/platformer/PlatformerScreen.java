@@ -51,7 +51,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
 		int x1 = (int) Math.floor(Math.random() * 400);
 		if (x1 > chance) {
-			switch ((int) (Math.random() * 2)) {
+			switch ((int) (Math.random() * 3)) {
 			case 0:
 				obs = new Obstacle(850, 420, 100, 100, -5, "resources/cactus.png");
 				obs.setAction(new Action() {
@@ -80,6 +80,24 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 							}
 						}
 						PlatformerGame.cs.player.setInitialV(9);
+					}
+				});
+				break;
+			case 2:
+				obs = new Obstacle(850, 200, 50, 50, -7, "resources/bird1.png");
+				obs.setAction(new Action() {
+					public void act() {
+						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
+						// - 1);
+						int currentScore = PlatformerGame.cs.getScore();
+						while(PlatformerGame.cs.getScore() < (currentScore+5)){
+							try {
+								Thread.sleep(20);
+								update();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
 					}
 				});
 				break;
