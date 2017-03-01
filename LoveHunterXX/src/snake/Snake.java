@@ -29,12 +29,13 @@ public class Snake extends MovingComponent{
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		presentList.add(cart);
-		//presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
 	}
 
 	public void addPresent(Present p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
+		System.out.println(p.getX() + ", " + p.getY());
 		presentList.add(presentList.size()-1,p);
 	}
 
@@ -43,6 +44,8 @@ public class Snake extends MovingComponent{
 	}
 
 	public void moveCoors(Direction d){
+		int tempX;
+		int tempY;
 		if(presentList == null || gameRunning == false) return;
 		// this moves the body parts.
 
@@ -50,6 +53,7 @@ public class Snake extends MovingComponent{
 		this.direction = d;
 
 		for(int i = presentList.size()-1; i>0; i--){
+			System.out.println("CART: " + i + " UPDATED");
 			presentList.get(i).setX(presentList.get(i-1).getX());
 			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
@@ -57,21 +61,21 @@ public class Snake extends MovingComponent{
 		// this moves the head.
 		switch(this.direction){
 		case left:
-			presentList.get(0).setX(presentList.get(0).getX() - DISTANCE); // could we not just use the cart field here
+			cart.setX(cart.getX() - DISTANCE); // could we not just use the cart field here
 			checkGenCollision();
 			cart.setSprite("resources/cartLeft.png");
 			break;
 		case up:
-			presentList.get(0).setY(presentList.get(0).getY() - DISTANCE);
+			cart.setY(cart.getY() - DISTANCE);
 			checkGenCollision();
 			break;
 		case right:
-			presentList.get(0).setX(presentList.get(0).getX() + DISTANCE);
+			cart.setX(cart.getX() + DISTANCE);
 			checkGenCollision();
 			cart.setSprite("resources/cartRight.png");
 			break;
 		case down:
-			presentList.get(0).setY(presentList.get(0).getY() + DISTANCE);
+			cart.setY(cart.getY() + DISTANCE);
 			checkGenCollision();
 			break;
 		}
