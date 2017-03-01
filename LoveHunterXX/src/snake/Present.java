@@ -83,9 +83,12 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		
 	}
 	@Override
+	//I don' think we did this right. It should generate on any cell that is not occupied. Not just an x or y value
+	//Let's say we have an entire horizontal row of presents, it would always say false cuz all the x 
+	//have been taken.
 	public boolean isEmptyX(int x) {
 		// Usage of lambdas would've been better.
-		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
+		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
 			if(SnakeGame.sScreen.getViewObjects().get(i).getX() == x) return false;
 		}
 		return true;
@@ -93,7 +96,7 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	@Override
 	public boolean isEmptyY(int y) {
 		// TODO Auto-generated method stub
-		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); ++i){
+		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
 			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y) return false;
 		}
 		return true;
