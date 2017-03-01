@@ -83,6 +83,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	}
 	
 	public void updateScore(){
+		scoreCount.clear();
 		scoreCount.setText(snake.presentList.size() - 1 + "");
 	}
 
