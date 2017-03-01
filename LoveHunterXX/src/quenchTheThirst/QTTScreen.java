@@ -18,7 +18,7 @@ public class QTTScreen extends Screen implements KeyListener {
 	private TextLabel alluring;
 	private TextLabel health;
 	private Player user;
-	private ArrayList<Entity> entities;
+	public ArrayList<Entity> entities;
 
 	public QTTScreen(int width, int height) {
 		super(width, height);
