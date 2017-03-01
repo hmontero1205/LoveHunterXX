@@ -23,7 +23,23 @@ public class ExplosiveBottle extends Projectile {
 			}
 		}
 		
+		for(Entity e: ShooterGame.shooterScreen.entities){
+			if(e instanceof LivingEntity && distance(e,10)){
+				LivingEntity live = (LivingEntity)e; //why do we need this part?
+				live.damage(100);
+			}
+		}
+		
 		ShooterGame.shooterScreen.kill(this);
+	}
+
+	private boolean distance(Entity e, int i) {
+		//x2 = this.getX() x1 = e.getX()
+		if(Math.abs(Math.sqrt((Math.pow(this.getX()-e.getX(), 2))+(Math.pow(this.getY()-e.getY(), 2))))<i){
+			return true;
+		}
+		return false;
+		
 	}
 
 	@Override
