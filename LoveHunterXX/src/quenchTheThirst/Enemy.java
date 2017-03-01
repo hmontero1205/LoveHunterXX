@@ -15,17 +15,13 @@ public class Enemy extends LivingEntity {
 			return;
 		}
 		
-		GraphNode goal = null;//new GraphNode(null, ShooterGame.shooterScreen.getPlayer().getCenterX(),
-				//ShooterGame.shooterScreen.getPlayer().getCenterY());
+		GraphNode goal = new GraphNode(null, ShooterGame.shooterScreen.getPlayer().getCenterX(),
+				ShooterGame.shooterScreen.getPlayer().getCenterY());
 		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
-			if (e instanceof AlluringBottle && e.distance(e, 200) && ((AlluringBottle) e).isActive()) {
+			if (e instanceof AlluringBottle && e.distance(e, 10) && ((AlluringBottle) e).isActive()) {
 				goal = new GraphNode(null, e.getCenterX(), e.getCenterY(), e.getWidth(), e.getHeight());
 				break;
 			}
-		}
-		
-		if (goal == null) {
-			return;
 		}
 		
 
@@ -62,7 +58,6 @@ public class Enemy extends LivingEntity {
 			queue.remove(current);
 			explored.add(current);
 
-			System.out.println(current.isTouching(goal));
 			if (current.isTouching(goal)) {
 				return current;
 			}
