@@ -1,7 +1,7 @@
 package quenchTheThirst;
 
 public class ExplosiveBottle extends Projectile {
-	
+
 	private static String[] frames = new String[8];
 	static {
 		for (int i = 0; i < frames.length; i++) {
