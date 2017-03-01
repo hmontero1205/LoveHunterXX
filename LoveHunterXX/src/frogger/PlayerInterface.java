@@ -23,7 +23,7 @@ public interface PlayerInterface extends Visible {
 
 	void setRunning(boolean b);
 
-	void pickUpItem(PowerUpInterface pu);
+	void pickUpItem(PowerUp pu);
 
 	void activatePower();
 

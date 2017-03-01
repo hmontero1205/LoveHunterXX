@@ -30,28 +30,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public final static int ROAD = 1;
 	public final static int WATER = 2;
 	public ArrayList<Terrain> tList;
-	// public Terrain[][] levels = {
-	// {new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS,
-	// 0,false),new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH,
-	// ROW_HEIGHT, WATER, 6,true),new Terrain(3, WINDOWBARHEIGHT + (2 *
-	// ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3,
-	// WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT,
-	// ROAD,-5,false),new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT),
-	// ROW_WIDTH, ROW_HEIGHT, ROAD, 4,false),new Terrain(3, WINDOWBARHEIGHT + (5
-	// * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3,
-	// WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD,
-	// 4,false),new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH,
-	// ROW_HEIGHT, ROAD, -5,false),new Terrain(3, WINDOWBARHEIGHT + (8 *
-	// ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0,false),new Terrain(3,
-	// WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER,
-	// -4,false),new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH,
-	// ROW_HEIGHT, GRASS, 0,true),new Terrain(3, WINDOWBARHEIGHT + (11 *
-	// ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5,false),new Terrain(3,
-	// WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD,
-	// 5,false),new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH,
-	// ROW_HEIGHT, GRASS, 0,false)}
-	// };
-	public PlayerInterface player;
+	public static PlayerInterface player;
 	public static Terrain currentRow;
 	public static boolean gameOver;
 	private Button b;
@@ -144,9 +123,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	@Override
 	public void run() {
 		for (int i = 0; i < tList.size(); i++) {
-			if (tList.get(i).getTerrain() == ROAD || tList.get(i).getTerrain() == WATER) {
-				tList.get(i).startThread();
-			}
+			tList.get(i).startThread();
 		}
 		try {
 			Thread.sleep(1000);

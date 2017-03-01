@@ -12,11 +12,12 @@ import javax.swing.ImageIcon;
 import gui.components.Component;
 import gui.components.MovingComponent;
 import gui.components.Visible;
+import gui.components.Action;
 
 public class Terrain extends Component implements Runnable {
 	private List<CollisionInterface> mcList;
 	private String[] carSrcArr = { "bluecar.png", "whiteconvert.png", "greencar.png", "purplecar.png" };
-	//private List<AnimatedPlatform> apf;
+	private String[] powerUpGraphics = {"glove.png","snorkel.png","stopwatch.png"};
 	private int terrain;
 	private String[] terrainGraphics = { "resources/frogger/grass.png", "resources/frogger/road.png",
 			"resources/frogger/water.png" };
@@ -31,23 +32,13 @@ public class Terrain extends Component implements Runnable {
 	private int numTurtles;
 	private boolean genTurtles;
 	private boolean isRunning;
+	private PowerUp powerUp;
 
 	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity, boolean genTurtles) {
 		super(x, y, w, h);
 		this.terrain = terrain;
 		this.obVelocity = obVelocity;
 		mcList = Collections.synchronizedList(new ArrayList<CollisionInterface>());
-		
-//		switch(this.terrain){
-//			case ROAD:
-//				cars = Collections.synchronizedList(new ArrayList<Car>());
-//				genCars = true;
-//				break;
-//			case WATER:
-//				mcList = Collections.synchronizedList(new ArrayList<Log>());
-//				break;
-//		}	
-		
 		this.genTurtles = genTurtles;
 		superCreated = true;
 		mcList.clear();
@@ -86,10 +77,62 @@ public class Terrain extends Component implements Runnable {
 			case WATER:
 				runWater();
 				break;
+			case GRASS:
+				runGrass();
 		}
 		
 	}
 	
+	public void runGrass() {
+		while(isRunning){
+			if(this.powerUp == null && Math.random()<.01){
+				System.out.println("hey");
+				int selection = (int) (Math.random()*3);
+				int xCoord = 10+30*(int) (Math.random()*27);
+				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], getAction(selection));
+				FroggerGame.fs.addObject(powerUp);
+			}
+			if(checkPlayer){
+				checkPlayer();
+			}
+			try {
+				int sleepTime = (checkPlayer) ? 40:1000;
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	public Action getAction(int j) {
+		switch(j){
+			case 0:
+				return new Action(){
+					@Override
+					public void act() {
+						//FroggerScreen.player.setSuperStrength(true);	
+					}
+				};
+			case 1:
+				return new Action(){
+					@Override
+					public void act() {
+						//FroggerScreen.player.setSwimming(true);	
+					}
+				};
+			case 2:
+				return new Action(){
+					@Override
+					public void act() {
+						//FroggerScreen.setSlow(true);
+					}
+				};	
+			default: return null;
+		}
+	}
+
 	public void runRoad(){
 		while (isRunning) {
 			if(genCars)
@@ -160,38 +203,45 @@ public class Terrain extends Component implements Runnable {
 	public void checkMovingComponents() {
 		if(mcList.size()>0){
 			CollisionInterface leading = mcList.get(0);
-			if((leading.getX() < 0 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
+			if((leading.getX() < -20 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
 				mcList.remove(leading);
 				FroggerGame.fs.remove(leading);
 			}
 		}
 	}
 
-	public void checkPlayer() {	
-		for(int i=0;i<mcList.size();i++){
-			CollisionInterface p = mcList.get(i);
-			if(p.isTouchingPlayer(FroggerGame.fs.player)){
-				if(p instanceof Car){
-					genCars = false;
-					FroggerGame.fs.gameOver("You were run over by a car!!");
-					FroggerGame.fs.player.die();
-					try {
-						Thread.sleep(40);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+	public void checkPlayer() {
+		if(terrain == GRASS){
+			if(this.powerUp!=null && powerUp.isTouchingPlayer(FroggerGame.fs.player)){
+				//do somethings
+			}
+		}
+		else{
+			for(int i=0;i<mcList.size();i++){
+				CollisionInterface p = mcList.get(i);
+				if(p.isTouchingPlayer(FroggerGame.fs.player)){
+					if(p instanceof Car){
+						genCars = false;
+						FroggerGame.fs.gameOver("You were run over by a car!!");
+						FroggerGame.fs.player.die();
+						try {
+							Thread.sleep(40);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						for(int j=i;j<mcList.size();j++){
+							Car c2 = (Car) mcList.get(j);
+							c2.setRunning(false);
+						}
 					}
-					for(int j=i;j<mcList.size();j++){
-						Car c2 = (Car) mcList.get(j);
-						c2.setRunning(false);
+					else{
+						if(!FroggerGame.fs.player.isOnPlatform())
+							FroggerGame.fs.player.ridePlatform(p);
 					}
-				}
-				else{
-					if(!FroggerGame.fs.player.isOnPlatform())
-						FroggerGame.fs.player.ridePlatform(p);
-				}
-				break;
-			}	
+					break;
+				}	
+			}
 		}
 	}
 

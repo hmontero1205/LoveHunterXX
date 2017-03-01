@@ -7,13 +7,11 @@ public interface CollisionInterface extends Visible {
 
 	boolean isApproachingPlayer(PlayerInterface p);
 
-	int getX();
-
-	void play();
+	void setRunning(boolean b);
 
 	double getVx();
 
 	boolean isRunning();
 
-	void setRunning(boolean b);
+	void play();
 }

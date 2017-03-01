@@ -7,6 +7,7 @@ import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import gui.Screen;
 import gui.components.Visible;
@@ -39,9 +40,9 @@ public class SnakeScreen extends Screen implements KeyListener {
 	}
 
 	@Override
-	public void initObjects(ArrayList<Visible> view) {
+	public void initObjects(List<Visible> viewObjects) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
