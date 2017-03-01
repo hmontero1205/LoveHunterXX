@@ -29,7 +29,7 @@ public class Snake extends MovingComponent{
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		presentList.add(cart);
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
+		//presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
 	}
 
 	public void addPresent(Present p){ // adding body parts.
@@ -147,7 +147,7 @@ public class Snake extends MovingComponent{
 			}
 		}
 
-		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 10 || cart.getY() > 440){
+		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 50 || cart.getY() > 440){
 			refresh_r = 999999;
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall.");
