@@ -30,13 +30,6 @@ public class Snake extends MovingComponent{
 		this.direction = Snake.Direction.down;
 		presentList = new ArrayList<Interactable>();
 		presentList.add(cart);
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
-		presentList.add(new Present(0,0,30,30,"resources/present.png", true, true));
 	}
 
 	public void addPresent(Present p){ // adding body parts.
