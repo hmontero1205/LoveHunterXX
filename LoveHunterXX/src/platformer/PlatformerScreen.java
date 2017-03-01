@@ -46,6 +46,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		/*trying to do a thing where the image of the player changes when they get hit and they are invulnerable for a 
 		 * second... can you finish the job on this one? 
 		 * also changed the effect of the crab to temporarily root the player... */
+		
+		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
 		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
 		int x1 = (int) Math.floor(Math.random() * 400);
 		if (x1 > chance) {
@@ -55,7 +57,6 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				obs.setAction(new Action() {
 					public void act() {
 						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-						PlatformerGame.cs.player.setImgSrc("resources/platformerplayerinvul.png");
 						System.out.println(PlatformerGame.cs.player.getHp());
 					}
 				});

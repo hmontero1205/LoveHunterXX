@@ -5,13 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import gui.components.AnimatedComponent;
 import gui.components.MovingComponent;
 
-public class Player extends MovingComponent{
+public class Player extends AnimatedComponent{
 	private int x;
 	private int y;
 	private int w;
@@ -19,8 +21,14 @@ public class Player extends MovingComponent{
 	
 	private Image image;
 	private boolean jump;
+	public boolean invuln;
 	private boolean load;
+	
+	private long startInvuln;
 	private long startJump;
+	private long invulnLength;
+	
+	private int imgID;
 	
 	private double initialV;
 	private double grav;
@@ -36,17 +44,25 @@ public class Player extends MovingComponent{
 		this.load = false;
 		this.jump = false;
 		this.hp = 3;
+		this.invulnLength = 950;
 		
-//		this.initialV = 5.5;
-//		this.grav = .5;
-		
+		this.imgID = 0;
 		this.initialV = 9;
 		this.grav = 1.5;
-		
 		
 		setX(x);
 		setY(y);
 		loadImage();
+	}
+	private BufferedImage convertImages(String loc){
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File(loc));
+		    return img;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return img;
 	}
 	private void loadImage() {
 		try{
@@ -59,8 +75,25 @@ public class Player extends MovingComponent{
 		}
 		
 	}
+	public void setInvuln(boolean b){
+		this.invuln = b;
+	}
 	public void update(Graphics2D g){
 		if(load){
+//			image = new ImageIcon(imageSrc).getImage(); 
+//			if(invuln){
+//				if(imgID == 0){
+//					image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
+//					imgID = 1;
+//				}
+//				else{
+//					if(imgID == 1){
+//						image = new ImageIcon(imageSrc).getImage();
+//						imgID = 0;
+//					}
+//				}
+//				image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
+//			}
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			if(jump){
 				setPosy(getPosy() + getVy());
@@ -75,6 +108,7 @@ public class Player extends MovingComponent{
 				Thread.sleep(REFRESH_RATE);
 				checkBehaviors();
 				update();
+				System.out.println(invuln);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -92,6 +126,16 @@ public class Player extends MovingComponent{
 			else{
 				super.setVy(-newV);
 			}
+		}
+		if(invuln){
+			image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
+			if(System.currentTimeMillis() - startInvuln > invulnLength){
+				invuln = false;
+				image = new ImageIcon("resources/player.png").getImage();
+			}
+		}
+		else{
+			image = new ImageIcon(imageSrc).getImage();
 		}
 	}
 	public int getHp() {
@@ -140,5 +184,12 @@ public class Player extends MovingComponent{
 	public void setImgSrc(String src){
 		this.imageSrc = src;
 		loadImage();
+	}
+	public void setInvulnLength(int i) {
+		this.invulnLength = i;
+		
+	}
+	public void setStartInvuln(long i){
+		this.startInvuln = i;
 	}
 }
