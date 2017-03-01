@@ -16,9 +16,9 @@ public class Player extends LivingEntity {
 		arsenal = new HashMap<String, Integer>();
 		arsenal.put("explosive", 5);
 		arsenal.put("alluring", 5);
-		
+
 		equipped = "explosive";
-		
+
 		direction = "east";
 	}
 
@@ -28,20 +28,16 @@ public class Player extends LivingEntity {
 
 	public void handle(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.VK_W) {
-			this.setY(this.getY() - 5);
-			direction = "north";
+			move(direction = "north");
 			this.loadImages("resources/playerup.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_A) {
-			this.setX(this.getX() - 5);
-			direction = "west";
+			move(direction = "west");
 			this.loadImages("resources/playerleft.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_S) {
-			this.setY(this.getY() + 5);
-			direction = "south";
+			move(direction = "south");
 			this.loadImages("resources/playerdown.png", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_D) {
-			this.setX(this.getX() + 5);
-			direction = "east";
+			move(direction = "east");
 			this.loadImages("resources/playerright.PNG", .5);
 		} else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
 			toss(equipped);
@@ -49,18 +45,20 @@ public class Player extends LivingEntity {
 			equipped = equipped("explosive") ? "alluring" : "explosive";
 		}
 	}
-	
+
 	public boolean equipped(String weapon) {
 		return equipped.equals(weapon);
 	}
 
 	public void toss(String proj) {
-		int wbx = this.getX();
-		int wby = this.getY();
+		int wbx = this.getCenterX();
+		int wby = this.getCenterY();
 
 		if (arsenal.get(proj) == 0) {
 			return;
 		}
+		
+		arsenal.put(proj, arsenal.get(proj) - 1);
 		
 		Projectile projectile = null;
 		if (proj.equals("explosive")) {
@@ -68,9 +66,17 @@ public class Player extends LivingEntity {
 		} else if (proj.equals("alluring")) {
 			projectile = new AlluringBottle(wbx, wby, direction);
 		}
+		
+		projectile.setX(projectile.getX() - projectile.getWidth() / 2);
+		projectile.setY(projectile.getY() - projectile.getHeight() / 2);
 
 		projectile.start();
 		ShooterGame.shooterScreen.spawnEntity(projectile);
+	}
+
+	@Override
+	public void die() {
+		
 	}
 
 }

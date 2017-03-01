@@ -12,8 +12,16 @@ public class ExplosiveBottle extends Projectile {
 	public ExplosiveBottle(int x, int y, String dir) {
 		super(x, y, 0.03, "resources/bottle.png", dir);
 	}
-	
+
 	public void explode() {
+		int centerX = this.getCenterX();
+		int centerY = this.getCenterY();
+		
+		loadImages(frames[0], .3);
+		
+		this.setX(centerX - this.getWidth() / 2);
+		this.setY(centerY - this.getHeight() / 2);
+		
 		for (int i = 0; i < frames.length; i++) {
 			loadImages(frames[i], 0.3);
 			try {
@@ -22,34 +30,26 @@ public class ExplosiveBottle extends Projectile {
 				e.printStackTrace();
 			}
 		}
-		
-		for(Entity e: ShooterGame.shooterScreen.entities){
-			if(e instanceof LivingEntity && distance(e,10)){
-				LivingEntity live = (LivingEntity)e; //why do we need this part?
+
+		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
+			if (e instanceof LivingEntity && distance(e, 30)) {
+				LivingEntity live = (LivingEntity) e; // why do we need this
+														// part?
 				live.damage(100);
 			}
 		}
-		
+
 		ShooterGame.shooterScreen.kill(this);
 	}
 
-	private boolean distance(Entity e, int i) {
-		//x2 = this.getX() x1 = e.getX()
-		if(Math.abs(Math.sqrt((Math.pow(this.getX()-e.getX(), 2))+(Math.pow(this.getY()-e.getY(), 2))))<i){
-			return true;
-		}
-		return false;
-		
-	}
-
 	@Override
-	public void hit() {
+	public void land() {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		explode();
 	}
 

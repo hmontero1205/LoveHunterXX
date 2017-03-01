@@ -9,6 +9,8 @@ public abstract class LivingEntity extends Entity {
 		
 		health = 100;
 	}
+	
+	public abstract void die();
 
 	public int getHealth() {
 		return 100;
@@ -16,6 +18,10 @@ public abstract class LivingEntity extends Entity {
 
 	public void damage(int damage) {
 		health -= damage;
+		
+		if (health <= 0) {
+			die();
+		}
 	}
 	
 }

@@ -16,7 +16,7 @@ public abstract class Projectile extends Entity implements Runnable {
 	}
 	
 	// called when projectile hit destination
-	public abstract void hit();
+	public abstract void land();
 
 	@Override
 	public void run() {
@@ -45,7 +45,7 @@ public abstract class Projectile extends Entity implements Runnable {
 			}
 		}
 		
-		hit();
+		land();
 	}
 
 	public void setVelocity(double velocity) {
