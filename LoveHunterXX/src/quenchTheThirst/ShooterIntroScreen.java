@@ -13,6 +13,7 @@ import gui.components.Visible;
 public class ShooterIntroScreen extends ClickableScreen {
 
 	private Button b;
+	private Graphic introBack;
 
 	public ShooterIntroScreen(int width, int height) {
 		super(width, height);
@@ -20,15 +21,16 @@ public class ShooterIntroScreen extends ClickableScreen {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		b = new Button(400, 300, 100, 100, "", Color.white, new Action() {
+		introBack = new Grapic(0,0,800,600,"resource/shootDesign");
+		b = new Button(350, 250, 100, 100, "Click Here To Continue", Color.white, new Action() {
 
 			@Override
 			public void act() {
-				ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen);
-				System.out.print("asd");
+				ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen);//explain this
 			}
 		});
-
+		
+		viewObjects.add(introBack);
 		viewObjects.add(b);
 
 	}
