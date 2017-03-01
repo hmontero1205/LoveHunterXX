@@ -8,6 +8,7 @@ import gui.Screen;
 import gui.components.Action;
 import gui.components.Button;
 import gui.components.Clickable;
+import gui.components.Graphic;
 import gui.components.Visible;
 
 public class ShooterIntroScreen extends ClickableScreen {
@@ -21,8 +22,8 @@ public class ShooterIntroScreen extends ClickableScreen {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		introBack = new Grapic(0,0,800,600,"resource/introBack.PNG");
-		b = new Button(350, 250, 100, 100, "Click Here To Continue", Color.white, new Action() {
+		introBack = new Graphic(0,0,800,600,"resources/introback.png");
+		b = new Button(500, 100, 150, 80, "Click", Color.white, new Action() {
 
 			@Override
 			public void act() {
