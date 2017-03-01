@@ -89,7 +89,7 @@ public class Terrain extends Component implements Runnable {
 				System.out.println("hey");
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*27);
-				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], getAction(selection));
+				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], getAction(1));
 				FroggerGame.fs.addObject(powerUp);
 			}
 			if(checkPlayer){
@@ -112,26 +112,51 @@ public class Terrain extends Component implements Runnable {
 				return new Action(){
 					@Override
 					public void act() {
-						//FroggerScreen.player.setSuperStrength(true);	
+						FroggerScreen.player.setSuperStrength(true);	
+						System.out.println("le touch");
+						try {
+							Thread.sleep(5000);
+							FroggerScreen.player.setSuperStrength(false);	
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				};
 			case 1:
 				return new Action(){
 					@Override
 					public void act() {
-						//FroggerScreen.player.setSwimming(true);	
+						FroggerScreen.player.setSwimming(true);	
+						System.out.println("le touch");
+						try {
+							Thread.sleep(5000);
+							FroggerScreen.player.setSwimming(false);	
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				};
 			case 2:
 				return new Action(){
 					@Override
 					public void act() {
-						//FroggerScreen.setSlow(true);
+						FroggerGame.fs.setSlowMode(true);
+						System.out.println("le touch");
+						try {
+							Thread.sleep(5000);
+							FroggerGame.fs.setSlowMode(false);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				};	
 			default: return null;
 		}
 	}
+
 
 	public void runRoad(){
 		while (isRunning) {
@@ -166,8 +191,7 @@ public class Terrain extends Component implements Runnable {
 	
 	public void addMovingComponents() {
 		
-		int startingPos = (obVelocity > 0) ? 0 : 800;	
-		//String imgSrc = (terrain==ROAD) ? carSrcArr[((int) (Math.random() * carSrcArr.length))] : "log.png";
+		int startingPos = (obVelocity > 0) ? 0 : 800;
 		if(mcList.size() == 0){
 			CollisionInterface m = determineMovingComponent(startingPos);
 			mcList.add(m);
@@ -188,14 +212,15 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public CollisionInterface determineMovingComponent(int s){
+		int vel = (FroggerGame.fs.getSlowMode()) ? (1 * (Math.abs(obVelocity)/obVelocity)) : obVelocity;
 		if(terrain == ROAD)
-			return new Car(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
+			return new Car(s, getY() + 10, 50, 25, vel,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
 			if(genTurtles){
-				return new Turtle(s, getY() + 10, 50, 25, this.obVelocity, (int) (1500*Math.random()), (int) (800*Math.random()),(int) (1000*(Math.random())));
+				return new Turtle(s, getY() + 10, 50, 25, vel, (int) (1500*Math.random()), (int) (800*Math.random()),(int) (1000*(Math.random())));
 			}
 			else
-				return new Log(s, getY() + 10, 50, 25, this.obVelocity,"resources/frogger/log.png");
+				return new Log(s, getY() + 10, 50, 25, vel,"resources/frogger/log.png");
 		}
 		
 	}
@@ -213,7 +238,10 @@ public class Terrain extends Component implements Runnable {
 	public void checkPlayer() {
 		if(terrain == GRASS){
 			if(this.powerUp!=null && powerUp.isTouchingPlayer(FroggerGame.fs.player)){
-				//do somethings
+				powerUp.getEffect().act();
+				FroggerGame.fs.remove(powerUp);
+				//FroggerGame.fs.player.pickUpItem(powerUp);
+				this.powerUp = null;
 			}
 		}
 		else{

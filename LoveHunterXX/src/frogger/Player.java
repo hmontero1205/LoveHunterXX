@@ -27,6 +27,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private CollisionInterface currentPlatform;
 	private Terrain currentTerrain;
 	private boolean deathGraphic;
+	private boolean strength;
+	private boolean swimming;
 
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -226,6 +228,18 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	public int getCurrentPowerUp() {
 		return currentPowerUp;
+	}
+
+	@Override
+	public void setSuperStrength(boolean b) {
+		this.strength = b;
+		
+	}
+
+	@Override
+	public void setSwimming(boolean b) {
+		this.swimming = b;
+		
 	}
 
 

@@ -28,4 +28,9 @@ public interface PlayerInterface extends Visible {
 	void activatePower();
 
 	void mouseScrolled(int wheelRotation);
+
+	void setSuperStrength(boolean b);
+
+	void setSwimming(boolean b);
+
 }

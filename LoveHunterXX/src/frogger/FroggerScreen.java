@@ -36,6 +36,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private Button b;
 	private boolean superCreated;
 	private boolean playerLocked;
+	private boolean slowMode;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -243,6 +244,14 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		player.mouseScrolled(e.getWheelRotation());
+	}
+
+	public void setSlowMode(boolean c) {
+		this.slowMode = c;
+	}
+
+	public boolean getSlowMode() {
+		return slowMode;
 	}
 
 }
