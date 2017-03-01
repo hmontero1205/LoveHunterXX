@@ -33,6 +33,7 @@ public class Terrain extends Component implements Runnable {
 	private boolean genTurtles;
 	private boolean isRunning;
 	private PowerUp powerUp;
+	private Thread tThread;
 
 	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity, boolean genTurtles) {
 		super(x, y, w, h);
@@ -63,7 +64,7 @@ public class Terrain extends Component implements Runnable {
 	}
 
 	public void startThread() {
-		Thread tThread = new Thread(this);
+		tThread = new Thread(this);
 		tThread.start();
 	}
 
@@ -89,7 +90,7 @@ public class Terrain extends Component implements Runnable {
 				System.out.println("hey");
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*27);
-				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], getAction(1));
+				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], getAction(selection));
 				FroggerGame.fs.addObject(powerUp);
 			}
 			if(checkPlayer){
@@ -229,6 +230,7 @@ public class Terrain extends Component implements Runnable {
 		if(mcList.size()>0){
 			CollisionInterface leading = mcList.get(0);
 			if((leading.getX() < -20 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
+				leading.setRunning(false);
 				mcList.remove(leading);
 				FroggerGame.fs.remove(leading);
 			}
