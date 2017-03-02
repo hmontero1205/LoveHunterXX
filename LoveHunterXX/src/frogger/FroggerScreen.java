@@ -47,7 +47,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public FroggerScreen(int w, int h) {
 		super(w, h);
 		superCreated = true;
-		level = 1;
+		this.level = 1;
 		startGame();
 	}
 
@@ -76,7 +76,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			ProgressMarker p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+//			ProgressMarker p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			ProgressMarker p = new ProgressMarker(740,ROW_HEIGHT+485,25,25,"continue.png");
 			p.start();
 			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
@@ -176,10 +177,25 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public void keyReleased(KeyEvent k) {
 		if (!gameOver && !playerLocked) {
 			int kc = k.getKeyCode();
-			if (kc == KeyEvent.VK_W || kc == KeyEvent.VK_A || kc == KeyEvent.VK_S || kc == KeyEvent.VK_D) {
+			switch(kc) {
+			case KeyEvent.VK_SPACE:
+				player.activatePower();
+				break;
+				
+			case KeyEvent.VK_W:
+			case KeyEvent.VK_A:
+			case KeyEvent.VK_S:
+			case KeyEvent.VK_D:
 				player.move(kc);
 				checkPlayerRow();
-			} else if(kc == KeyEvent.VK_SPACE) player.activatePower();
+				break;
+			case KeyEvent.VK_LEFT:
+				player.mouseScrolled(-1);
+				break;
+			case KeyEvent.VK_RIGHT:
+				player.mouseScrolled(1);
+			}
+			
 		}
 	}
 
@@ -206,7 +222,10 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	}
 
 	public void startGame() {
+		ArrayList<PowerUp> inv = new ArrayList<PowerUp>();
+		if(player != null) inv = player.getInventory();
 		initObjects(getViewObjects());
+		player.setInventory(inv);
 		infoBox.setText("Level "+level);
 		Thread fGame = new Thread(this);
 		fGame.start();

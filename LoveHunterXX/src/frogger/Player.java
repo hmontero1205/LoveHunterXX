@@ -95,7 +95,17 @@ public class Player extends MovingComponent implements PlayerInterface {
 		this.onPlatform = false;
 		update();
 	}
-
+	
+	public void changeItemSelection(int k) {
+		switch(k) {
+		case KeyEvent.VK_LEFT:
+			mouseScrolled(-1);
+			break;
+		case KeyEvent.VK_RIGHT:
+			mouseScrolled(1);
+		}
+	}
+	
 	public boolean outOfBounds(int k) {
 		switch (k) {
 		case KeyEvent.VK_W:
@@ -109,7 +119,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 			}
 			break;
 		case KeyEvent.VK_S:
-			if (getY() + FroggerScreen.ROW_HEIGHT + getHeight() > 600) {
+			if (getY() + FroggerScreen.ROW_HEIGHT + getHeight() > 600 - FroggerScreen.ROW_HEIGHT) {
 				return true;
 			}
 			break;
@@ -117,7 +127,6 @@ public class Player extends MovingComponent implements PlayerInterface {
 			if (getX() + moveDistance > 775) {
 				return true;
 			}
-			
 		}
 		return false;
 	}
@@ -268,6 +277,11 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public void removeItem(PowerUp powerUp) {
 		inventory.remove(powerUp);
 		mouseScrolled(0);
+	}
+
+	@Override
+	public void setInventory(ArrayList<PowerUp> pu) {
+		this.inventory = pu;
 	}
 
 }

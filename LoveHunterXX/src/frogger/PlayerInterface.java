@@ -40,7 +40,9 @@ public interface PlayerInterface extends Visible {
 	boolean getSwimming();
 
 	ArrayList<PowerUp> getInventory();
-
+	
+	void setInventory(ArrayList<PowerUp> pu);
+	
 	int getCurrentPowerUp();
 
 	void removeItem(PowerUp powerUp);
