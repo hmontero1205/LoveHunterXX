@@ -119,6 +119,11 @@ public class Snake extends MovingComponent{
 	public void setDirection(Direction d){
 		this.direction = d;
 	}
+	
+	public void updateRates(){
+		int s = presentList.size() - 1;
+		
+	}
 
 	@Override
 	public void run() {
@@ -200,9 +205,7 @@ public class Snake extends MovingComponent{
 						System.out.println("Collided with block");
 					}
 				}
-				
 				SnakeGame.sScreen.updateScore();
-
 			}
 		}
 	}
