@@ -127,7 +127,7 @@ public class Terrain extends Component implements Runnable {
 				checkPlayer();
 			}
 			try {
-				int sleepTime = (checkPlayer) ? 40:5000;
+				int sleepTime = (checkPlayer && this.powerUp!=null) ? 40:5000;
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
