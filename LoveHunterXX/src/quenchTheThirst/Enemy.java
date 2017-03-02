@@ -7,14 +7,14 @@ public class Enemy extends LivingEntity {
 	private String direction;
 
 	public Enemy(int x, int y) {
-		super(x, y, 0.025, "resources/robbierotten.png");
+		super(x, y, 0.025, "resources/robbierotten.png", 5);
 	}
 
 	public void tick() {
 		if (ShooterGame.shooterScreen == null) {
 			return;
 		}
-		
+
 		GraphNode goal = new GraphNode(null, ShooterGame.shooterScreen.getPlayer().getCenterX(),
 				ShooterGame.shooterScreen.getPlayer().getCenterY());
 		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
@@ -23,7 +23,6 @@ public class Enemy extends LivingEntity {
 				break;
 			}
 		}
-		
 
 		GraphNode decision = findShortestPath(goal);
 		if (decision == null || decision.getParent() == null) {
@@ -59,6 +58,7 @@ public class Enemy extends LivingEntity {
 			explored.add(current);
 
 			if (current.isTouching(goal)) {
+				System.out.println("FOUND PATH");
 				return current;
 			}
 
@@ -66,7 +66,7 @@ public class Enemy extends LivingEntity {
 				if (explored.contains(neighbor)) {
 					continue;
 				}
-				
+
 				int newCost = current.gCost + neighbor.distanceFrom(current);
 				if (newCost < neighbor.gCost || !explored.contains(neighbor)) {
 					neighbor.gCost = newCost;
@@ -78,6 +78,8 @@ public class Enemy extends LivingEntity {
 					queue.add(neighbor);
 				}
 			}
+
+			System.out.println("CHECKED HERE");
 		}
 
 		return null;
@@ -90,7 +92,7 @@ public class Enemy extends LivingEntity {
 		private int hCost, gCost;
 		private String directionToParent;
 		private int width, height;
-		
+
 		public GraphNode(GraphNode goal, int x, int y) {
 			this.goal = goal;
 			this.x = x;
@@ -127,47 +129,49 @@ public class Enemy extends LivingEntity {
 			ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
 
 			if (x < ShooterGame.shooterScreen.getWidth() - 5
-					&& ShooterGame.shooterScreen.canPlace(x + 5, y, getWidth(), getHeight(), Enemy.this)) {
+					&& ShooterGame.shooterScreen.canPlace(x, y, "east", Enemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x + 5, y, "east"));
 			}
 
-			if (x - 5 > 0 && ShooterGame.shooterScreen.canPlace(x - 5, y, getWidth(), getHeight(), Enemy.this)) {
+			if (x - 5 > 0 && ShooterGame.shooterScreen.canPlace(x, y, "west", Enemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x - 5, y, "west"));
 			}
 
 			if (y < ShooterGame.shooterScreen.getHeight() - 5
-					&& ShooterGame.shooterScreen.canPlace(x, y + 5, getWidth(), getHeight(), Enemy.this)) {
+					&& ShooterGame.shooterScreen.canPlace(x, y, "south", Enemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y + 5, "south"));
 			}
 
-			if (y - 5 > 0 && ShooterGame.shooterScreen.canPlace(x, y - 5, getWidth(), getHeight(), Enemy.this)) {
+			if (y - 5 > 0 && ShooterGame.shooterScreen.canPlace(x, y, "north", Enemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y - 5, "north"));
 			}
-			
-			System.out.println("X: " + x + " Y: " + y + " GoalX: " + goal.x + " GoalY: " + goal.y + " Dir: " + directionToParent);
+
+			System.out.println(neighbors.size());
+			System.out.println(
+					"X: " + x + " Y: " + y + " GoalX: " + goal.x + " GoalY: " + goal.y + " Dir: " + directionToParent);
 			return neighbors;
 		}
-		
+
 		public int distanceFrom(GraphNode node) {
 			int dx = Math.abs(this.getX() - node.getX());
 			int dy = Math.abs(this.getY() - node.getY());
 
 			return 10 * (dx + dy);
 		}
-		
+
 		public boolean isTouching(GraphNode node) {
 			return Math.abs(this.getX() - goal.getX()) * 2 < Enemy.this.getWidth() + goal.getWidth()
 					&& Math.abs(this.getY() - goal.getY()) * 2 < Enemy.this.getHeight() + goal.getHeight();
 		}
-		
+
 		public int getWidth() {
 			return width;
 		}
-		
-		public int getHeight(){
+
+		public int getHeight() {
 			return height;
 		}
-		
+
 		public int fCost() {
 			return gCost + hCost;
 		}
@@ -184,6 +188,8 @@ public class Enemy extends LivingEntity {
 
 	@Override
 	public void die() {
+		/** LOVE POINT ADD HERE **/
+
 		ShooterGame.shooterScreen.kill(this);
 	}
 

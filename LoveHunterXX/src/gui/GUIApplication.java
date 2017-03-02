@@ -28,6 +28,7 @@ public abstract class GUIApplication extends JFrame implements Runnable {
 	public void setScreen(Screen s) {
 		removeListeners();
 		currentScreen = s;
+		currentScreen.onDisplay();
 		addListeners();
 	}
 

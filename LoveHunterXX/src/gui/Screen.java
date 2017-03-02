@@ -25,7 +25,6 @@ public abstract class Screen {
 	public void initImage(int width, int height) {
 		image = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
 		update();
-		
 	}
 	public void update() {
 		BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -42,6 +41,10 @@ public abstract class Screen {
 		
 	}
 	public abstract void initObjects(List<Visible> viewObjects);
+	
+	public void onDisplay() {
+	}
+	
 	public int getWidth(){
 		return image.getWidth();
 	}

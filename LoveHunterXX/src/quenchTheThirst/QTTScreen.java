@@ -2,11 +2,10 @@ package quenchTheThirst;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import gui.ClickableScreen;
 import gui.Screen;
 import gui.components.Graphic;
 import gui.components.TextLabel;
@@ -19,7 +18,7 @@ public class QTTScreen extends Screen implements KeyListener {
 	private TextLabel alluring;
 	private TextLabel health;
 	private Player user;
-	private List<Entity> entities;
+	private CopyOnWriteArrayList<Entity> entities;
 
 	public QTTScreen(int width, int height) {
 		super(width, height);
@@ -40,7 +39,7 @@ public class QTTScreen extends Screen implements KeyListener {
 	 */
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
-		entities = Collections.synchronizedList(new ArrayList<Entity>());
+		entities = new CopyOnWriteArrayList<Entity>();
 		user = new Player(400, 300);
 		viewObjects.add(user);
 
@@ -54,50 +53,57 @@ public class QTTScreen extends Screen implements KeyListener {
 		alluring = new TextLabel(680, 530, 140, 50,
 				(user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
 
-		map = new Graphic(0, 0, 800, 600, "resources/mapparts/map.png");
+		map = new Graphic(0, 0, 800, 600, "resources/qtt/mapparts/map.png");
 		viewObjects.add(map);
 		viewObjects.add(health);
 		viewObjects.add(explosive);
 		viewObjects.add(alluring);
 
-		Obstacle longwall = new Obstacle(75, 75, .75, "resources/mapparts/longwall.png");
+		Obstacle longwall = new Obstacle(75, 75, .75, "resources/qtt/mapparts/longwall.png");
 		spawnEntity(longwall);
 
-		Obstacle shortwall = new Obstacle(75, 75, .75, "resources/mapparts/shortwall.png");
+		Obstacle shortwall = new Obstacle(75, 75, .75, "resources/qtt/mapparts/shortwall.png");
 		spawnEntity(shortwall);
 
-		Obstacle shortwall2 = new Obstacle(75, 325, .75, "resources/mapparts/shortwall.png");
+		Obstacle shortwall2 = new Obstacle(75, 325, .75, "resources/qtt/mapparts/shortwall.png");
 		spawnEntity(shortwall2);
 
-		Obstacle shortwall3 = new Obstacle(655, 75, .75, "resources/mapparts/shortwall.png");
+		Obstacle shortwall3 = new Obstacle(655, 75, .75, "resources/qtt/mapparts/shortwall.png");
 		spawnEntity(shortwall3);
 
-		Obstacle shortwall4 = new Obstacle(655, 325, .75, "resources/mapparts/shortwall.png");
+		Obstacle shortwall4 = new Obstacle(655, 325, .75, "resources/qtt/mapparts/shortwall.png");
 		spawnEntity(shortwall4);
 
-		Obstacle longwall2 = new Obstacle(73, 495, .76, "resources/mapparts/longwall.png");
+		Obstacle longwall2 = new Obstacle(73, 495, .76, "resources/qtt/mapparts/longwall.png");
 		spawnEntity(longwall2);
 
-		Obstacle bench = new Obstacle(140, 140, .15, "resources/mapparts/bench.png");
+		Obstacle bench = new Obstacle(140, 140, .15, "resources/qtt/mapparts/bench.png");
 		spawnEntity(bench);
 
-		Obstacle bushes = new Obstacle(200, 250, .3, "resources/mapparts/bushes.png");
+		Obstacle bushes = new Obstacle(200, 250, .3, "resources/qtt/mapparts/bushes.png");
 		spawnEntity(bushes);
 
 		Enemy enemy = new Enemy(300, 200);
 		spawnEntity(enemy);
 
 		moveToFront(user);
-		
+	}
+
+	@Override
+	public void onDisplay() {
 		tick();
 	}
 
 	public void tick() {
 		new Thread(() -> {
 			while (true) {
-				for (Entity ent : entities) {
+				Iterator<Entity> entIterator = entities.iterator();
+				while (entIterator.hasNext()) {
+					Entity ent = entIterator.next();
 					if (ent instanceof Enemy) {
 						((Enemy) ent).tick();
+						
+						
 					}
 				}
 
@@ -110,9 +116,30 @@ public class QTTScreen extends Screen implements KeyListener {
 		}).start();
 	}
 
-	public boolean canPlace(int x, int y, int width, int height, Entity e) {
-		for (Entity ent : entities) {
-			if (!(e instanceof Player) && e != ent && ent.collideWith(x, y, width, height)) {
+	public boolean canPlace(int x, int y, String dir, Entity ent) {
+		switch (dir) {
+		case "north":
+			y -= ent.getSpeed();
+			break;
+		case "east":
+			x += ent.getSpeed();
+			break;
+		case "south":
+			y += ent.getSpeed();
+			break;
+		case "west":
+			x -= ent.getSpeed();
+			break;
+		default:
+			return false;
+		}
+
+		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
+			if (e instanceof Projectile || e == ent) {
+				continue;
+			}
+
+			if (e.collideWith(x, y, ent.getWidth(), ent.getHeight())) {
 				return false;
 			}
 		}
@@ -122,11 +149,13 @@ public class QTTScreen extends Screen implements KeyListener {
 
 	public void spawnEntity(Entity e) {
 		entities.add(e);
+
 		this.addObject(e);
 	}
 
 	public void kill(Entity e) {
 		entities.remove(e);
+
 		this.remove(e);
 	}
 

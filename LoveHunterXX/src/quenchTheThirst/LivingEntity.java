@@ -4,8 +4,8 @@ public abstract class LivingEntity extends Entity {
 	
 	private int health;
 	
-	public LivingEntity(int x, int y, double scale, String imageLocation) {
-		super(x, y, scale, imageLocation);
+	public LivingEntity(int x, int y, double scale, String imageLocation, int speed) {
+		super(x, y, scale, imageLocation, speed);
 		
 		health = 100;
 	}

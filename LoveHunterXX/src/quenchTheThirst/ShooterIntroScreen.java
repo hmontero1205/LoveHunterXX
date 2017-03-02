@@ -14,7 +14,8 @@ import gui.components.Visible;
 public class ShooterIntroScreen extends ClickableScreen {
 
 	private Button b;
-	private Graphic introBack;
+	private Graphic background;
+	private int sequence;
 
 	public ShooterIntroScreen(int width, int height) {
 		super(width, height);
@@ -22,16 +23,23 @@ public class ShooterIntroScreen extends ClickableScreen {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		introBack = new Graphic(0,0,800,600,"resources/introback.png");
+		background = new Graphic(0, 0, 800, 600, "resources/qtt/introback.png");
 		b = new Button(500, 100, 150, 80, "Click", Color.white, new Action() {
 
 			@Override
 			public void act() {
-				ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen);//explain this
+				if (sequence == 0) {
+					background.loadImages("resources/qtt/howtoplay.png", 800, 600);
+				} else if (sequence == 1) {
+					ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen); // explain this
+				}
+
+				sequence++;
 			}
+
 		});
-		
-		viewObjects.add(introBack);
+
+		viewObjects.add(background);
 		viewObjects.add(b);
 
 	}

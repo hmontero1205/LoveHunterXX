@@ -5,15 +5,15 @@ public class AlluringBottle extends Projectile {
 	private static String[] frames = new String[10];
 	static {
 		for (int i = 0; i < frames.length; i++) {
-			frames[i] = "resources/pool/frame_" + i + "_delay-0.01s.gif";
+			frames[i] = "resources/qtt/pool/frame_" + i + "_delay-0.01s.gif";
 		}
 	}
 	private boolean isActive;
 
 	public AlluringBottle(int x, int y, String dir) {
-		super(x, y, 0.04, "resources/bottle.png", dir);
+		super(x, y, 0.04, "resources/qtt/bottle.png", dir);
 	}
-	
+
 	public void allure() {
 		isActive = true;
 		

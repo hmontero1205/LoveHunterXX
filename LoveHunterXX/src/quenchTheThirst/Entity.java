@@ -4,24 +4,36 @@ import gui.components.Graphic;
 
 public abstract class Entity extends Graphic {
 
+	private int speed;
+
 	public Entity(int x, int y, double scale, String imageLocation) {
 		super(x, y, scale, imageLocation);
+	}
+
+	public Entity(int x, int y, double scale, String imageLocation, int speed) {
+		this(x, y, scale, imageLocation);
+
+		this.speed = speed;
+	}
+
+	public int getSpeed() {
+		return speed;
 	}
 
 	public boolean canMove(String dir) {
 		int x = this.getCenterX(), y = this.getCenterY();
 		switch (dir) {
 		case "north":
-			y -= 5;
+			y -= speed;
 			break;
 		case "east":
-			x += 5;
+			x += speed;
 			break;
 		case "south":
-			y += 5;
+			y += speed;
 			break;
 		case "west":
-			x -= 5;
+			x -= speed;
 			break;
 		default:
 			return false;
@@ -33,12 +45,10 @@ public abstract class Entity extends Graphic {
 			}
 
 			if (e.collideWith(x, y, this.getWidth(), this.getHeight())) {
-				System.out.println("FINISHED");
 				return false;
 			}
 		}
 
-		System.out.println("FINISHED");
 		return true;
 	}
 
@@ -57,16 +67,48 @@ public abstract class Entity extends Graphic {
 
 		switch (dir) {
 		case "north":
-			this.setY(this.getY() - 5);
+			for (int i = 0; i < speed; i++) {
+				this.setY(this.getY() - 1);
+				
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 		case "east":
-			this.setX(this.getX() + 5);
+			for (int i = 0; i < speed; i++) {
+				this.setX(this.getX() + i);
+				
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 		case "south":
-			this.setY(this.getY() + 5);
+			for (int i = 0; i < speed; i++) {
+				this.setY(this.getY() + i);
+				
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 		case "west":
-			this.setX(this.getX() - 5);
+			for (int i = 0; i < speed; i++) {
+				this.setX(this.getX() - i);
+				
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
 		}
 	}
