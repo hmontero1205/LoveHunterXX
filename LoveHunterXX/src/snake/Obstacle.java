@@ -7,7 +7,7 @@ import gui.components.Visible;
 public class Obstacle extends Present {
 
 	public Obstacle(int x, int y, int width, int height) {
-		super(x, y, width, height, "resources/Block.png");
+		super(x, y, width, height, "resources/obstacle.png");
 		setName("Block");
 	}
 

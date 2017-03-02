@@ -103,7 +103,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 		scoreCount.setText("" + (snake.presentList.size()-1));
 		
 		cBack = new Graphic(465,195,320,295,"resources/scorebackground.png");
-		cLine = new TextArea(475,205,320,295,"Shopping Spree!");
+		cLine = new TextArea(475,205,310,295,"Shopping Spree!");
 		
 		view.add(background);
 		view.add(sbBack);
@@ -111,16 +111,14 @@ public class SnakeScreen extends Screen implements KeyListener {
 		view.add(scoreCount);
 		view.add(cBack);
 		view.add(cLine);
-		for(Interactable i: snake.getItems()){ // add each snake body part.
+		for(Interactable i: snake.getItems()){ 
+			// add each snake body part.
 			view.add(i);
 		}
 		
 		LoveGift p = new LoveGift(50 , 60, 30, 30);
-		Obstacle o = new Obstacle(70, 120, 30, 30);
 		gens.add(p);
-		gens.add(o);
 		view.add(p);
-		view.add(o);
 	}
 	
 
