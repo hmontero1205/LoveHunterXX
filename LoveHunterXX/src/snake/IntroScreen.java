@@ -29,7 +29,7 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		buttonToGuide = new Button(350,100,100,50, "Guide Me.", Color.LIGHT_GRAY, new Action() {
+		buttonToGuide = new Button(340,100,120,50, "Instructions", Color.LIGHT_GRAY, new Action() {
 			@Override
 			public void act() {
 				// TODO Auto-generated method stub
@@ -51,7 +51,7 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 		});
 		
 		howToPlay = new Graphic(0,0,800,495,"resources/howToPlay.png");
-		splashArt = new Graphic(10,0,790,495,"resources/ShoppingSpree.png");
+		splashArt = new Graphic(0,0,800,495,"resources/ShoppingSpree.png");
 		
 		viewObjects.add(howToPlay);
 		viewObjects.add(buttonToGame);
