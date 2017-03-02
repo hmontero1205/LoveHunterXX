@@ -53,7 +53,6 @@ public class Snake extends MovingComponent{
 		this.direction = d;
 
 		for(int i = presentList.size()-1; i>0; i--){
-			System.out.println("CART: " + i + " UPDATED");
 			presentList.get(i).setX(presentList.get(i-1).getX());
 			presentList.get(i).setY(presentList.get(i-1).getY());
 		}
@@ -61,9 +60,9 @@ public class Snake extends MovingComponent{
 		// this moves the head.
 		switch(this.direction){
 		case left:
-			cart.setX(cart.getX() - DISTANCE); // could we not just use the cart field here
-			checkGenCollision();
+			cart.setX(cart.getX() - DISTANCE); 
 			cart.setSprite("resources/cartLeft.png");
+			checkGenCollision();
 			break;
 		case up:
 			cart.setY(cart.getY() - DISTANCE);
@@ -71,15 +70,14 @@ public class Snake extends MovingComponent{
 			break;
 		case right:
 			cart.setX(cart.getX() + DISTANCE);
-			checkGenCollision();
 			cart.setSprite("resources/cartRight.png");
+			checkGenCollision();
 			break;
 		case down:
 			cart.setY(cart.getY() + DISTANCE);
 			checkGenCollision();
 			break;
 		}
-
 	}
 
 	public double getPosx() {
@@ -110,9 +108,7 @@ public class Snake extends MovingComponent{
 			moveCoors(getDirection());
 
 			// check for any collisions.
-			checkGenCollision();
-			checkLose();
-
+			checkAll();
 		}
 	}
 
@@ -146,7 +142,7 @@ public class Snake extends MovingComponent{
 			if (cart.isCollided(presentList.get(i))){
 				refresh_r = 999999;
 				gameRunning = false;
-				System.out.println("Game Over. You ran into yourself.");
+				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
 				return true;                   
 			}
 		}
@@ -154,10 +150,19 @@ public class Snake extends MovingComponent{
 		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 50 || cart.getY() > 440){
 			refresh_r = 999999;
 			gameRunning = false;
-			System.out.println("Game Over. You ran into a wall.");
+			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/6 + " LovePoints.");
 			return true;
 		}
-
+		return false;
+	}
+	
+	public boolean checkWin(){
+		if(presentList.size()>15){
+			refresh_r=999999;
+			gameRunning = false;
+			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			return true;
+		}
 		return false;
 	}
 
@@ -166,7 +171,7 @@ public class Snake extends MovingComponent{
 		for(int i = 0; i < SnakeScreen.gens.size(); ++i){
 			System.out.println("cart: " + cart.getX() + ", " + cart.getY());
 			Present p = (Present) SnakeScreen.gens.get(i);
-			System.out.println("presnet: " + p.getX() + ", " + p.getY());
+			System.out.println("present: " + p.getX() + ", " + p.getY());
 			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
 				System.out.println("Present has been collided.");
 				SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
@@ -174,5 +179,11 @@ public class Snake extends MovingComponent{
 				SnakeGame.sScreen.updateScore();
 			}
 		}
+	}
+	
+	public void checkAll(){
+		checkGenCollision();
+		checkLose();
+		checkWin();
 	}
 }

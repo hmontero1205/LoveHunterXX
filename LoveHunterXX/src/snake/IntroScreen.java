@@ -17,9 +17,11 @@ import gui.components.Visible;
 
 public class IntroScreen extends ClickableScreen implements MouseListener {
 	
-	private Button button;
-	private Graphic background;
-	
+	private Button buttonToGuide;
+	private Button buttonToGame;
+	private Graphic splashArt;
+	private Graphic howToPlay;
+	private int clickCount =0;
 	public IntroScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
@@ -27,18 +29,33 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		button = new Button(350,100,100,50, "Start!", Color.LIGHT_GRAY, new Action() {
+		buttonToGuide = new Button(350,100,100,50, "Guide Me.", Color.LIGHT_GRAY, new Action() {
+			@Override
+			public void act() {
+				// TODO Auto-generated method stub
+				remove(splashArt);
+				remove(buttonToGuide);
+				clickCount++;
+				update();
+			}
+		});
+		
+		buttonToGame = new Button(350,400,100,50, "Start!", Color.LIGHT_GRAY, new Action() {
 			@Override
 			public void act() {
 				// TODO Auto-generated method stub
 				System.out.println("Go");
-				SnakeGame.sGame.setScreen(SnakeGame.gScreen);
-				
+				SnakeGame.sGame.setScreen(SnakeGame.sScreen);
+				SnakeGame.sScreen.snake.play();
 			}
 		});
 		
-		background = new Graphic(10,0,790,495,"resources/ShoppingSpree.png");
-		viewObjects.add(background);
-		viewObjects.add(button);
+		howToPlay = new Graphic(0,0,800,495,"resources/howToPlay.png");
+		splashArt = new Graphic(10,0,790,495,"resources/ShoppingSpree.png");
+		
+		viewObjects.add(howToPlay);
+		viewObjects.add(buttonToGame);
+		viewObjects.add(splashArt);
+		viewObjects.add(buttonToGuide);
 	}
 }
