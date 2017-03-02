@@ -102,7 +102,7 @@ public class Bird extends Obstacle {
 //		System.out.println((int) Math.floor(Math.random() * 2));
 		double chance = Math.random();
 		
-		if(chance < .007){
+		if(chance < .005){
 			startTime = System.currentTimeMillis();
 			excreted = true;
 			createFeces();
