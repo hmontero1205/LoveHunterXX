@@ -32,6 +32,8 @@ public class SnakeScreen extends Screen implements KeyListener {
 	Graphic sbBack;
 	TextArea line;
 	TextArea scoreCount;
+	Graphic cBack;
+	TextArea cLine;
 	
 	public SnakeScreen(int width, int height) {
 		super(width, height);
@@ -98,11 +100,16 @@ public class SnakeScreen extends Screen implements KeyListener {
 		scoreCount = new TextArea(600,75,250,200,"");
 		scoreCount.setSize(46);
 		scoreCount.setText("" + (snake.presentList.size()-1));
-
+		
+		cBack = new Graphic(465,195,320,295,"resources/scorebackground.png");
+		cLine = new TextArea(500,205,320,295,"Win/Lose Text Here Please");
+		
 		view.add(background);
 		view.add(sbBack);
 		view.add(line);
 		view.add(scoreCount);
+		view.add(cBack);
+		view.add(cLine);
 		for(Interactable i: snake.getItems()){ // add each snake body part.
 			view.add(i);
 		}
