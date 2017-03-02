@@ -59,6 +59,7 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
+				setRunning(false);
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
 						null);

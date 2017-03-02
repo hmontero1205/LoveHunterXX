@@ -18,6 +18,7 @@ public class Bird extends Obstacle {
 	private Image image;
 	private String imgLoc;
 	private boolean load;
+	private boolean collided;
 	private Action action;
 	private boolean excreted;
 	
@@ -49,9 +50,14 @@ public class Bird extends Obstacle {
 	}
 	public void update(Graphics2D g) {
 		if (load) {
+			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
+				collided = true;
+				act();
+			}
 			if (getX() < w*-1) {
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
+				setRunning(false);
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
 						null);

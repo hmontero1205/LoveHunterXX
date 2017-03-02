@@ -11,11 +11,16 @@ public class Excrement extends Obstacle {
 	private String imgSrc;
 	private Image image;
 	private boolean load;
+	private boolean collided;
+	private int w;
+	private int h;
 	public Excrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
 		startDrop = System.currentTimeMillis();
 		grav = vy;
 		imgSrc = imageLocation;
+		this.w = w;
+		this.h = h;
 		setX(x);
 		setY(y);
 		loadImage();
@@ -30,11 +35,24 @@ public class Excrement extends Obstacle {
 			e.printStackTrace();
 		}
 	}
+	public boolean isCollided(){
+		Player playTemp = PlatformerGame.cs.player;
+		if(playTemp.getY() < getY() + h && playTemp.getX() + playTemp.getWidth() > getX() &&
+				getX() + w > playTemp.getX()){
+			return true;
+		}
+		return false;
+	}
 	public void update(Graphics2D g){
 		if(load){
 			if(getY() > 850){
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
+			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
+				collided = true;
+				act();
 			}
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			setPosy(getPosy() + getVy());
