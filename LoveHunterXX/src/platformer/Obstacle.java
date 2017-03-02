@@ -24,7 +24,7 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 	private boolean collided;
 	private int id;
 
-	public Obstacle(int x, int y, int w, int h, int vx, int vy,  String imageLocation) {
+	public Obstacle(int x, int y, int w, int h, int vx, double vy,  String imageLocation) {
 		super(x, y, w, h);
 		this.x = x;
 		this.y = y;

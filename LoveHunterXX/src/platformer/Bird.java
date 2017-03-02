@@ -12,6 +12,9 @@ public class Bird extends Obstacle {
 	private int y;
 	private int w;
 	private int h;
+	private long startTime;
+	private long checkRate;
+	
 	private Image image;
 	private String imgLoc;
 	private boolean load;
@@ -31,6 +34,8 @@ public class Bird extends Obstacle {
 		setVx(vx);
 		setVy(vy);
 		loadImage();
+		startTime = System.currentTimeMillis();
+		checkRate = 300;
 		this.play();
 	}
 	private void loadImage() {
@@ -58,7 +63,7 @@ public class Bird extends Obstacle {
 		}
 	}
 	public void createFeces(){
-		Obstacle obs = new Obstacle(x, y, h, h, h, h, imgLoc);
+		Obstacle obs = new Obstacle(x, y, 50, 50, (int)super.getVx(), 1.5, imgLoc);
 	}
 	public void run() {
 		setRunning(true);
@@ -73,6 +78,10 @@ public class Bird extends Obstacle {
 		}
 	}
 	public void checkBehaviors(){
-		System.out.println((int) Math.random() * 2);
+//		System.out.println((int) Math.floor(Math.random() * 2));
+		if(!excreted && System.currentTimeMillis() - startTime > checkRate){
+			startTime = System.currentTimeMillis();
+			createFeces();
+		}
 	}
 }
