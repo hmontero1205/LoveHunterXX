@@ -33,4 +33,8 @@ public interface PlayerInterface extends Visible {
 
 	void setSwimming(boolean b);
 
+	boolean getSuperStrength();
+
+	boolean getSwimming();
+
 }

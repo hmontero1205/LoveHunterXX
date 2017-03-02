@@ -82,16 +82,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 			});
 			viewObjects.add(b);
-			//
-			// Turtle turtle = new Turtle(0 - 50, WINDOWBARHEIGHT + 25, 50, 25,
-			// 1, 1000, 1000, 1000);
-			// viewObjects.add(turtle);
-			// turtle.play();
-			//
-			// turtle = new Turtle(800, WINDOWBARHEIGHT + 25, 50, 25, -1, 1000,
-			// 1000, 500);
-			// viewObjects.add(turtle);
-			// turtle.play();
 		}
 	}
 
@@ -146,13 +136,20 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	}
 
 	public void checkDrown() {
-		if (currentRow.getTerrain() == WATER && !player.isOnPlatform()) {
-			gameOver("You drowned!!");
-			// player.die();
-			currentRow.setCheckPlayer(false);
-			currentRow.setPostGame(true);
-
+		if(player.getSwimming()){
+			currentRow.setAllowPush(true);
 		}
+		else{
+			if (currentRow.getTerrain() == WATER && !player.isOnPlatform()) {
+				gameOver("You drowned!!");
+				currentRow.setCheckPlayer(false);
+				currentRow.setAllowPush(true);
+			}
+			else{
+				currentRow.setAllowPush(false);
+			}
+		}
+		
 	}
 
 	public KeyListener getKeyListener() {

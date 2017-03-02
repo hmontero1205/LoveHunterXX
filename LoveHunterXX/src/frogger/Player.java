@@ -145,7 +145,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	
 	@Override
 	public void activatePower() {
-		if(inventory.size() > 0) inventory.get(currentPowerUp).getEffect().act();
+		if(inventory.size() > 0) inventory.get(currentPowerUp).start();
 	}
 	
 	@Override
@@ -186,7 +186,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 			if ((getX() > 780 || getX() < 10)) {
 				setRunning(false);
 				currentTerrain.setCheckPlayer(false);
-				currentTerrain.setPostGame(false);
+				currentTerrain.setAllowPush(false);
 				setVx(0);
 				FroggerGame.fs.gameOver("You were swept away by the current!");
 				die();
@@ -233,14 +233,22 @@ public class Player extends MovingComponent implements PlayerInterface {
 	@Override
 	public void setSuperStrength(boolean b) {
 		this.strength = b;
-		
+	}
+	@Override
+	public boolean getSuperStrength(){
+		return this.strength;
 	}
 
 	@Override
 	public void setSwimming(boolean b) {
-		this.swimming = b;
-		
+		this.swimming = b;	
 	}
+	
+	@Override
+	public boolean getSwimming(){
+		return this.swimming;
+	}
+
 
 
 

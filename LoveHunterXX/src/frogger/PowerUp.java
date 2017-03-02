@@ -7,16 +7,20 @@ import javax.swing.ImageIcon;
 import gui.components.Action;
 import gui.components.Component;
 
-public class PowerUp extends Component{
-	private Action effect;
+public class PowerUp extends Component implements Runnable{
+	private int effect;
 	private String imgSrc;
 	private boolean superCreated;
+	private final int STRENGTH = 0;
+	private final int SWIM = 1;
+	private final int SLOW = 2;
 
-	public PowerUp(int x, int y, int w, int h, String s, Action action) {
+	public PowerUp(int x, int y, int w, int h, String s, int e) {
 		super(x,y,w,h);
 		superCreated = true;
-		this.effect = action;
+		this.effect = e;
 		this.imgSrc = s;
+		//Thread pThread = new Thread(this);
 		update();
 	}
 
@@ -43,8 +47,53 @@ public class PowerUp extends Component{
 		return touching;
 	}
 
-	public Action getEffect() {
-		return this.effect;
+	public void performEffect() {
+		switch(this.effect){
+			case STRENGTH:
+				FroggerScreen.player.setSuperStrength(true);	
+				System.out.println("le touch");
+				try {
+					Thread.sleep(3000);
+					FroggerScreen.player.setSuperStrength(false);	
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case SWIM:
+				FroggerScreen.player.setSwimming(true);	
+				System.out.println("le touch");
+				try {
+					Thread.sleep(5000);
+					FroggerScreen.player.setSwimming(false);	
+					FroggerGame.fs.checkPlayerRow();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case SLOW:
+				FroggerGame.fs.setSlowMode(true);
+				System.out.println("le touch");
+				try {
+					Thread.sleep(8000);	
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				FroggerGame.fs.setSlowMode(false);
+				break;
+		}
 	}
 
+	@Override
+	public void run() {
+		performEffect();
+	}
+	
+	public void start(){
+		Thread pThread = new Thread(this);
+		pThread.start();
+	}
+	
 }
