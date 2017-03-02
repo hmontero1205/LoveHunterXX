@@ -21,6 +21,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	private int score;
 	private Obstacle obs;
 	public int test;
+	public ArrayList<Graphic> hearts;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
@@ -85,22 +86,14 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				});
 				break;
 			case 2:
-				obs = new Bird(850, 200, 50, 50, -3,0, "resources/bird1.png");
+				obs = new Obstacle(850, 200, 50, 50, -3,0, "resources/bird1.png");
 				obs.setAction(new Action() {
 					public void act() {
-						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
-						// - 1);
-						int currentScore = PlatformerGame.cs.getScore();
-						while(PlatformerGame.cs.getScore() < (currentScore+5)){
-							try {
-								Thread.sleep(20);
-								update();
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-						}
+						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+						PlatformerGame.cs.player.setDamaged(true);
+						
+						System.out.println(PlatformerGame.cs.player.getHp());
 					}
-					
 				});
 				break;
 			}
@@ -138,10 +131,31 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		obstacles = new ArrayList<Obstacle>();
+		hearts = new ArrayList<Graphic>();
 		while (player.getHp() > 0) {
+			updateHp();
 			updateScore();
 			appearNewObstacle();
 		}
+		updateHp();
+	}
+
+	private void updateHp() {
+		int x = 20;
+		
+		while (hearts.size() > 0) {
+			this.remove(hearts.remove(hearts.size()-1));
+		}
+		
+		for(int i = 0; i < player.getHp(); i++){
+			Graphic heart = new Graphic(x, 30, 20, 20, "resources/heart.png");
+			hearts.add(heart);
+			this.addObject(heart);
+			
+			x+=30;
+		}
+		
+
 	}
 
 	private void updateScore() {
