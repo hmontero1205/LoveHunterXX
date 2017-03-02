@@ -49,8 +49,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		 * also changed the effect of the crab to temporarily root the player... */
 		
 		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
-		int chance = (obstacles.size() > 0) ? (int) obstacles.get(obstacles.size() - 1).getPosx() : 0;
-		int x1 = (int) Math.floor(Math.random() * 400);
+		int chance = (obstacles.size() > 0) ? 300000/getScore(): 0;
+		int x1 = (int) Math.floor(Math.random() * 4000);
 		if (x1 > chance) {
 			//(int) (Math.random() * 3
 			switch ((int) (Math.random() * 3)) {

@@ -13,7 +13,6 @@ public class Excrement extends Obstacle {
 	private boolean load;
 	public Excrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
-		System.out.println(x);
 		startDrop = System.currentTimeMillis();
 		grav = vy;
 		imgSrc = imageLocation;

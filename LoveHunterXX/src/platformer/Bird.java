@@ -72,6 +72,14 @@ public class Bird extends Obstacle {
 		PlatformerGame.cs.obstacles.add(obs);
 		PlatformerGame.cs.addObject(obs);
 	}
+	public boolean isCollided(){
+		Player playTemp = PlatformerGame.cs.player;
+		if(playTemp.getY() < getY() + h && playTemp.getX() + playTemp.getWidth() > getX() &&
+				getX() + w > playTemp.getX()){
+			return true;
+		}
+		return false;
+	}
 	public void run() {
 		setRunning(true);
 		while(isRunning()){
@@ -86,7 +94,9 @@ public class Bird extends Obstacle {
 	}
 	public void checkBehaviors(){
 //		System.out.println((int) Math.floor(Math.random() * 2));
-		if(!excreted && System.currentTimeMillis() - startTime > checkRate && getPosx() < 400){
+		double chance = Math.random();
+		
+		if(chance < .007){
 			startTime = System.currentTimeMillis();
 			excreted = true;
 			createFeces();
