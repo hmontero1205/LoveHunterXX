@@ -157,7 +157,7 @@ public class Snake extends MovingComponent{
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
 			SnakeGame.sScreen.updateText("                Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
-			return true;
+			return true;//
 		}
 		return false;
 	}
