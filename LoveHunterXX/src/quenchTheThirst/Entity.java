@@ -69,45 +69,25 @@ public abstract class Entity extends Graphic {
 		case "north":
 			for (int i = 0; i < speed; i++) {
 				this.setY(this.getY() - 1);
-				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
 			}
 			break;
 		case "east":
 			for (int i = 0; i < speed; i++) {
-				this.setX(this.getX() + i);
-				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				this.setX(this.getX() + 1);
+
 			}
 			break;
 		case "south":
 			for (int i = 0; i < speed; i++) {
-				this.setY(this.getY() + i);
-				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				this.setY(this.getY() + 1);
+
 			}
 			break;
 		case "west":
 			for (int i = 0; i < speed; i++) {
-				this.setX(this.getX() - i);
-				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				this.setX(this.getX() - 1);
+
 			}
 			break;
 		}

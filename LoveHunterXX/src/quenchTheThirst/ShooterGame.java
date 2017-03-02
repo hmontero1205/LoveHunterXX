@@ -16,7 +16,7 @@ public class ShooterGame extends GUIApplication {
 	public void initScreen() {
 		shooterScreen = new QTTScreen(800, 600);
 		introScreen = new ShooterIntroScreen(800,600);
-		setScreen(shooterScreen);
+		setScreen(introScreen);
 	}
 
 	public static void main(String[] string) {
