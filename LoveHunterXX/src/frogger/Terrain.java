@@ -64,14 +64,8 @@ public class Terrain extends Component implements Runnable {
 					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
 					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
 				}
-//				ImageIcon im = new ImageIcon("resources/frogger/glove.png");
-//				g.drawImage(im.getImage(), 10 + (0 * 35), 10, 25, 25, null);
-//				im = new ImageIcon("resources/frogger/snorkel.png");
-//				g.drawImage(im.getImage(), 10 + (1 * 35), 10, 25, 25, null);
-//				g.drawImage(im.getImage(), 10 + (2 * 35), 10, 25, 25, null);
 				g.setColor(Color.RED);
 				if(FroggerScreen.player.getInventory().size() > 0) g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31); // weird numbers so that the selection box can center itself around the items
-//				g.drawRect(7 + (0 * 35), 7, 31, 31);
 
 				break;
 			default:
@@ -116,7 +110,7 @@ public class Terrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<.1){
+			if(this.powerUp == null && Math.random()<1){
 				System.out.println("hey");
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
