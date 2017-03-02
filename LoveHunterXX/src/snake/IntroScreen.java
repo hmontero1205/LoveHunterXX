@@ -21,7 +21,7 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 	private Button buttonToGame;
 	private Graphic splashArt;
 	private Graphic howToPlay;
-	private int clickCount =0;
+	
 	public IntroScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
@@ -35,7 +35,6 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 				// TODO Auto-generated method stub
 				remove(splashArt);
 				remove(buttonToGuide);
-				clickCount++;
 				update();
 			}
 		});
