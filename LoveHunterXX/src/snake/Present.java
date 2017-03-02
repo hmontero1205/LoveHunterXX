@@ -40,14 +40,7 @@ public abstract class Present extends Interactable implements PresentInterface, 
 		name = s;
 	}
 	@Override
-	abstract public void generateNew(List<GeneratableInterface> presents);//{
-//		// TODO Auto-generated method stub
-//		if(SnakeGame.sScreen == null) return ;
-//		int[] newCoords = getNewXY();
-//		presents.add(getNewObject(newCoords[0],newCoords[1]));
-//		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
-//		
-//	}
+	abstract public void generateNew(List<GeneratableInterface> presents);
 	
 	abstract public GeneratableInterface getNewObject(int x, int y);
 	@Override

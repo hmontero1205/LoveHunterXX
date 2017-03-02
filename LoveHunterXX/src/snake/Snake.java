@@ -153,8 +153,8 @@ public class Snake extends MovingComponent{
 		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 50 || cart.getY() > 440){
 			refresh_r = 999999;
 			gameRunning = false;
-			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/6 + " LovePoints.");
-			SnakeGame.sScreen.updateText("Game Over. You ran into a wall. You have earned " + presentList.size()/6 + " LovePoints.");
+			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
+			SnakeGame.sScreen.updateText("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
 			return true;
 		}
 		return false;
@@ -165,6 +165,7 @@ public class Snake extends MovingComponent{
 			refresh_r=999999;
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			SnakeGame.sScreen.updateText("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
 			return true;
 		}
 		return false;
@@ -173,9 +174,7 @@ public class Snake extends MovingComponent{
 
 	public void checkGenCollision(){
 		for(int i = 0; i < SnakeScreen.gens.size(); ++i){
-			System.out.println("cart: " + cart.getX() + ", " + cart.getY());
 			Present p = (Present) SnakeScreen.gens.get(i);
-			System.out.println("present: " + p.getX() + ", " + p.getY());
 			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
 				// keep track of the collision.
 				Present collided = (Present) SnakeScreen.gens.get(i);
@@ -192,11 +191,17 @@ public class Snake extends MovingComponent{
 				else if(collided.getName() == "Block"){
 					// collision was with Obstacle type.
 					Obstacle item = (Obstacle) collided;
-					SnakeGame.sScreen.remove(item); // removes old obstacle.
+					// remove old item from gens list.
+					SnakeScreen.gens.remove(item);
+					// removes old obstacle from screen.
+					SnakeGame.sScreen.remove(item); 
+					// generate new obstacle.
 					item.generateNew(SnakeScreen.gens);
 					
-					removeLastPresent();
-					System.out.println("Collided with block");
+					if(presentList.size() > 2){
+						removeLastPresent();
+						System.out.println("Collided with block");
+					}
 				}
 				
 				SnakeGame.sScreen.updateScore();
