@@ -69,7 +69,7 @@ public class Terrain extends Component implements Runnable {
 				g.drawImage(im.getImage(), 10 + (1 * 35), 10, 25, 25, null);
 				g.drawImage(im.getImage(), 10 + (2 * 35), 10, 25, 25, null);
 				g.setColor(Color.RED);
-//				g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31);
+//				g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31); // weird numbers so that the selection box can center itself around the items
 				g.drawRect(7 + (0 * 35), 7, 31, 31);
 
 				break;
