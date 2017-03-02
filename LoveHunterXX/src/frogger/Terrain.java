@@ -116,7 +116,7 @@ public class Terrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<.9){
+			if(this.powerUp == null && Math.random()<.1){
 				System.out.println("hey");
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
@@ -127,7 +127,7 @@ public class Terrain extends Component implements Runnable {
 				checkPlayer();
 			}
 			try {
-				int sleepTime = (checkPlayer) ? 40:1000;
+				int sleepTime = (checkPlayer) ? 40:5000;
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -192,7 +192,6 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public CollisionInterface determineMovingComponent(int s, int v){
-		
 		if(terrain == ROAD)
 			return new Car(s, getY() + 10, 50, 25, v,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
@@ -219,9 +218,8 @@ public class Terrain extends Component implements Runnable {
 	public void checkPlayer() {
 		if(terrain == GRASS){
 			if(this.powerUp!=null && powerUp.isTouchingPlayer(FroggerGame.fs.player)){
-				powerUp.start();
 				FroggerGame.fs.remove(powerUp);
-				//FroggerGame.fs.player.pickUpItem(powerUp);
+				FroggerGame.fs.player.pickUpItem(powerUp);
 				this.powerUp = null;
 			}
 		}
