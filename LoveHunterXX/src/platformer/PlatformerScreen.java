@@ -155,7 +155,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 			x+=30;
 		}
 		
-
+//xd
 	}
 
 	private void updateScore() {
