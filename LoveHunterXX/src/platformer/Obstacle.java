@@ -23,7 +23,7 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 	private boolean collided;
 	private int id;
 
-	public Obstacle(int x, int y, int w, int h, int vx, String imageLocation) {
+	public Obstacle(int x, int y, int w, int h, int vx, int vy,  String imageLocation) {
 		super(x, y, w, h);
 		this.x = x;
 		this.y = y;
@@ -35,6 +35,7 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 		setX(x);
 		setY(y);
 		setVx(vx);
+		setVy(vy);
 		loadImage();
 		this.play();
 	}
@@ -48,7 +49,6 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 		}
 
 	}
-
 	public void update(Graphics2D g) {
 		if (load) {
 			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
@@ -62,7 +62,9 @@ public class Obstacle extends MovingComponent implements Collidable, Action {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
 						null);
 				setPosx(getPosx() + getVx());
+				setPosy(getPosy() + getVy());
 				super.setX((int) getPosx());
+				super.setY((int) getPosy());
 			}
 		}
 	}
