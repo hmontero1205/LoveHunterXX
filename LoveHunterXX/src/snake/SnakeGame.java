@@ -19,7 +19,7 @@ public class SnakeGame extends GUIApplication {
 		gameStart = false;
 		sScreen = new SnakeScreen(getWidth(),getHeight());
 		iScreen = new IntroScreen(getWidth(),getHeight());
-		gScreen = new GuideScreen(getWidth(),getHeight());
+		//gScreen = new GuideScreen(getWidth(),getHeight());
 		setScreen(iScreen);
 	}
 	

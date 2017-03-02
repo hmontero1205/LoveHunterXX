@@ -92,8 +92,8 @@ public class SnakeScreen extends Screen implements KeyListener {
 		// TODO Auto-generated method stub
 		gens = new ArrayList<GeneratableInterface>();
 		snake = new Snake(0, 0, 100, 100);
-		background = new Graphic(10, 40, 450,450, "resources/snakebackground.png");
-		sbBack = new Graphic(465,40,320,200,"resources/snakebackground.png");
+		background = new Graphic(10, 40, 450,450, "resources/snakebackground.jpg");
+		sbBack = new Graphic(465,40,320,150,"resources/scorebackground.png");
 		line = new TextArea(525,50,300,200, "You have collected:");
 		scoreCount = new TextArea(600,75,250,200,"");
 		scoreCount.setSize(46);
