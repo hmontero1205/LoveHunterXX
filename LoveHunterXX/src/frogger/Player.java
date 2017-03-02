@@ -162,6 +162,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 			inventory.get(currentPowerUp).start();
 			inventory.remove(currentPowerUp);
 			currentPowerUp --;
+			if(currentPowerUp < 0) currentPowerUp = 0;
 			updateInventory();
 		}
 	}
