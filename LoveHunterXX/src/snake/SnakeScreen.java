@@ -20,11 +20,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	public final static int UPARROWKEY = 38;
 	public final static int RIGHTARROWKEY = 39;
 	public final static int DOWNARROWKEY = 40;
-	
-	/*public final static int LEFT = 0;
-	public final static int UP = 1;
-	public final static int RIGHT = 2;
-	public final static int DOWN = 3;*/
+
 
 	public Snake snake;
 	public static List<GeneratableInterface> gens; // generated objects.
@@ -86,7 +82,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 	
 	public void updateScore(){
 		scoreCount.clear();
-		scoreCount.setText(snake.presentList.size() - 1 + "");
+		scoreCount.setText(snake.presentList.size() - 1  + "");
 	}
 
 	@Override
@@ -114,9 +110,12 @@ public class SnakeScreen extends Screen implements KeyListener {
 			view.add(i);
 		}
 		
-		Present p = new Present(50 , 60, 30, 30, "resources/present.png", true, false);
+		LoveGift p = new LoveGift(50 , 60, 30, 30);
+		Obstacle o = new Obstacle(70, 120, 30, 30);
 		gens.add(p);
+		gens.add(o);
 		view.add(p);
+		view.add(o);
 	}
 	
 

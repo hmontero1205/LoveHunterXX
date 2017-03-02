@@ -4,14 +4,10 @@ import java.util.List;
 
 import gui.components.Visible;
 
-public class Present extends Interactable implements PresentInterface, GeneratableInterface{
+public abstract class Present extends Interactable implements PresentInterface, GeneratableInterface{
 	
 	private int reward;
 	private String name;
-	private boolean collectable;
-	private boolean collected;
-	
-	
 	
 	public Present(int x, int y, int width, int height, String path) {
 		super(x, y, width, height, path);
@@ -20,30 +16,8 @@ public class Present extends Interactable implements PresentInterface, Generatab
 	
 	public Present(int x, int y, int width, int height, String path, boolean collectable, boolean collected) {
 		super(x, y, width, height, path);
-		this.collectable = collectable;
-		this.collected = collected;
 	}
 	
-	@Override
-	public void setCollectable(boolean b) {
-		// TODO Auto-generated method stub
-		collectable = b;
-	}
-	@Override
-	public void setCollected(boolean b) {
-		// TODO Auto-generated method stub
-		collected = b;
-	}
-	@Override
-	public boolean isCollectable() {
-		// TODO Auto-generated method stub
-		return collectable;
-	}
-	@Override
-	public boolean isCollected() {
-		// TODO Auto-generated method stub
-		return collected;
-	}
 	@Override
 	public void setReward(int r) {
 		// TODO Auto-generated method stub
@@ -66,22 +40,16 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		name = s;
 	}
 	@Override
-	public void generateNew(List<GeneratableInterface> presents) {
-		// TODO Auto-generated method stub
-		if(SnakeGame.sScreen == null) return ;
-		presents.add(getNewObject(getNewX(),getNewY()));
-		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
-		
-	}
+	abstract public void generateNew(List<GeneratableInterface> presents);//{
+//		// TODO Auto-generated method stub
+//		if(SnakeGame.sScreen == null) return ;
+//		int[] newCoords = getNewXY();
+//		presents.add(getNewObject(newCoords[0],newCoords[1]));
+//		SnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
+//		
+//	}
 	
-	public GeneratableInterface getNewObject(int x, int y){
-		return new Present(x ,y, 30,30, "resources/present.png");
-	}
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
+	abstract public GeneratableInterface getNewObject(int x, int y);
 	@Override
 	//I don' think we did this right. It should generate on any cell that is not occupied. Not just an x or y value
 	//Let's say we have an entire horizontal row of presents, it would always say false cuz all the x 
@@ -106,9 +74,8 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated method stub
 		int x;
 		do{
-			//x = getRandBetween(30, 440);
 			System.out.println("stucccck");
-			x = 30 + (20 * getRandBetween(0, 13));
+			x = 30 + (20 * getRandBetween(0, 19));
 		}while(!isEmptyX(x));
 		System.out.println("x: " + x);
 		return x;
@@ -118,10 +85,31 @@ public class Present extends Interactable implements PresentInterface, Generatab
 		// TODO Auto-generated method stub
 		int y;
 		do{
-			y = 60 + (20 * getRandBetween(0, 13));
+			y = 60 + (20 * getRandBetween(0, 19));
 		}while(!isEmptyX(y));
 		System.out.print("y: " + y);
 		return y;
+	}
+	public boolean isEmptySpace(int x, int y){
+		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
+			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y && 
+					SnakeGame.sScreen.getViewObjects().get(i).getX() == x){
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	public int[] getNewXY(){
+		int[] coords = new int[2];
+		int x,y;
+		do{
+			x = 30 + (20 * getRandBetween(0, 19));
+			y = 60 + (20 * getRandBetween(0, 19));
+		}while(!isEmptySpace(x, y));
+		coords[0] = x;
+		coords[1] = y;
+		return coords;
 	}
 	
 }
