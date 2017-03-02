@@ -59,11 +59,19 @@ public class Terrain extends Component implements Runnable {
 			case INVENTORY:
 				g.setColor(new Color(179, 179, 179));
 				g.fillRect(0, 0, getWidth(), getHeight());
-				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
-					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
-					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
-				}
-				g.drawRect(10 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 10, 25, 25);
+//				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
+//					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
+//					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
+//				}
+				ImageIcon im = new ImageIcon("resources/frogger/glove.png");
+				g.drawImage(im.getImage(), 10 + (0 * 35), 10, 25, 25, null);
+				im = new ImageIcon("resources/frogger/snorkel.png");
+				g.drawImage(im.getImage(), 10 + (1 * 35), 10, 25, 25, null);
+				g.drawImage(im.getImage(), 10 + (2 * 35), 10, 25, 25, null);
+				g.setColor(Color.RED);
+//				g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31);
+				g.drawRect(7 + (0 * 35), 7, 31, 31);
+
 				break;
 			default:
 				ImageIcon icon = new ImageIcon(getImgLoc());
