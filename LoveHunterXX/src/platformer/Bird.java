@@ -73,6 +73,7 @@ public class Bird extends Obstacle {
 		PlatformerGame.cs.obstacles.add(obs);
 		PlatformerGame.cs.addObject(obs);
 	}
+	
 	public void run() {
 		setRunning(true);
 		while(isRunning()){
