@@ -29,6 +29,7 @@ public class Terrain extends Component implements Runnable {
 	private final int ROAD = 1;
 	private final int WATER = 2;
 	private final int INVENTORY = 3;
+	private final int MENU = 4;
 	private boolean allowPush;
 	private boolean postGame;
 	private int numTurtles;
@@ -58,15 +59,18 @@ public class Terrain extends Component implements Runnable {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			switch(terrain) {
 			case INVENTORY:
-				g.setColor(new Color(179, 179, 179));
+				g.setColor(new Color(128,21,21));
 				g.fillRect(0, 0, getWidth(), getHeight());
 				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
 					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
 					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
 				}
-				g.setColor(Color.RED);
-				if(FroggerScreen.player.getInventory().size() > 0) g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31); // weird numbers so that the selection box can center itself around the items
-
+				g.setColor(Color.pink);
+				if(FroggerScreen.player.getInventory().size() > 0) g.drawRoundRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31,20, 20); // weird numbers so that the selection box can center itself around the items
+				break;
+			case MENU:
+				g.setColor(new Color(128,21,21));
+				g.fillRect(0, 0, getWidth(), getHeight());
 				break;
 			default:
 				ImageIcon icon = new ImageIcon(getImgLoc());
@@ -96,22 +100,15 @@ public class Terrain extends Component implements Runnable {
 				break;
 			case GRASS:
 				runGrass();
-			case INVENTORY:
-				runInventoryUI();
+				break;
+			default: break;
 		}
 		
-	}
-	
-	private void runInventoryUI() {
-		while(isRunning) {
-			
-		}
 	}
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<1){
-				System.out.println("hey");
+			if(this.powerUp == null && Math.random()<.1){
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
 				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], selection);
@@ -121,7 +118,7 @@ public class Terrain extends Component implements Runnable {
 				checkPlayer();
 			}
 			try {
-				int sleepTime = (checkPlayer && this.powerUp!=null) ? 40:5000;
+				int sleepTime = (checkPlayer && this.powerUp!=null) ? 40:9000;
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -174,7 +171,7 @@ public class Terrain extends Component implements Runnable {
 			m.play();
 		}
 		CollisionInterface trailing = mcList.get(mcList.size() - 1);
-		CollisionInterface leading = mcList.get(0);	
+		//CollisionInterface leading = mcList.get(0);	
 		if(((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)) && (trailing.getVx() == vel)){
 			CollisionInterface m = determineMovingComponent(startingPos,vel);
 			mcList.add(m);
@@ -246,7 +243,6 @@ public class Terrain extends Component implements Runnable {
 					}
 					else{
 						if(!FroggerGame.fs.player.isOnPlatform()){
-							System.out.println("Ride");
 							FroggerGame.fs.player.ridePlatform(p);
 							
 						}

@@ -5,6 +5,7 @@
 package frogger;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,7 @@ import gui.components.Action;
 import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.MovingComponent;
+import gui.components.TextLabel;
 import gui.components.Visible;
 
 public class FroggerScreen extends Screen implements KeyListener, MouseListener, Runnable, MouseWheelListener {
@@ -30,18 +32,22 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public final static int ROAD = 1;
 	public final static int WATER = 2;
 	public final static int INVENTORY = 3;
+	public final static int MENU = 4;
 	public static ArrayList<Terrain> tList;
 	public static PlayerInterface player;
 	public static Terrain currentRow;
 	public static boolean gameOver;
-	private Button b;
+	private Button resetButton;
 	private boolean superCreated;
 	private boolean playerLocked;
 	private boolean slowMode;
+	public int level;
+	private TextLabel infoBox;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
 		superCreated = true;
+		level = 1;
 		startGame();
 	}
 
@@ -51,31 +57,32 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			endThreads(viewObjects);
 			viewObjects.clear();
 			
-			player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
+			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
 			
 			tList = new ArrayList<Terrain>();
-			// for(Terrain t:levels[0]){
-			// tList.add(t);
-			// t.resetTerrain();
-			// }
 			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER,-4, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, true));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-
-			b = new Button(695, 561, 100, 35, "Restart", Color.green, new Action() {
+			ProgressMarker p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			p.start();
+			viewObjects.add(p);
+			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
+			infoBox.setC(Color.pink);
+			viewObjects.add(infoBox);
+			resetButton = new Button(695, 561, 100, 35, "Restart", Color.pink, new Action() {
 
 				@Override
 				public void act() {
@@ -83,7 +90,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 				};
 
 			});
-			viewObjects.add(b);
 		}
 	}
 
@@ -192,26 +198,28 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public void gameOver(String m) {
 		if (!gameOver) {
 			gameOver = true;
-			System.out.println("GAME OVER!\n" + m);
+			infoBox.setText("Game over! "+m);
 			currentRow.setCheckPlayer(false);
+			addObject(resetButton);
 		}
 
 	}
 
 	public void startGame() {
-		System.out.println("Game started");
 		initObjects(getViewObjects());
+		infoBox.setText("Level "+level);
 		Thread fGame = new Thread(this);
 		fGame.start();
 		currentRow = tList.get(tList.size() - 1);
 		gameOver = false;
 		playerLocked = true;
+		remove(resetButton);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (b.isHovered(e.getX(), e.getY())) {
-			b.act();
+		if (resetButton.isHovered(e.getX(), e.getY())) {
+			resetButton.act();
 		}
 
 	}

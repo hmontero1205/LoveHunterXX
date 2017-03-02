@@ -20,14 +20,12 @@ public class PowerUp extends Component implements Runnable{
 		superCreated = true;
 		this.effect = e;
 		this.imgSrc = s;
-		//Thread pThread = new Thread(this);
 		update();
 	}
 
 	@Override
 	public void update(Graphics2D g) {
 		if(superCreated){
-			System.out.println(imgSrc);
 			ImageIcon icon = new ImageIcon("resources/frogger/"+imgSrc);
 			g.drawImage(icon.getImage(),0,0, getWidth(), getHeight(), null);
 		}
@@ -52,7 +50,6 @@ public class PowerUp extends Component implements Runnable{
 		switch(this.effect){
 			case STRENGTH:
 				FroggerScreen.player.setSuperStrength(true);	
-				System.out.println("le strength");
 				try {
 					Thread.sleep(3000);
 					FroggerScreen.player.setSuperStrength(false);	
@@ -62,7 +59,6 @@ public class PowerUp extends Component implements Runnable{
 				break;
 			case SWIM:
 				FroggerScreen.player.setSwimming(true);	
-				System.out.println("le swim");
 				try {
 					Thread.sleep(5000);
 					FroggerScreen.player.setSwimming(false);	
@@ -73,7 +69,6 @@ public class PowerUp extends Component implements Runnable{
 				break;
 			case SLOW:
 				FroggerGame.fs.setSlowMode(true);
-				System.out.println("le slow");
 				try {
 					Thread.sleep(8000);	
 				} catch (InterruptedException e) {

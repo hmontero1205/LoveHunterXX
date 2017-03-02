@@ -192,17 +192,17 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 		return touching;
 	}
 
-	@Override
-	public boolean isApproachingPlayer(PlayerInterface p) {
-		boolean approaching = false;
-		if (getVx() > 0 && p.getX() - this.getX() + this.getWidth() < 200
-				&& p.getX() - this.getX() + this.getWidth() > 0) {
-			approaching = true;
-		} else if (this.getX() - p.getX() + p.getWidth() < 200 && this.getX() - p.getX() + p.getWidth() > 0) {
-			approaching = true;
-		}
-		return approaching;
-	}
+//	@Override
+//	public boolean isApproachingPlayer(PlayerInterface p) {
+//		boolean approaching = false;
+//		if (getVx() > 0 && p.getX() - this.getX() + this.getWidth() < 200
+//				&& p.getX() - this.getX() + this.getWidth() > 0) {
+//			approaching = true;
+//		} else if (this.getX() - p.getX() + p.getWidth() < 200 && this.getX() - p.getX() + p.getWidth() > 0) {
+//			approaching = true;
+//		}
+//		return approaching;
+//	}
 
 	public boolean isTouchable() {
 		return touchable;

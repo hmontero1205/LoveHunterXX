@@ -97,7 +97,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public boolean outOfBounds(int k) {
 		switch (k) {
 		case KeyEvent.VK_W:
-			if (getY() - FroggerScreen.ROW_HEIGHT < 0) {
+			if (getY() - FroggerScreen.ROW_HEIGHT < FroggerScreen.ROW_HEIGHT) {
 				return true;
 			}
 			break;
