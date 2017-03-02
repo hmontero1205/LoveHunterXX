@@ -13,7 +13,10 @@ public class Excrement extends Obstacle {
 	private boolean load;
 	public Excrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
+		System.out.println(x);
+		startDrop = System.currentTimeMillis();
 		grav = vy;
+		imgSrc = imageLocation;
 		setX(x);
 		setY(y);
 		loadImage();
@@ -30,12 +33,15 @@ public class Excrement extends Obstacle {
 	}
 	public void update(Graphics2D g){
 		if(load){
+			if(getY() > 850){
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+			}
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
-			setPosy(getPosy() + 1.5);
+			setPosy(getPosy() + getVy());
+			setPosx(getPosx() + getVx());
 			setY((int)getPosy());
-//			setX((int)getPosx());
-//			System.out.println(getPosy());
-//			System.out.println(getPosx());
+			setX((int)getPosx());
 		}
 	}
 	public void run() {
