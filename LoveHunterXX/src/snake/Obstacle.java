@@ -29,7 +29,7 @@ public class Obstacle extends Present {
 	@Override
 	public GeneratableInterface getNewObject(int x, int y) {
 		// TODO Auto-generated method stub
-		return new Obstacle(x, 0, y, 30);
+		return new Obstacle(x, y, 30, 30);
 	}
 	
 

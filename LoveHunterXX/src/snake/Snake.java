@@ -145,6 +145,7 @@ public class Snake extends MovingComponent{
 				refresh_r = 999999;
 				gameRunning = false;
 				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
+				SnakeGame.sScreen.updateText("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
 				return true;                   
 			}
 		}
@@ -153,6 +154,7 @@ public class Snake extends MovingComponent{
 			refresh_r = 999999;
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/6 + " LovePoints.");
+			SnakeGame.sScreen.updateText("Game Over. You ran into a wall. You have earned " + presentList.size()/6 + " LovePoints.");
 			return true;
 		}
 		return false;
@@ -190,7 +192,9 @@ public class Snake extends MovingComponent{
 				else if(collided.getName() == "Block"){
 					// collision was with Obstacle type.
 					Obstacle item = (Obstacle) collided;
+					SnakeGame.sScreen.remove(item); // removes old obstacle.
 					item.generateNew(SnakeScreen.gens);
+					
 					removeLastPresent();
 					System.out.println("Collided with block");
 				}

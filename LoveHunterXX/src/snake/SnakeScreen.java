@@ -84,6 +84,11 @@ public class SnakeScreen extends Screen implements KeyListener {
 		scoreCount.clear();
 		scoreCount.setText(snake.presentList.size() - 1  + "");
 	}
+	
+	public void updateText(String s){
+		cLine.clear();
+		cLine.setText(s);
+	}
 
 	@Override
 	public void initObjects(List<Visible> view) {
@@ -98,7 +103,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 		scoreCount.setText("" + (snake.presentList.size()-1));
 		
 		cBack = new Graphic(465,195,320,295,"resources/scorebackground.png");
-		cLine = new TextArea(500,205,320,295,"Win/Lose Text Here Please");
+		cLine = new TextArea(475,205,320,295,"Win/Lose Text Here Please");
 		
 		view.add(background);
 		view.add(sbBack);
