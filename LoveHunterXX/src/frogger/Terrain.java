@@ -1,3 +1,7 @@
+/**
+ * @author Hans (Jia Ming worked on the inventory that is in the update method)
+ *
+ */
 package frogger;
 
 import java.awt.Color;
@@ -10,9 +14,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import gui.components.Component;
-import gui.components.MovingComponent;
-import gui.components.Visible;
-import gui.components.Action;
 
 public class Terrain extends Component implements Runnable {
 	private List<CollisionInterface> mcList;
@@ -110,7 +111,7 @@ public class Terrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<1){
+			if(this.powerUp == null && Math.random()<.1){
 				System.out.println("hey");
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);

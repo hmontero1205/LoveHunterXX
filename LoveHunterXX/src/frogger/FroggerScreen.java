@@ -1,5 +1,5 @@
 /**
- * @author Hans
+ * @author Hans and Jia Ming
  *
  */
 package frogger;
