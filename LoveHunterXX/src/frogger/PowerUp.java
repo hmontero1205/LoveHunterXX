@@ -1,10 +1,13 @@
+/**
+ * @author Hans
+ *
+ */
 package frogger;
 
 import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 
-import gui.components.Action;
 import gui.components.Component;
 
 public class PowerUp extends Component implements Runnable{

@@ -1,9 +1,10 @@
+/**
+ * @author Hans
+ *
+ */
 package frogger;
 
-import java.awt.RenderingHints;
 import java.util.ArrayList;
-
-import gui.components.MovingComponent;
 import gui.components.Visible;
 
 public interface PlayerInterface extends Visible {

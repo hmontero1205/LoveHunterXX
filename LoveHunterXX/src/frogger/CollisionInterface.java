@@ -1,3 +1,7 @@
+/**
+ * @author Hans
+ *
+ */
 package frogger;
 
 import gui.components.Visible;

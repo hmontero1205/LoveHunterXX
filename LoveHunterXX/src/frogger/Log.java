@@ -1,3 +1,7 @@
+/**
+ * @author Jia Ming
+ *
+ */
 package frogger;
 
 import java.awt.Graphics2D;
