@@ -14,6 +14,8 @@ public interface CollisionInterface extends Visible {
 	double getVx();
 
 	boolean isRunning();
+	
+	Thread getThread();
 
 	void play();
 }

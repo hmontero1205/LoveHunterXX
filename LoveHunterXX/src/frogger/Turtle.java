@@ -28,6 +28,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	private boolean isSubmerging;
 	private boolean loop;
 	private boolean superCreated;
+	private Thread tThread;
 
 	/**
 	 * @param x
@@ -175,8 +176,8 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 
 	public void play() {
 		if (!isRunning()) {
-			Thread go = new Thread(this);
-			go.start();
+			tThread = new Thread(this);
+			tThread.start();
 		}
 	}
 
@@ -212,5 +213,10 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 
 	public void setTouchable(boolean touchable) {
 		this.touchable = touchable;
+	}
+
+	@Override
+	public Thread getThread() {
+		return tThread;
 	}
 }

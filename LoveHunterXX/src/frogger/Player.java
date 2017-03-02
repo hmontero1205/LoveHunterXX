@@ -31,6 +31,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private boolean deathGraphic;
 	private boolean strength;
 	private boolean swimming;
+	private Thread thread;
 
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -209,11 +210,15 @@ public class Player extends MovingComponent implements PlayerInterface {
 		}
 
 	}
+	
+	public Thread getThread() {
+		return thread;
+	}
 
 	public void play() {
 		if (!isRunning()) {
-			Thread go = new Thread(this);
-			go.start();
+			thread = new Thread(this);
+			thread.start();
 		}
 	}
 

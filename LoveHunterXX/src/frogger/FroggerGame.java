@@ -1,5 +1,7 @@
 package frogger;
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 import gui.GUIApplication;

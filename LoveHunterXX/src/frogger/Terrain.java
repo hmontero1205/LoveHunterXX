@@ -54,6 +54,10 @@ public class Terrain extends Component implements Runnable {
 		update();
 	}
 	
+	public Thread getThread(){
+		return tThread;
+	}
+	
 	@Override
 	public void update(Graphics2D g) {
 		if (superCreated) {

@@ -43,6 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
+	private ProgressMarker p;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -76,7 +77,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			ProgressMarker p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
 			p.start();
 			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
@@ -99,19 +100,36 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 				// System.out.println("Terrain length: "+tList.size());
 				Terrain t = tList.get(i);
 				t.setRunning(false);
+				
+
+				t.getThread().interrupt();
+				
+				System.out.println("terrain stopped");
+				
 				List<CollisionInterface> tObList = t.getMcList();
 				// System.out.println("Car length: "+tObList.size());
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
 						CollisionInterface c = tObList.get(j);
 						c.setRunning(false);
+						System.out.println(c.isRunning());
+						
+							c.getThread().interrupt();
+						System.out.println("collision stopped");
 					}
 				}
+				
 			}
 		}
 		if (player != null) {
 			player.setRunning(false);
 		}
+		
+		if(p!=null){
+			p.setRunning(false);
+		}
+		
+		System.out.println(Thread.activeCount());
 
 	}
 

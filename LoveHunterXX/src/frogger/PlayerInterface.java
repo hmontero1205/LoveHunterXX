@@ -16,6 +16,8 @@ public interface PlayerInterface extends Visible {
 	void ridePlatform(CollisionInterface p);
 
 	void setVx(double vx);
+	
+	Thread getThread();
 
 	boolean isOnPlatform();
 

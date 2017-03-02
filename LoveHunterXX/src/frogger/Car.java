@@ -15,6 +15,7 @@ import gui.components.MovingComponent;
 public class Car extends MovingComponent implements CollisionInterface {
 	private boolean touchable;
 	private String imgLoc;
+	private Thread cThread;
 
 	/**
 	 * @param x
@@ -98,8 +99,8 @@ public class Car extends MovingComponent implements CollisionInterface {
 
 	public void play() {
 		if (!isRunning()) {
-			Thread go = new Thread(this);
-			go.start();
+			cThread = new Thread(this);
+			cThread.start();
 		}
 	}
 
@@ -115,6 +116,11 @@ public class Car extends MovingComponent implements CollisionInterface {
 			}
 		}
 		return touching;
+	}
+
+	@Override
+	public Thread getThread() {
+		return cThread;
 	}
 
 //	@Override

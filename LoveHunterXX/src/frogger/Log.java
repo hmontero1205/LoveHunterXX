@@ -15,6 +15,7 @@ public class Log extends MovingComponent implements CollisionInterface {
 
 	private boolean touchable;
 	private String imgLoc;
+	private Thread lThread;
 
 	/**
 	 * @param x
@@ -97,8 +98,8 @@ public class Log extends MovingComponent implements CollisionInterface {
 
 	public void play() {
 		if (!isRunning()) {
-			Thread go = new Thread(this);
-			go.start();
+			lThread = new Thread(this);
+			lThread.start();
 		}
 	}
 
@@ -114,6 +115,11 @@ public class Log extends MovingComponent implements CollisionInterface {
 			}
 		}
 		return touching;
+	}
+
+	@Override
+	public Thread getThread() {
+		return lThread;
 	}
 
 //	@Override

@@ -10,12 +10,17 @@ public class ProgressMarker extends Component implements Runnable {
 	private boolean superCreated;
 	private String imgSrc;
 	private boolean running;
+	private Thread thread;
 	
 	public ProgressMarker(int x, int y, int w, int h ,String s) {
 		super(x, y, w, h);
 		superCreated = true;
 		imgSrc = s;
 		update();
+	}
+	
+	public Thread getThread() {
+		return thread;
 	}
 
 	@Override
@@ -42,8 +47,7 @@ public class ProgressMarker extends Component implements Runnable {
 	@Override
 	public void run() {
 		while(isRunning()){	
-			if(isTouchingPlayer(FroggerGame.fs.player)){
-				System.out.println("hey");
+			if(FroggerGame.fs != null){
 				FroggerGame.fs.level++;
 				FroggerGame.fs.startGame();
 				setRunning(false);
@@ -61,9 +65,9 @@ public class ProgressMarker extends Component implements Runnable {
 	}
 
 	public void start() {
-		Thread p = new Thread(this);
+		thread = new Thread(this);
 		setRunning(true);
-		p.start();
+		thread.start();
 		
 	}
 
