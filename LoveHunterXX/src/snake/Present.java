@@ -39,50 +39,11 @@ public abstract class Present extends Interactable implements PresentInterface, 
 		// TODO Auto-generated method stub
 		name = s;
 	}
-	@Override
-	abstract public void generateNew(List<GeneratableInterface> presents);
 	
+	@Override // Abstract methods: each present has its own way of generating new objects.
+	abstract public void generateNew(List<GeneratableInterface> presents);
 	abstract public GeneratableInterface getNewObject(int x, int y);
-	@Override
-	//I don' think we did this right. It should generate on any cell that is not occupied. Not just an x or y value
-	//Let's say we have an entire horizontal row of presents, it would always say false cuz all the x 
-	//have been taken.
-	public boolean isEmptyX(int x) {
-		// Usage of lambdas would've been better.
-		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
-			if(SnakeGame.sScreen.getViewObjects().get(i).getX() == x) return false;
-		}
-		return true;
-	}
-	@Override
-	public boolean isEmptyY(int y) {
-		// TODO Auto-generated method stub
-		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
-			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y) return false;
-		}
-		return true;
-	}
-	@Override
-	public int getNewX() {
-		// TODO Auto-generated method stub
-		int x;
-		do{
-			System.out.println("stucccck");
-			x = 30 + (20 * getRandBetween(0, 19));
-		}while(!isEmptyX(x));
-		System.out.println("x: " + x);
-		return x;
-	}
-	@Override
-	public int getNewY() {
-		// TODO Auto-generated method stub
-		int y;
-		do{
-			y = 60 + (20 * getRandBetween(0, 19));
-		}while(!isEmptyX(y));
-		System.out.print("y: " + y);
-		return y;
-	}
+	
 	public boolean isEmptySpace(int x, int y){
 		for(int i = 0; i < SnakeGame.sScreen.getViewObjects().size(); i++){
 			if(SnakeGame.sScreen.getViewObjects().get(i).getY() == y && 

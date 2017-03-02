@@ -23,7 +23,6 @@ public class LoveGift extends Present {
 		// 50/50 chance of creating new Obstacle:
 		Obstacle o = new Obstacle(0, 0, 1, 1); // create new obstacle.
 		o.generateNew(presents); // 50/50 chance of adding it to the screen.
-		//o = null; 
 	}
 
 	@Override

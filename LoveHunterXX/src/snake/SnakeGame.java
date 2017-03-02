@@ -7,7 +7,6 @@ public class SnakeGame extends GUIApplication {
 	public static SnakeGame sGame; // the main class to run game.
 	public static IntroScreen iScreen; // screen for introduction.
 	public static SnakeScreen sScreen; // screen for game.
-	public static GuideScreen gScreen; // screen for instructions.
 	
 	public static boolean gameStart;
 
@@ -19,7 +18,6 @@ public class SnakeGame extends GUIApplication {
 		gameStart = false;
 		sScreen = new SnakeScreen(getWidth(),getHeight());
 		iScreen = new IntroScreen(getWidth(),getHeight());
-		//gScreen = new GuideScreen(getWidth(),getHeight());
 		setScreen(iScreen);
 	}
 	

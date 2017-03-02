@@ -103,7 +103,7 @@ public class SnakeScreen extends Screen implements KeyListener {
 		scoreCount.setText("" + (snake.presentList.size()-1));
 		
 		cBack = new Graphic(465,195,320,295,"resources/scorebackground.png");
-		cLine = new TextArea(475,205,320,295,"Win/Lose Text Here Please");
+		cLine = new TextArea(475,205,320,295,"Shopping Spree!");
 		
 		view.add(background);
 		view.add(sbBack);
