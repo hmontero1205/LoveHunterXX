@@ -43,7 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	public ProgressMarker p;
+	private ProgressMarker p;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -291,6 +291,11 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 	public boolean getSlowMode() {
 		return slowMode;
+	}
+	
+
+	public ProgressMarker getP() {
+		return p;
 	}
 
 }

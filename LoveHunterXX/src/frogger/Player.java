@@ -91,7 +91,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 				dir = RIGHT;
 			}
 		}
-		if(FroggerGame.fs.p.isTouchingPlayer(this)) FroggerGame.fs.p.nextLevel();
+		if(FroggerGame.fs.getP().isTouchingPlayer(this)) FroggerGame.fs.getP().nextLevel();
 		setVx(0);
 		setRunning(false);
 		this.onPlatform = false;
