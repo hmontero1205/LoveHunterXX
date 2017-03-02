@@ -1,5 +1,6 @@
 package frogger;
 
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 import gui.components.MovingComponent;
@@ -32,5 +33,9 @@ public interface PlayerInterface extends Visible {
 	void setSuperStrength(boolean b);
 
 	void setSwimming(boolean b);
+
+	ArrayList<PowerUp> getInventory();
+
+	int getCurrentPowerUp();
 
 }

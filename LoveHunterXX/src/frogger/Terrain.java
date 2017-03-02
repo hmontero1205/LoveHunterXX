@@ -28,6 +28,7 @@ public class Terrain extends Component implements Runnable {
 	private final int GRASS = 0;
 	private final int ROAD = 1;
 	private final int WATER = 2;
+	private final int INVENTORY = 3;
 	private boolean postGame;
 	private int numTurtles;
 	private boolean genTurtles;
@@ -54,8 +55,20 @@ public class Terrain extends Component implements Runnable {
 	public void update(Graphics2D g) {
 		if (superCreated) {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			ImageIcon icon = new ImageIcon(getImgLoc());
-			g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
+			switch(terrain) {
+			case INVENTORY:
+				g.setColor(new Color(179, 179, 179));
+				g.fillRect(0, 0, getWidth(), getHeight());
+				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
+					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
+					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
+				}
+				g.drawRect(10 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 10, 25, 25);
+				break;
+			default:
+				ImageIcon icon = new ImageIcon(getImgLoc());
+				g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
+			}
 		}
 	}
 
@@ -80,10 +93,18 @@ public class Terrain extends Component implements Runnable {
 				break;
 			case GRASS:
 				runGrass();
+			case INVENTORY:
+				runInventoryUI();
 		}
 		
 	}
 	
+	private void runInventoryUI() {
+		while(isRunning) {
+			
+		}
+	}
+
 	public void runGrass() {
 		while(isRunning){
 			if(this.powerUp == null && Math.random()<.01){
