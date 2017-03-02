@@ -7,9 +7,10 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 import gui.components.Action;
+import gui.components.AnimatedComponent;
 import gui.components.MovingComponent;
 
-public class Obstacle extends MovingComponent implements Collidable, Action {
+public class Obstacle extends AnimatedComponent implements Collidable, Action {
 
 	private int x;
 	private int y;

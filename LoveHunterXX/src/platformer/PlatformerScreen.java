@@ -84,7 +84,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				});
 				break;
 			case 2:
-				obs = new Obstacle(850, 200, 50, 50, -7,0, "resources/bird1.png");
+				obs = new Bird(850, 200, 50, 50, -7,0, "resources/bird1.png");
 				obs.setAction(new Action() {
 					public void act() {
 						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
