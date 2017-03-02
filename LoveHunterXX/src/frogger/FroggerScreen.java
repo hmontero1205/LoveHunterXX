@@ -44,6 +44,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public int level;
 	private TextLabel infoBox;
 	private ProgressMarker p;
+	private Thread thread;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -55,12 +56,12 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		if (superCreated) {
-//			endThreads(viewObjects);
-//			viewObjects.clear();
-			
+			endThreads(viewObjects);
+			viewObjects.clear();
+
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
-			
+
 			tList = new ArrayList<Terrain>();
 			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
@@ -68,7 +69,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER,-4, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
@@ -77,8 +78,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-//			p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
-			p = new ProgressMarker(740,ROW_HEIGHT+480,25,25,"continue.png");
+			// p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			p = new ProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
 			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
@@ -100,33 +101,78 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 				// System.out.println("Terrain length: "+tList.size());
 				Terrain t = tList.get(i);
 				t.setRunning(false);
-				
 
-				t.getThread().interrupt();
-				
-				System.out.println("terrain stopped");
-				
+				if (t.getThread() != null) {
+					t.getThread().interrupt();
+				}
 				List<CollisionInterface> tObList = t.getMcList();
 				// System.out.println("Car length: "+tObList.size());
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
 						CollisionInterface c = tObList.get(j);
 						c.setRunning(false);
-						System.out.println(c.isRunning());
-						
+
+						if (c.getThread() != null) {
 							c.getThread().interrupt();
-						System.out.println("collision stopped");
+						}
 					}
 				}
-				
+
 			}
+
+			for (int i = 0; i < tList.size(); i++) {
+				// System.out.println("Terrain length: "+tList.size());
+				Terrain t = tList.get(i);
+
+				if (t.getThread() != null) {
+					try {
+						t.getThread().join();
+					} catch (InterruptedException e) {
+					}
+				}
+
+				List<CollisionInterface> tObList = t.getMcList();
+				// System.out.println("Car length: "+tObList.size());
+				if (tObList.size() > 0) {
+					for (int j = 0; j < tObList.size(); j++) {
+
+						CollisionInterface c = tObList.get(j);
+
+						if (c.getThread() != null) {
+							try {
+								c.getThread().join();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+
 		}
+
 		if (player != null) {
 			player.setRunning(false);
-		}
-		
-		System.out.println(Thread.activeCount());
 
+			if (player.getThread() != null) {
+				player.getThread().interrupt();
+
+				try {
+					player.getThread().join();
+				} catch (InterruptedException e) {
+				}
+			}
+		}
+
+		if (thread != null) {
+			try {
+				thread.interrupt();
+				thread.join();
+			} catch (InterruptedException e) {
+			}
+		}
+
+		System.out.println(Thread.activeCount());
 	}
 
 	public PlayerInterface getPlayer(int x, int y, int w, int h) {
@@ -141,11 +187,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		playerLocked = false;
-
 	}
 
 	public void checkPlayerRow() {
@@ -154,24 +197,21 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		player.setTerrain(currentRow);
 		currentRow.setCheckPlayer(true);
 		checkDrown();
-
 	}
 
 	public void checkDrown() {
-		if(player.getSwimming()){
+		if (player.getSwimming()) {
 			currentRow.setAllowPush(true);
-		}
-		else{
+		} else {
 			if (currentRow.getTerrain() == WATER && !player.isOnPlatform()) {
 				gameOver("You drowned!!");
 				currentRow.setCheckPlayer(false);
 				currentRow.setAllowPush(true);
-			}
-			else{
+			} else {
 				currentRow.setAllowPush(false);
 			}
 		}
-		
+
 	}
 
 	public KeyListener getKeyListener() {
@@ -190,11 +230,11 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public void keyReleased(KeyEvent k) {
 		if (!gameOver && !playerLocked) {
 			int kc = k.getKeyCode();
-			switch(kc) {
+			switch (kc) {
 			case KeyEvent.VK_SPACE:
 				player.activatePower();
 				break;
-				
+
 			case KeyEvent.VK_W:
 			case KeyEvent.VK_A:
 			case KeyEvent.VK_S:
@@ -208,7 +248,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			case KeyEvent.VK_RIGHT:
 				player.mouseScrolled(1);
 			}
-			
+
 		}
 	}
 
@@ -227,7 +267,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public void gameOver(String m) {
 		if (!gameOver) {
 			gameOver = true;
-			infoBox.setText("Game over! "+m);
+			infoBox.setText("Game over! " + m);
 			currentRow.setCheckPlayer(false);
 			addObject(resetButton);
 		}
@@ -236,12 +276,13 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 	public void startGame() {
 		ArrayList<PowerUp> inv = new ArrayList<PowerUp>();
-		if(player != null) inv = player.getInventory();
+		if (player != null)
+			inv = player.getInventory();
 		initObjects(getViewObjects());
 		player.setInventory(inv);
-		infoBox.setText("Level "+level);
-		Thread fGame = new Thread(this);
-		fGame.start();
+		infoBox.setText("Level " + level);
+		thread = new Thread(this);
+		thread.start();
 		currentRow = tList.get(tList.size() - 1);
 		gameOver = false;
 		playerLocked = true;
@@ -292,7 +333,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public boolean getSlowMode() {
 		return slowMode;
 	}
-	
 
 	public ProgressMarker getP() {
 		return p;

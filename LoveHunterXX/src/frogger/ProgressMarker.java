@@ -10,29 +10,24 @@ import gui.components.Component;
 public class ProgressMarker extends Component {
 	private boolean superCreated;
 	private String imgSrc;
-	private Thread thread;
 	private boolean touching;
-	
-	public ProgressMarker(int x, int y, int w, int h ,String s) {
+
+	public ProgressMarker(int x, int y, int w, int h, String s) {
 		super(x, y, w, h);
 		superCreated = true;
 		touching = false;
 		imgSrc = s;
 		update();
 	}
-	
-	public Thread getThread() {
-		return thread;
-	}
 
 	@Override
 	public void update(Graphics2D g) {
-		if(superCreated){
-			ImageIcon icon = new ImageIcon("resources/frogger/"+imgSrc);
-			g.drawImage(icon.getImage(),0,0, getWidth(), getHeight(), null);
+		if (superCreated) {
+			ImageIcon icon = new ImageIcon("resources/frogger/" + imgSrc);
+			g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), null);
 		}
 	}
-	
+
 	public boolean isTouchingPlayer(PlayerInterface p) {
 		boolean touching = false;
 		if (p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX()

@@ -122,15 +122,14 @@ public class Terrain extends Component implements Runnable {
 			if(checkPlayer){
 				checkPlayer();
 			}
+			
 			try {
 				int sleepTime = (checkPlayer && this.powerUp!=null) ? 40:9000;
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Stopped grass");
 			}
 		}
-		
 	}
 
 
@@ -144,8 +143,8 @@ public class Terrain extends Component implements Runnable {
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Stopped road");
+				break;
 			}
 		}
 	}
@@ -159,7 +158,8 @@ public class Terrain extends Component implements Runnable {
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println("Stopped water");
+				break;
 			}
 		}
 		

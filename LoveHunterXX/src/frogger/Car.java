@@ -67,7 +67,8 @@ public class Car extends MovingComponent implements CollisionInterface {
 				Thread.sleep(REFRESH_RATE);
 				update();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println("Stopped car");
+				break;
 			}
 		}
 
