@@ -125,32 +125,34 @@ public class Player extends MovingComponent implements PlayerInterface {
 		if(currentPowerUp == -1 && inventory.size() > 0) { 
 			currentPowerUp = 0;
 		} else if(currentPowerUp != -1){
-			if (w > 0) {
+			if (w < 0) {
 				if (currentPowerUp - 1 < 0 ) {
 					currentPowerUp = inventory.size() - 1;
 				} else {
 					currentPowerUp -= 1;
 				}
-				System.out.println("DOWN " + currentPowerUp);
-			} else {
+			} else if(w > 0){
 				if (currentPowerUp + 1 > inventory.size() - 1) {
 					currentPowerUp = 0;
 				} else {
 					currentPowerUp += 1;
 				}
-				System.out.println("UP " + currentPowerUp);
 			}
-			for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
-				if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
-					FroggerScreen.tList.get(i).update();
-				}
+			
+		}
+		for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
+			if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
+				FroggerScreen.tList.get(i).update();
 			}
 		}
 	}
 	
 	@Override
 	public void activatePower() {
-		if(inventory.size() > 0) inventory.get(currentPowerUp).start();
+		if(inventory.size() > 0)  {
+			inventory.get(currentPowerUp).start();
+			currentPowerUp --;
+		}
 	}
 	
 	@Override
@@ -227,10 +229,6 @@ public class Player extends MovingComponent implements PlayerInterface {
 		this.currentTerrain = t;
 	}
 
-	public void pickUpItem(PowerUp pu) {
-		inventory.add(pu);
-	}
-
 	public int getCurrentPowerUp() {
 		return currentPowerUp;
 	}
@@ -257,6 +255,17 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	public ArrayList<PowerUp> getInventory() {
 		return inventory;
+	}
+
+	public void pickUpItem(PowerUp pu) {
+		inventory.add(pu);
+		mouseScrolled(0);
+	}
+	
+	@Override
+	public void removeItem(PowerUp powerUp) {
+		inventory.remove(powerUp);
+		mouseScrolled(0);
 	}
 
 }

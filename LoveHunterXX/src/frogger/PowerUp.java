@@ -48,37 +48,35 @@ public class PowerUp extends Component implements Runnable{
 	}
 
 	public void performEffect() {
+		FroggerScreen.player.removeItem(this);
 		switch(this.effect){
 			case STRENGTH:
 				FroggerScreen.player.setSuperStrength(true);	
-				System.out.println("le touch");
+				System.out.println("le strength");
 				try {
 					Thread.sleep(3000);
 					FroggerScreen.player.setSuperStrength(false);	
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
 			case SWIM:
 				FroggerScreen.player.setSwimming(true);	
-				System.out.println("le touch");
+				System.out.println("le swim");
 				try {
 					Thread.sleep(5000);
 					FroggerScreen.player.setSwimming(false);	
 					FroggerGame.fs.checkPlayerRow();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
 			case SLOW:
 				FroggerGame.fs.setSlowMode(true);
-				System.out.println("le touch");
+				System.out.println("le slow");
 				try {
 					Thread.sleep(8000);	
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				FroggerGame.fs.setSlowMode(false);
