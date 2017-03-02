@@ -113,7 +113,7 @@ public class Terrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<.1){
+			if(this.powerUp == null && Math.random()<1){
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
 				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], selection);

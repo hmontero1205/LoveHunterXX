@@ -1,6 +1,7 @@
 package frogger;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -47,7 +48,9 @@ public class ProgressMarker extends Component implements Runnable {
 	@Override
 	public void run() {
 		while(isRunning()){	
+			System.out.println(isTouchingPlayer(FroggerScreen.player));
 			if(FroggerGame.fs != null){
+				System.out.println("NEXT");
 				FroggerGame.fs.level++;
 				FroggerGame.fs.startGame();
 				setRunning(false);
