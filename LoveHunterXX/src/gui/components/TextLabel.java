@@ -14,7 +14,7 @@ public class TextLabel extends Component {
 	public TextLabel(int x, int y, int w, int h, String text) {
 		super(x, y, w, h);
 		this.text = text;
-		this.font = "Comic Sans MS";
+		this.font = "Arial";
 		this.size = 20;
 		update();
 	}
@@ -49,7 +49,7 @@ public class TextLabel extends Component {
 	public void update(Graphics2D g) {
 		g = clear();
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g.setColor(Color.black);
+		g.setColor(Color.pink);
 		g.setFont(new Font(font,Font.PLAIN,size));
 		if(text!=null){
 			g.drawString(text, 4, (getHeight()-5));

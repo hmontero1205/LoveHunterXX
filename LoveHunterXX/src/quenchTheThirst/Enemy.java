@@ -7,7 +7,7 @@ public class Enemy extends LivingEntity {
 	private String direction;
 
 	public Enemy(int x, int y) {
-		super(x, y, 0.025, "resources/robbierotten.png", 5);
+		super(x, y, .5, "resources/qtt/enemyRight.png", 5);
 	}
 
 	public void tick() {
@@ -18,7 +18,7 @@ public class Enemy extends LivingEntity {
 		GraphNode goal = new GraphNode(null, ShooterGame.shooterScreen.getPlayer().getCenterX(),
 				ShooterGame.shooterScreen.getPlayer().getCenterY());
 		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
-			if (e instanceof AlluringBottle && e.distance(e, 10) && ((AlluringBottle) e).isActive()) {
+			if (e instanceof AlluringBottle && this.distance(e, AlluringBottle.DISTANCE) && ((AlluringBottle) e).isActive()) {
 				goal = new GraphNode(null, e.getCenterX(), e.getCenterY(), e.getWidth(), e.getHeight());
 				break;
 			}

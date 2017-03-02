@@ -24,7 +24,7 @@ public class ShooterIntroScreen extends ClickableScreen {
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		background = new Graphic(0, 0, 800, 600, "resources/qtt/introback.png");
-		b = new Button(500, 100, 150, 80, "Click", Color.white, new Action() {
+		b = new Button(325, 425, 150, 80, "Continue", Color.pink, new Action() {
 
 			@Override
 			public void act() {

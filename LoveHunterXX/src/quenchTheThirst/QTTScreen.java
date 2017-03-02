@@ -1,5 +1,6 @@
 package quenchTheThirst;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Iterator;
@@ -43,18 +44,23 @@ public class QTTScreen extends Screen implements KeyListener {
 		user = new Player(400, 300);
 		viewObjects.add(user);
 
+		map = new Graphic(0, 0, 800, 600, "resources/qtt/mapparts/map.png");
+		Graphic border1 = new Graphic(0, 0, 800, 75, "resources/qtt/mapparts/border.png");
+		Graphic border2 = new Graphic(0, 525, 800, 75, "resources/qtt/mapparts/border.png");
+		
 		// returns the int amount for explosive
 		int explosiveAmmo = user.getArsenal().get("explosive");
 		int alluringAmmo = user.getArsenal().get("alluring");
-
+		
 		health = new TextLabel(600, 20, 130, 50, "HEALTH:" + user.getHealth());
 		explosive = new TextLabel(500, 530, 140, 50,
 				(user.equipped("explosive") ? "*" : "") + "explosive: " + explosiveAmmo);
 		alluring = new TextLabel(680, 530, 140, 50,
 				(user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
-
-		map = new Graphic(0, 0, 800, 600, "resources/qtt/mapparts/map.png");
+		
 		viewObjects.add(map);
+		viewObjects.add(border1);
+		viewObjects.add(border2);
 		viewObjects.add(health);
 		viewObjects.add(explosive);
 		viewObjects.add(alluring);
@@ -103,7 +109,11 @@ public class QTTScreen extends Screen implements KeyListener {
 					if (ent instanceof Enemy) {
 						((Enemy) ent).tick();
 						
-						
+						if (ent.collideWith(user)) {
+							user.damage(1);
+							System.out.println(user.getHealth());
+							health.setText("Health: " + user.getHealth());
+						}
 					}
 				}
 
