@@ -28,7 +28,9 @@ public class Terrain extends Component implements Runnable {
 	private final int GRASS = 0;
 	private final int ROAD = 1;
 	private final int WATER = 2;
+	private final int INVENTORY = 3;
 	private boolean allowPush;
+	private boolean postGame;
 	private int numTurtles;
 	private boolean genTurtles;
 	private boolean isRunning;
@@ -54,8 +56,28 @@ public class Terrain extends Component implements Runnable {
 	public void update(Graphics2D g) {
 		if (superCreated) {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			ImageIcon icon = new ImageIcon(getImgLoc());
-			g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
+			switch(terrain) {
+			case INVENTORY:
+				g.setColor(new Color(179, 179, 179));
+				g.fillRect(0, 0, getWidth(), getHeight());
+//				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
+//					ImageIcon im = new ImageIcon(FroggerScreen.player.getInventory().get(i).getImage());
+//					g.drawImage(im.getImage(), 10 + (i * 35), 10, 25, 25, null);
+//				}
+				ImageIcon im = new ImageIcon("resources/frogger/glove.png");
+				g.drawImage(im.getImage(), 10 + (0 * 35), 10, 25, 25, null);
+				im = new ImageIcon("resources/frogger/snorkel.png");
+				g.drawImage(im.getImage(), 10 + (1 * 35), 10, 25, 25, null);
+				g.drawImage(im.getImage(), 10 + (2 * 35), 10, 25, 25, null);
+				g.setColor(Color.RED);
+//				g.drawRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31); // weird numbers so that the selection box can center itself around the items
+				g.drawRect(7 + (0 * 35), 7, 31, 31);
+
+				break;
+			default:
+				ImageIcon icon = new ImageIcon(getImgLoc());
+				g.drawImage(icon.getImage(), 0, 0, getWidth() - 1, getHeight(), null);
+			}
 		}
 	}
 
@@ -80,10 +102,18 @@ public class Terrain extends Component implements Runnable {
 				break;
 			case GRASS:
 				runGrass();
+			case INVENTORY:
+				runInventoryUI();
 		}
 		
 	}
 	
+	private void runInventoryUI() {
+		while(isRunning) {
+			
+		}
+	}
+
 	public void runGrass() {
 		while(isRunning){
 			if(this.powerUp == null && Math.random()<.9){

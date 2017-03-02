@@ -29,7 +29,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public final static int GRASS = 0;
 	public final static int ROAD = 1;
 	public final static int WATER = 2;
-	public ArrayList<Terrain> tList;
+	public final static int INVENTORY = 3;
+	public static ArrayList<Terrain> tList;
 	public static PlayerInterface player;
 	public static Terrain currentRow;
 	public static boolean gameOver;
@@ -49,12 +50,16 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		if (superCreated) {
 			endThreads(viewObjects);
 			viewObjects.clear();
+			
+			player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
+			viewObjects.add(player);
+			
 			tList = new ArrayList<Terrain>();
 			// for(Terrain t:levels[0]){
 			// tList.add(t);
 			// t.resetTerrain();
 			// }
-			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
@@ -69,9 +74,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			viewObjects.addAll(tList);
-
-			player = getPlayer(400, 600 - ROW_HEIGHT + (20 / 2), 20, 20);
-			viewObjects.add(player);
 
 			b = new Button(695, 561, 100, 35, "Restart", Color.green, new Action() {
 

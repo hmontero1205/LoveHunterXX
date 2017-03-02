@@ -140,6 +140,11 @@ public class Player extends MovingComponent implements PlayerInterface {
 				}
 				System.out.println("UP " + currentPowerUp);
 			}
+			for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
+				if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
+					FroggerScreen.tList.get(i).update();
+				}
+			}
 		}
 	}
 	
@@ -250,6 +255,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 
 
-
+	public ArrayList<PowerUp> getInventory() {
+		return inventory;
+	}
 
 }

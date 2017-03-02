@@ -42,6 +42,8 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	 *            time before next frame
 	 * @param timeBeforeAscending
 	 *            time that the turtles stay under water
+	 * @param submergeFrameInterval
+	 *            frame time of each submerging frame
 	 */
 
 	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending,
