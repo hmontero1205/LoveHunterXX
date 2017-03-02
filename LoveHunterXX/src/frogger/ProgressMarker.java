@@ -10,7 +10,6 @@ import gui.components.Component;
 public class ProgressMarker extends Component {
 	private boolean superCreated;
 	private String imgSrc;
-	private boolean running;
 	private Thread thread;
 	private boolean touching;
 	

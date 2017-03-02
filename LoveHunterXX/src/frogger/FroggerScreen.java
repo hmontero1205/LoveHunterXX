@@ -78,7 +78,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
 //			p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
-			p = new ProgressMarker(740,ROW_HEIGHT+480,100,50,"bluecar.png");
+			p = new ProgressMarker(740,ROW_HEIGHT+480,25,25,"continue.png");
 			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
