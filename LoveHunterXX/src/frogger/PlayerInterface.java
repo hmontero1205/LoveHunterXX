@@ -47,7 +47,4 @@ public interface PlayerInterface extends Visible {
 	
 	int getCurrentPowerUp();
 
-	void removeItem(PowerUp powerUp);
-
-
 }

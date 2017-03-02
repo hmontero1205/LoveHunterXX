@@ -153,18 +153,24 @@ public class Player extends MovingComponent implements PlayerInterface {
 			}
 			
 		}
-		for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
-			if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
-				FroggerScreen.tList.get(i).update();
-			}
-		}
+		updateInventory();
 	}
 	
 	@Override
 	public void activatePower() {
 		if(inventory.size() > 0)  {
 			inventory.get(currentPowerUp).start();
+			inventory.remove(currentPowerUp);
 			currentPowerUp --;
+			updateInventory();
+		}
+	}
+	
+	private void updateInventory() {
+		for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
+			if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
+				FroggerScreen.tList.get(i).update();
+			}
 		}
 	}
 	
@@ -276,12 +282,6 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	public void pickUpItem(PowerUp pu) {
 		inventory.add(pu);
-		mouseScrolled(0);
-	}
-	
-	@Override
-	public void removeItem(PowerUp powerUp) {
-		inventory.remove(powerUp);
 		mouseScrolled(0);
 	}
 

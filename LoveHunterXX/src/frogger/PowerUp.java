@@ -49,7 +49,6 @@ public class PowerUp extends Component implements Runnable{
 	}
 
 	public void performEffect() {
-		FroggerScreen.player.removeItem(this);
 		switch(this.effect){
 			case STRENGTH:
 				FroggerScreen.player.setSuperStrength(true);	
