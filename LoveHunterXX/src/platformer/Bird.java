@@ -63,8 +63,7 @@ public class Bird extends Obstacle {
 		}
 	}
 	public void createFeces(){
-		System.out.println("Bird x = " + x);
-		Excrement obs = new Excrement(x, y-getHeight(), 70, 70, (int)getVx(), -.5, "resources/cactus.png");
+		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 70, 70, (int)getVx(), -.5, "resources/cactus.png");
 		obs.setAction(new Action(){
 			public void act(){
 				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()-1);
@@ -73,7 +72,6 @@ public class Bird extends Obstacle {
 		PlatformerGame.cs.obstacles.add(obs);
 		PlatformerGame.cs.addObject(obs);
 	}
-	
 	public void run() {
 		setRunning(true);
 		while(isRunning()){
@@ -88,7 +86,7 @@ public class Bird extends Obstacle {
 	}
 	public void checkBehaviors(){
 //		System.out.println((int) Math.floor(Math.random() * 2));
-		if(!excreted && System.currentTimeMillis() - startTime > checkRate && getX() < 300){
+		if(!excreted && System.currentTimeMillis() - startTime > checkRate && getPosx() < 400){
 			startTime = System.currentTimeMillis();
 			excreted = true;
 			createFeces();
