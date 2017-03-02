@@ -43,7 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	private ProgressMarker p;
+	public ProgressMarker p;
 
 	public FroggerScreen(int w, int h) {
 		super(w, h);
@@ -55,8 +55,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
 		if (superCreated) {
-			endThreads(viewObjects);
-			viewObjects.clear();
+//			endThreads(viewObjects);
+//			viewObjects.clear();
 			
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
@@ -77,8 +77,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
-			p.start();
+//			p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			p = new ProgressMarker(740,ROW_HEIGHT+480,100,50,"bluecar.png");
 			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
@@ -123,10 +123,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		}
 		if (player != null) {
 			player.setRunning(false);
-		}
-		
-		if(p!=null){
-			p.setRunning(false);
 		}
 		
 		System.out.println(Thread.activeCount());

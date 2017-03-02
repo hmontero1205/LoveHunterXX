@@ -7,15 +7,17 @@ import javax.swing.ImageIcon;
 
 import gui.components.Component;
 
-public class ProgressMarker extends Component implements Runnable {
+public class ProgressMarker extends Component {
 	private boolean superCreated;
 	private String imgSrc;
 	private boolean running;
 	private Thread thread;
+	private boolean touching;
 	
 	public ProgressMarker(int x, int y, int w, int h ,String s) {
 		super(x, y, w, h);
 		superCreated = true;
+		touching = false;
 		imgSrc = s;
 		update();
 	}
@@ -45,33 +47,17 @@ public class ProgressMarker extends Component implements Runnable {
 		return touching;
 	}
 
-	@Override
-	public void run() {
-		while(isRunning()){	
-			System.out.println(isTouchingPlayer(FroggerScreen.player));
-			if(FroggerGame.fs != null){
-				System.out.println("NEXT");
-				FroggerGame.fs.level++;
-				FroggerGame.fs.startGame();
-				setRunning(false);
-			}
-		}
-		//sdsdf
+	public boolean isTouching() {
+		return touching;
 	}
 
-	public boolean isRunning() {
-		return this.running;
-	}
-	
-	public void setRunning(boolean b) {
-		this.running = b;
+	public void setTouching(boolean touching) {
+		this.touching = touching;
 	}
 
-	public void start() {
-		thread = new Thread(this);
-		setRunning(true);
-		thread.start();
-		
+	public void nextLevel() {
+		FroggerGame.fs.level++;
+		FroggerGame.fs.startGame();
 	}
 
 }
