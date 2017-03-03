@@ -88,6 +88,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 		if (superCreated) {
 			currentTime = System.currentTimeMillis();
 			if (currentTime - getDisplayTime() > swimTime) {
+				// determines when the turtles should start submerging, these numbers are flexible and can be decided by the user calling these objects (parameters)
 				if (getFrame() != null && getFrame().size() > 0 && getFrame().size() == getTimes().size()) {
 					g = clear();
 					ImageIcon icon = new ImageIcon(diveAnimation[getCurrentFrame()]);
@@ -102,22 +103,23 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 					}
 					g.drawImage(icon.getImage(), at, null);
 
-					// determines what order the frames should play, plays
-					// backward if the turtles are ascend and plays forward if
+					// determines the order that the frames in diveAnimation should play by, plays
+					// backward if the turtles are ascending and plays forward if
 					// the turtles are submerging
 					checkFrame();
-					// changes the frame based on the logics above ^
+					// changes to the next frame when some conditions are met
 					changeFrame();
 
 					if (getCurrentFrame() == 0 && !isRepeat()) {
 						setRunning(false);
 						return;
 					}
-					if (!isSubmerging)
-						underWaterTime += REFRESH_RATE;
+					
+					if(!isSubmerging) underWaterTime += REFRESH_RATE;
 					submergeCurrentFrameTime += REFRESH_RATE;
 				}
 			} else {
+				// if the turtles are not submerging, then it plays the swimming animation
 				g = clear();
 				swimSeq = (swimSeq + 1) % 2;
 				ImageIcon icon = new ImageIcon(swimAnimation[swimSeq]);
