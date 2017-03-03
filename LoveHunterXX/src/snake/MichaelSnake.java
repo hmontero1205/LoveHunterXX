@@ -167,7 +167,7 @@ public class MichaelSnake extends MovingComponent{
 		return false;
 	}
 
-
+	//David wrote this.
 	public void checkGenCollision(){
 		for(int i = 0; i < MichaelSnakeScreen.gens.size(); ++i){
 			DavidPresent p = (DavidPresent) MichaelSnakeScreen.gens.get(i);
