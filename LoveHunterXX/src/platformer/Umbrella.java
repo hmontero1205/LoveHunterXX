@@ -18,6 +18,7 @@ public class Umbrella extends MovingComponent {
 	private boolean active;
 	private boolean load;
 	private boolean superCreated;
+	
 
 	public Umbrella(int x, int y, int w, int h, String imageLocation) {
 		super(x, y, w, h);
@@ -25,11 +26,11 @@ public class Umbrella extends MovingComponent {
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		loadImages();
+		loadImage();
 		this.play();
 	}
 
-	private void loadImages() {
+	private void loadImage() {
 		try {
 			closed = new ImageIcon("resources/umbrellaclosed.png").getImage();
 			open = new ImageIcon("resources/umbrellaopen.png").getImage();
@@ -60,16 +61,16 @@ public class Umbrella extends MovingComponent {
 			Player p = PlatformerGame.cs.player;
 			if (load) {
 				if (active) {
-					super.setWidth(130);
-					super.setHeight(150);
+					//super.setWidth(150);
+					//super.setHeight(150);
 					super.setX((int) p.getX());
 					super.setY((int) p.getY()-70);
 					g.drawImage(open, 0, 0, getWidth(), getHeight(), 0, 0, open.getWidth(null), 
 							open.getHeight(null), null);
 				} else {
-					super.setWidth(50);
-					super.setHeight(100);
-					super.setX((int) p.getX()+20);
+					//super.setWidth(50);
+					//super.setHeight(100);
+					super.setX((int) p.getX()-5);
 					super.setY((int) p.getY()+50);
 					g.drawImage(closed, 0, 0, getWidth(), getHeight(), 0, 0, closed.getWidth(null),
 							closed.getHeight(null), null);

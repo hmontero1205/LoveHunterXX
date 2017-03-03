@@ -16,7 +16,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private Graphic bg;
 	public Player player;
-	public List<Obstacle> obstacles;
+	public List<Collidable> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
 	private Obstacle obs;
@@ -43,7 +43,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		player.play();
 		viewObjects.add(player);
 		
-		umbrella = new Umbrella(0, 0, 50, 100, "resources/umbrellaclosed.png");
+		umbrella = new Umbrella(0, 0, 130, 150, "resources/umbrellaclosed.png");
 		viewObjects.add(umbrella);
 	}
 	private void appearNewPowerUp(){
@@ -152,7 +152,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		obstacles = Collections.synchronizedList(new ArrayList<Obstacle>());
+		obstacles = Collections.synchronizedList(new ArrayList<Collidable>());
 		hearts = new ArrayList<Graphic>();
 		while (player.getHp() > 0) {
 			updateHp();
