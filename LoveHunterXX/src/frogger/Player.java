@@ -33,6 +33,12 @@ public class Player extends MovingComponent implements PlayerInterface {
 	private boolean swimming;
 	private Thread thread;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public Player(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		dir = UP;
@@ -91,14 +97,14 @@ public class Player extends MovingComponent implements PlayerInterface {
 				dir = RIGHT;
 			}
 		}
-		if(FroggerGame.fs.getP().isTouchingPlayer(this)) FroggerGame.fs.getP().nextLevel();
+		if(FroggerGame.fs.getPMarker().isTouchingPlayer(this)) FroggerGame.fs.getPMarker().nextLevel();
 		setVx(0);
 		setRunning(false);
 		this.onPlatform = false;
 		update();
 	}
 	
-	public void changeItemSelection(int k) {
+	public void changeItemSelection(int k){
 		switch(k) {
 		case KeyEvent.VK_LEFT:
 			mouseScrolled(-1);

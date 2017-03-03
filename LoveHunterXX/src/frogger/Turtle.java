@@ -168,7 +168,6 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 				Thread.sleep(REFRESH_RATE);
 				update();
 			} catch (InterruptedException e) {
-				System.out.println("Stopped turtle");
 				break;
 			}
 		}

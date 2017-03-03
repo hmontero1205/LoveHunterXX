@@ -17,7 +17,16 @@ public class PowerUp extends Component implements Runnable{
 	private final int STRENGTH = 0;
 	private final int SWIM = 1;
 	private final int SLOW = 2;
-
+	private Thread pThread;
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param s Image source
+	 * @param e Determines effect of PowerUp
+	 */
 	public PowerUp(int x, int y, int w, int h, String s, int e) {
 		super(x,y,w,h);
 		superCreated = true;
@@ -87,8 +96,12 @@ public class PowerUp extends Component implements Runnable{
 	}
 	
 	public void start(){
-		Thread pThread = new Thread(this);
+		pThread = new Thread(this);
 		pThread.start();
+	}
+	
+	public Thread getThread(){
+		return this.pThread;
 	}
 	
 }

@@ -43,7 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	private ProgressMarker p;
+	private ProgressMarker pMarker;
 	private Thread thread;
 
 	public FroggerScreen(int w, int h) {
@@ -78,9 +78,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			// p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
-			p = new ProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
-			viewObjects.add(p);
+			pMarker = new ProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
+			viewObjects.add(pMarker);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
 			viewObjects.add(infoBox);
@@ -88,7 +87,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 				@Override
 				public void act() {
-					startGame();
+					if(gameOver)
+						startGame();
 				};
 
 			});
@@ -97,47 +97,41 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 	public void endThreads(List<Visible> viewObjects) {
 		if (tList != null) {
+			//stops Terrain CollisionInterface
 			for (int i = 0; i < tList.size(); i++) {
-				// System.out.println("Terrain length: "+tList.size());
 				Terrain t = tList.get(i);
 				t.setRunning(false);
-
 				if (t.getThread() != null) {
 					t.getThread().interrupt();
 				}
 				List<CollisionInterface> tObList = t.getMcList();
-				// System.out.println("Car length: "+tObList.size());
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
 						CollisionInterface c = tObList.get(j);
 						c.setRunning(false);
-
 						if (c.getThread() != null) {
 							c.getThread().interrupt();
 						}
 					}
 				}
-
 			}
 
+			//waits for the above threads to finish
 			for (int i = 0; i < tList.size(); i++) {
-				// System.out.println("Terrain length: "+tList.size());
 				Terrain t = tList.get(i);
-
+				//Terrain thread
 				if (t.getThread() != null) {
 					try {
 						t.getThread().join();
 					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
-
+				//CollisionInterface threads
 				List<CollisionInterface> tObList = t.getMcList();
-				// System.out.println("Car length: "+tObList.size());
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
-
 						CollisionInterface c = tObList.get(j);
-
 						if (c.getThread() != null) {
 							try {
 								c.getThread().join();
@@ -147,10 +141,15 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 						}
 					}
 				}
+				//PowerUo threads, if exists
+				if(t.getPowerUp() != null && t.getPowerUp().getThread()!=null){
+					t.getPowerUp().getThread().interrupt();
+				}
 			}
 
 		}
-
+		
+		//stops player thread and waits for it
 		if (player != null) {
 			player.setRunning(false);
 
@@ -160,19 +159,21 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 				try {
 					player.getThread().join();
 				} catch (InterruptedException e) {
+					
 				}
 			}
 		}
-
+		//stops screen thread and waits for it
 		if (thread != null) {
 			try {
 				thread.interrupt();
 				thread.join();
 			} catch (InterruptedException e) {
+				
 			}
 		}
-
-		System.out.println(Thread.activeCount());
+		
+		//System.out.println(Thread.activeCount());
 	}
 
 	public PlayerInterface getPlayer(int x, int y, int w, int h) {
@@ -231,37 +232,25 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		if (!gameOver && !playerLocked) {
 			int kc = k.getKeyCode();
 			switch (kc) {
-			case KeyEvent.VK_SPACE:
-				player.activatePower();
-				break;
-
-			case KeyEvent.VK_W:
-			case KeyEvent.VK_A:
-			case KeyEvent.VK_S:
-			case KeyEvent.VK_D:
-				player.move(kc);
-				checkPlayerRow();
-				break;
-			case KeyEvent.VK_LEFT:
-				player.mouseScrolled(-1);
-				break;
-			case KeyEvent.VK_RIGHT:
-				player.mouseScrolled(1);
+				case KeyEvent.VK_SPACE:
+					player.activatePower();
+					break;
+				case KeyEvent.VK_W:
+				case KeyEvent.VK_A:
+				case KeyEvent.VK_S:
+				case KeyEvent.VK_D:
+					player.move(kc);
+					checkPlayerRow();
+					break;
+				case KeyEvent.VK_LEFT:
+					player.mouseScrolled(-1);
+					break;
+				case KeyEvent.VK_RIGHT:
+					player.mouseScrolled(1);
+					break;
 			}
 
 		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void gameOver(String m) {
@@ -294,31 +283,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		if (resetButton.isHovered(e.getX(), e.getY())) {
 			resetButton.act();
 		}
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -334,8 +298,41 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		return slowMode;
 	}
 
-	public ProgressMarker getP() {
-		return p;
+	public ProgressMarker getPMarker() {
+		return pMarker;
 	}
 
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -11,7 +11,14 @@ public class ProgressMarker extends Component {
 	private boolean superCreated;
 	private String imgSrc;
 	private boolean touching;
-
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param s Image source
+	 */
 	public ProgressMarker(int x, int y, int w, int h, String s) {
 		super(x, y, w, h);
 		superCreated = true;

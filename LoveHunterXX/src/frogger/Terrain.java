@@ -1,5 +1,5 @@
 /**
- * @author Hans (Jia Ming worked on the inventory that is in the update method)
+ * @author Hans (Jia Ming worked creating inventory for the INVENTORY Terrain)
  *
  */
 package frogger;
@@ -26,11 +26,6 @@ public class Terrain extends Component implements Runnable {
 	private int obVelocity;
 	public boolean checkPlayer;
 	private boolean genCars;
-	private final int GRASS = 0;
-	private final int ROAD = 1;
-	private final int WATER = 2;
-	private final int INVENTORY = 3;
-	private final int MENU = 4;
 	private boolean allowPush;
 	private boolean postGame;
 	private int numTurtles;
@@ -39,6 +34,16 @@ public class Terrain extends Component implements Runnable {
 	private PowerUp powerUp;
 	private Thread tThread;
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param terrain Determines function of lane and things spawning in it
+	 * @param obVelocity Velocity of MovingComponents in the lane
+	 * @param genTurtles If lane is WATER, determines whether or not to spawn logs or turtles
+	 */
 	public Terrain(int x, int y, int w, int h, int terrain, int obVelocity, boolean genTurtles) {
 		super(x, y, w, h);
 		this.terrain = terrain;
@@ -47,7 +52,7 @@ public class Terrain extends Component implements Runnable {
 		this.genTurtles = genTurtles;
 		superCreated = true;
 		mcList.clear();
-		if(terrain == ROAD)
+		if(terrain == FroggerScreen.ROAD)
 			genCars = true;
 		isRunning = false;
 		allowPush = false;
@@ -63,7 +68,7 @@ public class Terrain extends Component implements Runnable {
 		if (superCreated) {
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			switch(terrain) {
-			case INVENTORY:
+			case FroggerScreen.INVENTORY:
 				g.setColor(new Color(128,21,21));
 				g.fillRect(0, 0, getWidth(), getHeight());
 				for(int i = 0; i < FroggerScreen.player.getInventory().size(); i ++) {
@@ -73,7 +78,7 @@ public class Terrain extends Component implements Runnable {
 				g.setColor(Color.pink);
 				if(FroggerScreen.player.getInventory().size() > 0) g.drawRoundRect(7 + (FroggerScreen.player.getCurrentPowerUp() * 35) , 7, 31, 31,20, 20); // weird numbers so that the selection box can center itself around the items
 				break;
-			case MENU:
+			case FroggerScreen.MENU:
 				g.setColor(new Color(128,21,21));
 				g.fillRect(0, 0, getWidth(), getHeight());
 				break;
@@ -97,13 +102,13 @@ public class Terrain extends Component implements Runnable {
 	public void run() {
 		isRunning = true;
 		switch(terrain){
-			case ROAD:
+			case FroggerScreen.ROAD:
 				runRoad();
 				break;
-			case WATER:
+			case FroggerScreen.WATER:
 				runWater();
 				break;
-			case GRASS:
+			case FroggerScreen.GRASS:
 				runGrass();
 				break;
 			default: break;
@@ -113,7 +118,7 @@ public class Terrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<1){
+			if(this.powerUp == null && Math.random()<.11){
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
 				this.powerUp = new PowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], selection);
@@ -127,7 +132,7 @@ public class Terrain extends Component implements Runnable {
 				int sleepTime = (checkPlayer && this.powerUp!=null) ? 40:9000;
 				Thread.sleep(sleepTime);
 			} catch (InterruptedException e) {
-				System.out.println("Stopped grass");
+//				System.out.println("Stopped grass");
 			}
 		}
 	}
@@ -143,8 +148,8 @@ public class Terrain extends Component implements Runnable {
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				System.out.println("Stopped road");
-				break;
+//				System.out.println("Stopped road");
+//				break;
 			}
 		}
 	}
@@ -158,8 +163,8 @@ public class Terrain extends Component implements Runnable {
 			try {
 				Thread.sleep(40);
 			} catch (InterruptedException e) {
-				System.out.println("Stopped water");
-				break;
+//				System.out.println("Stopped water");
+//				break;
 			}
 		}
 		
@@ -188,14 +193,15 @@ public class Terrain extends Component implements Runnable {
 	}
 	
 	public CollisionInterface determineMovingComponent(int s, int v){
-		if(terrain == ROAD)
+		if(terrain == FroggerScreen.ROAD)
 			return new Car(s, getY() + 10, 50, 25, v,"resources/frogger/" + carSrcArr[((int) (Math.random() * carSrcArr.length))]);
 		else{
 			if(genTurtles){
 				return new Turtle(s, getY() + 10, 50, 25, v, (int) (1500*Math.random()), (int) (800*Math.random()),(int) (1000*(Math.random())));
 			}
-			else
+			else{
 				return new Log(s, getY() + 10, 50, 25, v,"resources/frogger/log.png");
+			}
 		}
 		
 	}
@@ -212,7 +218,7 @@ public class Terrain extends Component implements Runnable {
 	}
 
 	public void checkPlayer() {
-		if(terrain == GRASS){
+		if(terrain == FroggerScreen.GRASS){
 			if(this.powerUp!=null && powerUp.isTouchingPlayer(FroggerGame.fs.player)){
 				FroggerGame.fs.remove(powerUp);
 				FroggerGame.fs.player.pickUpItem(powerUp);
@@ -236,7 +242,6 @@ public class Terrain extends Component implements Runnable {
 							try {
 								Thread.sleep(40);
 							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							for(int j=i;j<mcList.size();j++){
@@ -248,8 +253,7 @@ public class Terrain extends Component implements Runnable {
 					}
 					else{
 						if(!FroggerGame.fs.player.isOnPlatform()){
-							FroggerGame.fs.player.ridePlatform(p);
-							
+							FroggerGame.fs.player.ridePlatform(p);	
 						}
 					}
 					break;
@@ -259,7 +263,6 @@ public class Terrain extends Component implements Runnable {
 	}
 
 	public int getTerrain() {
-		// TODO Auto-generated method stub
 		return terrain;
 	}
 
@@ -283,6 +286,10 @@ public class Terrain extends Component implements Runnable {
 	
 	public List<CollisionInterface> getMcList(){
 		return this.mcList;
+	}
+	
+	public PowerUp getPowerUp(){
+		return this.powerUp;
 	}
 
 	
