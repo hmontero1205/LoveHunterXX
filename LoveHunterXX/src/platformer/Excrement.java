@@ -12,6 +12,7 @@ public class Excrement extends Obstacle {
 	private Image image;
 	private boolean load;
 	private boolean collided;
+	private boolean um;
 	private int x;
 	private int y;
 	private int w;
@@ -45,16 +46,29 @@ public class Excrement extends Obstacle {
 	}
 	public boolean isCollided(){
 		Player playTemp = PlatformerGame.cs.player;
+		Umbrella umb = PlatformerGame.cs.umbrella;
+		if(umb.getX() < getPosx() + w && 
+				umb.getX() + umb.getWidth() > getPosx() &&
+				umb.getY() < getPosy() + h && umb.getY() + umb.getHeight() > getPosy()){
+			um = true;
+			return true;
+		}
 		if(playTemp.getX() < getPosx() + w && 
 				playTemp.getX() + playTemp.getWidth() > getPosx() &&
 				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){
 			return true;
 		}
+		
 		return false;
 	}
 	public void update(Graphics2D g){
 		if(load){
-			if (isCollided() && !collided) {
+			if(getY() > 850 || um){
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
+			if (isCollided() && !um && !collided) {
 				collided = true;
 				act();
 			}
@@ -63,11 +77,6 @@ public class Excrement extends Obstacle {
 			setPosx(getPosx() + getVx());
 			setY((int)getPosy());
 			setX((int)getPosx());
-			if(getY() > 850){
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
-				setRunning(false);
-			}
 		}
 	}
 	public void run() {
@@ -82,6 +91,7 @@ public class Excrement extends Obstacle {
 			}
 		}
 	}
+	
 	public void checkBehaviors(){
 		long current = System.currentTimeMillis();
 		double difference = (double)current - startDrop;

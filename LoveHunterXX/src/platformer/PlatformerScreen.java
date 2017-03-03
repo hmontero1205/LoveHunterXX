@@ -22,7 +22,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	private Obstacle obs;
 	public int test;
 	public ArrayList<Graphic> hearts;
-	private Umbrella umbrella;
+	public Umbrella umbrella;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
