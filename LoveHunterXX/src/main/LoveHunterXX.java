@@ -53,7 +53,6 @@ public class LoveHunterXX extends GUIApplication {
 		pis = new ShohebPlatformerIntro(800,600);
 		ps = new ShohebPlatformerScreen(800,600);
 		
-		setScreen(ts);
 		
 	}
 	
@@ -63,6 +62,7 @@ public class LoveHunterXX extends GUIApplication {
 		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread go = new Thread(game);
 		go.start();
+		game.setScreen(ts);
 	}
 
 	

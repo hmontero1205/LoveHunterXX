@@ -22,6 +22,7 @@ public abstract class GUIApplication extends JFrame implements Runnable {
 	public abstract void initScreen();
 
 	public void paint(Graphics g) {
+		if(currentScreen!=null)
 		g.drawImage(currentScreen.getImage(), 0, 0, null);
 	}
 

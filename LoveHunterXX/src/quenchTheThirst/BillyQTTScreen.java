@@ -180,7 +180,8 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 	
 		message.setText(won ? "You won!" : "You lost!");
 		
-		//LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+		//LoveHunterXX.game.ts.getSequence();
+		LoveHunterXX.game.setScreen(LoveHunterXX.pis);
 		//LoveHunterXX.ts.playSequence5();
 	}
 

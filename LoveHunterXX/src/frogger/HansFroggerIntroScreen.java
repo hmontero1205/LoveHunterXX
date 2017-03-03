@@ -30,6 +30,7 @@ public class HansFroggerIntroScreen extends Screen implements MouseListener{
 			public void act() {
 				if (!second) {
 					backImg.loadImages("resources/frogger/htp.png", 800, 600);
+					update();
 					second = true;
 				}
 				else{

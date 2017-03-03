@@ -17,6 +17,7 @@ public class MichaelSnake extends MovingComponent{
 	private int refresh_r = 250;
 	private int posX;
 	private int posY;
+	private boolean nextCalled;
 	private Direction direction;
 	public ArrayList<MichaelInteractable> presentList;
 	public enum Direction{
@@ -212,17 +213,21 @@ public class MichaelSnake extends MovingComponent{
 	}
 	
 	public void nextPart(){
-		//Thread transition = new Thread();
+		if(!nextCalled){
+			nextCalled = true;
+			//Thread transition = new Thread();
 		try {
 			Thread.sleep(2500);
 			//Next game.
-			LoveHunterXX.ts.lovePoints += (presentList.size()/10);
-			LoveHunterXX.game.setScreen(LoveHunterXX.ts);
-			LoveHunterXX.ts.playSequence2();
+			//LoveHunterXX.ts.lovePoints += (presentList.size()/10);
+			System.out.println("called from mike");
+			LoveHunterXX.game.setScreen(LoveHunterXX.fis);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+		
 	}
 	
 	public void checkAll(){

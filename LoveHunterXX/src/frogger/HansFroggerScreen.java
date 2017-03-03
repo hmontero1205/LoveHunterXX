@@ -320,9 +320,10 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 			@Override
 			public void act() {
 //				LoveHunterXX.ts.lovePoints += pointsToAdd;
-//				LoveHunterXX.game.setScreen(LoveHunterXX.ts);
-//				LoveHunterXX.ts.playSequence3();
+				//LoveHunterXX.game.setScreen(LoveHunterXX.ts);
 				LoveHunterXX.game.setScreen(LoveHunterXX.qttis);
+//				LoveHunterXX.ts.playSequence3();
+				//LoveHunterXX.game.setScreen(LoveHunterXX.qttis);
 			};
 
 		});
