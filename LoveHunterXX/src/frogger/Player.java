@@ -20,6 +20,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int moveDistance = 30;
+	private ProgressMarkerInterface p;
 	private int dir;
 	private ArrayList<PowerUp> inventory;
 	private int currentPowerUp = -1;
@@ -94,7 +95,8 @@ public class Player extends MovingComponent implements PlayerInterface {
 				dir = RIGHT;
 			}
 		}
-		if(FroggerGame.fs.getP().isTouchingPlayer(this)) FroggerGame.fs.getP().nextLevel(); // the arrow key to the next level
+		if(p == null) p = FroggerGame.fs.getProgressMarker();
+		if(p.isTouchingPlayer(this)) p.nextLevel(); // the arrow key to the next level
 		setVx(0); // if they get off the log, then their speed should return to 0
 		setRunning(false); // and the thread should be stopped
 		this.onPlatform = false;

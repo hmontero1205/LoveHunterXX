@@ -43,7 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	private ProgressMarker p;
+	private ProgressMarkerInterface p;
 	private Thread thread;
 
 	public FroggerScreen(int w, int h) {
@@ -59,6 +59,9 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			endThreads(viewObjects);
 			viewObjects.clear();
 
+			// p = getProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
+			p = getProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
+			viewObjects.add(p);
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
 
@@ -78,9 +81,6 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			// p = new ProgressMarker(740,ROW_HEIGHT+35,25,25,"continue.png");
-			p = new ProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
-			viewObjects.add(p);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
 			viewObjects.add(infoBox);
@@ -93,6 +93,10 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 			});
 		}
+	}
+
+	private ProgressMarkerInterface getProgressMarker(int x, int y, int w, int h, String img) {
+		return  new ProgressMarker(x, y, w, h, img);
 	}
 
 	public void endThreads(List<Visible> viewObjects) {
@@ -334,7 +338,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		return slowMode;
 	}
 
-	public ProgressMarker getP() {
+	public ProgressMarkerInterface getProgressMarker() {
 		return p;
 	}
 
