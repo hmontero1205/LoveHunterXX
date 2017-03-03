@@ -46,7 +46,11 @@ public abstract class Screen {
 
 	public abstract void initObjects(List<Visible> viewObjects);
 
-	public int getWidth() {
+	
+	public void onDisplay() {
+	}
+	
+	public int getWidth(){
 		return image.getWidth();
 	}
 

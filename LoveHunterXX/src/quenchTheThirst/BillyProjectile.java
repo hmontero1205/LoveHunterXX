@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public abstract class Projectile extends Entity implements Runnable {
+public abstract class BillyProjectile extends KevinEntity implements Runnable {
 
 	private double velocity;
 	private double acceleration;
@@ -8,12 +8,14 @@ public abstract class Projectile extends Entity implements Runnable {
 	private int x;
 	private int y;
 
-	public Projectile(int x, int y, double scale, String imageLocation, String dir) {
+	public BillyProjectile(int x, int y, double scale, String imageLocation, String dir) {
 		super(x, y, scale, imageLocation);
 		this.dir = dir;
-		velocity = 15;
+		velocity = 10;
 		acceleration = -0.5;
 	}
+	
+	public abstract void land();
 
 	@Override
 	public void run() {
@@ -41,6 +43,8 @@ public abstract class Projectile extends Entity implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		
+		land();
 	}
 
 	public void setVelocity(double velocity) {
