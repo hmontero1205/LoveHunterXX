@@ -10,6 +10,8 @@ import frogger.HansFroggerGame;
 import frogger.HansFroggerIntroScreen;
 import frogger.HansFroggerScreen;
 import gui.GUIApplication;
+import platformer.ShohebPlatformerIntro;
+import platformer.ShohebPlatformerScreen;
 import quenchTheThirst.BillyQTTScreen;
 import quenchTheThirst.BillyShooterIntroScreen;
 import snake.MichaelDavidSnakeScreen;
@@ -28,8 +30,8 @@ public class LoveHunterXX extends GUIApplication {
 	public static BillyQTTScreen qtts;
 	public static BillyShooterIntroScreen qttis;
 	
-//	public static ShohebPlatformerIntro pis;
-//	public static ShohebPlatformerScreen ps;
+	public static ShohebPlatformerIntro pis;
+	public static ShohebPlatformerScreen ps;
 	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
@@ -48,8 +50,8 @@ public class LoveHunterXX extends GUIApplication {
 		qttis = new BillyShooterIntroScreen(800,600);
 		qtts = new BillyQTTScreen(800,600);
 		
-//		pis = new ShohebPlatformerIntro(800,600);
-//		ps = new ShohebPlatformerScreen(800,600);
+		pis = new ShohebPlatformerIntro(800,600);
+		ps = new ShohebPlatformerScreen(800,600);
 		
 		setScreen(ts);
 		
