@@ -18,6 +18,7 @@ public class Player extends AnimatedComponent{
 	private int y;
 	private int w;
 	private int h;
+	private int currentFrame;
 	
 	private Image image;
 	private boolean jump;
@@ -30,6 +31,7 @@ public class Player extends AnimatedComponent{
 	private long invulnLength;
 	
 	private int imgID;
+	
 	
 	private double initialV;
 	private double grav;

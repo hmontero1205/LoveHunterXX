@@ -1,6 +1,7 @@
 package platformer;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
@@ -11,7 +12,8 @@ import gui.components.MovingComponent;
 public class Power extends MovingComponent implements Runnable, PowerUp{
 	private int effect;
 	private String imgSrc;
-	private boolean superCreated;
+	private Image image;
+	private boolean load;
 	private final int HEART = 0;
 	private final int INVULN = 1;
 	private final int WATER = 2;
@@ -19,16 +21,23 @@ public class Power extends MovingComponent implements Runnable, PowerUp{
 
 	public Power(int x, int y, int w, int h, String s, int e) {
 		super(x,y,w,h);
-		superCreated = true;
 		this.effect = e;
 		this.imgSrc = s;
 		//Thread pThread = new Thread(this);
 		update();
 	}
+	private void loadImage() {
+		try {
+			image = new ImageIcon(imgSrc).getImage();
+			load = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+	}
 	@Override
 	public void update(Graphics2D g) {
-		if(superCreated){
+		if(load){
 			System.out.println(imgSrc);
 			ImageIcon icon = new ImageIcon("resources/frogger/"+imgSrc);
 			g.drawImage(icon.getImage(),0,0, getWidth(), getHeight(), null);
@@ -53,7 +62,7 @@ public class Power extends MovingComponent implements Runnable, PowerUp{
 //					e.printStackTrace();
 //				}
 //				FroggerGame.fs.setSlowMode(false);
-//				break;
+				break;
 		}
 	}
 
