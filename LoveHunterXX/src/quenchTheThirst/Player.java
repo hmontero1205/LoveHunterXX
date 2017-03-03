@@ -60,9 +60,9 @@ public class Player extends LivingEntity {
 
 		arsenal.put(proj, arsenal.get(proj) - 1);
 
-		Projectile projectile = null;
+		BillyProjectile projectile = null;
 		if (proj.equals("explosive")) {
-			projectile = new ExplosiveBottle(wbx, wby, direction);
+			projectile = new BillyExplosiveBottle(wbx, wby, direction);
 		} else if (proj.equals("alluring")) {
 			projectile = new AlluringBottle(wbx, wby, direction);
 		}

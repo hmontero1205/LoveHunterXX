@@ -12,7 +12,7 @@ import gui.components.Graphic;
 import gui.components.TextLabel;
 import gui.components.Visible;
 
-public class QTTScreen extends Screen implements KeyListener {
+public class BillyQTTScreen extends Screen implements KeyListener {
 
 	private Graphic map;
 	private TextLabel explosive;
@@ -23,7 +23,7 @@ public class QTTScreen extends Screen implements KeyListener {
 	private CopyOnWriteArrayList<Entity> entities;
 	private Thread ticker;
 
-	public QTTScreen(int width, int height) {
+	public BillyQTTScreen(int width, int height) {
 		super(width, height);
 	}
 
@@ -50,7 +50,6 @@ public class QTTScreen extends Screen implements KeyListener {
 		Graphic border1 = new Graphic(0, 0, 800, 75, "resources/qtt/mapparts/border.png");
 		Graphic border2 = new Graphic(0, 525, 800, 75, "resources/qtt/mapparts/border.png");
 
-		// returns the int amount for explosive
 		int explosiveAmmo = user.getArsenal().get("explosive");
 		int alluringAmmo = user.getArsenal().get("alluring");
 
@@ -186,7 +185,7 @@ public class QTTScreen extends Screen implements KeyListener {
 		}
 
 		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
-			if (e instanceof Projectile || e == ent || e.getClass() == ent.getClass()) {
+			if (e instanceof BillyProjectile || e == ent || e.getClass() == ent.getClass()) {
 				continue;
 			}
 

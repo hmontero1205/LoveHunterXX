@@ -5,8 +5,8 @@ import gui.GUIApplication;
 public class ShooterGame extends GUIApplication {
 
 	public static ShooterGame shootGame;
-	public static ShooterIntroScreen introScreen;
-	public static QTTScreen shooterScreen;
+	public static BillyShooterIntroScreen introScreen;
+	public static BillyQTTScreen shooterScreen;
 
 	public ShooterGame(int width, int height) {
 		super(width, height);
@@ -14,8 +14,8 @@ public class ShooterGame extends GUIApplication {
 	}
 
 	public void initScreen() {
-		shooterScreen = new QTTScreen(800, 600);
-		introScreen = new ShooterIntroScreen(800,600);
+		shooterScreen = new BillyQTTScreen(800, 600);
+		introScreen = new BillyShooterIntroScreen(800,600);
 		setScreen(introScreen);
 	}
 

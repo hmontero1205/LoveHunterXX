@@ -11,13 +11,13 @@ import gui.components.Clickable;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class ShooterIntroScreen extends ClickableScreen {
+public class BillyShooterIntroScreen extends ClickableScreen {
 
 	private Button b;
 	private Graphic background;
 	private int sequence;
 
-	public ShooterIntroScreen(int width, int height) {
+	public BillyShooterIntroScreen(int width, int height) {
 		super(width, height);
 	}
 
@@ -31,7 +31,7 @@ public class ShooterIntroScreen extends ClickableScreen {
 				if (sequence == 0) {
 					background.loadImages("resources/qtt/howtoplay.png", 800, 600);
 				} else if (sequence == 1) {
-					ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen); // explain this
+					ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen);
 				}
 
 				sequence++;

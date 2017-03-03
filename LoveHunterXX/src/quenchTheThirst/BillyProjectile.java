@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public abstract class Projectile extends Entity implements Runnable {
+public abstract class BillyProjectile extends Entity implements Runnable {
 
 	private double velocity;
 	private double acceleration;
@@ -8,14 +8,13 @@ public abstract class Projectile extends Entity implements Runnable {
 	private int x;
 	private int y;
 
-	public Projectile(int x, int y, double scale, String imageLocation, String dir) {
+	public BillyProjectile(int x, int y, double scale, String imageLocation, String dir) {
 		super(x, y, scale, imageLocation);
 		this.dir = dir;
 		velocity = 10;
 		acceleration = -0.5;
 	}
 	
-	// called when projectile hit destination
 	public abstract void land();
 
 	@Override

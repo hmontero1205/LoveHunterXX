@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public class AlluringBottle extends Projectile {
+public class AlluringBottle extends BillyProjectile {
 	
 	public static final int DISTANCE = 150;
 	private static String[] frames = new String[10];

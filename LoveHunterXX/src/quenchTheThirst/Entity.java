@@ -40,7 +40,7 @@ public abstract class Entity extends Graphic {
 		}
 
 		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
-			if (e instanceof Projectile || e == this || e.getClass() == this.getClass()) {
+			if (e instanceof BillyProjectile || e == this || e.getClass() == this.getClass()) {
 				continue;
 			}
 

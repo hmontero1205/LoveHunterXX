@@ -2,7 +2,7 @@ package quenchTheThirst;
 
 import java.util.Iterator;
 
-public class ExplosiveBottle extends Projectile {
+public class BillyExplosiveBottle extends BillyProjectile {
 	
 	private static String[] frames = new String[8];
 	static {
@@ -14,7 +14,7 @@ public class ExplosiveBottle extends Projectile {
 	private static final int DAMAGE = 50;
 	private static final int RADIUS = 30;
 
-	public ExplosiveBottle(int x, int y, String dir) {
+	public BillyExplosiveBottle(int x, int y, String dir) {
 		super(x, y, 0.03, "resources/qtt/bottle.png", dir);
 	}
 
@@ -40,8 +40,7 @@ public class ExplosiveBottle extends Projectile {
 		while (entIterator.hasNext()) {
 			Entity e = entIterator.next();
 			if (e instanceof LivingEntity && distance(e, RADIUS)) {
-				LivingEntity live = (LivingEntity) e; // why do we need this
-														// part?
+				LivingEntity live = (LivingEntity) e;
 				live.damage(DAMAGE);
 			}
 		}
