@@ -54,11 +54,6 @@ public class Excrement extends Obstacle {
 	}
 	public void update(Graphics2D g){
 		if(load){
-			if(getY() > 850){
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
-				setRunning(false);
-			}
 			if (isCollided() && !collided) {
 				collided = true;
 				act();
@@ -68,6 +63,11 @@ public class Excrement extends Obstacle {
 			setPosx(getPosx() + getVx());
 			setY((int)getPosy());
 			setX((int)getPosx());
+			if(getY() > 850){
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
 		}
 	}
 	public void run() {
