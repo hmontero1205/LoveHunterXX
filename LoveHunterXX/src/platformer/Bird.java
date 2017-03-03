@@ -110,7 +110,10 @@ public class Bird extends Obstacle {
 		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 70, 70, (int)getVx(), -.5, "resources/cactus.png");
 		obs.setAction(new Action(){
 			public void act(){
-				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()-1);
+				if(!PlatformerGame.cs.player.invuln){
+					PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()-1);
+					PlatformerGame.cs.player.setDamaged(true);
+				}
 			}
 		});
 		PlatformerGame.cs.obstacles.add(obs);

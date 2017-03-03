@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.Action;
 import gui.components.Component;
+import gui.components.MovingComponent;
 
 public class Power extends MovingComponent implements Runnable, PowerUp{
 	private int effect;

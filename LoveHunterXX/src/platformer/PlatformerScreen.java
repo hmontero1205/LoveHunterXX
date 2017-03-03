@@ -82,6 +82,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
+							
 						}
 						PlatformerGame.cs.player.setInitialV(9);
 					}
@@ -109,6 +110,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		return this;
 	}
 
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
