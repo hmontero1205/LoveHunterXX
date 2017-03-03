@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -25,6 +26,8 @@ public class Player extends AnimatedComponent{
 	public boolean invuln;
 	private boolean load;
 	private boolean damaged;
+	
+	private ArrayList<Image> frames;
 	
 	private long startInvuln;
 	private long startJump;
@@ -55,19 +58,13 @@ public class Player extends AnimatedComponent{
 		this.initialV = 9;
 		this.grav = 1.5;
 		
+		frames = new ArrayList<Image>();
+		frames.add(new ImageIcon(imageSrc).getImage());
+		frames.add(new ImageIcon("resources/playerjump.png").getImage());
+		
 		setX(x);
 		setY(y);
 		loadImage();
-	}
-	private BufferedImage convertImages(String loc){
-		BufferedImage img = null;
-		try {
-		    img = ImageIO.read(new File(loc));
-		    return img;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return img;
 	}
 	private void loadImage() {
 		try{
@@ -85,7 +82,6 @@ public class Player extends AnimatedComponent{
 	}
 	public void update(Graphics2D g){
 		if(load){
-			
 //			image = new ImageIcon(imageSrc).getImage(); 
 //			if(invuln){
 //				if(imgID == 0){
@@ -101,15 +97,20 @@ public class Player extends AnimatedComponent{
 //				image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
 //			}
 			
-				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
+				
 //				clear();
 //				imageSrc = "resources/playerhit.png";
 //				loadImage();
 //				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 				global = g;
 			if(jump){
+				
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 				setPosy(getPosy() + getVy());
 				super.setY((int)getPosy());
+			}
+			else{
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			}
 		}
 	}
@@ -150,6 +151,7 @@ public class Player extends AnimatedComponent{
 			if(getY() > 372){
 				setJump(false);
 				setY(370);
+				image = frames.get(0);
 			}
 			else{
 				super.setVy(-newV);
@@ -179,8 +181,10 @@ public class Player extends AnimatedComponent{
 		}
 	}
 	public void setJump(boolean b) {
+		clear();
 		jump = b;
 		startJump = System.currentTimeMillis();
+		image = frames.get(1);
 	}
 	public boolean getJump() {
 		return jump;
