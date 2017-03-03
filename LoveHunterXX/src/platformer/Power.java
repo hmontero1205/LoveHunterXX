@@ -31,6 +31,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		this.imgSrc = s;
 		this.w = w;
 		this.h = h;
+		
 		setVx(vx);
 		setVy(vy);
 		//Thread pThread = new Thread(this);
@@ -49,7 +50,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	@Override
 	public void update(Graphics2D g) {
 		if(load){
-			if(!picked || isCollided() || getX() < w*-1){
+			if(!picked && isCollided() || getX() < w*-1){
 				performEffect();
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);

@@ -43,18 +43,20 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		viewObjects.add(player);
 	}
 	private void appearNewPowerUp(){
-		Obstacle power = null;
+		
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
 		double rand = (Math.random()) * 1000;
 		if (rand < chance) {
-			switch ((int) (Math.random() * 1)) {
+			Power power = null;
+			switch (0) {
 			case 0:
-				power = new Power(850, 500, 50, 50, -5, 0, "resources/heart.png", 0);
+				power = new Power(850, 420, 50, 50, -5, 0, "resources/heart.png", 0);
 				break;
 			}
+			obstacles.add(power);
+			addObject(power);
 		}
-		obstacles.add(power);
-		addObject(power);
+		
 	}
 	private void appearNewObstacle() {
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
