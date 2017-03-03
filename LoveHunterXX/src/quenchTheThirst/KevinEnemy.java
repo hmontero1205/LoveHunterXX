@@ -2,6 +2,8 @@ package quenchTheThirst;
 
 import java.util.ArrayList;
 
+import main.LoveHunterXX;
+
 public class KevinEnemy extends AriqLivingEntity {
 
 	private String direction;
@@ -11,13 +13,13 @@ public class KevinEnemy extends AriqLivingEntity {
 	}
 
 	public void tick() {
-		if (AriqShooterGame.shooterScreen == null) {
+		if (LoveHunterXX.qtts == null) {
 			return;
 		}
 
-		GraphNode goal = new GraphNode(null, AriqShooterGame.shooterScreen.getPlayer().getCenterX(),
-				AriqShooterGame.shooterScreen.getPlayer().getCenterY());
-		for (KevinEntity e : AriqShooterGame.shooterScreen.getEntities()) {
+		GraphNode goal = new GraphNode(null, LoveHunterXX.qtts.getPlayer().getCenterX(),
+				LoveHunterXX.qtts.getPlayer().getCenterY());
+		for (KevinEntity e : LoveHunterXX.qtts.getEntities()) {
 			if (e instanceof AriqAlluringBottle && this.distance(e, AriqAlluringBottle.DISTANCE) && ((AriqAlluringBottle) e).isActive()) {
 				goal = new GraphNode(null, e.getCenterX(), e.getCenterY(), e.getWidth(), e.getHeight());
 				break;
@@ -129,21 +131,21 @@ public class KevinEnemy extends AriqLivingEntity {
 		public ArrayList<GraphNode> getNeighbors() {
 			ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
 
-			if (x < AriqShooterGame.shooterScreen.getWidth() - 5
-					&& AriqShooterGame.shooterScreen.canPlace(x, y, "east", KevinEnemy.this)) {
+			if (x < LoveHunterXX.qtts.getWidth() - 5
+					&& LoveHunterXX.qtts.canPlace(x, y, "east", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x + 5, y, "east"));
 			}
 
-			if (x - 5 > 0 && AriqShooterGame.shooterScreen.canPlace(x, y, "west", KevinEnemy.this)) {
+			if (x - 5 > 0 && LoveHunterXX.qtts.canPlace(x, y, "west", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x - 5, y, "west"));
 			}
 
-			if (y < AriqShooterGame.shooterScreen.getHeight() - 5
-					&& AriqShooterGame.shooterScreen.canPlace(x, y, "south", KevinEnemy.this)) {
+			if (y < LoveHunterXX.qtts.getHeight() - 5
+					&& LoveHunterXX.qtts.canPlace(x, y, "south", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y + 5, "south"));
 			}
 
-			if (y - 5 > 0 && AriqShooterGame.shooterScreen.canPlace(x, y, "north", KevinEnemy.this)) {
+			if (y - 5 > 0 && LoveHunterXX.qtts.canPlace(x, y, "north", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y - 5, "north"));
 			}
 
@@ -189,9 +191,8 @@ public class KevinEnemy extends AriqLivingEntity {
 
 	@Override
 	public void die() {
-		/** LOVE POINT ADD HERE **/
-
-		AriqShooterGame.shooterScreen.kill(this);
+		LoveHunterXX.ts.lovePoints++;
+		LoveHunterXX.qtts.kill(this);
 	}
 
 }

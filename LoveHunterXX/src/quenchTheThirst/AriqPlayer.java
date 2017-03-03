@@ -3,6 +3,8 @@ package quenchTheThirst;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
+import main.LoveHunterXX;
+
 public class AriqPlayer extends AriqLivingEntity {
 
 	private String direction;
@@ -71,12 +73,12 @@ public class AriqPlayer extends AriqLivingEntity {
 		projectile.setY(projectile.getY() - projectile.getHeight() / 2);
 
 		projectile.start();
-		AriqShooterGame.shooterScreen.spawnEntity(projectile);
+		LoveHunterXX.qtts.spawnEntity(projectile);
 	}
 
 	@Override
 	public void die() {
-		AriqShooterGame.shooterScreen.endGame(false);
+		LoveHunterXX.qtts.endGame(false);
 	}
 
 }

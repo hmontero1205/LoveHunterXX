@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import gui.components.Component;
+import main.LoveHunterXX;
 
 public class HansTerrain extends Component implements Runnable {
 	private List<HansCollisionInterface> mcList;
@@ -118,11 +119,11 @@ public class HansTerrain extends Component implements Runnable {
 
 	public void runGrass() {
 		while(isRunning){
-			if(this.powerUp == null && Math.random()<.11){
+			if(this.powerUp == null && Math.random()<.1){
 				int selection = (int) (Math.random()*3);
 				int xCoord = 10+30*(int) (Math.random()*26);
 				this.powerUp = new HansPowerUp(xCoord, getY()+10, 25, 25, powerUpGraphics[selection], selection);
-				HansFroggerGame.fs.addObject(powerUp);
+				LoveHunterXX.fs.addObject(powerUp);
 			}
 			if(checkPlayer){
 				checkPlayer();
@@ -171,13 +172,13 @@ public class HansTerrain extends Component implements Runnable {
 	}
 	
 	public void addMovingComponents() {
-		int vel = (HansFroggerGame.fs.getSlowMode()) ? (2 * (Math.abs(obVelocity)/obVelocity)) : obVelocity;
+		int vel = (LoveHunterXX.fs.getSlowMode()) ? (2 * (Math.abs(obVelocity)/obVelocity)) : obVelocity;
 		int startingPos = (obVelocity > 0) ? 0 : 800;
 		if(mcList.size() == 0){
 			HansCollisionInterface m = determineMovingComponent(startingPos,vel);
 			mcList.add(m);
-			HansFroggerGame.fs.addObject(m);
-			HansFroggerGame.fs.moveToFront(HansFroggerGame.fs.player);
+			LoveHunterXX.fs.addObject(m);
+			LoveHunterXX.fs.moveToFront(LoveHunterXX.fs.player);
 			m.play();
 		}
 		HansCollisionInterface trailing = mcList.get(mcList.size() - 1);
@@ -185,8 +186,8 @@ public class HansTerrain extends Component implements Runnable {
 		if(((trailing.getX() > 100 && obVelocity > 0 && Math.random() < .1) || (trailing.getX() < 700 && obVelocity < 0 && Math.random() < .1)) && (trailing.getVx() == vel)){
 			HansCollisionInterface m = determineMovingComponent(startingPos,vel);
 			mcList.add(m);
-			HansFroggerGame.fs.addObject(m);
-			HansFroggerGame.fs.moveToFront(HansFroggerGame.fs.player);
+			LoveHunterXX.fs.addObject(m);
+			LoveHunterXX.fs.moveToFront(LoveHunterXX.fs.player);
 			m.play();
 			
 		}
@@ -212,33 +213,33 @@ public class HansTerrain extends Component implements Runnable {
 			if((leading.getX() < -20 && obVelocity < 0) || (leading.getX() > 800 && obVelocity > 0)){
 				leading.setRunning(false);
 				mcList.remove(leading);
-				HansFroggerGame.fs.remove(leading);
+				LoveHunterXX.fs.remove(leading);
 			}
 		}
 	}
 
 	public void checkPlayer() {
 		if(terrain == HansFroggerScreen.GRASS){
-			if(this.powerUp!=null && powerUp.isTouchingPlayer(HansFroggerGame.fs.player)){
-				HansFroggerGame.fs.remove(powerUp);
-				HansFroggerGame.fs.player.pickUpItem(powerUp);
+			if(this.powerUp!=null && powerUp.isTouchingPlayer(LoveHunterXX.fs.player)){
+				LoveHunterXX.fs.remove(powerUp);
+				LoveHunterXX.fs.player.pickUpItem(powerUp);
 				this.powerUp = null;
 			}
 		}
 		else{
 			for(int i=0;i<mcList.size();i++){
 				HansCollisionInterface p = mcList.get(i);
-				if(p.isTouchingPlayer(HansFroggerGame.fs.player)){
+				if(p.isTouchingPlayer(LoveHunterXX.fs.player)){
 					if(p instanceof JiaMingCar){
-						if(HansFroggerGame.fs.player.getSuperStrength()){
+						if(LoveHunterXX.fs.player.getSuperStrength()){
 							p.setRunning(false);
 							mcList.remove(p);
-							HansFroggerGame.fs.remove(p);
+							LoveHunterXX.fs.remove(p);
 						}
 						else{
 							genCars = false;
-							HansFroggerGame.fs.gameOver("You were run over by a car!!");
-							HansFroggerGame.fs.player.die();
+							LoveHunterXX.fs.gameOver("You were run over by a car!!");
+							LoveHunterXX.fs.player.die();
 							try {
 								Thread.sleep(40);
 							} catch (InterruptedException e) {
@@ -252,8 +253,8 @@ public class HansTerrain extends Component implements Runnable {
 						
 					}
 					else{
-						if(!HansFroggerGame.fs.player.isOnPlatform()){
-							HansFroggerGame.fs.player.ridePlatform(p);	
+						if(!LoveHunterXX.fs.player.isOnPlatform()){
+							LoveHunterXX.fs.player.ridePlatform(p);	
 						}
 					}
 					break;

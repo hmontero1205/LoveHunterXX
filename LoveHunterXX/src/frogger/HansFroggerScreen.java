@@ -22,6 +22,7 @@ import gui.components.Graphic;
 import gui.components.MovingComponent;
 import gui.components.TextLabel;
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public class HansFroggerScreen extends Screen implements KeyListener, MouseListener, Runnable, MouseWheelListener {
 
@@ -46,11 +47,13 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	private JiaMingProgressMarkerInterface pMarker;
 	private Thread thread;
 	private Button endB;
+	private int pointsToAdd;
 
 	public HansFroggerScreen(int w, int h) {
 		super(w, h);
 		superCreated = true;
 		this.level = 1;
+		this.pointsToAdd = -1;
 		startGame();
 	}
 
@@ -115,7 +118,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
-					pMarker = new HansProgressMarker(745, ROW_HEIGHT + 35, 25, 25, "gf.png");
+					pMarker = new HansProgressMarker(745, 12*ROW_HEIGHT + 35, 25, 25, "gf.png");
 					break;
 			}
 			
@@ -311,12 +314,14 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	}
 	
 	public void gameEnd(){
-		infoBox.setText("You finally made it to your gf!! Click to continue.");
+		infoBox.setText("You finally made it to your gf!!");
 		endB = new Button(695, 561, 100, 35, "Onward!", Color.pink, new Action() {
 
 			@Override
 			public void act() {
-				//change screen
+				LoveHunterXX.ts.lovePoints += pointsToAdd;
+				LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+				LoveHunterXX.ts.playSequence3();
 			};
 
 		});
@@ -325,6 +330,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	}
 
 	public void startGame() {
+		pointsToAdd++;
 		if(level == 4){
 			gameEnd();
 			endThreads(getViewObjects());

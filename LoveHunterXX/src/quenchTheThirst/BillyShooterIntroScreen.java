@@ -10,6 +10,7 @@ import gui.components.Button;
 import gui.components.Clickable;
 import gui.components.Graphic;
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public class BillyShooterIntroScreen extends ClickableScreen {
 
@@ -31,7 +32,7 @@ public class BillyShooterIntroScreen extends ClickableScreen {
 				if (sequence == 0) {
 					background.loadImages("resources/qtt/howtoplay.png", 800, 600);
 				} else if (sequence == 1) {
-					AriqShooterGame.shootGame.setScreen(AriqShooterGame.shooterScreen);
+					LoveHunterXX.game.setScreen(LoveHunterXX.qtts);
 				}
 
 				sequence++;

@@ -1,6 +1,7 @@
 package quenchTheThirst;
 
 import gui.components.Graphic;
+import main.LoveHunterXX;
 
 public abstract class KevinEntity extends Graphic {
 
@@ -39,7 +40,7 @@ public abstract class KevinEntity extends Graphic {
 			return false;
 		}
 
-		for (KevinEntity e : AriqShooterGame.shooterScreen.getEntities()) {
+		for (KevinEntity e : LoveHunterXX.qtts.getEntities()) {
 			if (e instanceof BillyProjectile || e == this || e.getClass() == this.getClass()) {
 				continue;
 			}

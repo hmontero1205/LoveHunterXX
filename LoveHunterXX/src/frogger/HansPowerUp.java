@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
 import gui.components.Component;
+import main.LoveHunterXX;
 
 public class HansPowerUp extends Component implements Runnable{
 	private int effect;
@@ -73,19 +74,19 @@ public class HansPowerUp extends Component implements Runnable{
 				try {
 					Thread.sleep(5000);
 					HansFroggerScreen.player.setSwimming(false);	
-					HansFroggerGame.fs.checkPlayerRow();
+					LoveHunterXX.fs.checkPlayerRow();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
 			case SLOW:
-				HansFroggerGame.fs.setSlowMode(true);
+				LoveHunterXX.fs.setSlowMode(true);
 				try {
 					Thread.sleep(8000);	
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				HansFroggerGame.fs.setSlowMode(false);
+				LoveHunterXX.fs.setSlowMode(false);
 				break;
 		}
 	}

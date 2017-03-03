@@ -14,6 +14,7 @@ import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.TextLabel;
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 
@@ -151,7 +152,7 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 
 						if (ent.collideWith(user)) {
 							user.damage(1);
-							System.out.println(user.getHealth());
+							//System.out.println(user.getHealth());
 							health.setText("Health: " + user.getHealth());
 						}
 					}
@@ -179,7 +180,8 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 	
 		message.setText(won ? "You won!" : "You lost!");
 		
-		/** CHANGE SCREENS HERE **/
+		LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+		LoveHunterXX.ts.playSequence4();
 	}
 
 	public boolean canPlace(int x, int y, String dir, KevinEntity ent) {
@@ -200,7 +202,7 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 			return false;
 		}
 
-		for (KevinEntity e : AriqShooterGame.shooterScreen.getEntities()) {
+		for (KevinEntity e : LoveHunterXX.qtts.getEntities()) {
 			if (e instanceof BillyProjectile || e == ent || e.getClass() == ent.getClass()) {
 				continue;
 			}

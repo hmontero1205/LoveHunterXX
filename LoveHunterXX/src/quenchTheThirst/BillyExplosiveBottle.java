@@ -2,6 +2,8 @@ package quenchTheThirst;
 
 import java.util.Iterator;
 
+import main.LoveHunterXX;
+
 public class BillyExplosiveBottle extends BillyProjectile {
 	
 	private static String[] frames = new String[8];
@@ -36,7 +38,7 @@ public class BillyExplosiveBottle extends BillyProjectile {
 			}
 		}
 
-		Iterator<KevinEntity> entIterator = AriqShooterGame.shooterScreen.getEntities().iterator();
+		Iterator<KevinEntity> entIterator = LoveHunterXX.qtts.getEntities().iterator();
 		while (entIterator.hasNext()) {
 			KevinEntity e = entIterator.next();
 			if (e instanceof AriqLivingEntity && distance(e, RADIUS)) {
@@ -45,7 +47,7 @@ public class BillyExplosiveBottle extends BillyProjectile {
 			}
 		}
 
-		AriqShooterGame.shooterScreen.kill(this);
+		LoveHunterXX.qtts.kill(this);
 	}
 
 	@Override

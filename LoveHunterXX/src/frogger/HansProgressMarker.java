@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 import gui.components.Component;
+import main.LoveHunterXX;
 
 public class HansProgressMarker extends Component implements JiaMingProgressMarkerInterface {
 	private boolean superCreated;
@@ -57,8 +58,8 @@ public class HansProgressMarker extends Component implements JiaMingProgressMark
 	}
 
 	public void nextLevel() {
-		HansFroggerGame.fs.level++;
-		HansFroggerGame.fs.startGame();
+		LoveHunterXX.fs.level++;
+		LoveHunterXX.fs.startGame();
 	}
 	
 	public String getSrc(){

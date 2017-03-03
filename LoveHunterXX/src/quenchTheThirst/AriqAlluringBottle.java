@@ -1,5 +1,7 @@
 package quenchTheThirst;
 
+import main.LoveHunterXX;
+
 public class AriqAlluringBottle extends BillyProjectile {
 	
 	public static final int DISTANCE = 150;
@@ -35,7 +37,7 @@ public class AriqAlluringBottle extends BillyProjectile {
 			}
 		}
 		
-		AriqShooterGame.shooterScreen.kill(this);
+		LoveHunterXX.qtts.kill(this);
 	}
 	
 	public boolean isActive() {

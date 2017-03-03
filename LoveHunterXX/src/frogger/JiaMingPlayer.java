@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
+import main.LoveHunterXX;
 
 public class JiaMingPlayer extends MovingComponent implements HansPlayerInterface {
 
@@ -101,7 +102,7 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 				dir = RIGHT;
 			}
 		}
-		if(pMarker == null) pMarker = HansFroggerGame.fs.getProgressMarker();
+		if(pMarker == null) pMarker = LoveHunterXX.fs.getProgressMarker();
 		setVx(0); // if they get off the log, then their speed should return to 0
 		setRunning(false); // and the thread should be stopped
 		this.onPlatform = false;
@@ -226,13 +227,13 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 				currentTerrain.setCheckPlayer(false);
 				currentTerrain.setAllowPush(false);
 				setVx(0);
-				HansFroggerGame.fs.gameOver("You were swept away by the current!");
+				LoveHunterXX.fs.gameOver("You were swept away by the current!");
 				die();
 			}
 
 			if (currentPlatform instanceof JiaMingTurtle && !((JiaMingTurtle) currentPlatform).isTouchable()
 					&& !HansFroggerScreen.gameOver) {
-				HansFroggerGame.fs.gameOver("The turtle betrayed you.");
+				LoveHunterXX.fs.gameOver("The turtle betrayed you.");
 				die();
 			}
 		}
