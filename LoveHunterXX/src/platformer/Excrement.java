@@ -12,17 +12,25 @@ public class Excrement extends Obstacle {
 	private Image image;
 	private boolean load;
 	private boolean collided;
+	private int x;
+	private int y;
 	private int w;
 	private int h;
 	public Excrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
+		
 		startDrop = System.currentTimeMillis();
 		grav = vy;
+		
 		imgSrc = imageLocation;
+		this.x = x;
+		this.y = y;
 		this.w = w;
 		this.h = h;
+		
 		setX(x);
 		setY(y);
+		
 		loadImage();
 		this.play();
 	}
@@ -37,8 +45,9 @@ public class Excrement extends Obstacle {
 	}
 	public boolean isCollided(){
 		Player playTemp = PlatformerGame.cs.player;
-		if(playTemp.getY() < getY() + h && playTemp.getX() + playTemp.getWidth() > getX() &&
-				getX() + w > playTemp.getX()){
+		if(playTemp.getX() < getPosx() + w && 
+				playTemp.getX() + playTemp.getWidth() > getPosx() &&
+				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){
 			return true;
 		}
 		return false;
@@ -50,7 +59,7 @@ public class Excrement extends Obstacle {
 				PlatformerGame.cs.remove(this);
 				setRunning(false);
 			}
-			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
+			if (isCollided() && !collided) {
 				collided = true;
 				act();
 			}

@@ -17,10 +17,13 @@ public class Bird extends Obstacle {
 	
 	private Image image;
 	private String imgLoc;
+	
 	private boolean load;
 	private boolean collided;
-	private Action action;
 	private boolean excreted;
+	
+	private Action action;
+	
 	
 	public Bird(int x, int y, int w, int h, int vx, int vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
@@ -80,8 +83,9 @@ public class Bird extends Obstacle {
 	}
 	public boolean isCollided(){
 		Player playTemp = PlatformerGame.cs.player;
-		if(playTemp.getY() < getY() + h && playTemp.getX() + playTemp.getWidth() > getX() &&
-				getX() + w > playTemp.getX()){
+		if(playTemp.getX() < getPosx() + w && 
+				playTemp.getX() + playTemp.getWidth() > getPosx() &&
+				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){
 			return true;
 		}
 		return false;
