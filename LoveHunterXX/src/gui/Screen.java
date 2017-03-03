@@ -95,5 +95,8 @@ public abstract class Screen {
 	public MouseWheelListener getMouseWheelListener() {
 		return null;
 	}
-
+	
+	public List<Visible> getViewObjects(){
+		return viewObjects;
+	}
 }
