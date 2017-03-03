@@ -60,4 +60,8 @@ public class HansProgressMarker extends Component implements JiaMingProgressMark
 		HansFroggerGame.fs.level++;
 		HansFroggerGame.fs.startGame();
 	}
+	
+	public String getSrc(){
+		return imgSrc;
+	}
 }

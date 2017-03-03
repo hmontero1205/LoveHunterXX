@@ -106,7 +106,8 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 		setVx(0); // if they get off the log, then their speed should return to 0
 		setRunning(false); // and the thread should be stopped
 		this.onPlatform = false;
-		update();
+		if(!pMarker.getSrc().equals("gf.png"));
+			update();
 	}
 	
 	public void changeItemSelection(int k){

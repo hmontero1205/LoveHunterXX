@@ -6,5 +6,6 @@ public interface JiaMingProgressMarkerInterface extends Visible {
 	
 	void nextLevel();
 	boolean isTouchingPlayer(HansPlayerInterface p);
+	String getSrc();
 	
 }
