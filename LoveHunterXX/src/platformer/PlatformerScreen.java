@@ -20,13 +20,11 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	private TextLabel scoreLabel;
 	private int score;
 	private Obstacle obs;
-	public int test;
 	public ArrayList<Graphic> hearts;
 	public Umbrella umbrella;
 
 	public PlatformerScreen(int width, int height) {
 		super(width, height);
-		test = 5;
 		Thread play = new Thread(this);
 		play.start();
 	}
@@ -50,7 +48,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	private void appearNewPowerUp(){
 		
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
-		double rand = (Math.random()) * 1000;
+		double rand = ((Math.random()) * 1000);
 		if (rand < chance) {
 			Power power = null;
 			switch (0) {
@@ -65,7 +63,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	}
 	private void appearNewObstacle() {
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
-		double rand = (Math.random()) * 1000;
+		double rand = ((Math.random()) * 1000)-(score/100);
 		if (rand < chance) {
 			switch ((int) (Math.random() * 3)) {
 			case 0:
@@ -83,8 +81,6 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				obs = new Obstacle(850, 470, 50, 50, -7, 0, "resources/crab.png");
 				obs.setAction(new Action() {
 					public void act() {
-						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
-						// - 1);
 						if (!player.invuln) {
 							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
 							PlatformerGame.cs.player.setDamaged(true);

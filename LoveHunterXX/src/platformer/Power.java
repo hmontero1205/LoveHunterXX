@@ -21,8 +21,6 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	private int h;
 	
 	private final int HEART = 0;
-	private final int INVULN = 1;
-	private final int WATER = 2;
 	
 
 	public Power(int x, int y, int w, int h,int vx,int vy,String s, int e) {
@@ -78,20 +76,6 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 			case HEART:
 				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() + 1);
 				break;
-			case INVULN:
-				PlatformerGame.cs.player.setInvuln(true);
-				break;
-			case WATER:
-				
-//				FroggerGame.fs.setSlowMode(true);
-//				try {
-//					Thread.sleep(8000);	
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				FroggerGame.fs.setSlowMode(false);
-				break;
 		}
 	}
 
@@ -123,22 +107,11 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		}
 		return false;
 	}
-
-	@Override
-	public void setAction(Action action) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void act() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void setPowerID() {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }
