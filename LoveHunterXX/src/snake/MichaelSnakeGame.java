@@ -1,5 +1,7 @@
 package snake;
 
+import javax.swing.ImageIcon;
+
 import gui.GUIApplication;
 
 public class MichaelSnakeGame extends GUIApplication {
@@ -12,6 +14,7 @@ public class MichaelSnakeGame extends GUIApplication {
 
 	public MichaelSnakeGame(int width, int height) {
 		super(width, height);
+		setResizable(false);
 	}
 
 	public void initScreen() {
@@ -23,6 +26,8 @@ public class MichaelSnakeGame extends GUIApplication {
 	
 	public static void main(String[] stuff){
 		sGame = new MichaelSnakeGame(800,500);
+		sGame.setTitle("LoveHunterXX");
+		sGame.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread game = new Thread(sGame);
 		game.start();
 	}
