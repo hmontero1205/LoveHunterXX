@@ -113,24 +113,12 @@ public class Player extends AnimatedComponent{
 	}
 	public void flicker(Graphics2D g){
 		try {
+			invuln = true;
 			clear();
-			Thread.sleep(100);
+			Thread.sleep(500);
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
-			Thread.sleep(100);
-			System.out.println("dawda");
-			
-			clear();
-			Thread.sleep(100);
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
-			Thread.sleep(100);
-			System.out.println("da");
-			
-			clear();
-			Thread.sleep(100);
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
-			clear();
-			
 			damaged = !damaged;
+			invuln = false;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

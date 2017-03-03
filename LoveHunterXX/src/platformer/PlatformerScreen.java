@@ -49,21 +49,21 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		 * also changed the effect of the crab to temporarily root the player... */
 		
 		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
-		double chance = (obstacles.size() > 0) ? Math.log((double)score): 0;
-		double rand = (Math.random());
-		System.out.println(chance);
+		double chance = (obstacles.size() > 0) ? Math.log((double)score): 10000;
+		double rand = (Math.random())*100;
+		//System.out.println(chance);
 		//System.out.println(rand);
-		if (rand > chance) {
-			//(int) (Math.random() * 3
+		if (rand < chance) {
+			//(int) (Math.random() * 3)
 			switch ((int) (Math.random() * 3)) {
 			case 0:
 				obs = new Obstacle(850, 420, 100, 100, -5,0, "resources/cactus.png");
 				obs.setAction(new Action() {
 					public void act() {
-						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-						PlatformerGame.cs.player.setDamaged(true);
-						
-						System.out.println(PlatformerGame.cs.player.getHp());
+						if(!player.invuln){
+							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+							PlatformerGame.cs.player.setDamaged(true);
+						}
 					}
 				});
 				break;
