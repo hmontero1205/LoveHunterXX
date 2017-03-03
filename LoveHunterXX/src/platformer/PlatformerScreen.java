@@ -44,23 +44,27 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	}
 
 	private void appearNewObstacle() {
-		/*trying to do a thing where the image of the player changes when they get hit and they are invulnerable for a 
-		 * second... can you finish the job on this one? 
-		 * also changed the effect of the crab to temporarily root the player... */
-		
-		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
-		double chance = (obstacles.size() > 0) ? Math.log((double)score): 10000;
-		double rand = (Math.random())*1000;
-		//System.out.println(chance);
-		//System.out.println(rand);
+		/*
+		 * trying to do a thing where the image of the player changes when they
+		 * get hit and they are invulnerable for a second... can you finish the
+		 * job on this one? also changed the effect of the crab to temporarily
+		 * root the player...
+		 */
+
+		// Tried to do the invuln, but images are changing funny. player loses
+		// its transparency for some reason.
+		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
+		double rand = (Math.random()) * 1000;
+		// System.out.println(chance);
+		// System.out.println(rand);
 		if (rand < chance) {
-			//(int) (Math.random() * 3)
+			// (int) (Math.random() * 3)
 			switch ((int) (Math.random() * 3)) {
 			case 0:
-				obs = new Obstacle(850, 420, 100, 120, -5,0, "resources/cactus.png");
+				obs = new Obstacle(850, 420, 100, 100, -5, 0, "resources/cactus.png");
 				obs.setAction(new Action() {
 					public void act() {
-						if(!player.invuln){
+						if (!player.invuln) {
 							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
 							PlatformerGame.cs.player.setDamaged(true);
 						}
@@ -68,34 +72,38 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				});
 				break;
 			case 1:
-				obs = new Obstacle(850, 470, 50, 50, -7,0, "resources/crab.png");
+				obs = new Obstacle(850, 470, 50, 50, -7, 0, "resources/crab.png");
 				obs.setAction(new Action() {
 					public void act() {
 						// PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()
 						// - 1);
-						int currentScore = PlatformerGame.cs.getScore();
-						PlatformerGame.cs.player.setInitialV(0);
-						while(PlatformerGame.cs.getScore() < (currentScore+5)){
-							try {
-								Thread.sleep(20);
-								update();
-							} catch (InterruptedException e) {
-								e.printStackTrace();
+						if (!player.invuln) {
+							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+							PlatformerGame.cs.player.setDamaged(true);
+							int currentScore = PlatformerGame.cs.getScore();
+							PlatformerGame.cs.player.setInitialV(0);
+							while (PlatformerGame.cs.getScore() < (currentScore + 1)) {
+								try {
+									Thread.sleep(20);
+									update();
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+
 							}
-							
+							PlatformerGame.cs.player.setInitialV(9);
 						}
-						PlatformerGame.cs.player.setInitialV(9);
 					}
 				});
 				break;
 			case 2:
-				obs = new Bird(850, 230, 50, 50, -3,0, "resources/bird1.png");
+				obs = new Bird(850, 230, 50, 50, -3, 0, "resources/bird1.png");
 				obs.setAction(new Action() {
 					public void act() {
-						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-						PlatformerGame.cs.player.setDamaged(true);
-						
-						System.out.println(PlatformerGame.cs.player.getHp());
+						if (!player.invuln) {
+							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
+							PlatformerGame.cs.player.setDamaged(true);
+						}
 					}
 				});
 				break;
@@ -110,7 +118,6 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		return this;
 	}
 
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
@@ -143,27 +150,27 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		}
 		gameOver();
 	}
-	
-	private void gameOver(){
+
+	private void gameOver() {
 		updateHp();
 	}
 
 	private void updateHp() {
 		int x = 20;
-		
+
 		while (hearts.size() > 0) {
-			this.remove(hearts.remove(hearts.size()-1));
+			this.remove(hearts.remove(hearts.size() - 1));
 		}
-		
-		for(int i = 0; i < player.getHp(); i++){
+
+		for (int i = 0; i < player.getHp(); i++) {
 			Graphic heart = new Graphic(x, 30, 20, 20, "resources/heart.png");
 			hearts.add(heart);
 			this.addObject(heart);
-			
-			x+=30;
+
+			x += 30;
 		}
-		
-//xd
+
+		// xd
 	}
 
 	private void updateScore() {
@@ -176,8 +183,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		scoreLabel.setText("" + score);
 
 	}
-	
-	public int getScore(){
+
+	public int getScore() {
 		return this.score;
 	}
 
