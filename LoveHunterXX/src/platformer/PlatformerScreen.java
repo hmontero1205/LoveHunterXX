@@ -33,6 +33,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
+		
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
 
@@ -165,6 +166,12 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private void gameOver() {
 		updateHp();
+		player.setRunning(false);
+		umbrella.setRunning(false);
+		Graphic border1 = new Graphic(0, 0, 800, 75, "resources/qtt/mapparts/border.png");
+		Graphic border2 = new Graphic(0, 525, 800, 75, "resources/qtt/mapparts/border.png");
+		addObject(border1);
+		addObject(border2);
 	}
 
 	private void updateHp() {

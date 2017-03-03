@@ -76,7 +76,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		picked = true;
 		switch(this.effect){
 			case HEART:
-				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() + 2);
+				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() + 1);
 				break;
 			case INVULN:
 				PlatformerGame.cs.player.setInvuln(true);
