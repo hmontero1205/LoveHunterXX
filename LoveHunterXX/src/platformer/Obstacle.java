@@ -86,9 +86,9 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 	public boolean isCollided() {
 		// TODO Auto-generated method stud
 		Player playTemp = PlatformerGame.cs.player;
-		if (playTemp.getX() < getPosx() + w && 
-				playTemp.getX() + playTemp.getWidth() > getPosx() &&
-				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()) {
+		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
+				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
+				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()) {
 			return true;
 		}
 		return false;
