@@ -1,5 +1,6 @@
 package gui.components;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class AnimatedComponent extends MovingComponent {
 	public void setFrame(ArrayList<BufferedImage> frame) {
 		this.frame = frame;
 	}
-
+	
 	public ArrayList<Integer> getTimes() {
 		return times;
 	}

@@ -3,7 +3,7 @@
  */
 package main;
 
-import frogger.FroggerScreen;
+import frogger.HansFroggerScreen;
 import gui.GUIApplication;
 
 /**

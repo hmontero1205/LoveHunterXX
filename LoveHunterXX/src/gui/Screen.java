@@ -95,12 +95,13 @@ public abstract class Screen {
 			viewObjects.add(v);
 		}
 	}
+	
+	public List<Visible> getViewObjects(){
+		return viewObjects;
+	}
 
 	public MouseWheelListener getMouseWheelListener() {
 		return null;
 	}
 	
-	public List<Visible> getViewObjects(){
-		return viewObjects;
-	}
 }
