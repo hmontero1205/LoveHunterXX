@@ -49,7 +49,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		if (rand < chance) {
 			switch ((int) (Math.random() * 1)) {
 			case 0:
-				power = new Power(850, 420, 100, 100, -5, 0, "resources/poop.jpg", 0);
+				power = new Power(850, 500, 50, 50, -5, 0, "resources/heart.png", 0);
 				break;
 			}
 		}
