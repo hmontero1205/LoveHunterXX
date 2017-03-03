@@ -14,7 +14,12 @@ public class ShohebPlatformerIntro extends ClickableScreen {
 	private Graphic img;
 	private Button proceedButton;
 	private int choice;
-	@Override
+	
+	public ShohebPlatformerIntro(int width, int height) {
+		super(width, height);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public void initAllObjects(List<Visible> viewObjects) {
 		img = new Graphic(0, 0, 800, 600, "resources/qtt/lwb.png");
 		proceedButton = new Button(325, 425, 150, 80, "Continue", Color.pink, new Action() {

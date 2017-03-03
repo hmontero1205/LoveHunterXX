@@ -1,14 +1,17 @@
 package platformer;
 
 import java.awt.Graphics2D;
+
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
 import gui.components.Action;
+import gui.components.AnimatedComponent;
 import gui.components.MovingComponent;
+import main.LoveHunterXX;
 
-public class Obstacle extends MovingComponent implements Collidable {
+public class DanielObstacle extends AnimatedComponent implements ShohebCollidable, Action {
 
 	private int x;
 	private int y;
@@ -20,18 +23,21 @@ public class Obstacle extends MovingComponent implements Collidable {
 	private boolean load;
 	private Action action;
 	private boolean collided;
+	private int id;
 
-	public Obstacle(int x, int y, int w, int h, int vx, String imageLocation) {
+	public DanielObstacle(int x, int y, int w, int h, int vx, double vy,  String imageLocation) {
 		super(x, y, w, h);
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.id = id;
 		this.imgLoc = imageLocation;
 		load = false;
 		setX(x);
 		setY(y);
 		setVx(vx);
+		setVy(vy);
 		loadImage();
 		this.play();
 	}
@@ -40,34 +46,29 @@ public class Obstacle extends MovingComponent implements Collidable {
 		try {
 			image = new ImageIcon(imgLoc).getImage();
 			load = true;
-			update();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-
 	public void update(Graphics2D g) {
 		if (load) {
-			if (isCollided() && !collided) {
+			if (isCollided() && !collided && !LoveHunterXX.ps.danielPlayer.invuln) {
 				collided = true;
-				this.act();
+				act();
 			}
-			if (getX() < -50) {
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+			if (getX() < w*-1) {
+				LoveHunterXX.ps.obstacles.remove(this);
+				LoveHunterXX.ps.remove(this);
+				setRunning(false);
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
 						null);
-				long currentTime = System.currentTimeMillis();
-				int diff = (int) (currentTime - getMoveTime());
-				if (diff >= REFRESH_RATE) {
-					setMoveTime(currentTime);
-					setPosx(getPosx() + getVx());
-					super.setX((int) getPosx());
-				}
+				setPosx(getPosx() + getVx());
+				setPosy(getPosy() + getVy());
+				super.setX((int) getPosx());
+				super.setY((int) getPosy());
 			}
-
 		}
 	}
 
@@ -85,21 +86,20 @@ public class Obstacle extends MovingComponent implements Collidable {
 
 	public boolean isCollided() {
 		// TODO Auto-generated method stud
-		Player playTemp = PlatformerGame.cs.player;
-		//playTemp.getX() + playTemp.getWidth() > x && playTemp.getX() > x
-		//((playTemp.getX() + playTemp.getWidth()) > (x+w))
-		if (((playTemp.getX() + playTemp.getWidth()) > getPosx()) && ((playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)) 
-				&& ((playTemp.getY()+playTemp.getHeight()) > getPosy()) ) {
+		DanielPlayer playTemp = LoveHunterXX.ps.danielPlayer;
+		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
+				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
+				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()) {
 			return true;
 		}
 		return false;
 	}
 
-	@Override
 	public void act() {
 		action.act();
 	}
-	public void setAction(Action action){
+
+	public void setAction(Action action) {
 		this.action = action;
 	}
 
