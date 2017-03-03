@@ -53,7 +53,7 @@ public class Umbrella extends MovingComponent {
 			}
 		}
 	}
-
+//xd
 	@Override
 	public void update(Graphics2D g) {
 		if (superCreated) {
