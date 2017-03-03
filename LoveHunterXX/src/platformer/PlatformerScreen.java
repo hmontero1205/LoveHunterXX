@@ -16,7 +16,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private Graphic bg;
 	public Player player;
-	public ArrayList<Obstacle> obstacles;
+	public List<Obstacle> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
 	private Obstacle obs;
@@ -49,11 +49,13 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		 * also changed the effect of the crab to temporarily root the player... */
 		
 		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
-		int chance = (obstacles.size() > 0) ? 300000/getScore(): 0;
-		int x1 = (int) Math.floor(Math.random() * 4000);
-		if (x1 > chance) {
+		double chance = (obstacles.size() > 0) ? Math.log((double)score): 0;
+		double rand = (Math.random());
+		System.out.println(chance);
+		//System.out.println(rand);
+		if (rand > chance) {
 			//(int) (Math.random() * 3
-			switch (2) {
+			switch ((int) (Math.random() * 3)) {
 			case 0:
 				obs = new Obstacle(850, 420, 100, 100, -5,0, "resources/cactus.png");
 				obs.setAction(new Action() {
@@ -86,7 +88,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				});
 				break;
 			case 2:
-				obs = new Bird(850, 200, 50, 50, -3,0, "resources/bird1.png");
+				obs = new Bird(850, 230, 50, 50, -3,0, "resources/bird1.png");
 				obs.setAction(new Action() {
 					public void act() {
 						PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
@@ -130,13 +132,17 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		obstacles = new ArrayList<Obstacle>();
+		obstacles = Collections.synchronizedList(new ArrayList<Obstacle>());
 		hearts = new ArrayList<Graphic>();
 		while (player.getHp() > 0) {
 			updateHp();
 			updateScore();
 			appearNewObstacle();
 		}
+		gameOver();
+	}
+	
+	private void gameOver(){
 		updateHp();
 	}
 
