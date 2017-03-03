@@ -2,15 +2,14 @@ package snake;
 
 import gui.components.Graphic;
 
-public abstract class Interactable extends Graphic{
+public abstract class MichaelInteractable extends Graphic{
 	// not sure what to put in this class so we can decide at a later time.
-	private boolean isDanger;
 	private int xPos;
 	private int yPos;
 	private int width;
 	private int height;
 	
-	public Interactable(int x, int y, int width, int height, String path) {
+	public MichaelInteractable(int x, int y, int width, int height, String path) {
 		super(x, y, width, height, path);
 		this.xPos = x;
 		this.yPos = y;
@@ -34,7 +33,7 @@ public abstract class Interactable extends Graphic{
 	public void setY(int y){
 		this.yPos = y;
 	}
-	public boolean isCollided(Interactable interactable) {
+	public boolean isCollided(MichaelInteractable interactable) {
 		return (this.getX() == interactable.getX() && this.getY() == interactable.getY());
 	}
 	public int getRandBetween(int min, int max){

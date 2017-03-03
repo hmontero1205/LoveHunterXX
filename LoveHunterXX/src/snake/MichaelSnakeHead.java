@@ -1,10 +1,10 @@
 package snake;
 
-public class SnakeHead extends Interactable {
+public class MichaelSnakeHead extends MichaelInteractable {
 	
 	private String sprite;
 
-	public SnakeHead(int x, int y, int width, int height, String path) {
+	public MichaelSnakeHead(int x, int y, int width, int height, String path) {
 		super(x, y, width, height, path);
 	}
 

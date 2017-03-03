@@ -6,32 +6,31 @@ import java.util.List;
 
 import gui.components.MovingComponent;
 
-public class Snake extends MovingComponent{
+public class MichaelSnake extends MovingComponent{
 	public static final int DISTANCE = 20;
 	private boolean gameRunning = true;
-	public SnakeHead cart;
+	public MichaelSnakeHead cart;
 	private int refresh_r = 250;
 	private int posX;
 	private int posY;
 	private Direction direction;
-	public ArrayList<Interactable> presentList;
+	public ArrayList<MichaelInteractable> presentList;
 	public enum Direction{
 		left, up, right, down
 	}
 
-	public Snake(int x, int y, int w, int h) {
+	public MichaelSnake(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		this.posX = 0;
 		this.posY = 0;
-		cart = new SnakeHead(30,60,30,30, "resources/cartRight.png");
-
-		this.direction = Snake.Direction.down;
-		presentList = new ArrayList<Interactable>();
+		cart = new MichaelSnakeHead(30,60,30,30, "resources/cartRight.png");
+		this.direction = MichaelSnake.Direction.down;
+		presentList = new ArrayList<MichaelInteractable>();
 		presentList.add(cart);
-		presentList.add(new LoveGift(0,0,30,30));
+		presentList.add(new DavidLoveGift(0,0,30,30));
 	}
 
-	public void addPresent(Present p){ // adding body parts.
+	public void addPresent(DavidPresent p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
 		System.out.println(p.getX() + ", " + p.getY());
@@ -39,8 +38,8 @@ public class Snake extends MovingComponent{
 	}
 
 	public void removeLastPresent(){
-		Interactable i = presentList.remove(presentList.size()-1);
-		SnakeGame.sScreen.remove(i);
+		MichaelInteractable i = presentList.remove(presentList.size()-1);
+		MichaelSnakeGame.sScreen.remove(i);
 	}
 
 	public void moveCoors(Direction d){
@@ -112,7 +111,7 @@ public class Snake extends MovingComponent{
 		}
 	}
 
-	public ArrayList<Interactable> getItems(){
+	public ArrayList<MichaelInteractable> getItems(){
 		return presentList;
 	}
 
@@ -120,11 +119,6 @@ public class Snake extends MovingComponent{
 		this.direction = d;
 	}
 	
-	public void updateRates(){
-		int s = presentList.size() - 1;
-		
-	}
-
 	@Override
 	public void run() {
 		setRunning(true);
@@ -147,7 +141,7 @@ public class Snake extends MovingComponent{
 				setRate(999999);
 				gameRunning = false;
 				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
-				SnakeGame.sScreen.updateText("                Game Over.                 You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
+				MichaelSnakeGame.sScreen.updateText("                Game Over.                 You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
 				return true;                   
 			}
 		}
@@ -156,7 +150,7 @@ public class Snake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
-			SnakeGame.sScreen.updateText("                Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			MichaelSnakeGame.sScreen.updateText("                Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			return true;
 		}
 		return false;
@@ -167,7 +161,7 @@ public class Snake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
-			SnakeGame.sScreen.updateText("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			MichaelSnakeGame.sScreen.updateText("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
 			return true;
 		}
 		return false;
@@ -175,37 +169,37 @@ public class Snake extends MovingComponent{
 
 
 	public void checkGenCollision(){
-		for(int i = 0; i < SnakeScreen.gens.size(); ++i){
-			Present p = (Present) SnakeScreen.gens.get(i);
-			if(cart.isCollided((Interactable) SnakeScreen.gens.get(i))){
+		for(int i = 0; i < MichaelSnakeScreen.gens.size(); ++i){
+			DavidPresent p = (DavidPresent) MichaelSnakeScreen.gens.get(i);
+			if(cart.isCollided((MichaelInteractable) MichaelSnakeScreen.gens.get(i))){
 				// keep track of the collision.
-				Present collided = (Present) SnakeScreen.gens.get(i);
+				DavidPresent collided = (DavidPresent) MichaelSnakeScreen.gens.get(i);
 				
 				// check what kind of collision.
 				if(collided.getName() == "LoveGift"){
 					// collision was with LoveGift type.
-					LoveGift item = (LoveGift) collided;
+					DavidLoveGift item = (DavidLoveGift) collided;
 					System.out.println("Collided with LOVE");
 					//SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
-					item.generateNew(SnakeScreen.gens);
-					addPresent((Present) SnakeScreen.gens.remove(i));
+					item.generateNew(MichaelSnakeScreen.gens);
+					addPresent((DavidPresent) MichaelSnakeScreen.gens.remove(i));
 				}
 				else if(collided.getName() == "Block"){
 					// collision was with Obstacle type.
-					Obstacle item = (Obstacle) collided;
+					DavidObstacle item = (DavidObstacle) collided;
 					// remove old item from gens list.
-					SnakeScreen.gens.remove(item);
+					MichaelSnakeScreen.gens.remove(item);
 					// removes old obstacle from screen.
-					SnakeGame.sScreen.remove(item); 
+					MichaelSnakeGame.sScreen.remove(item); 
 					// generate new obstacle.
-					item.generateNew(SnakeScreen.gens);
+					item.generateNew(MichaelSnakeScreen.gens);
 					
 					if(presentList.size() > 2){
 						removeLastPresent();
 						System.out.println("Collided with block");
 					}
 				}
-				SnakeGame.sScreen.updateScore();
+				MichaelSnakeGame.sScreen.updateScore();
 			}
 		}
 	}

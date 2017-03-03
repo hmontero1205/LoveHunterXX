@@ -15,14 +15,14 @@ import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.Visible;
 
-public class IntroScreen extends ClickableScreen implements MouseListener {
+public class MichaelIntroScreen extends ClickableScreen implements MouseListener {
 	
 	private Button buttonToGuide;
 	private Button buttonToGame;
 	private Graphic splashArt;
 	private Graphic howToPlay;
 	
-	public IntroScreen(int width, int height) {
+	public MichaelIntroScreen(int width, int height) {
 		super(width, height);
 		// TODO Auto-generated constructor stub
 	}
@@ -44,8 +44,8 @@ public class IntroScreen extends ClickableScreen implements MouseListener {
 			public void act() {
 				// TODO Auto-generated method stub
 				System.out.println("Go");
-				SnakeGame.sGame.setScreen(SnakeGame.sScreen);
-				SnakeGame.sScreen.snake.play();
+				MichaelSnakeGame.sGame.setScreen(MichaelSnakeGame.sScreen);
+				MichaelSnakeGame.sScreen.snake.play();
 			}
 		});
 		
