@@ -31,6 +31,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		this.imgSrc = s;
 		this.w = w;
 		this.h = h;
+		
 		setVx(vx);
 		setVy(vy);
 		//Thread pThread = new Thread(this);
@@ -49,8 +50,13 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	@Override
 	public void update(Graphics2D g) {
 		if(load){
-			if(isCollided() || getX() < w*-1){
+			if(!picked && isCollided()){
 				performEffect();
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
+			if(getX() < w*-1){
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
 				setRunning(false);
@@ -67,6 +73,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		
 	}
 	public void performEffect() {
+		picked = true;
 		switch(this.effect){
 			case HEART:
 				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() + 3);
@@ -109,9 +116,9 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	@Override
 	public boolean isCollided() {
 		Player playTemp = PlatformerGame.cs.player;
-		if(playTemp.getX() < getPosx() + w && 
-				playTemp.getX() + playTemp.getWidth() > getPosx() &&
-				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){
+		if((playTemp.getX() + playTemp.getWidth()) > getPosx()
+				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
+				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()){
 			return true;
 		}
 		return false;

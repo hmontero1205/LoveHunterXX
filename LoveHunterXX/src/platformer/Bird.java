@@ -44,6 +44,7 @@ public class Bird extends Obstacle {
 		birdFrames.add(image = new ImageIcon(imgLoc).getImage());
 		birdFrames.add(image = new ImageIcon("resources/bird2.png").getImage());
 		birdFrames.add(image = new ImageIcon("resources/bird3.png").getImage());
+		
 		setX(x);
 		setY(y);
 		setVx(vx);
@@ -107,7 +108,7 @@ public class Bird extends Obstacle {
 //		}
 //	}
 	public void createFeces(){
-		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 70, 70, (int)getVx(), -.5, "resources/cactus.png");
+		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 70, 70, (int)getVx(), -.5, "resources/poop.png");
 		obs.setAction(new Action(){
 			public void act(){
 				if(!PlatformerGame.cs.player.invuln){
