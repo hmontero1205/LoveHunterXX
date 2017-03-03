@@ -140,8 +140,8 @@ public class MichaelSnake extends MovingComponent{
 			if (cart.isCollided(presentList.get(i))){
 				setRate(999999);
 				gameRunning = false;
-				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
-				MichaelSnakeGame.sScreen.updateText("                Game Over.                 You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
+				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
+				MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
 				return true;                   
 			}
 		}
@@ -150,7 +150,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
-			MichaelSnakeGame.sScreen.updateText("                Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			return true;
 		}
 		return false;
@@ -161,7 +161,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
-			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough             presents to please your                        girlfriend!                                LovePoints +3!");
+			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
 			return true;
 		}
 		return false;
@@ -208,5 +208,11 @@ public class MichaelSnake extends MovingComponent{
 		checkGenCollision();
 		checkLose();
 		checkWin();
+	}
+	
+	public void cheat(){
+		while (presentList.size()<31){
+			presentList.add(new DavidLoveGift(0,0,30,30));
+		}
 	}
 }

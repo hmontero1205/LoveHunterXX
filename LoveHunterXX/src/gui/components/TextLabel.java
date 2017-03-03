@@ -14,7 +14,7 @@ public class TextLabel extends Component {
 	public TextLabel(int x, int y, int w, int h, String text) {
 		super(x, y, w, h);
 		this.text = text;
-		this.font = "Comic Sans MS";
+		this.font = "Arial";
 		this.size = 20;
 		update();
 	}

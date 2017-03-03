@@ -3,17 +3,23 @@ package snake;
  *  
  * */
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.ClickableScreen;
 import gui.Screen;
+import gui.components.Action;
+import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.TextArea;
+import gui.components.TextLabel;
 import gui.components.Visible;
 
-public class MichaelSnakeScreen extends Screen implements KeyListener {
+public class MichaelSnakeScreen extends ClickableScreen implements KeyListener {
 
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
@@ -22,12 +28,13 @@ public class MichaelSnakeScreen extends Screen implements KeyListener {
 
 	public MichaelSnake snake;
 	public static List<DavidGeneratableInterface> gens; // generated objects.
-	Graphic background;
-	Graphic sbBack;
-	TextArea line;
-	TextArea scoreCount;
-	Graphic cBack;
-	TextArea cLine;
+	private Graphic background;
+	private Graphic sbBack;
+	private TextArea line;
+	private TextArea scoreCount;
+	private Graphic cBack;
+	private TextArea cLine;
+	private Button cheat;
 
 	public MichaelSnakeScreen(int width, int height) {
 		super(width, height);
@@ -90,7 +97,14 @@ public class MichaelSnakeScreen extends Screen implements KeyListener {
 
 	@Override
 	public void initObjects(List<Visible> view) {
-		// TODO Auto-generated method stub
+		//Screen setup
+		Graphic blackBack = new Graphic(0,0,800,600,"resources/black.png");
+		Graphic logoBack = new Graphic(465,445,320,50,"resources/logoBack.png");
+		Graphic logo = new Graphic(480,445,40,40,"resources/Logo.png");
+		TextLabel gameName = new TextLabel(510,405,200,75,"Shopping Spree");
+		gameName.setSize(25);
+		
+		//game setup
 		gens = new ArrayList<DavidGeneratableInterface>();
 		snake = new MichaelSnake(0, 0, 100, 100);
 		background = new Graphic(10, 40, 450, 450, "resources/snakebackground.jpg");
@@ -100,9 +114,20 @@ public class MichaelSnakeScreen extends Screen implements KeyListener {
 		scoreCount.setSize(46);
 		scoreCount.setText("" + (snake.presentList.size() - 1));
 
-		cBack = new Graphic(465, 195, 320, 295, "resources/scorebackground.png");
-		cLine = new TextArea(475, 205, 310, 295, "          Shopping Spree!");
+		cBack = new Graphic(465, 195, 320, 240, "resources/scorebackground.png");
+		cLine = new TextArea(475, 205, 310, 235, "            Shopping Spree!");
 
+		//cheat button
+		cheat = new Button(700,447,70,40, "Cheat", Color.LIGHT_GRAY, new Action() {
+			@Override
+			public void act() {
+				snake.cheat();
+				System.out.println("acted");
+			}
+		});
+		
+		view.add(blackBack);
+		view.add(logoBack);
 		view.add(background);
 		view.add(sbBack);
 		view.add(line);
@@ -113,10 +138,20 @@ public class MichaelSnakeScreen extends Screen implements KeyListener {
 			// add each snake body part.
 			view.add(i);
 		}
+		
+		view.add(logo);
+		view.add(gameName);
+		view.add(cheat);
 
 		DavidLoveGift p = new DavidLoveGift(50, 60, 30, 30);
 		gens.add(p);
 		view.add(p);
+	}
+
+	@Override
+	public void initAllObjects(List<Visible> viewObjects) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
