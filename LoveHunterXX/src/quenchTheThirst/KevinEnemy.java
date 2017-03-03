@@ -2,23 +2,23 @@ package quenchTheThirst;
 
 import java.util.ArrayList;
 
-public class Enemy extends LivingEntity {
+public class KevinEnemy extends AriqLivingEntity {
 
 	private String direction;
 
-	public Enemy(int x, int y) {
+	public KevinEnemy(int x, int y) {
 		super(x, y, .5, "resources/qtt/enemyeast.png", (int) (Math.random() * 3) + 2);
 	}
 
 	public void tick() {
-		if (ShooterGame.shooterScreen == null) {
+		if (AriqShooterGame.shooterScreen == null) {
 			return;
 		}
 
-		GraphNode goal = new GraphNode(null, ShooterGame.shooterScreen.getPlayer().getCenterX(),
-				ShooterGame.shooterScreen.getPlayer().getCenterY());
-		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
-			if (e instanceof AlluringBottle && this.distance(e, AlluringBottle.DISTANCE) && ((AlluringBottle) e).isActive()) {
+		GraphNode goal = new GraphNode(null, AriqShooterGame.shooterScreen.getPlayer().getCenterX(),
+				AriqShooterGame.shooterScreen.getPlayer().getCenterY());
+		for (KevinEntity e : AriqShooterGame.shooterScreen.getEntities()) {
+			if (e instanceof AriqAlluringBottle && this.distance(e, AriqAlluringBottle.DISTANCE) && ((AriqAlluringBottle) e).isActive()) {
 				goal = new GraphNode(null, e.getCenterX(), e.getCenterY(), e.getWidth(), e.getHeight());
 				break;
 			}
@@ -129,21 +129,21 @@ public class Enemy extends LivingEntity {
 		public ArrayList<GraphNode> getNeighbors() {
 			ArrayList<GraphNode> neighbors = new ArrayList<GraphNode>();
 
-			if (x < ShooterGame.shooterScreen.getWidth() - 5
-					&& ShooterGame.shooterScreen.canPlace(x, y, "east", Enemy.this)) {
+			if (x < AriqShooterGame.shooterScreen.getWidth() - 5
+					&& AriqShooterGame.shooterScreen.canPlace(x, y, "east", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x + 5, y, "east"));
 			}
 
-			if (x - 5 > 0 && ShooterGame.shooterScreen.canPlace(x, y, "west", Enemy.this)) {
+			if (x - 5 > 0 && AriqShooterGame.shooterScreen.canPlace(x, y, "west", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x - 5, y, "west"));
 			}
 
-			if (y < ShooterGame.shooterScreen.getHeight() - 5
-					&& ShooterGame.shooterScreen.canPlace(x, y, "south", Enemy.this)) {
+			if (y < AriqShooterGame.shooterScreen.getHeight() - 5
+					&& AriqShooterGame.shooterScreen.canPlace(x, y, "south", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y + 5, "south"));
 			}
 
-			if (y - 5 > 0 && ShooterGame.shooterScreen.canPlace(x, y, "north", Enemy.this)) {
+			if (y - 5 > 0 && AriqShooterGame.shooterScreen.canPlace(x, y, "north", KevinEnemy.this)) {
 				neighbors.add(new GraphNode(this, goal, x, y - 5, "north"));
 			}
 
@@ -161,8 +161,8 @@ public class Enemy extends LivingEntity {
 		}
 
 		public boolean isTouching(GraphNode node) {
-			return Math.abs(this.getX() - goal.getX()) * 2 < Enemy.this.getWidth() + goal.getWidth()
-					&& Math.abs(this.getY() - goal.getY()) * 2 < Enemy.this.getHeight() + goal.getHeight();
+			return Math.abs(this.getX() - goal.getX()) * 2 < KevinEnemy.this.getWidth() + goal.getWidth()
+					&& Math.abs(this.getY() - goal.getY()) * 2 < KevinEnemy.this.getHeight() + goal.getHeight();
 		}
 
 		public int getWidth() {
@@ -191,7 +191,7 @@ public class Enemy extends LivingEntity {
 	public void die() {
 		/** LOVE POINT ADD HERE **/
 
-		ShooterGame.shooterScreen.kill(this);
+		AriqShooterGame.shooterScreen.kill(this);
 	}
 
 }

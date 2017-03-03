@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public abstract class BillyProjectile extends Entity implements Runnable {
+public abstract class BillyProjectile extends KevinEntity implements Runnable {
 
 	private double velocity;
 	private double acceleration;

@@ -2,15 +2,15 @@ package quenchTheThirst;
 
 import gui.components.Graphic;
 
-public abstract class Entity extends Graphic {
+public abstract class KevinEntity extends Graphic {
 
 	private int speed;
 
-	public Entity(int x, int y, double scale, String imageLocation) {
+	public KevinEntity(int x, int y, double scale, String imageLocation) {
 		super(x, y, scale, imageLocation);
 	}
 
-	public Entity(int x, int y, double scale, String imageLocation, int speed) {
+	public KevinEntity(int x, int y, double scale, String imageLocation, int speed) {
 		this(x, y, scale, imageLocation);
 
 		this.speed = speed;
@@ -39,7 +39,7 @@ public abstract class Entity extends Graphic {
 			return false;
 		}
 
-		for (Entity e : ShooterGame.shooterScreen.getEntities()) {
+		for (KevinEntity e : AriqShooterGame.shooterScreen.getEntities()) {
 			if (e instanceof BillyProjectile || e == this || e.getClass() == this.getClass()) {
 				continue;
 			}
@@ -52,7 +52,7 @@ public abstract class Entity extends Graphic {
 		return true;
 	}
 
-	public boolean collideWith(Entity e) {
+	public boolean collideWith(KevinEntity e) {
 		return collideWith(e.getCenterX(), e.getCenterY(), e.getWidth(), e.getHeight());
 	}
 
@@ -93,7 +93,7 @@ public abstract class Entity extends Graphic {
 		}
 	}
 
-	public boolean distance(Entity e, int i) {
+	public boolean distance(KevinEntity e, int i) {
 		if (Math.abs(Math.sqrt((Math.pow(this.getCenterX() - e.getCenterX(), 2))
 				+ (Math.pow(this.getCenterY() - e.getCenterY(), 2)))) < i) {
 			return true;

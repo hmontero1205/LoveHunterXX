@@ -31,7 +31,7 @@ public class BillyShooterIntroScreen extends ClickableScreen {
 				if (sequence == 0) {
 					background.loadImages("resources/qtt/howtoplay.png", 800, 600);
 				} else if (sequence == 1) {
-					ShooterGame.shootGame.setScreen(ShooterGame.shooterScreen);
+					AriqShooterGame.shootGame.setScreen(AriqShooterGame.shooterScreen);
 				}
 
 				sequence++;

@@ -1,6 +1,6 @@
 package quenchTheThirst;
 
-public class AlluringBottle extends BillyProjectile {
+public class AriqAlluringBottle extends BillyProjectile {
 	
 	public static final int DISTANCE = 150;
 	private static String[] frames = new String[10];
@@ -11,7 +11,7 @@ public class AlluringBottle extends BillyProjectile {
 	}
 	private boolean isActive;
 
-	public AlluringBottle(int x, int y, String dir) {
+	public AriqAlluringBottle(int x, int y, String dir) {
 		super(x, y, 0.04, "resources/qtt/bottle.png", dir);
 	}
 
@@ -35,7 +35,7 @@ public class AlluringBottle extends BillyProjectile {
 			}
 		}
 		
-		ShooterGame.shooterScreen.kill(this);
+		AriqShooterGame.shooterScreen.kill(this);
 	}
 	
 	public boolean isActive() {

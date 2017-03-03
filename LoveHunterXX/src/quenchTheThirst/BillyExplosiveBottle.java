@@ -36,16 +36,16 @@ public class BillyExplosiveBottle extends BillyProjectile {
 			}
 		}
 
-		Iterator<Entity> entIterator = ShooterGame.shooterScreen.getEntities().iterator();
+		Iterator<KevinEntity> entIterator = AriqShooterGame.shooterScreen.getEntities().iterator();
 		while (entIterator.hasNext()) {
-			Entity e = entIterator.next();
-			if (e instanceof LivingEntity && distance(e, RADIUS)) {
-				LivingEntity live = (LivingEntity) e;
+			KevinEntity e = entIterator.next();
+			if (e instanceof AriqLivingEntity && distance(e, RADIUS)) {
+				AriqLivingEntity live = (AriqLivingEntity) e;
 				live.damage(DAMAGE);
 			}
 		}
 
-		ShooterGame.shooterScreen.kill(this);
+		AriqShooterGame.shooterScreen.kill(this);
 	}
 
 	@Override

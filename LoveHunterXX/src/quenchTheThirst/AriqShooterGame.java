@@ -2,13 +2,13 @@ package quenchTheThirst;
 
 import gui.GUIApplication;
 
-public class ShooterGame extends GUIApplication {
+public class AriqShooterGame extends GUIApplication {
 
-	public static ShooterGame shootGame;
+	public static AriqShooterGame shootGame;
 	public static BillyShooterIntroScreen introScreen;
 	public static BillyQTTScreen shooterScreen;
 
-	public ShooterGame(int width, int height) {
+	public AriqShooterGame(int width, int height) {
 		super(width, height);
 		setResizable(true);
 	}
@@ -20,7 +20,7 @@ public class ShooterGame extends GUIApplication {
 	}
 
 	public static void main(String[] string) {
-		shootGame = new ShooterGame(800, 600);
+		shootGame = new AriqShooterGame(800, 600);
 		Thread game = new Thread(shootGame);
 		game.start();
 	}

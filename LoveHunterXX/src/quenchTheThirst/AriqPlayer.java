@@ -3,14 +3,14 @@ package quenchTheThirst;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
-public class Player extends LivingEntity {
+public class AriqPlayer extends AriqLivingEntity {
 
 	private String direction;
 
 	private HashMap<String, Integer> arsenal;
 	private String equipped;
 
-	public Player(int x, int y) {
+	public AriqPlayer(int x, int y) {
 		super(x, y, .5, "resources/qtt/playerright.PNG", 5);
 
 		arsenal = new HashMap<String, Integer>();
@@ -64,19 +64,19 @@ public class Player extends LivingEntity {
 		if (proj.equals("explosive")) {
 			projectile = new BillyExplosiveBottle(wbx, wby, direction);
 		} else if (proj.equals("alluring")) {
-			projectile = new AlluringBottle(wbx, wby, direction);
+			projectile = new AriqAlluringBottle(wbx, wby, direction);
 		}
 
 		projectile.setX(projectile.getX() - projectile.getWidth() / 2);
 		projectile.setY(projectile.getY() - projectile.getHeight() / 2);
 
 		projectile.start();
-		ShooterGame.shooterScreen.spawnEntity(projectile);
+		AriqShooterGame.shooterScreen.spawnEntity(projectile);
 	}
 
 	@Override
 	public void die() {
-		ShooterGame.shooterScreen.endGame(false);
+		AriqShooterGame.shooterScreen.endGame(false);
 	}
 
 }

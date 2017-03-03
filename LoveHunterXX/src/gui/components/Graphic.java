@@ -45,8 +45,6 @@ public class Graphic implements Visible {
 			Graphics2D g = image.createGraphics();
 			g.drawImage(icon.getImage(), 0, 0, newWidth, newHeight, 0, 0, icon.getIconWidth(), icon.getIconHeight(),
 					null);
-			g.setColor(Color.BLACK);
-			g.drawRect(0, 0, newWidth - 1, newHeight - 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,13 +60,11 @@ public class Graphic implements Visible {
 				image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
 				Graphics2D g = image.createGraphics();
 				g.drawImage(icon.getImage(), 0, 0, null);
-				g.drawRect(0, 0, icon.getIconHeight() - 1, icon.getIconWidth() - 1);
 			} else {
 				image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 				Graphics2D g = image.createGraphics();
 
 				g.drawImage(icon.getImage(), 0, 0, w, h, 0, 0, icon.getIconWidth(), icon.getIconHeight(), null);
-				g.drawRect(0, 0, w - 1, h - 1);
 			}
 			loadedImages = true;
 		} catch (Exception e) {
