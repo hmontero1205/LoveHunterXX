@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.AnimatedComponent;
 
-public class Turtle extends AnimatedComponent implements CollisionInterface {
+public class JiaMingTurtle extends AnimatedComponent implements HansCollisionInterface {
 
 	private boolean touchable;
 	private String[] swimAnimation = { "resources/frogger/turtle0.png", "resources/frogger/turtle1.png" };
@@ -49,7 +49,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	 *            frame time of each submerging frame
 	 */
 
-	public Turtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending,
+	public JiaMingTurtle(int x, int y, int w, int h, int vx, int swimTime, int timeBeforeAscending,
 			int submergeFrameInterval) {
 		super(x, y, w, h);
 		this.swimTime = swimTime;
@@ -184,7 +184,7 @@ public class Turtle extends AnimatedComponent implements CollisionInterface {
 	}
 
 	@Override
-	public boolean isTouchingPlayer(PlayerInterface p) {
+	public boolean isTouchingPlayer(HansPlayerInterface p) {
 		boolean touching = false;
 		if (p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX()
 				|| p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {

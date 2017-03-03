@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.Component;
 
-public class ProgressMarker extends Component implements ProgressMarkerInterface {
+public class HansProgressMarker extends Component implements JiaMingProgressMarkerInterface {
 	private boolean superCreated;
 	private String imgSrc;
 	private boolean touching;
@@ -19,7 +19,7 @@ public class ProgressMarker extends Component implements ProgressMarkerInterface
 	 * @param h
 	 * @param s Image source
 	 */
-	public ProgressMarker(int x, int y, int w, int h, String s) {
+	public HansProgressMarker(int x, int y, int w, int h, String s) {
 		super(x, y, w, h);
 		superCreated = true;
 		touching = false;
@@ -35,7 +35,7 @@ public class ProgressMarker extends Component implements ProgressMarkerInterface
 		}
 	}
 
-	public boolean isTouchingPlayer(PlayerInterface p) {
+	public boolean isTouchingPlayer(HansPlayerInterface p) {
 		boolean touching = false;
 		if (p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX()
 				|| p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
@@ -57,7 +57,7 @@ public class ProgressMarker extends Component implements ProgressMarkerInterface
 	}
 
 	public void nextLevel() {
-		FroggerGame.fs.level++;
-		FroggerGame.fs.startGame();
+		HansFroggerGame.fs.level++;
+		HansFroggerGame.fs.startGame();
 	}
 }

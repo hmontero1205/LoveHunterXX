@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.Component;
 
-public class PowerUp extends Component implements Runnable{
+public class HansPowerUp extends Component implements Runnable{
 	private int effect;
 	private String imgSrc;
 	private boolean superCreated;
@@ -27,7 +27,7 @@ public class PowerUp extends Component implements Runnable{
 	 * @param s Image source
 	 * @param e Determines effect of PowerUp
 	 */
-	public PowerUp(int x, int y, int w, int h, String s, int e) {
+	public HansPowerUp(int x, int y, int w, int h, String s, int e) {
 		super(x,y,w,h);
 		superCreated = true;
 		this.effect = e;
@@ -44,7 +44,7 @@ public class PowerUp extends Component implements Runnable{
 		
 	}
 
-	public boolean isTouchingPlayer(PlayerInterface p) {
+	public boolean isTouchingPlayer(HansPlayerInterface p) {
 		boolean touching = false;
 		if (p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX()
 				|| p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
@@ -60,32 +60,32 @@ public class PowerUp extends Component implements Runnable{
 	public void performEffect() {
 		switch(this.effect){
 			case STRENGTH:
-				FroggerScreen.player.setSuperStrength(true);	
+				HansFroggerScreen.player.setSuperStrength(true);	
 				try {
 					Thread.sleep(3000);
-					FroggerScreen.player.setSuperStrength(false);	
+					HansFroggerScreen.player.setSuperStrength(false);	
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
 			case SWIM:
-				FroggerScreen.player.setSwimming(true);	
+				HansFroggerScreen.player.setSwimming(true);	
 				try {
 					Thread.sleep(5000);
-					FroggerScreen.player.setSwimming(false);	
-					FroggerGame.fs.checkPlayerRow();
+					HansFroggerScreen.player.setSwimming(false);	
+					HansFroggerGame.fs.checkPlayerRow();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
 			case SLOW:
-				FroggerGame.fs.setSlowMode(true);
+				HansFroggerGame.fs.setSlowMode(true);
 				try {
 					Thread.sleep(8000);	
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				FroggerGame.fs.setSlowMode(false);
+				HansFroggerGame.fs.setSlowMode(false);
 				break;
 		}
 	}

@@ -13,22 +13,22 @@ import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
 
-public class Player extends MovingComponent implements PlayerInterface {
+public class JiaMingPlayer extends MovingComponent implements HansPlayerInterface {
 
 	public static final int LEFT = 0;
 	public static final int RIGHT = 1;
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int moveDistance = 30;
-	private ProgressMarkerInterface pMarker;
+	private JiaMingProgressMarkerInterface pMarker;
 	private int dir;
-	private ArrayList<PowerUp> inventory;
+	private ArrayList<HansPowerUp> inventory;
 	private int currentPowerUp = -1;
 	private String[] pModels = { "resources/frogger/player/playerleft.png", "resources/frogger/player/playerright.png",
 			"resources/frogger/player/playerup.png", "resources/frogger/player/playerdown.png" };
 	private boolean onPlatform;
-	private CollisionInterface currentPlatform;
-	private Terrain currentTerrain;
+	private HansCollisionInterface currentPlatform;
+	private HansTerrain currentTerrain;
 	private boolean deathGraphic;
 	private boolean strength;
 	private boolean swimming;
@@ -40,10 +40,10 @@ public class Player extends MovingComponent implements PlayerInterface {
 	 * @param w
 	 * @param h
 	 */
-	public Player(int x, int y, int w, int h) {
+	public JiaMingPlayer(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		dir = UP;
-		inventory = new ArrayList<PowerUp>();
+		inventory = new ArrayList<HansPowerUp>();
 		update();
 
 	}
@@ -79,7 +79,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 		switch (k) {
 		case KeyEvent.VK_W:
 			if (!outOfBounds(KeyEvent.VK_W)) {
-				setY(getY() - FroggerScreen.ROW_HEIGHT);
+				setY(getY() - HansFroggerScreen.ROW_HEIGHT);
 				dir = UP;
 			}
 			break;
@@ -91,7 +91,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 			break;
 		case KeyEvent.VK_S:
 			if (!outOfBounds(KeyEvent.VK_S)) {
-				setY(getY() + FroggerScreen.ROW_HEIGHT);
+				setY(getY() + HansFroggerScreen.ROW_HEIGHT);
 				dir = DOWN;
 			}
 			break;
@@ -101,7 +101,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 				dir = RIGHT;
 			}
 		}
-		if(pMarker == null) pMarker = FroggerGame.fs.getProgressMarker();
+		if(pMarker == null) pMarker = HansFroggerGame.fs.getProgressMarker();
 		if(pMarker.isTouchingPlayer(this)) pMarker.nextLevel(); // the arrow key to the next level
 		setVx(0); // if they get off the log, then their speed should return to 0
 		setRunning(false); // and the thread should be stopped
@@ -122,7 +122,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public boolean outOfBounds(int k) {
 		switch (k) {
 		case KeyEvent.VK_W:
-			if (getY() - FroggerScreen.ROW_HEIGHT < FroggerScreen.ROW_HEIGHT) {
+			if (getY() - HansFroggerScreen.ROW_HEIGHT < HansFroggerScreen.ROW_HEIGHT) {
 				return true;
 			}
 			break;
@@ -132,7 +132,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 			}
 			break;
 		case KeyEvent.VK_S:
-			if (getY() + FroggerScreen.ROW_HEIGHT + getHeight() > 600 - FroggerScreen.ROW_HEIGHT) {
+			if (getY() + HansFroggerScreen.ROW_HEIGHT + getHeight() > 600 - HansFroggerScreen.ROW_HEIGHT) {
 				return true;
 			}
 			break;
@@ -179,17 +179,17 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 	
 	private void updateInventory() {
-		for(int i = 0; i < FroggerScreen.tList.size(); i ++) {
-			if(FroggerScreen.tList.get(i).getTerrain() == FroggerScreen.INVENTORY) {
-				FroggerScreen.tList.get(i).update();
+		for(int i = 0; i < HansFroggerScreen.tList.size(); i ++) {
+			if(HansFroggerScreen.tList.get(i).getTerrain() == HansFroggerScreen.INVENTORY) {
+				HansFroggerScreen.tList.get(i).update();
 			}
 		}
 	}
 	
 	@Override
-	public void ridePlatform(CollisionInterface p) {
-		if (p instanceof Turtle) {
-			if (((Turtle) p).isTouchable()) {
+	public void ridePlatform(HansCollisionInterface p) {
+		if (p instanceof JiaMingTurtle) {
+			if (((JiaMingTurtle) p).isTouchable()) {
 				this.onPlatform = true;
 				this.setVx(p.getVx());
 				play();
@@ -226,13 +226,13 @@ public class Player extends MovingComponent implements PlayerInterface {
 				currentTerrain.setCheckPlayer(false);
 				currentTerrain.setAllowPush(false);
 				setVx(0);
-				FroggerGame.fs.gameOver("You were swept away by the current!");
+				HansFroggerGame.fs.gameOver("You were swept away by the current!");
 				die();
 			}
 
-			if (currentPlatform instanceof Turtle && !((Turtle) currentPlatform).isTouchable()
-					&& !FroggerScreen.gameOver) {
-				FroggerGame.fs.gameOver("The turtle betrayed you.");
+			if (currentPlatform instanceof JiaMingTurtle && !((JiaMingTurtle) currentPlatform).isTouchable()
+					&& !HansFroggerScreen.gameOver) {
+				HansFroggerGame.fs.gameOver("The turtle betrayed you.");
 				die();
 			}
 		}
@@ -260,7 +260,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 		return onPlatform;
 	}
 
-	public void setTerrain(Terrain t) {
+	public void setTerrain(HansTerrain t) {
 		this.currentTerrain = t;
 	}
 
@@ -288,17 +288,17 @@ public class Player extends MovingComponent implements PlayerInterface {
 	}
 
 
-	public ArrayList<PowerUp> getInventory() {
+	public ArrayList<HansPowerUp> getInventory() {
 		return inventory;
 	}
 
-	public void pickUpItem(PowerUp pu) {
+	public void pickUpItem(HansPowerUp pu) {
 		inventory.add(pu);
 		mouseScrolled(0);
 	}
 
 	@Override
-	public void setInventory(ArrayList<PowerUp> pu) {
+	public void setInventory(ArrayList<HansPowerUp> pu) {
 		this.inventory = pu;
 	}
 

@@ -4,6 +4,7 @@
  */
 package frogger;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
@@ -11,11 +12,10 @@ import javax.swing.ImageIcon;
 
 import gui.components.MovingComponent;
 
-public class Log extends MovingComponent implements CollisionInterface {
-
+public class JiaMingCar extends MovingComponent implements HansCollisionInterface {
 	private boolean touchable;
 	private String imgLoc;
-	private Thread lThread;
+	private Thread cThread;
 
 	/**
 	 * @param x
@@ -32,7 +32,7 @@ public class Log extends MovingComponent implements CollisionInterface {
 	 *            location of the image for this component
 	 */
 
-	public Log(int x, int y, int w, int h, int vx, String imgLoc) {
+	public JiaMingCar(int x, int y, int w, int h, int vx, String imgLoc) {
 		super(x, y, w, h);
 		touchable = true;
 		this.imgLoc = imgLoc;
@@ -92,19 +92,20 @@ public class Log extends MovingComponent implements CollisionInterface {
 			at.scale(xScale, yScale);
 			if (getVx() > 0)
 				at.rotate(Math.toRadians(180), icon.getIconWidth() / 2, icon.getIconHeight() / 2);
+			g.setColor(Color.black);
 			g.drawImage(icon.getImage(), at, null);
 		}
 	}
 
 	public void play() {
 		if (!isRunning()) {
-			lThread = new Thread(this);
-			lThread.start();
+			cThread = new Thread(this);
+			cThread.start();
 		}
 	}
 
 	@Override
-	public boolean isTouchingPlayer(PlayerInterface p) {
+	public boolean isTouchingPlayer(HansPlayerInterface p) {
 		boolean touching = false;
 		if (p.getX() <= this.getX() + this.getWidth() && p.getX() >= this.getX()
 				|| p.getX() + p.getWidth() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX()) {
@@ -119,7 +120,7 @@ public class Log extends MovingComponent implements CollisionInterface {
 
 	@Override
 	public Thread getThread() {
-		return lThread;
+		return cThread;
 	}
 
 //	@Override

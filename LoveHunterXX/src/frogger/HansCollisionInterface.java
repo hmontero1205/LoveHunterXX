@@ -6,8 +6,8 @@ package frogger;
 
 import gui.components.Visible;
 
-public interface CollisionInterface extends Visible {
-	boolean isTouchingPlayer(PlayerInterface p);
+public interface HansCollisionInterface extends Visible {
+	boolean isTouchingPlayer(HansPlayerInterface p);
 
 	void setRunning(boolean b);
 

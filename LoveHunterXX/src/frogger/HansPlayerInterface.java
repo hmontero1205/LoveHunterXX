@@ -7,13 +7,13 @@ package frogger;
 import java.util.ArrayList;
 import gui.components.Visible;
 
-public interface PlayerInterface extends Visible {
+public interface HansPlayerInterface extends Visible {
 
 	void move(int k);
 
 	boolean outOfBounds(int dir);
 
-	void ridePlatform(CollisionInterface p);
+	void ridePlatform(HansCollisionInterface p);
 
 	void setVx(double vx);
 	
@@ -23,11 +23,11 @@ public interface PlayerInterface extends Visible {
 
 	void die();
 
-	public void setTerrain(Terrain t);
+	public void setTerrain(HansTerrain t);
 
 	void setRunning(boolean b);
 
-	void pickUpItem(PowerUp pu);
+	void pickUpItem(HansPowerUp pu);
 
 	void activatePower();
 
@@ -41,9 +41,9 @@ public interface PlayerInterface extends Visible {
 
 	boolean getSwimming();
 
-	ArrayList<PowerUp> getInventory();
+	ArrayList<HansPowerUp> getInventory();
 	
-	void setInventory(ArrayList<PowerUp> pu);
+	void setInventory(ArrayList<HansPowerUp> pu);
 	
 	int getCurrentPowerUp();
 

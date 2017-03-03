@@ -23,7 +23,7 @@ import gui.components.MovingComponent;
 import gui.components.TextLabel;
 import gui.components.Visible;
 
-public class FroggerScreen extends Screen implements KeyListener, MouseListener, Runnable, MouseWheelListener {
+public class HansFroggerScreen extends Screen implements KeyListener, MouseListener, Runnable, MouseWheelListener {
 
 	public final static int WINDOWBARHEIGHT = 26;
 	public final static int ROW_HEIGHT = 41;
@@ -33,9 +33,9 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public final static int WATER = 2;
 	public final static int INVENTORY = 3;
 	public final static int MENU = 4;
-	public static ArrayList<Terrain> tList;
-	public static PlayerInterface player;
-	public static Terrain currentRow;
+	public static ArrayList<HansTerrain> tList;
+	public static HansPlayerInterface player;
+	public static HansTerrain currentRow;
 	public static boolean gameOver;
 	private Button resetButton;
 	private boolean superCreated;
@@ -43,10 +43,10 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	private ProgressMarkerInterface pMarker;
+	private JiaMingProgressMarkerInterface pMarker;
 	private Thread thread;
 
-	public FroggerScreen(int w, int h) {
+	public HansFroggerScreen(int w, int h) {
 		super(w, h);
 		superCreated = true;
 		this.level = 1;
@@ -63,23 +63,23 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
 
-			tList = new ArrayList<Terrain>();
-			tList.add(new Terrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, true));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new Terrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
+			tList = new ArrayList<HansTerrain>();
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, true));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
 			viewObjects.addAll(tList);
-			pMarker = new ProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
+			pMarker = new HansProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
 			viewObjects.add(pMarker);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
@@ -96,23 +96,23 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		}
 	}
 
-	private ProgressMarkerInterface getProgressMarker(int x, int y, int w, int h, String img) {
-		return  new ProgressMarker(x, y, w, h, img);
+	private JiaMingProgressMarkerInterface getProgressMarker(int x, int y, int w, int h, String img) {
+		return  new HansProgressMarker(x, y, w, h, img);
 	}
 
 	public void endThreads(List<Visible> viewObjects) {
 		if (tList != null) {
 			//stops Terrain CollisionInterface
 			for (int i = 0; i < tList.size(); i++) {
-				Terrain t = tList.get(i);
+				HansTerrain t = tList.get(i);
 				t.setRunning(false);
 				if (t.getThread() != null) {
 					t.getThread().interrupt();
 				}
-				List<CollisionInterface> tObList = t.getMcList();
+				List<HansCollisionInterface> tObList = t.getMcList();
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
-						CollisionInterface c = tObList.get(j);
+						HansCollisionInterface c = tObList.get(j);
 						c.setRunning(false);
 						if (c.getThread() != null) {
 							c.getThread().interrupt();
@@ -123,7 +123,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 			//waits for the above threads to finish
 			for (int i = 0; i < tList.size(); i++) {
-				Terrain t = tList.get(i);
+				HansTerrain t = tList.get(i);
 				//Terrain thread
 				if (t.getThread() != null) {
 					try {
@@ -133,10 +133,10 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 					}
 				}
 				//CollisionInterface threads
-				List<CollisionInterface> tObList = t.getMcList();
+				List<HansCollisionInterface> tObList = t.getMcList();
 				if (tObList.size() > 0) {
 					for (int j = 0; j < tObList.size(); j++) {
-						CollisionInterface c = tObList.get(j);
+						HansCollisionInterface c = tObList.get(j);
 						if (c.getThread() != null) {
 							try {
 								c.getThread().join();
@@ -181,8 +181,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		//System.out.println(Thread.activeCount());
 	}
 
-	public PlayerInterface getPlayer(int x, int y, int w, int h) {
-		return new Player(x, y, w, h);
+	public HansPlayerInterface getPlayer(int x, int y, int w, int h) {
+		return new JiaMingPlayer(x, y, w, h);
 	}
 
 	@Override
@@ -269,7 +269,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	}
 
 	public void startGame() {
-		ArrayList<PowerUp> inv = new ArrayList<PowerUp>();
+		ArrayList<HansPowerUp> inv = new ArrayList<HansPowerUp>();
 		if (player != null)
 			inv = player.getInventory();
 		initObjects(getViewObjects());
@@ -303,7 +303,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		return slowMode;
 	}
 	
-	public ProgressMarkerInterface getProgressMarker() {
+	public JiaMingProgressMarkerInterface getProgressMarker() {
 		return pMarker;
 	}
 
