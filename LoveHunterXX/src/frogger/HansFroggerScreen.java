@@ -64,22 +64,62 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 			viewObjects.add(player);
 
 			tList = new ArrayList<HansTerrain>();
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, true));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
-			tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
+			
+			switch(level){
+				case 1:
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 3, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -4, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 4, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
+					pMarker = new HansProgressMarker(740, ROW_HEIGHT + 35, 25, 25, "continue.png");
+					break;
+				case 2:
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD,7, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
+					pMarker = new HansProgressMarker(740, ROW_HEIGHT + 35, 25, 25, "continue.png");
+					break;
+				case 3:
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT, ROW_WIDTH, ROW_HEIGHT, INVENTORY, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + ROW_HEIGHT, ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (2 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER ,5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (10 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, 5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
+					pMarker = new HansProgressMarker(740, ROW_HEIGHT + 35, 25, 25, "continue.png");
+					break;
+			}
+			
 			viewObjects.addAll(tList);
-			pMarker = new HansProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
 			viewObjects.add(pMarker);
 			infoBox = new TextLabel(10, 561, 500, 30, "Howdy");
 			infoBox.setC(Color.pink);
@@ -253,6 +293,8 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 				case KeyEvent.VK_RIGHT:
 					player.mouseScrolled(1);
 					break;
+				case KeyEvent.VK_P:
+					pMarker.nextLevel();
 			}
 
 		}
@@ -266,6 +308,18 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 			addObject(resetButton);
 		}
 
+	}
+	
+	public void gameEnd(){
+		infoBox.setText("You finally made it to your gf!! Click to continue.");
+		Button endB = new Button(695, 561, 100, 35, "Restart", Color.pink, new Action() {
+
+			@Override
+			public void act() {
+				//change screen
+			};
+
+		});
 	}
 
 	public void startGame() {

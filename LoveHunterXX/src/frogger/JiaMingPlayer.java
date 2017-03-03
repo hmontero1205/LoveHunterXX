@@ -218,7 +218,7 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 				update();
 
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				
 			}
 
 			if ((getX() > 780 || getX() < 10)) {
