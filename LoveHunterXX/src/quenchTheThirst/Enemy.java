@@ -7,7 +7,7 @@ public class Enemy extends LivingEntity {
 	private String direction;
 
 	public Enemy(int x, int y) {
-		super(x, y, .5, "resources/qtt/enemyRight.png", 5);
+		super(x, y, .5, "resources/qtt/enemyeast.png", (int) (Math.random() * 3) + 2);
 	}
 
 	public void tick() {
@@ -26,7 +26,7 @@ public class Enemy extends LivingEntity {
 
 		GraphNode decision = findShortestPath(goal);
 		if (decision == null || decision.getParent() == null) {
-			System.out.println("NO DECISION");
+			//System.out.println("NO DECISION");
 			return;
 		}
 
@@ -35,6 +35,7 @@ public class Enemy extends LivingEntity {
 		}
 
 		direction = decision.directionToParent;
+		this.loadImages("resources/qtt/enemy" + direction + ".png", .5);
 		move(direction);
 	}
 
@@ -58,7 +59,7 @@ public class Enemy extends LivingEntity {
 			explored.add(current);
 
 			if (current.isTouching(goal)) {
-				System.out.println("FOUND PATH");
+				//System.out.println("FOUND PATH");
 				return current;
 			}
 
@@ -79,7 +80,7 @@ public class Enemy extends LivingEntity {
 				}
 			}
 
-			System.out.println("CHECKED HERE");
+			//System.out.println("CHECKED HERE");
 		}
 
 		return null;
@@ -146,9 +147,9 @@ public class Enemy extends LivingEntity {
 				neighbors.add(new GraphNode(this, goal, x, y - 5, "north"));
 			}
 
-			System.out.println(neighbors.size());
-			System.out.println(
-					"X: " + x + " Y: " + y + " GoalX: " + goal.x + " GoalY: " + goal.y + " Dir: " + directionToParent);
+			//System.out.println(neighbors.size());
+			//System.out.println(
+			//		"X: " + x + " Y: " + y + " GoalX: " + goal.x + " GoalY: " + goal.y + " Dir: " + directionToParent);
 			return neighbors;
 		}
 

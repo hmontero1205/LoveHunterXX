@@ -14,8 +14,8 @@ public class Player extends LivingEntity {
 		super(x, y, .5, "resources/qtt/playerright.PNG", 5);
 
 		arsenal = new HashMap<String, Integer>();
-		arsenal.put("explosive", 5);
-		arsenal.put("alluring", 5);
+		arsenal.put("explosive", 10);
+		arsenal.put("alluring", 10);
 
 		equipped = "explosive";
 
@@ -76,7 +76,7 @@ public class Player extends LivingEntity {
 
 	@Override
 	public void die() {
-		/** CHANGE SCREEN **/
+		ShooterGame.shooterScreen.endGame(false);
 	}
 
 }
