@@ -33,7 +33,7 @@ public class MichaelSnake extends MovingComponent{
 	public void addPresent(DavidPresent p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
-		System.out.println(p.getX() + ", " + p.getY());
+		//System.out.println(p.getX() + ", " + p.getY());
 		presentList.add(presentList.size()-1,p);
 	}
 
@@ -179,7 +179,6 @@ public class MichaelSnake extends MovingComponent{
 				if(collided.getName() == "LoveGift"){
 					// collision was with LoveGift type.
 					DavidLoveGift item = (DavidLoveGift) collided;
-					System.out.println("Collided with LOVE");
 					//SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
 					item.generateNew(MichaelDavidSnakeScreen.gens);
 					addPresent((DavidPresent) MichaelDavidSnakeScreen.gens.remove(i));
@@ -196,7 +195,7 @@ public class MichaelSnake extends MovingComponent{
 					
 					if(presentList.size() > 2){
 						removeLastPresent();
-						System.out.println("Collided with block");
+						//System.out.println("Collided with block");
 					}
 				}
 				MichaelSnakeGame.sScreen.updateScore();

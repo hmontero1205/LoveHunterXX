@@ -21,7 +21,7 @@ public class DavidObstacle extends DavidPresent {
 			presents.add(getNewObject(newCoords[0],newCoords[1]));
 			MichaelSnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		}
-		else System.out.println("NOT EVEN");
+		//else System.out.println("NOT EVEN");
 	}
 
 	@Override

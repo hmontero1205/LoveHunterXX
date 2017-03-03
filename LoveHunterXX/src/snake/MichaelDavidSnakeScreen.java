@@ -110,7 +110,7 @@ public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListe
 		snake = new MichaelSnake(0, 0, 100, 100);
 		background = new Graphic(10, 40, 450, 450, "resources/snakebackground.jpg");
 		sbBack = new Graphic(465, 40, 320, 150, "resources/scorebackground.png");
-		line = new TextArea(525, 50, 300, 200, "You have collected:");
+		line = new TextArea(525, 50, 300, 200, " You have collected:");
 		scoreCount = new TextArea(600, 75, 250, 200, "");
 		scoreCount.setSize(46);
 		scoreCount.setText("" + (snake.presentList.size() - 1));
@@ -119,7 +119,7 @@ public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListe
 		cLine = new TextArea(475, 205, 310, 235, "            Shopping Spree!");
 
 		// cheat button
-		cheat = new Button(700, 447, 70, 40, "Cheat", Color.LIGHT_GRAY, new Action() {
+		cheat = new Button(700, 447, 70, 40, "Cheat", Color.PINK, new Action() {
 			@Override
 			public void act() {
 				snake.cheat();
