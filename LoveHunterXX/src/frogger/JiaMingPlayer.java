@@ -102,12 +102,11 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 			}
 		}
 		if(pMarker == null) pMarker = HansFroggerGame.fs.getProgressMarker();
-		if(pMarker.isTouchingPlayer(this)) pMarker.nextLevel(); // the arrow key to the next level
 		setVx(0); // if they get off the log, then their speed should return to 0
 		setRunning(false); // and the thread should be stopped
 		this.onPlatform = false;
-		if(!pMarker.getSrc().equals("gf.png"));
-			update();
+		update();
+		if(pMarker.isTouchingPlayer(this)) pMarker.nextLevel(); // the arrow key to the next level
 	}
 	
 	public void changeItemSelection(int k){

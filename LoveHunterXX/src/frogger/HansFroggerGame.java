@@ -14,7 +14,7 @@ public class HansFroggerGame extends GUIApplication {
 
 	public HansFroggerGame(int width, int height) {
 		super(width, height);
-		setResizable(true);
+		setResizable(false);
 	}
 
 	@Override

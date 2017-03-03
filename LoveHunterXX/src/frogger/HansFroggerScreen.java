@@ -45,6 +45,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	private TextLabel infoBox;
 	private JiaMingProgressMarkerInterface pMarker;
 	private Thread thread;
+	private Button endB;
 
 	public HansFroggerScreen(int w, int h) {
 		super(w, h);
@@ -62,7 +63,6 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 			viewObjects.add(pMarker);
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
-
 			tList = new ArrayList<HansTerrain>();
 			
 			switch(level){
@@ -107,7 +107,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (3 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, true));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (4 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (5 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER ,5, false));
-					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, true));
+					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (6 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, -5, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (7 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, WATER, 5, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (8 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (9 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -4, false));
@@ -115,7 +115,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
-					pMarker = new HansProgressMarker(740, ROW_HEIGHT + 35, 25, 25, "gf.png");
+					pMarker = new HansProgressMarker(745, ROW_HEIGHT + 35, 25, 25, "gf.png");
 					break;
 			}
 			
@@ -312,7 +312,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	
 	public void gameEnd(){
 		infoBox.setText("You finally made it to your gf!! Click to continue.");
-		Button endB = new Button(695, 561, 100, 35, "Restart", Color.pink, new Action() {
+		endB = new Button(695, 561, 100, 35, "Onward!", Color.pink, new Action() {
 
 			@Override
 			public void act() {
@@ -320,27 +320,41 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 			};
 
 		});
+		addObject(endB);
+		gameOver = true;
 	}
 
 	public void startGame() {
-		ArrayList<HansPowerUp> inv = new ArrayList<HansPowerUp>();
-		if (player != null)
-			inv = player.getInventory();
-		initObjects(getViewObjects());
-		player.setInventory(inv);
-		infoBox.setText("Level " + level);
-		thread = new Thread(this);
-		thread.start();
-		currentRow = tList.get(tList.size() - 1);
-		gameOver = false;
-		playerLocked = true;
-		remove(resetButton);
+		if(level == 4){
+			gameEnd();
+			endThreads(getViewObjects());
+			//System.out.println(Thread.activeCount());
+			
+		}
+		else{
+			ArrayList<HansPowerUp> inv = new ArrayList<HansPowerUp>();
+			if (player != null)
+				inv = player.getInventory();
+			initObjects(getViewObjects());
+			player.setInventory(inv);
+			infoBox.setText("Level " + level);
+			thread = new Thread(this);
+			thread.start();
+			currentRow = tList.get(tList.size() - 1);
+			gameOver = false;
+			playerLocked = true;
+			remove(resetButton);
+		}
+		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (resetButton.isHovered(e.getX(), e.getY())) {
 			resetButton.act();
+		}
+		if (endB!= null && endB.isHovered(e.getX(), e.getY())) {
+			endB.act();
 		}
 	}
 
