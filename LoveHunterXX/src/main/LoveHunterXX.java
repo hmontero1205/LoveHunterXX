@@ -4,6 +4,9 @@
  */
 package main;
 
+import javax.swing.ImageIcon;
+
+import frogger.HansFroggerGame;
 import frogger.HansFroggerIntroScreen;
 import frogger.HansFroggerScreen;
 import gui.GUIApplication;
@@ -13,14 +16,17 @@ import snake.MichaelDavidSnakeScreen;
 import snake.MichaelIntroScreen;
 
 public class LoveHunterXX extends GUIApplication {
-	public MichaelDavidSnakeScreen ss;
-	public MichaelIntroScreen sis;
+	public static LoveHunterXX game;
+	public static HansTransitionScreen ts;
 	
-	public HansFroggerScreen fs;
-	public HansFroggerIntroScreen fis;
+	public static MichaelDavidSnakeScreen ss;
+	public static MichaelIntroScreen sis;
 	
-	public BillyQTTScreen qtts;
-	public BillyShooterIntroScreen qttis;
+	public static HansFroggerScreen fs;
+	public static HansFroggerIntroScreen fis;
+	
+	public static BillyQTTScreen qtts;
+	public static BillyShooterIntroScreen qttis;
 	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
@@ -29,8 +35,19 @@ public class LoveHunterXX extends GUIApplication {
 
 	@Override
 	public void initScreen() {
-		// TODO Auto-generated method stub
+		ts = new HansTransitionScreen(800,600);
+		sis = new MichaelIntroScreen(800,600);
+		ss = new MichaelDavidSnakeScreen(800,600);
+		setScreen(ts);
 		
+	}
+	
+	public static void main(String[] args){
+		game = new LoveHunterXX(800, 600);
+		game.setTitle("LoveHunterXX");
+		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
+		Thread go = new Thread(game);
+		go.start();
 	}
 
 	

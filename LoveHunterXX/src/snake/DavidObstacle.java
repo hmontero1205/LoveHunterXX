@@ -3,6 +3,7 @@ package snake;
 import java.util.List;
 
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public class DavidObstacle extends DavidPresent {
 
@@ -14,12 +15,12 @@ public class DavidObstacle extends DavidPresent {
 	@Override
 	public void generateNew(List<DavidGeneratableInterface> presents) {
 		// TODO Auto-generated method stub
-		if(MichaelSnakeGame.sScreen == null) return ;
+		if(LoveHunterXX.ss == null) return ;
 		int r = getRandBetween(0, 9);
 		if(r % 2 == 0){
 			int[] newCoords = getNewXY();
 			presents.add(getNewObject(newCoords[0],newCoords[1]));
-			MichaelSnakeGame.sScreen.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
+			LoveHunterXX.ss.addObject((Visible) presents.get(presents.size() - 1)); // adds the new generatable to the scene.
 		}
 		//else System.out.println("NOT EVEN");
 	}

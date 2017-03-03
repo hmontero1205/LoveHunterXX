@@ -13,10 +13,11 @@ public class TextArea extends TextLabel {
 	}
 
 	public void update(Graphics2D g){
+		g=clear();
+		g.setColor(getC());
 		if(getText()!=null){
 			g.setFont(new Font(getFont(),Font.PLAIN,getSize()));
 			g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			g.setColor(Color.black);
 			FontMetrics fm = g.getFontMetrics();
 			String[] wordArr = this.getText().split(" ");
 			int wordArrIndex = 0;

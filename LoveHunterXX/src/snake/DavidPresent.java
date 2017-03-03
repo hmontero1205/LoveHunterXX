@@ -3,6 +3,7 @@ package snake;
 import java.util.List;
 
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public abstract class DavidPresent extends MichaelInteractable implements MichaelPresentInterface, DavidGeneratableInterface{
 
@@ -48,9 +49,9 @@ public abstract class DavidPresent extends MichaelInteractable implements Michae
 	abstract public DavidGeneratableInterface getNewObject(int x, int y);
 
 	public boolean isEmptySpace(int x, int y){
-		for(int i = 0; i < MichaelSnakeGame.sScreen.getViewObjects().size(); i++){
-			if(MichaelSnakeGame.sScreen.getViewObjects().get(i).getY() == y && 
-					MichaelSnakeGame.sScreen.getViewObjects().get(i).getX() == x){
+		for(int i = 0; i < LoveHunterXX.ss.getViewObjects().size(); i++){
+			if(LoveHunterXX.ss.getViewObjects().get(i).getY() == y && 
+					LoveHunterXX.ss.getViewObjects().get(i).getX() == x){
 				return false;
 			}
 		}

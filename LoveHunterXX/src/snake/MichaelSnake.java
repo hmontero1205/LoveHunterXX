@@ -8,6 +8,7 @@ import java.util.List;
 import gui.components.Action;
 import gui.components.Button;
 import gui.components.MovingComponent;
+import main.LoveHunterXX;
 
 public class MichaelSnake extends MovingComponent{
 	public static final int DISTANCE = 20;
@@ -42,7 +43,7 @@ public class MichaelSnake extends MovingComponent{
 
 	public void removeLastPresent(){
 		MichaelInteractable i = presentList.remove(presentList.size()-1);
-		MichaelSnakeGame.sScreen.remove(i);
+		LoveHunterXX.ss.remove(i);
 	}
 
 	public void moveCoors(Direction d){
@@ -144,7 +145,7 @@ public class MichaelSnake extends MovingComponent{
 				setRate(999999);
 				gameRunning = false;
 				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
-				MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
+				LoveHunterXX.ss.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
 				addContinueButton();
 				return true;                   
 			}
@@ -154,7 +155,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
-			MichaelSnakeGame.sScreen.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			LoveHunterXX.ss.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			addContinueButton();
 			return true;
 		}
@@ -165,8 +166,8 @@ public class MichaelSnake extends MovingComponent{
 		if(presentList.size()>30){
 			setRate(999999);
 			gameRunning = false;
-			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
-			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
+			//System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			LoveHunterXX.ss.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
 			addContinueButton();
 			return true;
 		}
@@ -195,7 +196,7 @@ public class MichaelSnake extends MovingComponent{
 					// remove old item from gens list.
 					MichaelDavidSnakeScreen.gens.remove(item);
 					// removes old obstacle from screen.
-					MichaelSnakeGame.sScreen.remove(item); 
+					LoveHunterXX.ss.remove(item); 
 					// generate new obstacle.
 					item.generateNew(MichaelDavidSnakeScreen.gens);
 					
@@ -204,7 +205,8 @@ public class MichaelSnake extends MovingComponent{
 						//System.out.println("Collided with block");
 					}
 				}
-				MichaelSnakeGame.sScreen.updateScore();
+				//LoveHunterXX.ss.updateScore();
+				LoveHunterXX.ss.updateScore();
 			}
 		}
 	}
@@ -213,12 +215,12 @@ public class MichaelSnake extends MovingComponent{
 		Button cButton = new Button(575, 350, 100, 40, "Continue", Color.LIGHT_GRAY, new Action() {
 			@Override
 			public void act() {
-				//Code here.
-				System.out.println("Find the method for me at MichaelSnake line 212");
+				System.out.println(Thread.activeCount());
+				//System.out.println("Find the method for me at MichaelSnake line 212");
 			}
 		});
 		
-		MichaelSnakeGame.sScreen.getViewObjects().add(cButton);
+		LoveHunterXX.ss.getViewObjects().add(cButton);
 	}
 	
 	public void checkAll(){

@@ -14,6 +14,7 @@ import gui.components.Action;
 import gui.components.Button;
 import gui.components.Graphic;
 import gui.components.Visible;
+import main.LoveHunterXX;
 
 public class MichaelIntroScreen extends ClickableScreen implements MouseListener {
 	
@@ -44,8 +45,10 @@ public class MichaelIntroScreen extends ClickableScreen implements MouseListener
 			public void act() {
 				// TODO Auto-generated method stub
 				//System.out.println("Go");
-				MichaelSnakeGame.sGame.setScreen(MichaelSnakeGame.sScreen);
-				MichaelSnakeGame.sScreen.snake.play();
+//				MichaelSnakeGame.sGame.setScreen(MichaelSnakeGame.sScreen);
+//				MichaelSnakeGame.sScreen.snake.play();
+				LoveHunterXX.game.setScreen(LoveHunterXX.ss);
+				LoveHunterXX.ss.snake.play();
 			}
 		});
 		

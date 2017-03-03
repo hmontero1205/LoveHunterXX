@@ -31,6 +31,7 @@ public class TextLabel extends Component {
 
 	public void setC(Color c) {
 		this.c = c;
+		update();
 	}
 
 	public void setText(String text) {
