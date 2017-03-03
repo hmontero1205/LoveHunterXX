@@ -56,9 +56,9 @@ public class QTTScreen extends Screen implements KeyListener {
 
 		health = new TextLabel(600, 20, 130, 50, "HEALTH:" + user.getHealth());
 		explosive = new TextLabel(500, 530, 140, 50,
-				(user.equipped("explosive") ? "*" : "") + "explosive: " + explosiveAmmo);
+				(user.equipped("explosive") ? "*" : "") + "Explosive: " + explosiveAmmo);
 		alluring = new TextLabel(680, 530, 140, 50,
-				(user.equipped("alluring") ? "*" : "") + "alluring: " + alluringAmmo);
+				(user.equipped("alluring") ? "*" : "") + "Alluring: " + alluringAmmo);
 		
 		message = new TextLabel(20, 530, 300, 50, "");
 
