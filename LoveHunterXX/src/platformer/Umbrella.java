@@ -60,20 +60,28 @@ public class Umbrella extends MovingComponent {
 			Player p = PlatformerGame.cs.player;
 			if (load) {
 				if (active) {
-					g.drawImage(open, 0, 0, getWidth(), getHeight(), 0, 0, open.getWidth(null), open.getHeight(null),
-							null);
+					super.setWidth(130);
+					super.setHeight(150);
+					super.setX((int) p.getX());
+					super.setY((int) p.getY()-70);
+					g.drawImage(open, 0, 0, getWidth(), getHeight(), 0, 0, open.getWidth(null), 
+							open.getHeight(null), null);
 				} else {
+					super.setWidth(50);
+					super.setHeight(100);
+					super.setX((int) p.getX()+20);
+					super.setY((int) p.getY()+50);
 					g.drawImage(closed, 0, 0, getWidth(), getHeight(), 0, 0, closed.getWidth(null),
 							closed.getHeight(null), null);
 				}
-				super.setX((int) p.getX());
-				super.setY((int) p.getY());
 			}
 		}
 	}
 
 	public void setActive(boolean b) {
-		this.active = true;
+		if(this.active != b)
+			clear();
+		this.active = b;
 	}
 
 }

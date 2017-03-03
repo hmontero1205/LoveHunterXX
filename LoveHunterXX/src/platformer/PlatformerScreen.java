@@ -36,14 +36,14 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
 
-		scoreLabel = new TextLabel(50, 40, 80, 40, "0");
+		scoreLabel = new TextLabel(20, 40, 80, 40, "0");
 		viewObjects.add(scoreLabel);
 
 		player = new Player(10, 370, 100, 150, "resources/player.png");
 		player.play();
 		viewObjects.add(player);
 		
-		umbrella = new Umbrella(15, 375, 100, 150, "resources/umbrellaclosed.png");
+		umbrella = new Umbrella(0, 0, 50, 100, "resources/umbrellaclosed.png");
 		viewObjects.add(umbrella);
 	}
 	private void appearNewPowerUp(){
@@ -133,14 +133,15 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 			}
 		}
 		if(e.getKeyCode() == 38) {
-			
+			umbrella.setActive(true);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getKeyCode() == 38){
+			umbrella.setActive(false);
+		}
 	}
 
 	@Override
@@ -174,7 +175,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		}
 
 		for (int i = 0; i < player.getHp(); i++) {
-			Graphic heart = new Graphic(x, 30, 20, 20, "resources/heart.png");
+			Graphic heart = new Graphic(x, 40, 20, 20, "resources/heart.png");
 			hearts.add(heart);
 			this.addObject(heart);
 
