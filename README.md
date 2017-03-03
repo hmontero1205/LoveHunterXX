@@ -1,25 +1,8 @@
-<<<<<<< HEAD
-##LoveHunterXX - Quench the Thirst
-=======
-##LoveHunterXX - Long Walk on the Beach
->>>>>>> refs/heads/platformerTeam
+##LoveHunterXX
 
-<<<<<<< HEAD
-Kevin Zheng<br/>
-Ariq Zaman<br/>
-Billy Luy<br/>
-=======
-Shoheb Ome<br/>
-Daniel Goon<br/>
->>>>>>> refs/heads/platformerTeam
+Michael Li & David Medina - Shopping Spree<br/>
+Hans Montero & Jia Ming Ma - To Get to the Other Side<br/>
+Kevin Zheng, Ariq Zaman, Billy Luy - Quench the Thirst<br/>
+Shoheb Ome & Daniel Goon - Long Walk on the Beach<br/>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<i>Develop Branch</i>
-=======
-Shooter
->>>>>>> refs/heads/shooterTeam
-
-=======
-Platformer
->>>>>>> refs/heads/platformerTeam
+A game engine run GUI application that simulates a quest for love filled with spicy challenges and perils.
