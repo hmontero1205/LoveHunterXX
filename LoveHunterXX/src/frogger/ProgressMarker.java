@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.Component;
 
-public class ProgressMarker extends Component {
+public class ProgressMarker extends Component implements ProgressMarkerInterface {
 	private boolean superCreated;
 	private String imgSrc;
 	private boolean touching;
@@ -60,5 +60,4 @@ public class ProgressMarker extends Component {
 		FroggerGame.fs.level++;
 		FroggerGame.fs.startGame();
 	}
-
 }

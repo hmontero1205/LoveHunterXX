@@ -43,7 +43,7 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	private boolean slowMode;
 	public int level;
 	private TextLabel infoBox;
-	private ProgressMarker pMarker;
+	private ProgressMarkerInterface pMarker;
 	private Thread thread;
 
 	public FroggerScreen(int w, int h) {
@@ -58,7 +58,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 		if (superCreated) {
 			endThreads(viewObjects);
 			viewObjects.clear();
-
+			pMarker = getProgressMarker(740, ROW_HEIGHT + 480, 25, 25, "continue.png");
+			viewObjects.add(pMarker);
 			player = getPlayer(400, 600 - ROW_HEIGHT - 30, 20, 20);
 			viewObjects.add(player);
 
@@ -93,6 +94,10 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 
 			});
 		}
+	}
+
+	private ProgressMarkerInterface getProgressMarker(int x, int y, int w, int h, String img) {
+		return  new ProgressMarker(x, y, w, h, img);
 	}
 
 	public void endThreads(List<Visible> viewObjects) {
@@ -297,8 +302,8 @@ public class FroggerScreen extends Screen implements KeyListener, MouseListener,
 	public boolean getSlowMode() {
 		return slowMode;
 	}
-
-	public ProgressMarker getPMarker() {
+	
+	public ProgressMarkerInterface getProgressMarker() {
 		return pMarker;
 	}
 

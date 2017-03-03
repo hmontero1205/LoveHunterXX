@@ -20,6 +20,7 @@ public class Player extends MovingComponent implements PlayerInterface {
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int moveDistance = 30;
+	private ProgressMarkerInterface pMarker;
 	private int dir;
 	private ArrayList<PowerUp> inventory;
 	private int currentPowerUp = -1;
@@ -72,6 +73,9 @@ public class Player extends MovingComponent implements PlayerInterface {
 
 	@Override
 	public void move(int k) {
+		// there are a lot of logic codes but I picked this one because this one has a lot of impact on the game
+		// these are the controls for the player for when they press WASD, the controls for the powerups are in another method
+		// and i think using switch and cases can make your code look extremely clean and good
 		switch (k) {
 		case KeyEvent.VK_W:
 			if (!outOfBounds(KeyEvent.VK_W)) {
@@ -97,9 +101,10 @@ public class Player extends MovingComponent implements PlayerInterface {
 				dir = RIGHT;
 			}
 		}
-		if(FroggerGame.fs.getPMarker().isTouchingPlayer(this)) FroggerGame.fs.getPMarker().nextLevel();
-		setVx(0);
-		setRunning(false);
+		if(pMarker == null) pMarker = FroggerGame.fs.getProgressMarker();
+		if(pMarker.isTouchingPlayer(this)) pMarker.nextLevel(); // the arrow key to the next level
+		setVx(0); // if they get off the log, then their speed should return to 0
+		setRunning(false); // and the thread should be stopped
 		this.onPlatform = false;
 		update();
 	}
