@@ -52,8 +52,8 @@ public class MichaelIntroScreen extends ClickableScreen implements MouseListener
 			}
 		});
 		
-		howToPlay = new Graphic(0,0,800,495,"resources/howToPlay.png");
-		splashArt = new Graphic(0,0,800,495,"resources/ShoppingSpree.png");
+		howToPlay = new Graphic(0,0,800,595,"resources/howToPlay.png");
+		splashArt = new Graphic(0,0,800,595,"resources/ShoppingSpree.png");
 		
 		viewObjects.add(howToPlay);
 		viewObjects.add(buttonToGame);
