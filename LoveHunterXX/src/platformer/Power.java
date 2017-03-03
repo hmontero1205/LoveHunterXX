@@ -9,22 +9,33 @@ import gui.components.Action;
 import gui.components.Component;
 import gui.components.MovingComponent;
 
-public class Power extends MovingComponent implements Runnable, PowerUp{
+public class Power extends Obstacle implements Runnable, PowerUp{
 	private int effect;
 	private String imgSrc;
 	private Image image;
+	
 	private boolean load;
+	private boolean picked;
+	
+	private int w;
+	private int h;
+	
 	private final int HEART = 0;
 	private final int INVULN = 1;
 	private final int WATER = 2;
 	
 
-	public Power(int x, int y, int w, int h, String s, int e) {
-		super(x,y,w,h);
+	public Power(int x, int y, int w, int h,int vx,int vy,String s, int e) {
+		super(x,y,w,h, vx, vy, s);
 		this.effect = e;
 		this.imgSrc = s;
+		this.w = w;
+		this.h = h;
+		setVx(vx);
+		setVy(vy);
 		//Thread pThread = new Thread(this);
-		update();
+		loadImage();
+		this.play();
 	}
 	private void loadImage() {
 		try {
@@ -38,9 +49,20 @@ public class Power extends MovingComponent implements Runnable, PowerUp{
 	@Override
 	public void update(Graphics2D g) {
 		if(load){
-			System.out.println(imgSrc);
-			ImageIcon icon = new ImageIcon("resources/frogger/"+imgSrc);
-			g.drawImage(icon.getImage(),0,0, getWidth(), getHeight(), null);
+			if(isCollided() || getX() < w*-1){
+				performEffect();
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
+			else{
+				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
+						null);
+				setPosx(getPosx() + getVx());
+				setPosy(getPosy() + getVy());
+				super.setX((int) getPosx());
+				super.setY((int) getPosy());
+			}
 		}
 		
 	}
@@ -68,7 +90,15 @@ public class Power extends MovingComponent implements Runnable, PowerUp{
 
 	@Override
 	public void run() {
-		performEffect();
+		setRunning(true);
+		while (isRunning()) {
+			try {
+				Thread.sleep(REFRESH_RATE);
+				update();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void start(){
