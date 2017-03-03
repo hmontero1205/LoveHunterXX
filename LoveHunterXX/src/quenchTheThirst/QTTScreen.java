@@ -94,8 +94,21 @@ public class QTTScreen extends Screen implements KeyListener {
 		Obstacle bushes = new Obstacle(200, 250, .3, "resources/qtt/mapparts/bushes.png");
 		spawnEntity(bushes);
 
-		Obstacle sandbox = new Obstacle(500, 250, .6, "resources/qtt/mapparts/sandbox.png");
+                
+		
+		Obstacle sandbox = new Obstacle(500, 240, .8, "resources/qtt/mapparts/sandbox.png");
 		spawnEntity(sandbox);
+		
+		Obstacle slide = new Obstacle(300, 400, .3, "resources/qtt/mapparts/slide.png");
+		spawnEntity(slide);
+		
+		Obstacle trash = new Obstacle(380, 160, .05, "resources/qtt/mapparts/shoheb.png");
+		spawnEntity(trash);
+		
+		Obstacle tree = new Obstacle(500, 390, .02, "resources/qtt/mapparts/trees.png");
+		spawnEntity(tree);
+		
+		
 		
 		spawnEntity(new Enemy(20, 200));
 		spawnEntity(new Enemy(20, 100));
