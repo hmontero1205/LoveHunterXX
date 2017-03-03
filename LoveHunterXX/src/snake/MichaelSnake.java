@@ -145,7 +145,7 @@ public class MichaelSnake extends MovingComponent{
 				gameRunning = false;
 				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
 				MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
-				addContinueButton();
+				nextPart();
 				return true;                   
 			}
 		}
@@ -155,7 +155,7 @@ public class MichaelSnake extends MovingComponent{
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
 			MichaelSnakeGame.sScreen.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
-			addContinueButton();
+			nextPart();
 			return true;
 		}
 		return false;
@@ -167,7 +167,7 @@ public class MichaelSnake extends MovingComponent{
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
 			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
-			addContinueButton();
+			nextPart();
 			return true;
 		}
 		return false;
@@ -209,16 +209,16 @@ public class MichaelSnake extends MovingComponent{
 		}
 	}
 	
-	public void addContinueButton(){
-		Button cButton = new Button(575, 350, 100, 40, "Continue", Color.LIGHT_GRAY, new Action() {
-			@Override
-			public void act() {
-				//Code here.
-				System.out.println("Find the method for me at MichaelSnake line 212");
-			}
-		});
-		
-		MichaelSnakeGame.sScreen.getViewObjects().add(cButton);
+	public void nextPart(){
+		Thread transition = new Thread();
+		try {
+			transition.sleep(5000);
+			//Next game.
+			System.out.println("NEXT GAME!");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void checkAll(){
