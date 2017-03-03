@@ -92,8 +92,12 @@ public class HansTransitionScreen extends Screen implements Runnable {
 	public void playSequence2(){
 		back.loadImages("resources/lot.jpg", 800,600);
 		addObject(you);
-		you.setX(200);
-		you.setY(500);
+		you.setX(400);
+		you.setY(320);
+		yLabel.setX(320);
+		yLabel.setY(305);
+		String text = (lovePoints>2) ? "I'm such a great bf I got her a cool gift" : "I'm an awful bf I didn't get a good gift";
+		yLabel.setText(text);
 	}
 	
 	public void sleep(long t){
