@@ -100,10 +100,10 @@ public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListe
 		// TODO Auto-generated method stub
 		// Screen setup
 		Graphic blackBack = new Graphic(0, 0, 800, 600, "resources/black.png");
-		Graphic logoBack = new Graphic(465, 445, 320, 50, "resources/logoBack.png");
-		Graphic logo = new Graphic(480, 445, 40, 40, "resources/Logo.png");
-		TextLabel gameName = new TextLabel(510, 405, 200, 75, "Shopping Spree");
-		gameName.setSize(25);
+		Graphic logoBack = new Graphic(0, 520, 800, 80, "resources/logoBack.png");
+		Graphic logo = new Graphic(20, 530, 60, 60, "resources/Logo.png");
+		TextLabel gameName = new TextLabel(290, 485, 300, 75, "Shopping Spree");
+		gameName.setSize(30);
 
 		// game setup
 		gens = new ArrayList<DavidGeneratableInterface>();
@@ -115,11 +115,11 @@ public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListe
 		scoreCount.setSize(46);
 		scoreCount.setText("" + (snake.presentList.size() - 1));
 
-		cBack = new Graphic(465, 195, 320, 240, "resources/scorebackground.png");
+		cBack = new Graphic(465, 195, 320, 295, "resources/scorebackground.png");
 		cLine = new TextArea(475, 205, 310, 235, "            Shopping Spree!");
 
 		// cheat button
-		cheat = new Button(700, 447, 70, 40, "Cheat", Color.PINK, new Action() {
+		cheat = new Button(700, 540, 70, 40, "Cheat", Color.PINK, new Action() {
 			@Override
 			public void act() {
 				snake.cheat();
