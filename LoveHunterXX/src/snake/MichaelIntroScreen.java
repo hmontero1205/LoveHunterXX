@@ -43,7 +43,7 @@ public class MichaelIntroScreen extends ClickableScreen implements MouseListener
 			@Override
 			public void act() {
 				// TODO Auto-generated method stub
-				System.out.println("Go");
+				//System.out.println("Go");
 				MichaelSnakeGame.sGame.setScreen(MichaelSnakeGame.sScreen);
 				MichaelSnakeGame.sScreen.snake.play();
 			}

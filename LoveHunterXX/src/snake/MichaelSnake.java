@@ -33,7 +33,7 @@ public class MichaelSnake extends MovingComponent{
 	public void addPresent(DavidPresent p){ // adding body parts.
 		p.setX(presentList.get(presentList.size()-1).getX());
 		p.setY(presentList.get(presentList.size()-1).getY()); // finish from here
-		System.out.println(p.getX() + ", " + p.getY());
+		//System.out.println(p.getX() + ", " + p.getY());
 		presentList.add(presentList.size()-1,p);
 	}
 
@@ -150,7 +150,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
-			MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			MichaelSnakeGame.sScreen.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			return true;
 		}
 		return false;
@@ -169,34 +169,33 @@ public class MichaelSnake extends MovingComponent{
 
 	//David wrote this.
 	public void checkGenCollision(){
-		for(int i = 0; i < MichaelSnakeScreen.gens.size(); ++i){
-			DavidPresent p = (DavidPresent) MichaelSnakeScreen.gens.get(i);
-			if(cart.isCollided((MichaelInteractable) MichaelSnakeScreen.gens.get(i))){
+		for(int i = 0; i < MichaelDavidSnakeScreen.gens.size(); ++i){
+			DavidPresent p = (DavidPresent) MichaelDavidSnakeScreen.gens.get(i);
+			if(cart.isCollided((MichaelInteractable) MichaelDavidSnakeScreen.gens.get(i))){
 				// keep track of the collision.
-				DavidPresent collided = (DavidPresent) MichaelSnakeScreen.gens.get(i);
+				DavidPresent collided = (DavidPresent) MichaelDavidSnakeScreen.gens.get(i);
 				
 				// check what kind of collision.
 				if(collided.getName() == "LoveGift"){
 					// collision was with LoveGift type.
 					DavidLoveGift item = (DavidLoveGift) collided;
-					System.out.println("Collided with LOVE");
 					//SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
-					item.generateNew(MichaelSnakeScreen.gens);
-					addPresent((DavidPresent) MichaelSnakeScreen.gens.remove(i));
+					item.generateNew(MichaelDavidSnakeScreen.gens);
+					addPresent((DavidPresent) MichaelDavidSnakeScreen.gens.remove(i));
 				}
 				else if(collided.getName() == "Block"){
 					// collision was with Obstacle type.
 					DavidObstacle item = (DavidObstacle) collided;
 					// remove old item from gens list.
-					MichaelSnakeScreen.gens.remove(item);
+					MichaelDavidSnakeScreen.gens.remove(item);
 					// removes old obstacle from screen.
 					MichaelSnakeGame.sScreen.remove(item); 
 					// generate new obstacle.
-					item.generateNew(MichaelSnakeScreen.gens);
+					item.generateNew(MichaelDavidSnakeScreen.gens);
 					
 					if(presentList.size() > 2){
 						removeLastPresent();
-						System.out.println("Collided with block");
+						//System.out.println("Collided with block");
 					}
 				}
 				MichaelSnakeGame.sScreen.updateScore();
