@@ -6,7 +6,7 @@ public class MichaelSnakeGame extends GUIApplication {
 	
 	public static MichaelSnakeGame sGame; // the main class to run game.
 	public static MichaelIntroScreen iScreen; // screen for introduction.
-	public static MichaelSnakeScreen sScreen; // screen for game.
+	public static MichaelDavidSnakeScreen sScreen; // screen for game.
 	
 	public static boolean gameStart;
 
@@ -16,7 +16,7 @@ public class MichaelSnakeGame extends GUIApplication {
 
 	public void initScreen() {
 		gameStart = false;
-		sScreen = new MichaelSnakeScreen(getWidth(),getHeight());
+		sScreen = new MichaelDavidSnakeScreen(getWidth(),getHeight());
 		iScreen = new MichaelIntroScreen(getWidth(),getHeight());
 		setScreen(iScreen);
 	}

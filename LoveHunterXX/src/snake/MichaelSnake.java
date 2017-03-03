@@ -169,11 +169,11 @@ public class MichaelSnake extends MovingComponent{
 
 	//David wrote this.
 	public void checkGenCollision(){
-		for(int i = 0; i < MichaelSnakeScreen.gens.size(); ++i){
-			DavidPresent p = (DavidPresent) MichaelSnakeScreen.gens.get(i);
-			if(cart.isCollided((MichaelInteractable) MichaelSnakeScreen.gens.get(i))){
+		for(int i = 0; i < MichaelDavidSnakeScreen.gens.size(); ++i){
+			DavidPresent p = (DavidPresent) MichaelDavidSnakeScreen.gens.get(i);
+			if(cart.isCollided((MichaelInteractable) MichaelDavidSnakeScreen.gens.get(i))){
 				// keep track of the collision.
-				DavidPresent collided = (DavidPresent) MichaelSnakeScreen.gens.get(i);
+				DavidPresent collided = (DavidPresent) MichaelDavidSnakeScreen.gens.get(i);
 				
 				// check what kind of collision.
 				if(collided.getName() == "LoveGift"){
@@ -181,18 +181,18 @@ public class MichaelSnake extends MovingComponent{
 					DavidLoveGift item = (DavidLoveGift) collided;
 					System.out.println("Collided with LOVE");
 					//SnakeScreen.gens.get(SnakeScreen.gens.size() - 1).generateNew(SnakeScreen.gens);
-					item.generateNew(MichaelSnakeScreen.gens);
-					addPresent((DavidPresent) MichaelSnakeScreen.gens.remove(i));
+					item.generateNew(MichaelDavidSnakeScreen.gens);
+					addPresent((DavidPresent) MichaelDavidSnakeScreen.gens.remove(i));
 				}
 				else if(collided.getName() == "Block"){
 					// collision was with Obstacle type.
 					DavidObstacle item = (DavidObstacle) collided;
 					// remove old item from gens list.
-					MichaelSnakeScreen.gens.remove(item);
+					MichaelDavidSnakeScreen.gens.remove(item);
 					// removes old obstacle from screen.
 					MichaelSnakeGame.sScreen.remove(item); 
 					// generate new obstacle.
-					item.generateNew(MichaelSnakeScreen.gens);
+					item.generateNew(MichaelDavidSnakeScreen.gens);
 					
 					if(presentList.size() > 2){
 						removeLastPresent();

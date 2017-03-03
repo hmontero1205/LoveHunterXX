@@ -19,7 +19,7 @@ import gui.components.TextArea;
 import gui.components.TextLabel;
 import gui.components.Visible;
 
-public class MichaelSnakeScreen extends ClickableScreen implements KeyListener {
+public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListener {
 
 	public final static int LEFTARROWKEY = 37;
 	public final static int UPARROWKEY = 38;
@@ -36,7 +36,7 @@ public class MichaelSnakeScreen extends ClickableScreen implements KeyListener {
 	private TextArea cLine;
 	private Button cheat;
 
-	public MichaelSnakeScreen(int width, int height) {
+	public MichaelDavidSnakeScreen(int width, int height) {
 		super(width, height);
 	}
 
@@ -98,55 +98,55 @@ public class MichaelSnakeScreen extends ClickableScreen implements KeyListener {
 	@Override
 	public void initAllObjects(List<Visible> view) {
 		// TODO Auto-generated method stub
-		//Screen setup
-				Graphic blackBack = new Graphic(0,0,800,600,"resources/black.png");
-				Graphic logoBack = new Graphic(465,445,320,50,"resources/logoBack.png");
-				Graphic logo = new Graphic(480,445,40,40,"resources/Logo.png");
-				TextLabel gameName = new TextLabel(510,405,200,75,"Shopping Spree");
-				gameName.setSize(25);
-				
-				//game setup
-				gens = new ArrayList<DavidGeneratableInterface>();
-				snake = new MichaelSnake(0, 0, 100, 100);
-				background = new Graphic(10, 40, 450, 450, "resources/snakebackground.jpg");
-				sbBack = new Graphic(465, 40, 320, 150, "resources/scorebackground.png");
-				line = new TextArea(525, 50, 300, 200, "You have collected:");
-				scoreCount = new TextArea(600, 75, 250, 200, "");
-				scoreCount.setSize(46);
-				scoreCount.setText("" + (snake.presentList.size() - 1));
+		// Screen setup
+		Graphic blackBack = new Graphic(0, 0, 800, 600, "resources/black.png");
+		Graphic logoBack = new Graphic(465, 445, 320, 50, "resources/logoBack.png");
+		Graphic logo = new Graphic(480, 445, 40, 40, "resources/Logo.png");
+		TextLabel gameName = new TextLabel(510, 405, 200, 75, "Shopping Spree");
+		gameName.setSize(25);
 
-				cBack = new Graphic(465, 195, 320, 240, "resources/scorebackground.png");
-				cLine = new TextArea(475, 205, 310, 235, "            Shopping Spree!");
+		// game setup
+		gens = new ArrayList<DavidGeneratableInterface>();
+		snake = new MichaelSnake(0, 0, 100, 100);
+		background = new Graphic(10, 40, 450, 450, "resources/snakebackground.jpg");
+		sbBack = new Graphic(465, 40, 320, 150, "resources/scorebackground.png");
+		line = new TextArea(525, 50, 300, 200, "You have collected:");
+		scoreCount = new TextArea(600, 75, 250, 200, "");
+		scoreCount.setSize(46);
+		scoreCount.setText("" + (snake.presentList.size() - 1));
 
-				//cheat button
-				cheat = new Button(700,447,70,40, "Cheat", Color.LIGHT_GRAY, new Action() {
-					@Override
-					public void act() {
-						snake.cheat();
-						System.out.println("Cheating is for losers.");
-					}
-				});
-				
-				view.add(blackBack);
-				view.add(logoBack);
-				view.add(background);
-				view.add(sbBack);
-				view.add(line);
-				view.add(scoreCount);
-				view.add(cBack);
-				view.add(cLine);
-				for (MichaelInteractable i : snake.getItems()) {
-					// add each snake body part.
-					view.add(i);
-				}
-				
-				view.add(logo);
-				view.add(gameName);
-				view.add(cheat);
+		cBack = new Graphic(465, 195, 320, 240, "resources/scorebackground.png");
+		cLine = new TextArea(475, 205, 310, 235, "            Shopping Spree!");
 
-				DavidLoveGift p = new DavidLoveGift(50, 60, 30, 30);
-				gens.add(p);
-				view.add(p);
+		// cheat button
+		cheat = new Button(700, 447, 70, 40, "Cheat", Color.LIGHT_GRAY, new Action() {
+			@Override
+			public void act() {
+				snake.cheat();
+				System.out.println("Cheating is for losers.");
+			}
+		});
+
+		view.add(blackBack);
+		view.add(logoBack);
+		view.add(background);
+		view.add(sbBack);
+		view.add(line);
+		view.add(scoreCount);
+		view.add(cBack);
+		view.add(cLine);
+		for (MichaelInteractable i : snake.getItems()) {
+			// add each snake body part.
+			view.add(i);
+		}
+
+		view.add(logo);
+		view.add(gameName);
+		view.add(cheat);
+
+		DavidLoveGift p = new DavidLoveGift(50, 60, 30, 30);
+		gens.add(p);
+		view.add(p);
 	}
 
 }
