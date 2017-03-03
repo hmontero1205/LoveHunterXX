@@ -161,7 +161,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
-			MichaelSnakeGame.sScreen.updateText("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough             presents to please your                        girlfriend!                                LovePoints +3!");
 			return true;
 		}
 		return false;
