@@ -166,10 +166,8 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		updateHp();
 		danielPlayer.setRunning(false);
 		shohebUmbrella.setRunning(false);
-		Graphic border1 = new Graphic(0, 0, 800, 75, "resources/qtt/mapparts/border.png");
-		Graphic border2 = new Graphic(0, 525, 800, 75, "resources/qtt/mapparts/border.png");
-		addObject(border1);
-		addObject(border2);
+		TextLabel goverLabel = new TextLabel(20, 40, 80, 40, "Game Over");
+		addObject(goverLabel);
 	}
 
 	private void updateHp() {
