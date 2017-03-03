@@ -6,5 +6,5 @@ public interface PresentInterface{
 	public int getReward();
 	public String getName();
 	public void setName(String s);
-	
+	public int[] getNewXY();
 }
