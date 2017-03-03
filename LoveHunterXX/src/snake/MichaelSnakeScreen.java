@@ -123,7 +123,7 @@ public class MichaelSnakeScreen extends ClickableScreen implements KeyListener {
 					@Override
 					public void act() {
 						snake.cheat();
-						System.out.println("acted");
+						System.out.println("Cheating is for losers.");
 					}
 				});
 				

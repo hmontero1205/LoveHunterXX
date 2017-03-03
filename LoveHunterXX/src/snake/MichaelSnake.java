@@ -150,7 +150,7 @@ public class MichaelSnake extends MovingComponent{
 			setRate(999999);
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
-			MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			MichaelSnakeGame.sScreen.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			return true;
 		}
 		return false;
