@@ -89,7 +89,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
 							PlatformerGame.cs.player.setDamaged(true);
 							int currentScore = PlatformerGame.cs.getScore();
-							PlatformerGame.cs.player.setInitialV(0);
+							PlatformerGame.cs.player.setInitialV(1);
 							while (PlatformerGame.cs.getScore() < (currentScore + 1)) {
 								try {
 									Thread.sleep(20);
@@ -142,6 +142,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 38){
 			umbrella.setActive(false);
+			PlatformerGame.cs.player.setInitialV(9);
 		}
 	}
 

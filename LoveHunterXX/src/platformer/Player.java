@@ -118,6 +118,7 @@ public class Player extends AnimatedComponent{
 		try {
 			invuln = true;
 			clear();
+			PlatformerGame.cs.umbrella.clear();
 			Thread.sleep(500);
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			damaged = !damaged;
@@ -157,16 +158,6 @@ public class Player extends AnimatedComponent{
 				super.setVy(-newV);
 			}
 		}
-//		if(invuln){
-//			image = new ImageIcon("resources/platformerplayerinvul.png").getImage();
-//			if(System.currentTimeMillis() - startInvuln > invulnLength){
-//				invuln = false;
-//				image = new ImageIcon("resources/player.png").getImage();
-//			}
-//		}
-//		else{
-//			image = new ImageIcon(imageSrc).getImage();
-//		}
 	}
 	public int getHp() {
 		return hp;

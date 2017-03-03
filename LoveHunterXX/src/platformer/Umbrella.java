@@ -61,6 +61,7 @@ public class Umbrella extends MovingComponent {
 			Player p = PlatformerGame.cs.player;
 			if (load) {
 				if (active) {
+					PlatformerGame.cs.player.setInitialV(0);
 					//super.setWidth(150);
 					//super.setHeight(150);
 					super.setX((int) p.getX());

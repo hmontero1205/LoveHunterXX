@@ -108,7 +108,7 @@ public class Bird extends Obstacle {
 //		}
 //	}
 	public void createFeces(){
-		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 70, 70, (int)getVx(), -.5, "resources/poop.png");
+		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 50, 50, (int)getVx(), -.5, "resources/poop.png");
 		obs.setAction(new Action(){
 			public void act(){
 				if(!PlatformerGame.cs.player.invuln){
