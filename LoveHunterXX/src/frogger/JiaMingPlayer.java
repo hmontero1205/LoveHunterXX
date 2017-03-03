@@ -299,7 +299,10 @@ public class JiaMingPlayer extends MovingComponent implements HansPlayerInterfac
 
 	@Override
 	public void setInventory(ArrayList<HansPowerUp> pu) {
+		// setInventory when you advance to the next level, so you can keep your items
 		this.inventory = pu;
+		currentPowerUp = 0;
+		updateInventory();
 	}
 
 }
