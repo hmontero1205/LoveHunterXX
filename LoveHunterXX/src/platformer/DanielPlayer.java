@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 import gui.components.AnimatedComponent;
 import gui.components.MovingComponent;
 
-public class Player extends AnimatedComponent{
+public class DanielPlayer extends AnimatedComponent{
 	private int x;
 	private int y;
 	private int w;
@@ -42,7 +42,7 @@ public class Player extends AnimatedComponent{
 	private String imageSrc = "resources/player.png";
 	private Graphics2D global;
 	
-	public Player(int x, int y, int w, int h, String imageLocation){
+	public DanielPlayer(int x, int y, int w, int h, String imageLocation){
 		super(x,y,w,h);
 		
 		this.x = x;
@@ -118,7 +118,7 @@ public class Player extends AnimatedComponent{
 		try {
 			invuln = true;
 			clear();
-			PlatformerGame.cs.umbrella.clear();
+			ShohebPlatformerGame.cs.shohebUmbrella.clear();
 			Thread.sleep(500);
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			damaged = !damaged;

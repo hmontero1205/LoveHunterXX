@@ -1,6 +1,6 @@
 package platformer;
 
-public interface PowerUp extends Collidable {
+public interface DanielPowerUp extends ShohebCollidable {
 	void setPowerID();
 	void performEffect();
 }

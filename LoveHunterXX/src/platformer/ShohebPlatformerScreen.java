@@ -12,18 +12,18 @@ import gui.components.Graphic;
 import gui.components.TextLabel;
 import gui.components.Visible;
 
-public class PlatformerScreen extends Screen implements KeyListener, Runnable {
+public class ShohebPlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private Graphic bg;
-	public Player player;
-	public List<Collidable> obstacles;
+	public DanielPlayer danielPlayer;
+	public List<ShohebCollidable> obstacles;
 	private TextLabel scoreLabel;
 	private int score;
-	private Obstacle obs;
+	private DanielObstacle obs;
 	public ArrayList<Graphic> hearts;
-	public Umbrella umbrella;
+	public ShohebUmbrella shohebUmbrella;
 
-	public PlatformerScreen(int width, int height) {
+	public ShohebPlatformerScreen(int width, int height) {
 		super(width, height);
 		Thread play = new Thread(this);
 		play.start();
@@ -38,26 +38,26 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		scoreLabel = new TextLabel(20, 40, 80, 40, "0");
 		viewObjects.add(scoreLabel);
 
-		player = new Player(10, 370, 100, 150, "resources/player.png");
-		player.play();
-		viewObjects.add(player);
+		danielPlayer = new DanielPlayer(10, 370, 100, 150, "resources/player.png");
+		danielPlayer.play();
+		viewObjects.add(danielPlayer);
 		
-		umbrella = new Umbrella(0, 0, 130, 150, "resources/umbrellaclosed.png");
-		viewObjects.add(umbrella);
+		shohebUmbrella = new ShohebUmbrella(0, 0, 130, 150, "resources/umbrellaclosed.png");
+		viewObjects.add(shohebUmbrella);
 	}
 	private void appearNewPowerUp(){
 		
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
 		double rand = ((Math.random()) * 1000);
 		if (rand < chance) {
-			Power power = null;
+			ShohebPower shohebPower = null;
 			switch (0) {
 			case 0:
-				power = new Power(850, 420, 50, 50, -5, 0, "resources/heart.png", 0);
+				shohebPower = new ShohebPower(850, 420, 50, 50, -5, 0, "resources/heart.png", 0);
 				break;
 			}
-			obstacles.add(power);
-			addObject(power);
+			obstacles.add(shohebPower);
+			addObject(shohebPower);
 		}
 		
 	}
@@ -67,26 +67,26 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		if (rand < chance) {
 			switch ((int) (Math.random() * 3)) {
 			case 0:
-				obs = new Obstacle(850, 420, 100, 100, -5, 0, "resources/cactus.png");
+				obs = new DanielObstacle(850, 420, 100, 100, -5, 0, "resources/cactus.png");
 				obs.setAction(new Action() {
 					public void act() {
-						if (!player.invuln) {
-							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-							PlatformerGame.cs.player.setDamaged(true);
+						if (!danielPlayer.invuln) {
+							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
+							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
 						}
 					}
 				});
 				break;
 			case 1:
-				obs = new Obstacle(850, 470, 50, 50, -7, 0, "resources/crab.png");
+				obs = new DanielObstacle(850, 470, 50, 50, -7, 0, "resources/crab.png");
 				obs.setAction(new Action() {
 					public void act() {
-						if (!player.invuln) {
-							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-							PlatformerGame.cs.player.setDamaged(true);
-							int currentScore = PlatformerGame.cs.getScore();
-							PlatformerGame.cs.player.setInitialV(1);
-							while (PlatformerGame.cs.getScore() < (currentScore + 1)) {
+						if (!danielPlayer.invuln) {
+							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
+							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
+							int currentScore = ShohebPlatformerGame.cs.getScore();
+							ShohebPlatformerGame.cs.danielPlayer.setInitialV(1);
+							while (ShohebPlatformerGame.cs.getScore() < (currentScore + 1)) {
 								try {
 									Thread.sleep(20);
 									update();
@@ -95,18 +95,18 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 								}
 
 							}
-							PlatformerGame.cs.player.setInitialV(9);
+							ShohebPlatformerGame.cs.danielPlayer.setInitialV(9);
 						}
 					}
 				});
 				break;
 			case 2:
-				obs = new Bird(850, 230, 50, 50, -3, 0, "resources/bird1.png");
+				obs = new DanielBird(850, 230, 50, 50, -3, 0, "resources/bird1.png");
 				obs.setAction(new Action() {
 					public void act() {
-						if (!player.invuln) {
-							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-							PlatformerGame.cs.player.setDamaged(true);
+						if (!danielPlayer.invuln) {
+							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
+							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
 						}
 					}
 				});
@@ -125,20 +125,20 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
-			if (!player.getJump()) {
-				player.setJump(true);
+			if (!danielPlayer.getJump()) {
+				danielPlayer.setJump(true);
 			}
 		}
 		if(e.getKeyCode() == 38) {
-			umbrella.setActive(true);
+			shohebUmbrella.setActive(true);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 38){
-			umbrella.setActive(false);
-			PlatformerGame.cs.player.setInitialV(9);
+			shohebUmbrella.setActive(false);
+			ShohebPlatformerGame.cs.danielPlayer.setInitialV(9);
 		}
 	}
 
@@ -150,9 +150,9 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		obstacles = Collections.synchronizedList(new ArrayList<Collidable>());
+		obstacles = Collections.synchronizedList(new ArrayList<ShohebCollidable>());
 		hearts = new ArrayList<Graphic>();
-		while (player.getHp() > 0) {
+		while (danielPlayer.getHp() > 0) {
 			updateHp();
 			updateScore();
 			appearNewObstacle();
@@ -163,8 +163,8 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 
 	private void gameOver() {
 		updateHp();
-		player.setRunning(false);
-		umbrella.setRunning(false);
+		danielPlayer.setRunning(false);
+		shohebUmbrella.setRunning(false);
 		Graphic border1 = new Graphic(0, 0, 800, 75, "resources/qtt/mapparts/border.png");
 		Graphic border2 = new Graphic(0, 525, 800, 75, "resources/qtt/mapparts/border.png");
 		addObject(border1);
@@ -178,7 +178,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 			this.remove(hearts.remove(hearts.size() - 1));
 		}
 
-		for (int i = 0; i < player.getHp(); i++) {
+		for (int i = 0; i < danielPlayer.getHp(); i++) {
 			Graphic heart = new Graphic(x, 40, 20, 20, "resources/heart.png");
 			hearts.add(heart);
 			this.addObject(heart);

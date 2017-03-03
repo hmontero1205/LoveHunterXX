@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class Excrement extends Obstacle {
+public class DanielExcrement extends DanielObstacle {
 	private double grav;
 	private long startDrop;
 	private String imgSrc;
@@ -17,7 +17,7 @@ public class Excrement extends Obstacle {
 	private int y;
 	private int w;
 	private int h;
-	public Excrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
+	public DanielExcrement(int x, int y, int w, int h, int vx, double vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
 		
 		startDrop = System.currentTimeMillis();
@@ -45,8 +45,8 @@ public class Excrement extends Obstacle {
 		}
 	}
 	public boolean isCollided(){
-		Player playTemp = PlatformerGame.cs.player;
-		Umbrella umb = PlatformerGame.cs.umbrella;
+		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
+		ShohebUmbrella umb = ShohebPlatformerGame.cs.shohebUmbrella;
 		if(umb.getX() < getPosx() + w && 
 				umb.getX() + umb.getWidth() > getPosx() &&
 				umb.getY() < getPosy() + h && umb.getY() + umb.getHeight() > getPosy()){
@@ -64,8 +64,8 @@ public class Excrement extends Obstacle {
 	public void update(Graphics2D g){
 		if(load){
 			if(getY() > 850 || um){
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			}
 			if (isCollided() && !um && !collided) {

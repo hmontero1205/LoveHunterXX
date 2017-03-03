@@ -10,7 +10,7 @@ import gui.components.Action;
 import gui.components.AnimatedComponent;
 import gui.components.MovingComponent;
 
-public class Obstacle extends AnimatedComponent implements Collidable, Action {
+public class DanielObstacle extends AnimatedComponent implements ShohebCollidable, Action {
 
 	private int x;
 	private int y;
@@ -24,7 +24,7 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 	private boolean collided;
 	private int id;
 
-	public Obstacle(int x, int y, int w, int h, int vx, double vy,  String imageLocation) {
+	public DanielObstacle(int x, int y, int w, int h, int vx, double vy,  String imageLocation) {
 		super(x, y, w, h);
 		this.x = x;
 		this.y = y;
@@ -52,13 +52,13 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 	}
 	public void update(Graphics2D g) {
 		if (load) {
-			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
+			if (isCollided() && !collided && !ShohebPlatformerGame.cs.danielPlayer.invuln) {
 				collided = true;
 				act();
 			}
 			if (getX() < w*-1) {
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
@@ -85,7 +85,7 @@ public class Obstacle extends AnimatedComponent implements Collidable, Action {
 
 	public boolean isCollided() {
 		// TODO Auto-generated method stud
-		Player playTemp = PlatformerGame.cs.player;
+		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
 		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
 				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
 				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()) {

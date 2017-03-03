@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 
 import gui.components.Action;
 
-public class Bird extends Obstacle {
+public class DanielBird extends DanielObstacle {
 	private int x;
 	private int y;
 	private int w;
@@ -30,7 +30,7 @@ public class Bird extends Obstacle {
 	private Action action;
 	
 	
-	public Bird(int x, int y, int w, int h, int vx, int vy, String imageLocation) {
+	public DanielBird(int x, int y, int w, int h, int vx, int vy, String imageLocation) {
 		super(x, y, w, h, vx, vy, imageLocation);
 		this.x = x;
 		this.y = y;
@@ -67,14 +67,14 @@ public class Bird extends Obstacle {
 	}
 	public void update(Graphics2D g) {
 		if (load) {
-			if (isCollided() && !collided && !PlatformerGame.cs.player.invuln) {
+			if (isCollided() && !collided && !ShohebPlatformerGame.cs.danielPlayer.invuln) {
 				collided = true;
 				act();
 			}
 			
 			if (getX() < w*-1) {
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			} else {
 				g.drawImage(birdFrames.get(currentFrame), 0, 0, getWidth(), getHeight(), 0, 0, birdFrames.get(currentFrame).getWidth(null), birdFrames.get(currentFrame).getHeight(null),
@@ -108,20 +108,20 @@ public class Bird extends Obstacle {
 //		}
 //	}
 	public void createFeces(){
-		Excrement obs = new Excrement((int)getPosx(), y+getHeight(), 50, 50, (int)getVx(), -.5, "resources/poop.png");
+		DanielExcrement obs = new DanielExcrement((int)getPosx(), y+getHeight(), 50, 50, (int)getVx(), -.5, "resources/poop.png");
 		obs.setAction(new Action(){
 			public void act(){
-				if(!PlatformerGame.cs.player.invuln){
-					PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp()-1);
-					PlatformerGame.cs.player.setDamaged(true);
+				if(!ShohebPlatformerGame.cs.danielPlayer.invuln){
+					ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp()-1);
+					ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
 				}
 			}
 		});
-		PlatformerGame.cs.obstacles.add(obs);
-		PlatformerGame.cs.addObject(obs);
+		ShohebPlatformerGame.cs.obstacles.add(obs);
+		ShohebPlatformerGame.cs.addObject(obs);
 	}
 	public boolean isCollided(){
-		Player playTemp = PlatformerGame.cs.player;
+		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
 		if(playTemp.getX() < getPosx() + w && 
 				playTemp.getX() + playTemp.getWidth() > getPosx() &&
 				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){

@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import gui.components.Component;
 import gui.components.MovingComponent;
 
-public class Umbrella extends MovingComponent {
+public class ShohebUmbrella extends MovingComponent {
 	private int x;
 	private int y;
 	private int w;
@@ -20,7 +20,7 @@ public class Umbrella extends MovingComponent {
 	private boolean superCreated;
 	
 
-	public Umbrella(int x, int y, int w, int h, String imageLocation) {
+	public ShohebUmbrella(int x, int y, int w, int h, String imageLocation) {
 		super(x, y, w, h);
 		this.x = x;
 		this.y = y;
@@ -58,10 +58,10 @@ public class Umbrella extends MovingComponent {
 	@Override
 	public void update(Graphics2D g) {
 		if (superCreated) {
-			Player p = PlatformerGame.cs.player;
+			DanielPlayer p = ShohebPlatformerGame.cs.danielPlayer;
 			if (load) {
 				if (active) {
-					PlatformerGame.cs.player.setInitialV(0);
+					ShohebPlatformerGame.cs.danielPlayer.setInitialV(0);
 					super.setX((int) p.getX());
 					super.setY((int) p.getY()-70);
 					g.drawImage(open, 0, 0, getWidth(), getHeight(), 0, 0, open.getWidth(null), 

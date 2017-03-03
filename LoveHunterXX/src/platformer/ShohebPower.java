@@ -9,7 +9,7 @@ import gui.components.Action;
 import gui.components.Component;
 import gui.components.MovingComponent;
 
-public class Power extends Obstacle implements Runnable, PowerUp{
+public class ShohebPower extends DanielObstacle implements Runnable, DanielPowerUp{
 	private int effect;
 	private String imgSrc;
 	private Image image;
@@ -23,7 +23,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	private final int HEART = 0;
 	
 
-	public Power(int x, int y, int w, int h,int vx,int vy,String s, int e) {
+	public ShohebPower(int x, int y, int w, int h,int vx,int vy,String s, int e) {
 		super(x,y,w,h, vx, vy, s);
 		this.effect = e;
 		this.imgSrc = s;
@@ -50,13 +50,13 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		if(load){
 			if(!picked && isCollided()){
 				performEffect();
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			}
 			if(getX() < w*-1){
-				PlatformerGame.cs.obstacles.remove(this);
-				PlatformerGame.cs.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			}
 			else{
@@ -74,7 +74,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 		picked = true;
 		switch(this.effect){
 			case HEART:
-				PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() + 1);
+				ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() + 1);
 				break;
 		}
 	}
@@ -99,7 +99,7 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 
 	@Override
 	public boolean isCollided() {
-		Player playTemp = PlatformerGame.cs.player;
+		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
 		if((playTemp.getX() + playTemp.getWidth()) > getPosx()
 				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
 				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()){
