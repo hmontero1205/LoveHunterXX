@@ -1,9 +1,12 @@
 package snake;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.components.Action;
+import gui.components.Button;
 import gui.components.MovingComponent;
 
 public class MichaelSnake extends MovingComponent{
@@ -142,6 +145,7 @@ public class MichaelSnake extends MovingComponent{
 				gameRunning = false;
 				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
 				MichaelSnakeGame.sScreen.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
+				addContinueButton();
 				return true;                   
 			}
 		}
@@ -151,6 +155,7 @@ public class MichaelSnake extends MovingComponent{
 			gameRunning = false;
 			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
 			MichaelSnakeGame.sScreen.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
+			addContinueButton();
 			return true;
 		}
 		return false;
@@ -162,6 +167,7 @@ public class MichaelSnake extends MovingComponent{
 			gameRunning = false;
 			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
 			MichaelSnakeGame.sScreen.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
+			addContinueButton();
 			return true;
 		}
 		return false;
@@ -201,6 +207,18 @@ public class MichaelSnake extends MovingComponent{
 				MichaelSnakeGame.sScreen.updateScore();
 			}
 		}
+	}
+	
+	public void addContinueButton(){
+		Button cButton = new Button(575, 350, 100, 40, "Continue", Color.LIGHT_GRAY, new Action() {
+			@Override
+			public void act() {
+				//Code here.
+				System.out.println("Find the method for me at MichaelSnake line 212");
+			}
+		});
+		
+		MichaelSnakeGame.sScreen.getViewObjects().add(cButton);
 	}
 	
 	public void checkAll(){
