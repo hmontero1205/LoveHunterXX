@@ -17,6 +17,7 @@ public class HansTransitionScreen extends Screen implements Runnable {
 	private TextArea tBox;
 	private TextLabel hLabel;
 	private TextLabel yLabel;
+	public int lovePoints;
 	public HansTransitionScreen(int width, int height) {
 		super(width, height);
 		sThread = new Thread(this);
@@ -46,7 +47,8 @@ public class HansTransitionScreen extends Screen implements Runnable {
 
 	@Override
 	public void run() {
-		sleep(500);
+		//sequence 1
+		sleep(1000);
 //		back.loadImages("resources/bedroom.jpg", 800,600);
 //		sleep(500);
 //		addObject(tBox);
@@ -85,6 +87,13 @@ public class HansTransitionScreen extends Screen implements Runnable {
 //		yLabel.setText("");
 //		remove(you);
 		LoveHunterXX.game.setScreen(LoveHunterXX.sis);
+	}
+	
+	public void playSequence2(){
+		back.loadImages("resources/lot.jpg", 800,600);
+		addObject(you);
+		you.setX(200);
+		you.setY(500);
 	}
 	
 	public void sleep(long t){

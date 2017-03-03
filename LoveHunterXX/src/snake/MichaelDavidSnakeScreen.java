@@ -123,7 +123,7 @@ public class MichaelDavidSnakeScreen extends ClickableScreen implements KeyListe
 			@Override
 			public void act() {
 				snake.cheat();
-				System.out.println("Cheating is for losers.");
+				//System.out.println("Cheating is for losers.");
 			}
 		});
 

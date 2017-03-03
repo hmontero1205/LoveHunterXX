@@ -144,7 +144,7 @@ public class MichaelSnake extends MovingComponent{
 			if (cart.isCollided(presentList.get(i))){
 				setRate(999999);
 				gameRunning = false;
-				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
+				//System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
 				LoveHunterXX.ss.updateText("               Game Over.                   You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
 				nextPart();
 				return true;                   
@@ -154,7 +154,7 @@ public class MichaelSnake extends MovingComponent{
 		if(cart.getX()<30 || cart.getX()>415 || cart.getY() < 50 || cart.getY() > 440){
 			setRate(999999);
 			gameRunning = false;
-			System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
+			//System.out.println("Game Over. You ran into a wall. You have earned " + presentList.size()/10 + " LovePoints.");
 			LoveHunterXX.ss.updateText("                Game Over.                    You ran into a wall. You have              earned " + presentList.size()/10 + " LovePoints.");
 			nextPart();
 			return true;
@@ -166,7 +166,7 @@ public class MichaelSnake extends MovingComponent{
 		if(presentList.size()>30){
 			setRate(999999);
 			gameRunning = false;
-			System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
+			//System.out.println("You win! You have collected enough presents to please your girlfriend! LovePoints +3!");
 			LoveHunterXX.ss.updateText("                 You win!                          You have collected enough               presents to please your                          girlfriend!                                  LovePoints +3!");
 			nextPart();
 			return true;
@@ -214,9 +214,11 @@ public class MichaelSnake extends MovingComponent{
 	public void nextPart(){
 		//Thread transition = new Thread();
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2500);
 			//Next game.
-			System.out.println("NEXT GAME!");
+			LoveHunterXX.ts.lovePoints += (presentList.size()/10);
+			LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+			LoveHunterXX.ts.playSequence2();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
