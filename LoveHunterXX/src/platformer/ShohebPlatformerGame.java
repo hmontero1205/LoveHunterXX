@@ -25,6 +25,7 @@ public class ShohebPlatformerGame extends GUIApplication {
 		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread app = new Thread(game);
 		app.start();
+		//updated
 
 	}
 
