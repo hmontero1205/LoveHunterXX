@@ -180,8 +180,8 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 	
 		message.setText(won ? "You won!" : "You lost!");
 		
-		LoveHunterXX.game.setScreen(LoveHunterXX.ts);
-		LoveHunterXX.ts.playSequence4();
+		//LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+		//LoveHunterXX.ts.playSequence5();
 	}
 
 	public boolean canPlace(int x, int y, String dir, KevinEntity ent) {
