@@ -110,6 +110,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		return this;
 	}
 
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 32) {
