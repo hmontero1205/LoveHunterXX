@@ -50,7 +50,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		
 		//Tried to do the invuln, but images are changing funny. player loses its transparency for some reason. 
 		double chance = (obstacles.size() > 0) ? Math.log((double)score): 10000;
-		double rand = (Math.random())*100;
+		double rand = (Math.random())*1000;
 		//System.out.println(chance);
 		//System.out.println(rand);
 		if (rand < chance) {
