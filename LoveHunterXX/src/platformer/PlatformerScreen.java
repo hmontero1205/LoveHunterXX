@@ -42,24 +42,25 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 		player.play();
 		viewObjects.add(player);
 	}
-
-	private void appearNewObstacle() {
-		/*
-		 * trying to do a thing where the image of the player changes when they
-		 * get hit and they are invulnerable for a second... can you finish the
-		 * job on this one? also changed the effect of the crab to temporarily
-		 * root the player...
-		 */
-
-		// Tried to do the invuln, but images are changing funny. player loses
-		// its transparency for some reason.
+	private void appearNewPowerUp(){
+		Obstacle power = null;
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
 		double rand = (Math.random()) * 1000;
-		// System.out.println(chance);
-		// System.out.println(rand);
 		if (rand < chance) {
-			// (int) (Math.random() * 3)
-			switch ((int) (Math.random() * 4)) {
+			switch ((int) (Math.random() * 1)) {
+			case 0:
+				power = new Power(850, 420, 100, 100, -5, 0, "resources/poop.jpg", 0);
+				break;
+			}
+		}
+		obstacles.add(power);
+		addObject(power);
+	}
+	private void appearNewObstacle() {
+		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
+		double rand = (Math.random()) * 1000;
+		if (rand < chance) {
+			switch ((int) (Math.random() * 3)) {
 			case 0:
 				obs = new Obstacle(850, 420, 100, 100, -5, 0, "resources/cactus.png");
 				obs.setAction(new Action() {
@@ -98,17 +99,6 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 				break;
 			case 2:
 				obs = new Bird(850, 230, 50, 50, -3, 0, "resources/bird1.png");
-				obs.setAction(new Action() {
-					public void act() {
-						if (!player.invuln) {
-							PlatformerGame.cs.player.setHp(PlatformerGame.cs.player.getHp() - 1);
-							PlatformerGame.cs.player.setDamaged(true);
-						}
-					}
-				});
-				break;
-			case 3:
-				obs = new Power(850, 470, 50, 50, -3, 0, "resources/poop.jpg", 0);
 				obs.setAction(new Action() {
 					public void act() {
 						if (!player.invuln) {
@@ -158,6 +148,7 @@ public class PlatformerScreen extends Screen implements KeyListener, Runnable {
 			updateHp();
 			updateScore();
 			appearNewObstacle();
+			appearNewPowerUp();
 		}
 		gameOver();
 	}
