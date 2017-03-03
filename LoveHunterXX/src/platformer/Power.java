@@ -7,13 +7,14 @@ import javax.swing.ImageIcon;
 import gui.components.Action;
 import gui.components.Component;
 
-public class Power extends Component implements Runnable, PowerUp{
+public class Power extends MovingComponent implements Runnable, PowerUp{
 	private int effect;
 	private String imgSrc;
 	private boolean superCreated;
 	private final int HEART = 0;
 	private final int INVULN = 1;
 	private final int WATER = 2;
+	
 
 	public Power(int x, int y, int w, int h, String s, int e) {
 		super(x,y,w,h);
@@ -42,6 +43,7 @@ public class Power extends Component implements Runnable, PowerUp{
 				PlatformerGame.cs.player.setInvuln(true);
 				break;
 			case WATER:
+				
 //				FroggerGame.fs.setSlowMode(true);
 //				try {
 //					Thread.sleep(8000);	
@@ -62,5 +64,34 @@ public class Power extends Component implements Runnable, PowerUp{
 	public void start(){
 		Thread pThread = new Thread(this);
 		pThread.start();
+	}
+
+	@Override
+	public boolean isCollided() {
+		Player playTemp = PlatformerGame.cs.player;
+		if(playTemp.getX() < getPosx() + w && 
+				playTemp.getX() + playTemp.getWidth() > getPosx() &&
+				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void setAction(Action action) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void act() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPowerID() {
+		// TODO Auto-generated method stub
+		
 	}
 }
