@@ -50,8 +50,13 @@ public class Power extends Obstacle implements Runnable, PowerUp{
 	@Override
 	public void update(Graphics2D g) {
 		if(load){
-			if(!picked && isCollided() || getX() < w*-1){
+			if(!picked && isCollided()){
 				performEffect();
+				PlatformerGame.cs.obstacles.remove(this);
+				PlatformerGame.cs.remove(this);
+				setRunning(false);
+			}
+			if(getX() < w*-1){
 				PlatformerGame.cs.obstacles.remove(this);
 				PlatformerGame.cs.remove(this);
 				setRunning(false);
