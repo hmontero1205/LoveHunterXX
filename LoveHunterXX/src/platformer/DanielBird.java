@@ -68,14 +68,14 @@ public class DanielBird extends DanielObstacle {
 	}
 	public void update(Graphics2D g) {
 		if (load) {
-			if (isCollided() && !collided && !ShohebPlatformerGame.cs.danielPlayer.invuln) {
+			if (isCollided() && !collided && !LoveHunterXX.ps.danielPlayer.invuln) {
 				collided = true;
 				act();
 			}
 			
 			if (getX() < w*-1) {
-				ShohebPlatformerGame.cs.obstacles.remove(this);
-				ShohebPlatformerGame.cs.remove(this);
+				LoveHunterXX.ps.obstacles.remove(this);
+				LoveHunterXX.ps.remove(this);
 				setRunning(false);
 			} else {
 				g.drawImage(birdFrames.get(currentFrame), 0, 0, getWidth(), getHeight(), 0, 0, birdFrames.get(currentFrame).getWidth(null), birdFrames.get(currentFrame).getHeight(null),
@@ -112,17 +112,17 @@ public class DanielBird extends DanielObstacle {
 		DanielExcrement obs = new DanielExcrement((int)getPosx(), y+getHeight(), 50, 50, (int)getVx(), -.5, "resources/poop.png");
 		obs.setAction(new Action(){
 			public void act(){
-				if(!ShohebPlatformerGame.cs.danielPlayer.invuln){
-					ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp()-1);
-					ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
+				if(!LoveHunterXX.ps.danielPlayer.invuln){
+					LoveHunterXX.ps.danielPlayer.setHp(LoveHunterXX.ps.danielPlayer.getHp()-1);
+					LoveHunterXX.ps.danielPlayer.setDamaged(true);
 				}
 			}
 		});
-		ShohebPlatformerGame.cs.obstacles.add(obs);
-		ShohebPlatformerGame.cs.addObject(obs);
+		LoveHunterXX.ps.obstacles.add(obs);
+		LoveHunterXX.ps.addObject(obs);
 	}
 	public boolean isCollided(){
-		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
+		DanielPlayer playTemp = LoveHunterXX.ps.danielPlayer;
 		if(playTemp.getX() < getPosx() + w && 
 				playTemp.getX() + playTemp.getWidth() > getPosx() &&
 				playTemp.getY() < getPosy() + h && playTemp.getY() + playTemp.getHeight() > getPosy()){

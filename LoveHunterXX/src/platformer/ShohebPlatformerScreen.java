@@ -72,8 +72,8 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 				obs.setAction(new Action() {
 					public void act() {
 						if (!danielPlayer.invuln) {
-							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
-							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
+							LoveHunterXX.ps.danielPlayer.setHp(LoveHunterXX.ps.danielPlayer.getHp() - 1);
+							LoveHunterXX.ps.danielPlayer.setDamaged(true);
 						}
 					}
 				});
@@ -83,11 +83,11 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 				obs.setAction(new Action() {
 					public void act() {
 						if (!danielPlayer.invuln) {
-							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
-							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
-							int currentScore = ShohebPlatformerGame.cs.getScore();
-							ShohebPlatformerGame.cs.danielPlayer.setInitialV(1);
-							while (ShohebPlatformerGame.cs.getScore() < (currentScore + 1)) {
+							LoveHunterXX.ps.danielPlayer.setHp(LoveHunterXX.ps.danielPlayer.getHp() - 1);
+							LoveHunterXX.ps.danielPlayer.setDamaged(true);
+							int currentScore = LoveHunterXX.ps.getScore();
+							LoveHunterXX.ps.danielPlayer.setInitialV(1);
+							while (LoveHunterXX.ps.getScore() < (currentScore + 1)) {
 								try {
 									Thread.sleep(20);
 									update();
@@ -96,7 +96,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 								}
 
 							}
-							ShohebPlatformerGame.cs.danielPlayer.setInitialV(9);
+							LoveHunterXX.ps.danielPlayer.setInitialV(9);
 						}
 					}
 				});
@@ -106,8 +106,8 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 				obs.setAction(new Action() {
 					public void act() {
 						if (!danielPlayer.invuln) {
-							ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() - 1);
-							ShohebPlatformerGame.cs.danielPlayer.setDamaged(true);
+							LoveHunterXX.ps.danielPlayer.setHp(LoveHunterXX.ps.danielPlayer.getHp() - 1);
+							LoveHunterXX.ps.danielPlayer.setDamaged(true);
 						}
 					}
 				});
@@ -139,7 +139,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 38){
 			shohebUmbrella.setActive(false);
-			ShohebPlatformerGame.cs.danielPlayer.setInitialV(9);
+			LoveHunterXX.ps.danielPlayer.setInitialV(9);
 		}
 	}
 

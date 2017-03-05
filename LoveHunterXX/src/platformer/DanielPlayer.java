@@ -119,7 +119,7 @@ public class DanielPlayer extends AnimatedComponent{
 		try {
 			invuln = true;
 			clear();
-			ShohebPlatformerGame.cs.shohebUmbrella.clear();
+			LoveHunterXX.ps.shohebUmbrella.clear();
 			Thread.sleep(500);
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), 0,0,image.getWidth(null), image.getHeight(null), null);
 			damaged = !damaged;

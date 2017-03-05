@@ -51,13 +51,13 @@ public class ShohebPower extends DanielObstacle implements Runnable, DanielPower
 		if(load){
 			if(!picked && isCollided()){
 				performEffect();
-				ShohebPlatformerGame.cs.obstacles.remove(this);
-				ShohebPlatformerGame.cs.remove(this);
+				LoveHunterXX.ps.obstacles.remove(this);
+				LoveHunterXX.ps.remove(this);
 				setRunning(false);
 			}
 			if(getX() < w*-1){
-				ShohebPlatformerGame.cs.obstacles.remove(this);
-				ShohebPlatformerGame.cs.remove(this);
+				LoveHunterXX.ps.obstacles.remove(this);
+				LoveHunterXX.ps.remove(this);
 				setRunning(false);
 			}
 			else{
@@ -75,7 +75,7 @@ public class ShohebPower extends DanielObstacle implements Runnable, DanielPower
 		picked = true;
 		switch(this.effect){
 			case HEART:
-				ShohebPlatformerGame.cs.danielPlayer.setHp(ShohebPlatformerGame.cs.danielPlayer.getHp() + 1);
+				LoveHunterXX.ps.danielPlayer.setHp(LoveHunterXX.ps.danielPlayer.getHp() + 1);
 				break;
 		}
 	}
@@ -100,7 +100,7 @@ public class ShohebPower extends DanielObstacle implements Runnable, DanielPower
 
 	@Override
 	public boolean isCollided() {
-		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
+		DanielPlayer playTemp = LoveHunterXX.ps.danielPlayer;
 		if((playTemp.getX() + playTemp.getWidth()) > getPosx()
 				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
 				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()){

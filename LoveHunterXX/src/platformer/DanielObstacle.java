@@ -53,13 +53,13 @@ public class DanielObstacle extends AnimatedComponent implements ShohebCollidabl
 	}
 	public void update(Graphics2D g) {
 		if (load) {
-			if (isCollided() && !collided && !ShohebPlatformerGame.cs.danielPlayer.invuln) {
+			if (isCollided() && !collided && !LoveHunterXX.ps.danielPlayer.invuln) {
 				collided = true;
 				act();
 			}
 			if (getX() < w*-1) {
-				ShohebPlatformerGame.cs.obstacles.remove(this);
-				ShohebPlatformerGame.cs.remove(this);
+				LoveHunterXX.ps.obstacles.remove(this);
+				LoveHunterXX.ps.remove(this);
 				setRunning(false);
 			} else {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null),
@@ -86,7 +86,7 @@ public class DanielObstacle extends AnimatedComponent implements ShohebCollidabl
 
 	public boolean isCollided() {
 		// TODO Auto-generated method stud
-		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
+		DanielPlayer playTemp = LoveHunterXX.ps.danielPlayer;
 		if (((playTemp.getX() + playTemp.getWidth()) > getPosx())
 				&& (playTemp.getX() + playTemp.getWidth()) < (getPosx() + w)
 				&& (playTemp.getY() + playTemp.getHeight()) > getPosy()) {
