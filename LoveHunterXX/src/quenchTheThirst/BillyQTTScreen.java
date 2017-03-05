@@ -59,6 +59,7 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 
 			@Override
 			public void act() {
+				LoveHunterXX.ts.lovePoints += 3;
 				endGame(true);
 			}
 
@@ -177,12 +178,11 @@ public class BillyQTTScreen extends ClickableScreen implements KeyListener {
 		if (ticker != null) {
 			ticker.interrupt();
 		}
-	
+
 		message.setText(won ? "You won!" : "You lost!");
 		
-		//LoveHunterXX.game.ts.getSequence();
-		LoveHunterXX.game.setScreen(LoveHunterXX.pis);
-		//LoveHunterXX.ts.playSequence5();
+		LoveHunterXX.ts.setSequence(3);
+		LoveHunterXX.game.setScreen(LoveHunterXX.ts);
 	}
 
 	public boolean canPlace(int x, int y, String dir, KevinEntity ent) {

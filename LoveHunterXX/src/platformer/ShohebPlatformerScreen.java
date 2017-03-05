@@ -185,7 +185,6 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 			x += 30;
 		}
 
-		// xd
 	}
 
 	private void updateScore() {

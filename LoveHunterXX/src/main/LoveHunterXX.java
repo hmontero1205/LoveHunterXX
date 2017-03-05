@@ -35,7 +35,7 @@ public class LoveHunterXX extends GUIApplication {
 	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
-		setResizable(false);
+		setResizable(true);
 	}
 
 	@Override
@@ -52,8 +52,6 @@ public class LoveHunterXX extends GUIApplication {
 		
 		pis = new ShohebPlatformerIntro(800,600);
 		ps = new ShohebPlatformerScreen(800,600);
-		
-		
 	}
 	
 	public static void main(String[] args){
@@ -62,9 +60,7 @@ public class LoveHunterXX extends GUIApplication {
 		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread go = new Thread(game);
 		go.start();
-		game.setScreen(ts);
+		game.setScreen(fs);
 	}
-
-	
 
 }

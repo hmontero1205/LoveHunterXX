@@ -314,16 +314,17 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	}
 	
 	public void gameEnd(){
+		endThreads(getViewObjects());
+		
 		infoBox.setText("You finally made it to your gf!!");
 		endB = new Button(695, 561, 100, 35, "Onward!", Color.pink, new Action() {
 
 			@Override
 			public void act() {
-//				LoveHunterXX.ts.lovePoints += pointsToAdd;
-				//LoveHunterXX.game.setScreen(LoveHunterXX.ts);
-				LoveHunterXX.game.setScreen(LoveHunterXX.qttis);
-//				LoveHunterXX.ts.playSequence3();
-				//LoveHunterXX.game.setScreen(LoveHunterXX.qttis);
+				LoveHunterXX.ts.lovePoints += pointsToAdd;
+				
+				LoveHunterXX.ts.setSequence(2);
+				LoveHunterXX.game.setScreen(LoveHunterXX.ts);
 			};
 
 		});
