@@ -148,7 +148,6 @@ public class HansTransitionScreen extends Screen implements Runnable{
 	}
 
 	public void playSequence3() {
-//		System.out.println("seq3");
 		back.loadImages("resources/park.jpg", 800, 600);
 		addObject(you);
 		you.setX(250);
@@ -160,11 +159,14 @@ public class HansTransitionScreen extends Screen implements Runnable{
 		hLabel.setX(20);
 		hLabel.setY(290);
 		
-		sleep(2500);
-		hLabel.setText("dsffds");
+		String text = (lovePoints<4) ? "It's about time to made it smh" : "Hey babe I missed u :3";
+		hLabel.setText(text);
 		yLabel.setX(250);
 		yLabel.setY(300);
-
+		sleep(2500);
+		hLabel.setText("");
+		text =  (lovePoints<4) ? "Sorry for the hold up :/" : "heyyy I got u a gift :)";
+		yLabel.setText(text);
 		sleep(2500);
 		yLabel.setText("Anyways let's go to the park!");
 		sleep(2500);
@@ -193,7 +195,7 @@ public class HansTransitionScreen extends Screen implements Runnable{
 		hLabel.setText(text);
 		sleep(2500);
 		hLabel.setText("");
-		yLabel.setX(500);
+		yLabel.setX(400);
 		yLabel.setY(340);
 		text = (lovePoints < 5) ? "Sorry about that yikes" : "Glad you enjoyed dude";
 		yLabel.setText(text);

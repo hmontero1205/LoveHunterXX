@@ -60,7 +60,7 @@ public class LoveHunterXX extends GUIApplication {
 		game.setIconImage(new ImageIcon("resources/LoveHunterXXIcon.png").getImage());
 		Thread go = new Thread(game);
 		go.start();
-		game.setScreen(fs);
+		game.setScreen(ts);
 	}
 
 }

@@ -118,7 +118,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (11 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, ROAD, -5, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (12 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, GRASS, 0, false));
 					tList.add(new HansTerrain(3, WINDOWBARHEIGHT + (13 * ROW_HEIGHT), ROW_WIDTH, ROW_HEIGHT, MENU, 0, false));
-					pMarker = new HansProgressMarker(745, 12*ROW_HEIGHT + 35, 25, 25, "gf.png");
+					pMarker = new HansProgressMarker(745, ROW_HEIGHT + 35, 25, 25, "gf.png");
 					break;
 			}
 			
