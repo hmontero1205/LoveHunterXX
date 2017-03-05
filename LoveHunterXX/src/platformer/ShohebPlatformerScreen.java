@@ -166,7 +166,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		updateHp();
 		danielPlayer.setRunning(false);
 		shohebUmbrella.setRunning(false);
-		TextLabel goverLabel = new TextLabel(20, 40, 80, 40, "Game Over");
+		TextLabel goverLabel = new TextLabel(20, 60, 120, 40, "Game Over");
 		addObject(goverLabel);
 	}
 
