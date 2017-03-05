@@ -59,10 +59,10 @@ public class ShohebUmbrella extends MovingComponent {
 	@Override
 	public void update(Graphics2D g) {
 		if (superCreated) {
-			DanielPlayer p = LoveHunterXX.ps.danielPlayer;
+			DanielPlayer p = ShohebPlatformerGame.cs.danielPlayer;
 			if (load) {
 				if (active) {
-					LoveHunterXX.ps.danielPlayer.setInitialV(0);
+					ShohebPlatformerGame.cs.danielPlayer.setInitialV(0);
 					super.setX((int) p.getX());
 					super.setY((int) p.getY()-70);
 					g.drawImage(open, 0, 0, getWidth(), getHeight(), 0, 0, open.getWidth(null), 

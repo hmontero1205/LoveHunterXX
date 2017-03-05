@@ -47,8 +47,8 @@ public class DanielExcrement extends DanielObstacle {
 		}
 	}
 	public boolean isCollided(){
-		DanielPlayer playTemp = LoveHunterXX.ps.danielPlayer;
-		ShohebUmbrella umb = LoveHunterXX.ps.shohebUmbrella;
+		DanielPlayer playTemp = ShohebPlatformerGame.cs.danielPlayer;
+		ShohebUmbrella umb = ShohebPlatformerGame.cs.shohebUmbrella;
 		if(umb.getX() < getPosx() + w && 
 				umb.getX() + umb.getWidth() > getPosx() &&
 				umb.getY() < getPosy() + h && umb.getY() + umb.getHeight() > getPosy()){
@@ -66,8 +66,8 @@ public class DanielExcrement extends DanielObstacle {
 	public void update(Graphics2D g){
 		if(load){
 			if(getY() > 850 || um){
-				LoveHunterXX.ps.obstacles.remove(this);
-				LoveHunterXX.ps.remove(this);
+				ShohebPlatformerGame.cs.obstacles.remove(this);
+				ShohebPlatformerGame.cs.remove(this);
 				setRunning(false);
 			}
 			if (isCollided() && !um && !collided) {
