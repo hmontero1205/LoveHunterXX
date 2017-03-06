@@ -49,7 +49,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 	private void appearNewPowerUp() {
 
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
-		double rand = ((Math.random()) * 1000);
+		double rand = ((Math.random()) * 3000);
 		if (rand < chance) {
 			ShohebPower shohebPower = null;
 			switch (0) {
@@ -169,13 +169,13 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		shohebUmbrella.setRunning(false);
 		TextLabel goverLabel = new TextLabel(20, 60, 120, 40, "Game Over");
 		int scaledScore = 0;
-		if (score >= 300) {
-			scaledScore++;
-		}
 		if (score >= 500) {
 			scaledScore++;
 		}
-		if (score >= 800) {
+		if (score >= 1000) {
+			scaledScore++;
+		}
+		if (score >= 1500) {
 			scaledScore++;
 		}
 		LoveHunterXX.ts.lovePoints += scaledScore;
