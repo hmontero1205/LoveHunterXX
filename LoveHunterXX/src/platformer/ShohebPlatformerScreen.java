@@ -11,6 +11,7 @@ import gui.components.Action;
 import gui.components.Graphic;
 import gui.components.TextLabel;
 import gui.components.Visible;
+import main.HansTransitionScreen;
 import main.LoveHunterXX;
 
 public class ShohebPlatformerScreen extends Screen implements KeyListener, Runnable {
@@ -165,6 +166,8 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		danielPlayer.setRunning(false);
 		shohebUmbrella.setRunning(false);
 		TextLabel goverLabel = new TextLabel(20, 60, 120, 40, "Game Over");
+		int scaledScore = 0;
+		LoveHunterXX.ts.lovePoints+= scaledScore;
 		addObject(goverLabel);
 		try {
 			Thread.sleep(1500);
