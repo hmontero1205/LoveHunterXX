@@ -48,6 +48,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	private Thread thread;
 	private Button endB;
 	private int pointsToAdd;
+	private boolean proceed;
 	//to skip levels and end game, press p
 	public HansFroggerScreen(int w, int h) {
 		super(w, h);
@@ -321,10 +322,13 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 
 			@Override
 			public void act() {
-				LoveHunterXX.ts.lovePoints += pointsToAdd;
-				
-				LoveHunterXX.ts.setSequence(2);
-				LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+				if(!proceed){
+					proceed = true;
+					LoveHunterXX.ts.lovePoints += pointsToAdd;
+					
+					LoveHunterXX.ts.setSequence(2);
+					LoveHunterXX.game.setScreen(LoveHunterXX.ts);
+				}
 			};
 
 		});

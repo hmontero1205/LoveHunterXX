@@ -35,7 +35,7 @@ public class LoveHunterXX extends GUIApplication {
 	
 	public LoveHunterXX(int width, int height) {
 		super(width, height);
-		setResizable(true);
+		setResizable(false);
 	}
 
 	@Override
