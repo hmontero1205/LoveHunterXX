@@ -166,7 +166,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		shohebUmbrella.setRunning(false);
 		TextLabel goverLabel = new TextLabel(20, 60, 120, 40, "Game Over");
 		addObject(goverLabel);
-		LoveHunterXX.ts.setSequence(5);
+		LoveHunterXX.ts.setSequence(4);
 		LoveHunterXX.game.setScreen(LoveHunterXX.ts);
 	}
 
