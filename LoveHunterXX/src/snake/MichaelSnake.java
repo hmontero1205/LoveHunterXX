@@ -140,7 +140,7 @@ public class MichaelSnake extends MovingComponent{
 			if (cart.isCollided(presentList.get(i))){
 				setRate(999999);
 				gameRunning = false;
-				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/6 + " LovePoints.");
+				System.out.println("Game Over. You ran into yourself. You have earned " + presentList.size()/10 + " LovePoints.");
 				MichaelSnakeGame.sScreen.updateText("                Game Over.                 You ran into yourself. You have            earned " + presentList.size()/10 + " LovePoints.");
 				return true;                   
 			}
