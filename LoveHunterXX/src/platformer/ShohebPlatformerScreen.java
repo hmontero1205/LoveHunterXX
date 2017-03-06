@@ -31,7 +31,7 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 
 	@Override
 	public void initObjects(List<Visible> viewObjects) {
-		
+
 		bg = new Graphic(0, 0, 800, 600, "resources/platformerbg.png");
 		viewObjects.add(bg);
 
@@ -41,12 +41,13 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		danielPlayer = new DanielPlayer(10, 370, 100, 150, "resources/player.png");
 		danielPlayer.play();
 		viewObjects.add(danielPlayer);
-		
+
 		shohebUmbrella = new ShohebUmbrella(0, 0, 130, 150, "resources/umbrellaclosed.png");
 		viewObjects.add(shohebUmbrella);
 	}
-	private void appearNewPowerUp(){
-		
+
+	private void appearNewPowerUp() {
+
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
 		double rand = ((Math.random()) * 1000);
 		if (rand < chance) {
@@ -59,11 +60,12 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 			obstacles.add(shohebPower);
 			addObject(shohebPower);
 		}
-		
+
 	}
+
 	private void appearNewObstacle() {
 		double chance = (obstacles.size() > 0) ? Math.log((double) score) : 10000;
-		double rand = ((Math.random()) * 1000)-(score/100);
+		double rand = ((Math.random()) * 1000) - (score / 100);
 		if (rand < chance) {
 			switch ((int) (Math.random() * 3)) {
 			case 0:
@@ -129,14 +131,14 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 				danielPlayer.setJump(true);
 			}
 		}
-		if(e.getKeyCode() == 38) {
+		if (e.getKeyCode() == 38) {
 			shohebUmbrella.setActive(true);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == 38){
+		if (e.getKeyCode() == 38) {
 			shohebUmbrella.setActive(false);
 			LoveHunterXX.ps.danielPlayer.setInitialV(9);
 		}
@@ -167,7 +169,16 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 		shohebUmbrella.setRunning(false);
 		TextLabel goverLabel = new TextLabel(20, 60, 120, 40, "Game Over");
 		int scaledScore = 0;
-		LoveHunterXX.ts.lovePoints+= scaledScore;
+		if (score >= 300) {
+			scaledScore++;
+		}
+		if (score >= 500) {
+			scaledScore++;
+		}
+		if (score >= 800) {
+			scaledScore++;
+		}
+		LoveHunterXX.ts.lovePoints += scaledScore;
 		addObject(goverLabel);
 		try {
 			Thread.sleep(1500);
