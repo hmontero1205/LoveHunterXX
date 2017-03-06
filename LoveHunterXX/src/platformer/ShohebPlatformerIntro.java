@@ -35,7 +35,6 @@ public class ShohebPlatformerIntro extends Screen implements MouseListener {
 				if (choice == 0) {
 					img.loadImages("resources/lwbhtp.png", 800, 600);
 				} else if (choice == 1) {
-					System.out.println("hey");
 					LoveHunterXX.game.setScreen(LoveHunterXX.ps);
 					Thread g = new Thread(LoveHunterXX.ps);
 					g.start();
