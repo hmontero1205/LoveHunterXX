@@ -26,8 +26,6 @@ public class ShohebPlatformerScreen extends Screen implements KeyListener, Runna
 
 	public ShohebPlatformerScreen(int width, int height) {
 		super(width, height);
-		Thread play = new Thread(this);
-		play.start();
 	}
 
 	@Override
