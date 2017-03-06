@@ -74,47 +74,45 @@ public class HansTransitionScreen extends Screen implements Runnable{
 
 	public void playSequence1() {
 		// sequence 1
-//		sleep(1000);
-//		back.loadImages("resources/bedroom.jpg", 800, 600);
-//		sleep(500);
-//		addObject(tBox);
-//		sleep(2000);
-//		sleep(500);
-//		addObject(you);
-//		addObject(her);
-//		hLabel.setText("What took you so long? xD");
-//		tBox.setText("");
-//		sleep(2000);
-//		hLabel.setText("");
-//		yLabel.setText("I wanted to ask you something...");
-//		sleep(2000);
-//		yLabel.setText("LET'S GO ON A DATE PLS");
-//		sleep(2000);
-//		hLabel.setText("Yeah sure lol");
-//		yLabel.setText("");
-//		sleep(2000);
-//		hLabel.setText("");
-//		remove(her);
-//		remove(you);
-//		back.loadImages("resources/mall.jpg", 800, 600);
-//		tBox.setText("The next day...");
-//		tBox.setC(Color.black);
-//		sleep(2000);
-//		tBox.setText("");
-//		addObject(you);
-//		you.setX(400);
-//		yLabel.setX(350);
-//		yLabel.setY(270);
-//		yLabel.setC(Color.white);
-//		yLabel.setText("Oh man I should buy her a gift or something");
-//		sleep(2000);
-//		yLabel.setText("I should go on... a shopping spree!11");
-//		sleep(2500);
-//		yLabel.setText("");
-//		remove(you);
-		playSequence4();
-
-		//LoveHunterXX.game.setScreen(LoveHunterXX.sis);
+		sleep(1000);
+		back.loadImages("resources/bedroom.jpg", 800, 600);
+		sleep(500);
+		addObject(tBox);
+		sleep(2000);
+		sleep(500);
+		addObject(you);
+		addObject(her);
+		hLabel.setText("What took you so long? xD");
+		tBox.setText("");
+		sleep(2000);
+		hLabel.setText("");
+		yLabel.setText("I wanted to ask you something...");
+		sleep(2000);
+		yLabel.setText("LET'S GO ON A DATE PLS");
+		sleep(2000);
+		hLabel.setText("Yeah sure lol");
+		yLabel.setText("");
+		sleep(2000);
+		hLabel.setText("");
+		remove(her);
+		remove(you);
+		back.loadImages("resources/mall.jpg", 800, 600);
+		tBox.setText("The next day...");
+		tBox.setC(Color.black);
+		sleep(2000);
+		tBox.setText("");
+		addObject(you);
+		you.setX(400);
+		yLabel.setX(350);
+		yLabel.setY(270);
+		yLabel.setC(Color.white);
+		yLabel.setText("Oh man I should buy her a gift or something");
+		sleep(2000);
+		yLabel.setText("I should go on... a shopping spree!11");
+		sleep(2500);
+		yLabel.setText("");
+		remove(you);
+		LoveHunterXX.game.setScreen(LoveHunterXX.sis);
 	}
 
 	public void playSequence2() {
@@ -181,33 +179,33 @@ public class HansTransitionScreen extends Screen implements Runnable{
 	}
 
 	public void playSequence4() {
-//		back.loadImages("resources/boardwalk.jpg", 800, 600);
-//		addObject(you);
-//		you.setX(600);
-//		you.setY(320);
-//		her.setX(150);
-//		her.setY(320);
-//		addObject(her);
-//		hLabel.setC(Color.black);
-//		yLabel.setC(Color.black);
-//		hLabel.setX(250);
-//		hLabel.setY(340);
-//		String text = (lovePoints < 5) ? "That park was awful" : "Thank you for protecting me :3";
-//		hLabel.setText(text);
-//		sleep(2500);
-//		hLabel.setText("");
-//		yLabel.setX(400);
-//		yLabel.setY(340);
-//		text = (lovePoints < 5) ? "Sorry about that yikes" : "Glad you enjoyed dude";
-//		yLabel.setText(text);
-//		sleep(2500);
-//		yLabel.setText("");
-//		yLabel.setX(250);
-//		yLabel.setText("How about a nice long walk on the beach?;)");
-//		sleep(2500);
-//		yLabel.setText("");
-//		remove(her);
-//		remove(you);
+		back.loadImages("resources/boardwalk.jpg", 800, 600);
+		addObject(you);
+		you.setX(600);
+		you.setY(320);
+		her.setX(150);
+		her.setY(320);
+		addObject(her);
+		hLabel.setC(Color.black);
+		yLabel.setC(Color.black);
+		hLabel.setX(250);
+		hLabel.setY(340);
+		String text = (lovePoints < 5) ? "That park was awful" : "Thank you for protecting me :3";
+		hLabel.setText(text);
+		sleep(2500);
+		hLabel.setText("");
+		yLabel.setX(400);
+		yLabel.setY(340);
+		text = (lovePoints < 5) ? "Sorry about that yikes" : "Glad you enjoyed dude";
+		yLabel.setText(text);
+		sleep(2500);
+		yLabel.setText("");
+		yLabel.setX(250);
+		yLabel.setText("How about a nice long walk on the beach?;)");
+		sleep(2500);
+		yLabel.setText("");
+		remove(her);
+		remove(you);
 		
 		LoveHunterXX.game.setScreen(LoveHunterXX.pis);
 	}
