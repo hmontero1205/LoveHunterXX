@@ -48,7 +48,7 @@ public class HansFroggerScreen extends Screen implements KeyListener, MouseListe
 	private Thread thread;
 	private Button endB;
 	private int pointsToAdd;
-
+	//to skip levels and end game, press p
 	public HansFroggerScreen(int w, int h) {
 		super(w, h);
 		superCreated = true;
