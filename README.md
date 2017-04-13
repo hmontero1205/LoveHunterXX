@@ -7,4 +7,4 @@ Shoheb Ome & Daniel Goon - Long Walk on the Beach<br/>
 
 A GUI application that simulates a quest for love filled with spicy challenges and perils.<br/>
 Features four mini-games (snake, frogger, shooter, platformer).<br/>
-![Zip File](LoveHunterXX/LoveHunterXX.zip "Download")
+[Zip File](https://github.com/hmontero1205/LoveHunterXX/blob/master/LoveHunterXX/LoveHunterXX.zip)
